@@ -13,6 +13,8 @@
   stroke-width: 2px;
   opacity: 0.7; /* Slightly transparent */
   transition: stroke 0.3s ease; /* Smooth hover effect */
+  stroke-dasharray: 5, 5; /* Makes the connection dotted */
+
 }
 
 .link:hover {

@@ -1,4 +1,3 @@
-// src/components/Roadmap.js
 import React, { useEffect, useRef } from "react";
 import * as d3 from "d3";
 import "../styles/roadmaps/Roadmap.css";
@@ -12,9 +11,14 @@ const Roadmap = ({ data }) => {
       d3.select(d3Container.current).selectAll("*").remove();
 
       // Set up the dimensions
-      const width = 1200; // Increased width to accommodate side children
-      const height = 600; // Height of the container
-      const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+      const width = 1200;
+      const height = 1000;
+      const margin = { top: 50, right: 200, bottom: 50, left: 200 };
+      const nodeWidth = 120;
+      const nodeHeight = 50;
+      const minParentSpacing = 120;
+      const childSpacing = 80;
+      const horizontalGap = 250;
 
       const svg = d3
         .select(d3Container.current)
@@ -24,122 +28,188 @@ const Roadmap = ({ data }) => {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-      // Create a flat array of nodes
+      // First create the parent line that connects all parent nodes
+      const parentSpine = svg
+        .append("line")
+        .attr("class", "parent-spine")
+        .attr("x1", width / 2)
+        .attr("y1", 0)
+        .attr("x2", width / 2)
+        .attr("y2", height)
+        .attr("stroke", "#1565C0") // Matching parent node border color
+        .attr("stroke-width", 2)
+        .attr("opacity", 0.7);
+
       const nodes = data.children;
 
-      // Calculate the spacing between parent nodes
-      const nodeSpacing = height / (nodes.length - 1);
+      // Calculate required space for nodes
+      const calculateNodeSpace = (node) => {
+        if (!node.children || node.children.length === 0) {
+          return minParentSpacing;
+        }
+        const maxChildrenOnOneSide = Math.ceil(node.children.length / 2);
+        return Math.max(minParentSpacing, maxChildrenOnOneSide * childSpacing);
+      };
 
-      // Function to draw nodes and their children
-      const drawNodes = (parentNode, nodes, xOffset, yOffset) => {
-        nodes.forEach((node, i) => {
-          const nodeGroup = parentNode
-            .append("g")
-            .attr("class", "node")
-            .attr(
-              "transform",
-              `translate(${xOffset},${yOffset + i * nodeSpacing})`
+      // Calculate positions
+      let currentY = 0;
+      const parentPositions = nodes.map((node, i) => {
+        const currentSpace = calculateNodeSpace(node);
+        const nextNode = nodes[i + 1];
+        const nextSpace = nextNode ? calculateNodeSpace(nextNode) : 0;
+        const spacing = Math.max(currentSpace, nextSpace);
+        const position = currentY;
+        currentY += spacing;
+        return { node, y: position, spacing };
+      });
+
+      // Function to distribute children
+      const distributeChildren = (children) => {
+        if (!children) return { left: [], right: [] };
+        const mid = Math.ceil(children.length / 2);
+        return {
+          left: children.slice(0, mid),
+          right: children.slice(mid),
+        };
+      };
+
+      // Draw nodes
+      parentPositions.forEach((parentPos, i) => {
+        const { node, y } = parentPos;
+        const x = width / 2;
+
+        // Parent node
+        const parentGroup = svg
+          .append("g")
+          .attr("class", "node")
+          .attr("transform", `translate(${x},${y})`);
+
+        parentGroup
+          .append("rect")
+          .attr("width", nodeWidth)
+          .attr("height", nodeHeight)
+          .attr("x", -nodeWidth / 2)
+          .attr("y", -nodeHeight / 2)
+          .attr("rx", 10)
+          .attr("ry", 10)
+          .attr("fill", "#1976D2")
+          .attr("stroke", "#1565C0")
+          .attr("stroke-width", 2);
+
+        parentGroup
+          .append("text")
+          .attr("dy", "0.31em")
+          .attr("text-anchor", "middle")
+          .text(node.name)
+          .attr("fill", "#fff")
+          .attr("font-size", "14px")
+          .attr("font-family", "Arial, sans-serif");
+
+        // Draw children
+        if (node.children) {
+          const { left, right } = distributeChildren(node.children);
+          const leftOffset = ((left.length - 1) * childSpacing) / 2;
+          const rightOffset = ((right.length - 1) * childSpacing) / 2;
+
+          // Draw left children
+          left.forEach((child, j) => {
+            const childX = x - horizontalGap;
+            const childY = y - leftOffset + j * childSpacing;
+            drawChildNode(
+              svg,
+              child,
+              childX,
+              childY,
+              x,
+              y,
+              nodeWidth,
+              nodeHeight
             );
+          });
 
-          // Add rectangles for nodes
-          nodeGroup
-            .append("rect")
-            .attr("width", 100) // Width of the box
-            .attr("height", 50) // Height of the box
-            .attr("x", -50) // Center the box horizontally
-            .attr("y", -25) // Center the box vertically
-            .attr("rx", 10) // Rounded corners
-            .attr("ry", 10) // Rounded corners
-            .attr("fill", "#4CAF50") // Green color for nodes
-            .attr("stroke", "#388E3C") // Darker green border
-            .attr("stroke-width", 2);
-
-          // Add text for nodes
-          nodeGroup
-            .append("text")
-            .attr("dy", "0.31em")
-            .attr("x", 0) // Center text horizontally
-            .attr("y", 0) // Center text vertically
-            .attr("text-anchor", "middle") // Center text
-            .text((d) => node.name)
-            .attr("fill", "#fff") // White text color
-            .attr("font-size", "14px")
-            .attr("font-family", "Arial, sans-serif");
-
-          // Draw children nodes if they exist
-          if (node.children) {
-            drawNodes(
-              parentNode,
-              node.children,
-              xOffset + 200,
-              yOffset + i * nodeSpacing
-            ); // Move children to the right of the parent node
-          }
-        });
-      };
-
-      // Function to draw curved links between parent nodes (main roadmap)
-      const drawParentLinks = (parentNode, nodes, xOffset, yOffset) => {
-        const linkGenerator = d3
-          .linkVertical()
-          .x((d) => d.x)
-          .y((d) => d.y);
-
-        nodes.slice(1).forEach((node, i) => {
-          const source = { x: xOffset, y: yOffset + i * nodeSpacing };
-          const target = { x: xOffset, y: yOffset + (i + 1) * nodeSpacing };
-
-          parentNode
-            .append("path")
-            .attr("class", "link")
-            .attr("d", linkGenerator({ source, target }))
-            .attr("stroke", "#888")
-            .attr("stroke-width", 2)
-            .attr("fill", "none")
-            .attr("opacity", 0.7);
-        });
-      };
-
-      // Function to draw curved links between parent and child nodes
-      const drawChildLinks = (parentNode, nodes, xOffset, yOffset) => {
-        const linkGenerator = d3
-          .linkHorizontal()
-          .x((d) => d.x)
-          .y((d) => d.y);
-
-        nodes.forEach((node, i) => {
-          if (node.children) {
-            node.children.forEach((child, j) => {
-              const source = { x: xOffset + 50, y: yOffset + i * nodeSpacing }; // End of parent node
-              const target = {
-                x: xOffset + 200,
-                y: yOffset + i * nodeSpacing + j * 60,
-              }; // Start of child node
-
-              // Draw the curved link only once between parent and child
-              parentNode
-                .append("path")
-                .attr("class", "link")
-                .attr("d", linkGenerator({ source, target }))
-                .attr("stroke", "#888")
-                .attr("stroke-width", 2)
-                .attr("fill", "none")
-                .attr("opacity", 0.7);
-            });
-          }
-        });
-      };
-
-      // Draw nodes and their children
-      drawNodes(svg, nodes, width / 2, 0);
-
-      // Draw parent links (main roadmap)
-      drawParentLinks(svg, nodes, width / 2, 0);
-
-      // Draw child links (parent to children)
-      drawChildLinks(svg, nodes, width / 2, 0);
+          // Draw right children
+          right.forEach((child, j) => {
+            const childX = x + horizontalGap;
+            const childY = y - rightOffset + j * childSpacing;
+            drawChildNode(
+              svg,
+              child,
+              childX,
+              childY,
+              x,
+              y,
+              nodeWidth,
+              nodeHeight
+            );
+          });
+        }
+      });
     }
   }, [data]);
+
+  const drawChildNode = (
+    svg,
+    child,
+    x,
+    y,
+    parentX,
+    parentY,
+    nodeWidth,
+    nodeHeight
+  ) => {
+    const childGroup = svg
+      .append("g")
+      .attr("class", "node")
+      .attr("transform", `translate(${x},${y})`);
+
+    childGroup
+      .append("rect")
+      .attr("width", nodeWidth)
+      .attr("height", nodeHeight)
+      .attr("x", -nodeWidth / 2)
+      .attr("y", -nodeHeight / 2)
+      .attr("rx", 10)
+      .attr("ry", 10)
+      .attr("fill", "#81C784")
+      .attr("stroke", "#4CAF50")
+      .attr("stroke-width", 2);
+
+    childGroup
+      .append("text")
+      .attr("dy", "0.31em")
+      .attr("text-anchor", "middle")
+      .text(child.name)
+      .attr("fill", "#fff")
+      .attr("font-size", "14px")
+      .attr("font-family", "Arial, sans-serif");
+
+    // Calculate connection points
+    const isLeft = x < parentX;
+    const childConnectX = x + (isLeft ? nodeWidth / 2 : -nodeWidth / 2);
+    const parentConnectX = parentX + (isLeft ? -nodeWidth / 2 : nodeWidth / 2);
+
+    // Draw dotted connection for children
+    const path = d3.path();
+    path.moveTo(childConnectX, y);
+    path.bezierCurveTo(
+      (childConnectX + parentConnectX) / 2,
+      y,
+      (childConnectX + parentConnectX) / 2,
+      parentY,
+      parentConnectX,
+      parentY
+    );
+
+    svg
+      .append("path")
+      .attr("class", "child-link")
+      .attr("d", path.toString())
+      .attr("stroke", "#4CAF50") // Matching child node border color
+      .attr("stroke-width", 2)
+      .attr("fill", "none")
+      .attr("opacity", 0.7)
+      .attr("stroke-dasharray", "5,5"); // Dotted line for child connections
+  };
 
   return <div ref={d3Container} className="roadmap-container"></div>;
 };
