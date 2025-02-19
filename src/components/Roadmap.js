@@ -12,12 +12,9 @@ const Roadmap = ({ data }) => {
 
       // Setup dimensions and margins
       const width = 1200;
-      const initialHeight = 1000;
       const margin = { top: 50, right: 200, bottom: 50, left: 200 };
-
-      // Fixed distances for connection lines
-      const FIXED_LINE_LENGTH = 250; // Length of connection line
-      const BASE_BOX_WIDTH = 120; // Minimum width for boxes
+      const FIXED_LINE_LENGTH = 100; // desired gap between parent's edge and child's edge
+      const BASE_BOX_WIDTH = 120; // minimum width for boxes
 
       // Create temporary SVG for measurements
       const measureSvg = d3
@@ -45,8 +42,6 @@ const Roadmap = ({ data }) => {
         return {
           width: Math.max(bbox.width + paddingX * 2, BASE_BOX_WIDTH),
           height: bbox.height + paddingY * 2,
-          textWidth: bbox.width,
-          textHeight: bbox.height,
         };
       };
 
@@ -63,49 +58,30 @@ const Roadmap = ({ data }) => {
         })),
       };
 
-      // Calculate layout metrics
+      // Calculate layout metrics for parents
       const minParentSpacing = 100;
       const childVerticalGap = 30;
+      // Use only a fraction of the total children height to affect parent's spacing.
+      const childrenSpaceFactor = 0.5;
 
-      // Calculate vertical positions and required space
       let currentY = 0;
       const parentPositions = nodeMetrics.parents.map((parent) => {
         let childSpace = 0;
         if (parent.children.length > 0) {
-          const mid = Math.ceil(parent.children.length / 2);
-          const leftCount = mid;
-          const rightCount = parent.children.length - mid;
-
-          const leftChildrenHeight = parent.children
-            .slice(0, mid)
-            .reduce(
-              (total, child) =>
-                total + child.dimensions.height + childVerticalGap,
-              0
-            );
-          const rightChildrenHeight = parent.children
-            .slice(mid)
-            .reduce(
-              (total, child) =>
-                total + child.dimensions.height + childVerticalGap,
-              0
-            );
-
-          childSpace = Math.max(leftChildrenHeight, rightChildrenHeight);
+          childSpace = parent.children.reduce(
+            (total, child) =>
+              total + child.dimensions.height + childVerticalGap,
+            0
+          );
         }
-
+        // Only a fraction of the children group height is added to the parent's spacing.
         const blockHeight = Math.max(
           minParentSpacing,
-          parent.dimensions.height + childSpace
+          parent.dimensions.height + childrenSpaceFactor * childSpace
         );
         const position = currentY + blockHeight / 2;
         currentY += blockHeight;
-
-        return {
-          node: parent,
-          y: position,
-          blockHeight,
-        };
+        return { node: parent, y: position, blockHeight };
       });
 
       // Create the actual SVG
@@ -120,7 +96,7 @@ const Roadmap = ({ data }) => {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-      // Draw spine
+      // Draw the central spine for parent nodes
       svg
         .append("line")
         .attr("class", "parent-spine")
@@ -132,7 +108,7 @@ const Roadmap = ({ data }) => {
         .attr("stroke-width", 2)
         .attr("opacity", 0.7);
 
-      // Helper function to create a node
+      // Helper function to create a node (parent or child)
       const createNode = (
         group,
         text,
@@ -141,12 +117,11 @@ const Roadmap = ({ data }) => {
         strokeColor,
         isLeft = null
       ) => {
-        // Calculate the x-offset based on whether it's a left child, right child, or parent
+        // Calculate the x-offset based on whether it's a left or right child
         let xOffset = 0;
         const boxWidth = dimensions.width;
 
         if (isLeft !== null) {
-          // For child nodes, calculate the growth offset
           const growthOffset = Math.max(0, (boxWidth - BASE_BOX_WIDTH) / 2);
           xOffset = isLeft ? -growthOffset : growthOffset;
         }
@@ -193,7 +168,7 @@ const Roadmap = ({ data }) => {
           "#1565C0"
         );
 
-        // Position and draw children
+        // Draw children if any
         if (parent.children.length > 0) {
           const mid = Math.ceil(parent.children.length / 2);
           const leftChildren = parent.children.slice(0, mid);
@@ -206,16 +181,28 @@ const Roadmap = ({ data }) => {
               0
             ) - childVerticalGap;
 
-          // Draw children
           const drawChildren = (children, isLeft) => {
             const totalHeight = getChildrenTotalHeight(children);
             let currentChildY = y - totalHeight / 2;
 
             children.forEach((child) => {
-              const baseChildX =
-                parentX + (isLeft ? -FIXED_LINE_LENGTH : FIXED_LINE_LENGTH);
+              // Compute child x offset for node growth
+              const childXOffset = isLeft
+                ? -Math.max(0, (child.dimensions.width - BASE_BOX_WIDTH) / 2)
+                : Math.max(0, (child.dimensions.width - BASE_BOX_WIDTH) / 2);
 
-              // Draw child node
+              // Position the child so that the connecting edge is exactly FIXED_LINE_LENGTH from parent's edge.
+              const baseChildX = isLeft
+                ? parentX -
+                  parentBox.boxWidth / 2 -
+                  FIXED_LINE_LENGTH -
+                  (child.dimensions.width / 2 + childXOffset)
+                : parentX +
+                  parentBox.boxWidth / 2 +
+                  FIXED_LINE_LENGTH +
+                  child.dimensions.width / 2 -
+                  childXOffset;
+
               const childGroup = svg
                 .append("g")
                 .attr("class", "node")
@@ -230,14 +217,15 @@ const Roadmap = ({ data }) => {
                 isLeft
               );
 
-              // Calculate connection points
+              // Parent connection point: edge of parent's box
               const parentConnectX =
-                parentX + (isLeft ? -BASE_BOX_WIDTH / 2 : BASE_BOX_WIDTH / 2);
-              const childConnectX =
-                baseChildX +
-                (isLeft ? BASE_BOX_WIDTH / 2 : -BASE_BOX_WIDTH / 2);
+                parentX +
+                (isLeft ? -parentBox.boxWidth / 2 : parentBox.boxWidth / 2);
+              // Child connection point: edge of child's box
+              const childConnectX = isLeft
+                ? baseChildX + child.dimensions.width / 2 + childXOffset
+                : baseChildX - child.dimensions.width / 2 + childXOffset;
 
-              // Draw connection line
               const path = d3.path();
               path.moveTo(childConnectX, currentChildY);
               path.bezierCurveTo(

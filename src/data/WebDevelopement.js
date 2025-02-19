@@ -12,7 +12,7 @@ const frontendRoadmap = {
       ],
     },
     {
-      name: "CSS and JavaScript",
+      name: "CSS and JavaScript Development",
       children: [
         { name: "Bootstrap" },
         { name: "Tailwind CSS" },

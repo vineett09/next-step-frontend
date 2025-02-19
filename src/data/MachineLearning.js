@@ -3,11 +3,11 @@ const machineLearning = {
   children: [
     { name: "Python" },
     {
-      name: "TensorFlow",
+      name: "TensorFlow 2.0 API and Keras",
       children: [
         { name: "Keras" },
         { name: "Estimators" },
-        { name: "Eager Execution" },
+        { name: "Eager Execution Mode and Graph Mode" },
       ],
     },
     {
@@ -32,6 +32,10 @@ const machineLearning = {
       children: [
         { name: "Computer Vision" },
         { name: "Natural Language Processing" },
+        { name: "Reinforcement Learning" },
+        { name: "AutoML" },
+        { name: "Transfer Learning" },
+        { name: "Generative Adversarial Networks" },
       ],
     },
   ],
