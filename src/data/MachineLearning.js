@@ -1,44 +1,81 @@
-const machineLearning = {
-  name: "Machine Learning",
+const deepLearningRoadmap = {
+  name: "Deep Learning Roadmap",
   children: [
-    { name: "Python" },
     {
-      name: "TensorFlow 2.0 API and Keras",
+      name: "Programming Foundations",
+      children: [{ name: "Python" }, { name: "JavaScript" }],
+    },
+    {
+      name: "Mathematics for Deep Learning",
       children: [
-        { name: "Keras" },
-        { name: "Estimators" },
-        { name: "Eager Execution Mode and Graph Mode" },
+        { name: "Linear Algebra" },
+        { name: "Calculus" },
+        { name: "Probability and Statistics" },
       ],
     },
     {
-      name: "Scikit-Learn",
+      name: "Machine Learning Fundamentals",
       children: [
         { name: "Supervised Learning" },
         { name: "Unsupervised Learning" },
-        { name: "Model Selection" },
-        { name: "Feature Selection" },
+        { name: "Model Evaluation" },
       ],
     },
     {
-      name: "Neural Networks",
+      name: "Deep Learning Core Concepts",
       children: [
-        { name: "Convolutional Neural Networks" },
-        { name: "Recurrent Neural Networks" },
-        { name: "Generative Adversarial Networks" },
+        { name: "Neural Networks" },
+        { name: "Deep Neural Networks" },
+        { name: "Regularization Techniques" },
       ],
     },
     {
-      name: "Deep Learning",
+      name: "Specialized Deep Learning Architectures",
       children: [
-        { name: "Computer Vision" },
-        { name: "Natural Language Processing" },
+        { name: "Convolutional Neural Networks (CNNs)" },
+        { name: "Recurrent Neural Networks (RNNs)" },
+        { name: "Transformers" },
+      ],
+    },
+    {
+      name: "Advanced Topics",
+      children: [
+        { name: "Generative Adversarial Networks (GANs)" },
         { name: "Reinforcement Learning" },
-        { name: "AutoML" },
         { name: "Transfer Learning" },
-        { name: "Generative Adversarial Networks" },
+        { name: "AutoML" },
       ],
+    },
+    {
+      name: "Tools and Frameworks",
+      children: [
+        { name: "TensorFlow.js" },
+        { name: "Brain.js" },
+        { name: "Synaptic" },
+        { name: "ml5.js" },
+      ],
+    },
+    {
+      name: "Practical Application and Deployment",
+      children: [
+        { name: "Model Optimization" },
+        { name: "Deployment" },
+        { name: "MLOps" },
+      ],
+    },
+    {
+      name: "Emerging Trends",
+      children: [
+        { name: "Explainable AI (XAI)" },
+        { name: "Federated Learning" },
+        { name: "Quantum Machine Learning" },
+      ],
+    },
+    {
+      name: "Real-World Projects and Continuous Learning",
+      children: [{ name: "Portfolio Development" }, { name: "Stay Updated" }],
     },
   ],
 };
 
-export default machineLearning;
+export default deepLearningRoadmap;

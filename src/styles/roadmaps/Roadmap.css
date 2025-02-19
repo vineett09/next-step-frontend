@@ -1,12 +1,20 @@
 /* src/styles/roadmaps/Roadmap.css */
 .roadmap-container {
   width: 100%;
-  height: 100vh;
-  background-color: #f0f4f8; /* Light blue background */
+  min-height: 100vh; /* Ensure it matches MainContent */
+  background-color: #f0f4f8;
   padding: 20px;
-  overflow: auto; /* Allow scrolling if the roadmap is large */
+  overflow: hidden; /* Prevent unwanted scrolling */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
+.roadmap-container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .link {
   fill: none;
   stroke: #888; /* Light gray for links */
@@ -17,20 +25,13 @@
 
 }
 
-.link:hover {
-  stroke: #4CAF50; /* Green on hover */
-}
+
 
 .node rect {
   cursor: pointer; /* Indicate clickable nodes */
-  transition: all 0.3s ease; /* Smooth hover effect */
 }
 
-.node rect:hover {
-  fill: #81C784; /* Light green on hover */
-  stroke: #4CAF50; /* Darker green border on hover */
-  transform: scale(1.1); /* Slightly enlarge on hover */
-}
+
 
 .node text {
   pointer-events: none; /* Prevent text from blocking clicks */

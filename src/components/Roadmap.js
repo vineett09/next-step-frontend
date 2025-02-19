@@ -164,8 +164,8 @@ const Roadmap = ({ data }) => {
           parentGroup,
           parent.name,
           parent.dimensions,
-          "#1976D2",
-          "#1565C0"
+          "#64B5F6",
+          "black"
         );
 
         // Draw children if any
