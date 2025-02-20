@@ -1,28 +1,34 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
 import "../styles/roadmaps/Roadmap.css";
-
+import { useLocation } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
+  const [selectedNode, setSelectedNode] = useState({
+    name: "",
+    description: "",
+  }); // Changed state to object
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const location = useLocation();
+  const roadmapTitle =
+    location.state?.title || "Explore Your Path to Tech Excellence";
 
   useEffect(() => {
     if (data && d3Container.current) {
-      // Remove any previous SVG
       d3.select(d3Container.current).selectAll("*").remove();
 
-      // Setup dimensions and margins
       const width = 1200;
       const margin = { top: 50, right: 200, bottom: 50, left: 200 };
-      const FIXED_LINE_LENGTH = 100; // desired gap between parent's edge and child's edge
-      const BASE_BOX_WIDTH = 120; // minimum width for boxes
+      const FIXED_LINE_LENGTH = 100;
+      const BASE_BOX_WIDTH = 120;
 
-      // Create temporary SVG for measurements
       const measureSvg = d3
         .select(d3Container.current)
         .append("svg")
         .style("visibility", "hidden");
 
-      // Helper function to measure text dimensions
       const measureText = (text) => {
         const textElement = measureSvg
           .append("text")
@@ -34,7 +40,6 @@ const Roadmap = ({ data }) => {
         return bbox;
       };
 
-      // Helper function to calculate node dimensions
       const calculateNodeDimensions = (text) => {
         const paddingX = 20;
         const paddingY = 10;
@@ -45,7 +50,6 @@ const Roadmap = ({ data }) => {
         };
       };
 
-      // Pre-calculate all node dimensions
       const nodeMetrics = {
         parents: data.children.map((parent) => ({
           ...parent,
@@ -58,10 +62,8 @@ const Roadmap = ({ data }) => {
         })),
       };
 
-      // Calculate layout metrics for parents
       const minParentSpacing = 100;
       const childVerticalGap = 30;
-      // Use only a fraction of the total children height to affect parent's spacing.
       const childrenSpaceFactor = 0.5;
 
       let currentY = 0;
@@ -74,7 +76,6 @@ const Roadmap = ({ data }) => {
             0
           );
         }
-        // Only a fraction of the children group height is added to the parent's spacing.
         const blockHeight = Math.max(
           minParentSpacing,
           parent.dimensions.height + childrenSpaceFactor * childSpace
@@ -84,7 +85,6 @@ const Roadmap = ({ data }) => {
         return { node: parent, y: position, blockHeight };
       });
 
-      // Create the actual SVG
       const totalHeight = currentY;
       const svgElement = d3
         .select(d3Container.current)
@@ -96,7 +96,6 @@ const Roadmap = ({ data }) => {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-      // Draw the central spine for parent nodes
       svg
         .append("line")
         .attr("class", "parent-spine")
@@ -108,7 +107,6 @@ const Roadmap = ({ data }) => {
         .attr("stroke-width", 2)
         .attr("opacity", 0.7);
 
-      // Helper function to create a node (parent or child)
       const createNode = (
         group,
         text,
@@ -117,7 +115,6 @@ const Roadmap = ({ data }) => {
         strokeColor,
         isLeft = null
       ) => {
-        // Calculate the x-offset based on whether it's a left or right child
         let xOffset = 0;
         const boxWidth = dimensions.width;
 
@@ -150,15 +147,20 @@ const Roadmap = ({ data }) => {
         return { boxWidth, xOffset };
       };
 
-      // Draw parent nodes and their children
       parentPositions.forEach(({ node: parent, y }) => {
         const parentX = width / 2;
 
-        // Draw parent node
         const parentGroup = svg
           .append("g")
           .attr("class", "node")
-          .attr("transform", `translate(${parentX},${y})`);
+          .attr("transform", `translate(${parentX},${y})`)
+          .on("click", () => {
+            setSelectedNode({
+              name: parent.name,
+              description: parent.description,
+            }); // Set both name and description
+            setIsSidebarOpen(true);
+          });
 
         const parentBox = createNode(
           parentGroup,
@@ -168,7 +170,6 @@ const Roadmap = ({ data }) => {
           "black"
         );
 
-        // Draw children if any
         if (parent.children.length > 0) {
           const mid = Math.ceil(parent.children.length / 2);
           const leftChildren = parent.children.slice(0, mid);
@@ -186,12 +187,10 @@ const Roadmap = ({ data }) => {
             let currentChildY = y - totalHeight / 2;
 
             children.forEach((child) => {
-              // Compute child x offset for node growth
               const childXOffset = isLeft
                 ? -Math.max(0, (child.dimensions.width - BASE_BOX_WIDTH) / 2)
                 : Math.max(0, (child.dimensions.width - BASE_BOX_WIDTH) / 2);
 
-              // Position the child so that the connecting edge is exactly FIXED_LINE_LENGTH from parent's edge.
               const baseChildX = isLeft
                 ? parentX -
                   parentBox.boxWidth / 2 -
@@ -206,7 +205,14 @@ const Roadmap = ({ data }) => {
               const childGroup = svg
                 .append("g")
                 .attr("class", "node")
-                .attr("transform", `translate(${baseChildX},${currentChildY})`);
+                .attr("transform", `translate(${baseChildX},${currentChildY})`)
+                .on("click", () => {
+                  setSelectedNode({
+                    name: child.name,
+                    description: child.description,
+                  });
+                  setIsSidebarOpen(true);
+                });
 
               const childBox = createNode(
                 childGroup,
@@ -217,11 +223,9 @@ const Roadmap = ({ data }) => {
                 isLeft
               );
 
-              // Parent connection point: edge of parent's box
               const parentConnectX =
                 parentX +
                 (isLeft ? -parentBox.boxWidth / 2 : parentBox.boxWidth / 2);
-              // Child connection point: edge of child's box
               const childConnectX = isLeft
                 ? baseChildX + child.dimensions.width / 2 + childXOffset
                 : baseChildX - child.dimensions.width / 2 + childXOffset;
@@ -256,12 +260,27 @@ const Roadmap = ({ data }) => {
         }
       });
 
-      // Clean up measurement SVG
       measureSvg.remove();
     }
   }, [data]);
 
-  return <div ref={d3Container} className="roadmap-container"></div>;
+  const closeDescription = () => {
+    setSelectedNode({ name: "", description: "" });
+    setIsSidebarOpen(false);
+  };
+
+  return (
+    <div className="roadmap-container">
+      <Header title={roadmapTitle} />
+      <div ref={d3Container} />
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={closeDescription}
+        name={selectedNode.name}
+        description={selectedNode.description}
+      />
+    </div>
+  );
 };
 
 export default Roadmap;

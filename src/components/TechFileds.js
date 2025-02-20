@@ -328,8 +328,8 @@ const techSkills = [
 const TechFields = () => {
   const navigate = useNavigate();
 
-  const handleFieldClick = (link) => {
-    navigate(link); // Navigate to the selected field or skill
+  const handleFieldClick = (field) => {
+    navigate(field.link, { state: { title: field.title } }); // Send the title to Roadmap.js
   };
 
   return (
@@ -341,7 +341,7 @@ const TechFields = () => {
           <div
             key={field.id}
             className="tech-card"
-            onClick={() => handleFieldClick(field.link)}
+            onClick={() => handleFieldClick(field)}
           >
             <div className="tech-icon">{field.icon}</div>
             <h3>{field.title}</h3>

@@ -1,0 +1,69 @@
+.roadmap-header {
+  position: relative;
+  background: #64B5F6;
+  color: #000000;
+  text-align: center;
+  padding: 20px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.roadmap-header::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #64B5F6;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.1));
+}
+
+.roadmap-content {
+  max-width: 800px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  padding-top: 70px; /* Add padding to the top to make space for the back button */
+}
+
+.roadmap-header h1 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.roadmap-header p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.back-button {
+  position: absolute;
+  top: 10px; /* Adjust top position */
+  left: 10px; /* Adjust left position */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  padding: 4px 8px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.back-button:hover {
+  background-color: #59a3f0;
+}
+
+.back-button svg {
+  width: 24px; /* Ensure the SVG has a defined size */
+  height: 24px; /* Ensure the SVG has a defined size */
+  fill: #000; /* Ensure the SVG has a fill color */
+}
