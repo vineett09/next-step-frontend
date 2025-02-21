@@ -24,6 +24,7 @@ const machineLearningRoadmap = {
             "A high-performance language suited for numerical analysis and computational science, gaining popularity in machine learning research.",
         },
       ],
+      dividerText: "Foundation Skills", // Add this property
     },
     {
       name: "Mathematics and Statistics",
@@ -46,6 +47,7 @@ const machineLearningRoadmap = {
             "Provides the foundation for making inferences and predictions from data, including concepts like hypothesis testing and regression analysis.",
         },
       ],
+      dividerText: "Machine Learning Algorithms", // Add this property
     },
     {
       name: "Machine Learning Algorithms",
@@ -95,6 +97,7 @@ const machineLearningRoadmap = {
             "Adjusting data to a common scale without distorting differences in the ranges of values.",
         },
       ],
+      dividerText: "Data Scaling and Normalization", // Add this property
     },
     {
       name: "Model Evaluation and Validation",
@@ -117,6 +120,7 @@ const machineLearningRoadmap = {
             "Optimizing model parameters to improve performance using methods like grid search and random search.",
         },
       ],
+      dividerText: "Hyperparameter Tuning", // Add this property
     },
     {
       name: "Tools and Frameworks",

@@ -1,9 +1,9 @@
 /* src/components/Navbar.css */
 :root {
-    --primary-color: #007bff;
+    --primary-color: #000;
     --hover-color: #0056b3;
-    --background-color: #ffffff;
-    --text-color: #333;
+    --background-color: #E2E2B6;
+    --text-color: #000;
     --shadow-color: rgba(0, 0, 0, 0.1);
   }
   

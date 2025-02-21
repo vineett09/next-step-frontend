@@ -1,19 +1,22 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as d3 from "d3";
-import "../styles/roadmaps/Roadmap.css";
 import { useLocation } from "react-router-dom";
+import "../styles/roadmaps/Roadmap.css";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import FieldCard from "./FieldCard";
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
   const [selectedNode, setSelectedNode] = useState({
     name: "",
     description: "",
-  }); // Changed state to object
+  });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
   const roadmapTitle =
     location.state?.title || "Explore Your Path to Tech Excellence";
+  const roadmapDescription =
+    location.state?.description || "Select a field to learn more.";
 
   useEffect(() => {
     if (data && d3Container.current) {
@@ -23,11 +26,15 @@ const Roadmap = ({ data }) => {
       const margin = { top: 50, right: 200, bottom: 50, left: 200 };
       const FIXED_LINE_LENGTH = 100;
       const BASE_BOX_WIDTH = 120;
+      const DIVIDER_PADDING = 30;
 
-      const measureSvg = d3
+      const svgElement = d3
         .select(d3Container.current)
         .append("svg")
-        .style("visibility", "hidden");
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", 1000);
+
+      const measureSvg = svgElement.append("g").style("visibility", "hidden");
 
       const measureText = (text) => {
         const textElement = measureSvg
@@ -66,46 +73,148 @@ const Roadmap = ({ data }) => {
       const childVerticalGap = 30;
       const childrenSpaceFactor = 0.5;
 
-      let currentY = 0;
-      const parentPositions = nodeMetrics.parents.map((parent) => {
+      const svg = svgElement
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+      // Title node dimensions
+      const titleText = roadmapTitle; // Use the title from state
+      const titleDimensions = calculateNodeDimensions(titleText);
+      const titleY = 0; // Positioning title above roadmap
+
+      // Draw the title node
+      const titleGroup = svg
+        .append("g")
+        .attr("class", "title-node")
+        .attr("transform", `translate(${width / 2}, ${titleY})`);
+
+      titleGroup
+        .append("rect")
+        .attr("width", titleDimensions.width)
+        .attr("height", titleDimensions.height)
+        .attr("x", -titleDimensions.width / 2)
+        .attr("y", -titleDimensions.height / 2)
+        .attr("rx", 10)
+        .attr("ry", 10)
+        .attr("fill", "#FFD700") // Gold color to highlight title
+        .attr("stroke", "black")
+        .attr("stroke-width", 2);
+
+      titleGroup
+        .append("text")
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "middle")
+        .attr("font-size", "16px")
+        .attr("font-family", "Arial, sans-serif")
+        .attr("fill", "black")
+        .text(titleText);
+
+      // Connect the title to the first node
+      const TITLE_LINE_LENGTH = 150;
+      const lineStartY = titleY + titleDimensions.height / 2;
+      const lineEndY = lineStartY + TITLE_LINE_LENGTH;
+
+      svg
+        .append("line")
+        .attr("x1", width / 2)
+        .attr("y1", lineStartY)
+        .attr("x2", width / 2)
+        .attr("y2", lineEndY)
+        .attr("stroke", "#1565C0")
+        .attr("stroke-width", 3)
+        .attr("opacity", 0.7)
+        .attr("stroke-dasharray", "5,5");
+
+      // Calculate positions with divider consideration
+      let currentY = lineEndY;
+      const parentPositions = nodeMetrics.parents.map((parent, index) => {
         let childSpace = 0;
-        if (parent.children.length > 0) {
+        if (parent.children?.length > 0) {
           childSpace = parent.children.reduce(
             (total, child) =>
               total + child.dimensions.height + childVerticalGap,
             0
           );
         }
+
         const blockHeight = Math.max(
           minParentSpacing,
           parent.dimensions.height + childrenSpaceFactor * childSpace
         );
+
+        const dividerSpace = parent.dividerText ? DIVIDER_PADDING * 2 : 0;
         const position = currentY + blockHeight / 2;
-        currentY += blockHeight;
-        return { node: parent, y: position, blockHeight };
+        currentY += blockHeight + dividerSpace;
+
+        return {
+          node: parent,
+          y: position,
+          blockHeight,
+          dividerY: currentY - dividerSpace / 2,
+        };
       });
 
-      const totalHeight = currentY;
-      const svgElement = d3
-        .select(d3Container.current)
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", totalHeight + margin.top + margin.bottom);
+      const totalHeight = currentY + margin.top + margin.bottom;
+      svgElement.attr("height", totalHeight);
 
-      const svg = svgElement
-        .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+      // Draw main spine with gaps for divider text
+      parentPositions.forEach((position, index) => {
+        if (index > 0) {
+          const prevPosition = parentPositions[index - 1];
+          const startY =
+            prevPosition.y + prevPosition.node.dimensions.height / 2;
+          const endY = position.y - position.node.dimensions.height / 2;
 
-      svg
-        .append("line")
-        .attr("class", "parent-spine")
-        .attr("x1", width / 2)
-        .attr("y1", 0)
-        .attr("x2", width / 2)
-        .attr("y2", totalHeight)
-        .attr("stroke", "#1565C0")
-        .attr("stroke-width", 2)
-        .attr("opacity", 0.7);
+          if (prevPosition.node.dividerText) {
+            // Line above divider
+            svg
+              .append("line")
+              .attr("class", "parent-spine")
+              .attr("x1", width / 2)
+              .attr("y1", startY)
+              .attr("x2", width / 2)
+              .attr("y2", prevPosition.dividerY - DIVIDER_PADDING)
+              .attr("stroke", "#1565C0")
+              .attr("stroke-width", 3)
+              .attr("opacity", 0.7);
+
+            // Divider text
+            svg
+              .append("text")
+              .attr("x", width / 2)
+              .attr("y", prevPosition.dividerY)
+              .attr("text-anchor", "middle")
+              .attr("dominant-baseline", "middle")
+              .attr("font-size", "14px")
+              .attr("font-family", "Arial, sans-serif")
+              .attr("fill", "#666")
+              .text(prevPosition.node.dividerText);
+
+            // Line below divider
+            svg
+              .append("line")
+              .attr("class", "parent-spine")
+              .attr("x1", width / 2)
+              .attr("y1", prevPosition.dividerY + DIVIDER_PADDING)
+              .attr("x2", width / 2)
+              .attr("y2", endY)
+              .attr("stroke", "#1565C0")
+              .attr("stroke-width", 3)
+              .attr("opacity", 0.7);
+          } else {
+            // Continuous line if no divider
+            svg
+              .append("line")
+              .attr("class", "parent-spine")
+              .attr("x1", width / 2)
+              .attr("y1", startY)
+              .attr("x2", width / 2)
+              .attr("y2", endY)
+              .attr("stroke", "#1565C0")
+              .attr("stroke-width", 3)
+              .attr("opacity", 0.7);
+          }
+        }
+      });
 
       const createNode = (
         group,
@@ -147,6 +256,7 @@ const Roadmap = ({ data }) => {
         return { boxWidth, xOffset };
       };
 
+      // Draw parent and child nodes
       parentPositions.forEach(({ node: parent, y }) => {
         const parentX = width / 2;
 
@@ -158,7 +268,7 @@ const Roadmap = ({ data }) => {
             setSelectedNode({
               name: parent.name,
               description: parent.description,
-            }); // Set both name and description
+            });
             setIsSidebarOpen(true);
           });
 
@@ -170,7 +280,7 @@ const Roadmap = ({ data }) => {
           "black"
         );
 
-        if (parent.children.length > 0) {
+        if (parent.children?.length > 0) {
           const mid = Math.ceil(parent.children.length / 2);
           const leftChildren = parent.children.slice(0, mid);
           const rightChildren = parent.children.slice(mid);
@@ -214,12 +324,12 @@ const Roadmap = ({ data }) => {
                   setIsSidebarOpen(true);
                 });
 
-              const childBox = createNode(
+              createNode(
                 childGroup,
                 child.name,
                 child.dimensions,
                 "#81C784",
-                "#4CAF50",
+                "black",
                 isLeft
               );
 
@@ -272,6 +382,7 @@ const Roadmap = ({ data }) => {
   return (
     <div className="roadmap-container">
       <Header title={roadmapTitle} />
+      <FieldCard title={roadmapTitle} description={roadmapDescription} />{" "}
       <div ref={d3Container} />
       <Sidebar
         isOpen={isSidebarOpen}

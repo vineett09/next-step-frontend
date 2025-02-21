@@ -56,6 +56,7 @@ const mobileDevelopmentRoadmap = {
             "Apple’s framework for building user interfaces across all Apple platforms with Swift.",
         },
       ],
+      dividerText: "Native & Cross-Platform Development",
     },
     {
       name: "Development Tools",
@@ -83,6 +84,7 @@ const mobileDevelopmentRoadmap = {
             "A version control system for tracking changes in source code during development.",
         },
       ],
+      dividerText: "Development Environment & Tools",
     },
     {
       name: "User Interface (UI) and User Experience (UX) Design",
@@ -110,6 +112,7 @@ const mobileDevelopmentRoadmap = {
             "Utilizing tools like Figma or Sketch to design and prototype user interfaces.",
         },
       ],
+      dividerText: "UI/UX Design Principles",
     },
     {
       name: "Backend and APIs",
@@ -137,6 +140,7 @@ const mobileDevelopmentRoadmap = {
             "A set of tools and services by Amazon Web Services for building scalable mobile applications.",
         },
       ],
+      dividerText: "Backend Integration",
     },
     {
       name: "Testing and Debugging",
@@ -164,6 +168,7 @@ const mobileDevelopmentRoadmap = {
             "Analyzing the application to identify and fix performance bottlenecks.",
         },
       ],
+      dividerText: "Quality Assurance",
     },
     {
       name: "Deployment and Continuous Integration/Continuous Deployment (CI/CD)",
@@ -191,6 +196,7 @@ const mobileDevelopmentRoadmap = {
             "Integrating tools like Firebase Analytics or Mixpanel to monitor app performance and user behavior.",
         },
       ],
+      dividerText: "Release Management",
     },
     {
       name: "Security",
@@ -218,6 +224,7 @@ const mobileDevelopmentRoadmap = {
             "Conducting periodic security assessments to identify and mitigate potential threats.",
         },
       ],
+      dividerText: "Security & Compliance",
     },
     {
       name: "Emerging Technologies",
@@ -240,6 +247,7 @@ const mobileDevelopmentRoadmap = {
             "Developing applications that interact with IoT devices for smart home automation, health monitoring, and more.",
         },
       ],
+      dividerText: "Future Trends",
     },
     {
       name: "Soft Skills",
@@ -272,6 +280,7 @@ const mobileDevelopmentRoadmap = {
       name: "Continuous Learning",
       description:
         "Keeping up with evolving mobile development frameworks, programming languages, and best practices through research, courses, and community engagement.",
+      dividerText: "Lifelong Learning",
     },
   ],
 };

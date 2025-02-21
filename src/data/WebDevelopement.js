@@ -25,6 +25,7 @@ const webDevelopmentRoadmap = {
             "Popular framework for responsive, mobile-first projects.",
         },
       ],
+      dividerText: "Front-End Development",
     },
     {
       name: "JavaScript",
@@ -51,6 +52,7 @@ const webDevelopmentRoadmap = {
           description: "Predictable state container for JavaScript apps.",
         },
       ],
+      dividerText: "Collaboration & Code Management",
     },
     {
       name: "Version Control Systems",
@@ -63,6 +65,7 @@ const webDevelopmentRoadmap = {
             "Platform for hosting and collaborating on Git repositories.",
         },
       ],
+      dividerText: "Dependency Management",
     },
     {
       name: "Package Managers",
@@ -85,6 +88,7 @@ const webDevelopmentRoadmap = {
         },
         { name: "Vite", description: "Next-generation front-end build tool." },
       ],
+      dividerText: "Back-End Development",
     },
     {
       name: "Back-End Development",
@@ -113,6 +117,7 @@ const webDevelopmentRoadmap = {
         },
         { name: "GraphQL", description: "Query language for APIs." },
       ],
+      dividerText: "Deployment & Cloud Computing",
     },
     {
       name: "DevOps and Deployment",
@@ -138,6 +143,7 @@ const webDevelopmentRoadmap = {
           description: "Google's suite of cloud computing services.",
         },
       ],
+      dividerText: "Testing & Debugging",
     },
     {
       name: "Testing",
@@ -154,6 +160,7 @@ const webDevelopmentRoadmap = {
         },
         { name: "Selenium", description: "Tool for automating web browsers." },
       ],
+      dividerText: "Web Performance Optimization",
     },
     {
       name: "Performance Optimization",
@@ -172,7 +179,25 @@ const webDevelopmentRoadmap = {
           name: "Caching Strategies",
           description: "Storing data for faster subsequent access.",
         },
+        {
+          name: "Image Optimization",
+          description: "Compressing and optimizing images for faster loading.",
+        },
+        {
+          name: "Minification",
+          description: "Removing unnecessary whitespace and comments.",
+        },
+        {
+          name: "CSS Optimization",
+          description:
+            "Minifying and compressing CSS files for faster loading.",
+        },
+        {
+          name: "Browser Compatibility",
+          description: "Ensuring cross-browser compatibility.",
+        },
       ],
+      dividerText: "Web Security",
     },
     {
       name: "Security Best Practices",
@@ -188,6 +213,7 @@ const webDevelopmentRoadmap = {
           description: "Ensuring secure user access control.",
         },
       ],
+      dividerText: "Future Trends",
     },
     {
       name: "Emerging Technologies",
@@ -219,6 +245,7 @@ const webDevelopmentRoadmap = {
             "Integrating AI tools for automating web development workflows.",
         },
       ],
+      dividerText: "Soft Skills & Career Development",
     },
     {
       name: "Soft Skills",
@@ -246,6 +273,7 @@ const webDevelopmentRoadmap = {
     {
       name: "Continuous Learning",
       description: "Staying updated with evolving web technologies.",
+      dividerText: "Lifelong Learning",
     },
   ],
 };

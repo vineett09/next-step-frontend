@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+.field-card {
+    position: absolute;
+    top: 2%;
+    left: 20px;
+    width: 250px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .field-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: #1565C0;
+    font-weight: bold;
+  }
+  
+  .field-card p {
+    margin: 0;
+    font-size: 16px;
+    color: #000;
+    line-height: 1.5;
+    font-family: "Roboto", serif;
+  }

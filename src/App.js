@@ -10,6 +10,9 @@ import artificialIntelligenceRoadmap from "./data/ArtificialIntelligence";
 import cybersecurityRoadmap from "./data/CyberSecurity";
 import mobileDevelopmentRoadmap from "./data/MobileDevelopement";
 import machineLearningRoadmap from "./data/MachineLearning";
+import cloudComputingRoadmap from "./data/CloudComputing";
+import blockchainDeveloperRoadmap from "./data/Blockchain";
+import Footer from "./components/Footer";
 function App() {
   return (
     <Router>
@@ -44,7 +47,16 @@ function App() {
             path="/mobile-development"
             element={<Roadmap data={mobileDevelopmentRoadmap} />}
           />
+          <Route
+            path="/cloud-computing"
+            element={<Roadmap data={cloudComputingRoadmap} />}
+          />
+          <Route
+            path="/blockchain"
+            element={<Roadmap data={blockchainDeveloperRoadmap} />}
+          />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

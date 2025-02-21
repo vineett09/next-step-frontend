@@ -1,18 +1,1 @@
-/* Ensure every page has a full height and width */
-body, html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100vh;
-  overflow-x: hidden; /* Prevent unwanted horizontal scrolling */
-}
 
-/* Ensure consistent layout for all pages */
-.page-container {
-  width: 100%;
-  min-height: 100vh; /* Ensure both pages take up the full screen */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}

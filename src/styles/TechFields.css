@@ -30,6 +30,7 @@
     display: flex;
     align-items: center; /* Align items vertically in the center */
     justify-content: flex-start; /* Align items to the left */
+    cursor: pointer;
   }
   
   .tech-card:hover {
