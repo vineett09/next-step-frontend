@@ -1,244 +1,342 @@
-const artificialIntelligenceRoadmap = {
-  name: "Artificial Intelligence Roadmap 2025",
+const aiEngineerRoadmap = {
+  name: "AI Engineer Roadmap 2025",
   description:
-    "A comprehensive guide to essential AI skills and technologies for 2025.",
+    "A structured guide to acquiring essential skills and knowledge for aspiring AI Engineers, from beginner to advanced levels, aligned with 2025 industry trends.",
   children: [
     {
-      name: "Programming Languages",
+      name: "Foundational Knowledge",
       description:
-        "Proficiency in programming languages is fundamental for AI development and implementation.",
+        "Establish a strong base in mathematics, programming, and data handling.",
       children: [
         {
-          name: "Python",
-          description:
-            "The most widely used language in AI, known for its simplicity and extensive libraries like TensorFlow, PyTorch, and Scikit-learn.",
+          name: "Mathematics and Statistics",
+          description: "Understand the mathematical concepts underpinning AI.",
+          children: [
+            {
+              name: "Linear Algebra",
+              description: "Vectors, matrices, and transformations.",
+            },
+            {
+              name: "Calculus",
+              description: "Derivatives, integrals, and optimization.",
+            },
+            {
+              name: "Probability & Statistics",
+              description: "Distributions, variance, and hypothesis testing.",
+            },
+          ],
         },
         {
-          name: "R",
+          name: "Programming",
           description:
-            "A language specifically designed for statistical analysis and data visualization, offering robust packages for data manipulation.",
+            "Develop proficiency in essential programming languages.",
+          children: [
+            {
+              name: "Python",
+              description: "Primary language for AI development.",
+            },
+            { name: "R", description: "Statistical computing and graphics." },
+            { name: "C++", description: "Performance-critical applications." },
+          ],
         },
         {
-          name: "Julia",
-          description:
-            "A high-performance language suited for numerical analysis and computational science, gaining popularity in AI research.",
+          name: "Data Handling",
+          description: "Learn to collect, process, and clean data effectively.",
+          children: [
+            {
+              name: "Data Collection Techniques",
+              description: "Web scraping, APIs, and data acquisition.",
+            },
+            {
+              name: "Data Cleaning",
+              description:
+                "Handling missing values, outliers, and data inconsistencies.",
+            },
+            {
+              name: "Data Transformation",
+              description: "Normalization, scaling, and encoding.",
+            },
+          ],
         },
       ],
+      dividerText: "understanding Machine Learning and Modeling algorithms",
     },
     {
-      name: "Mathematics and Statistics",
+      name: "Machine Learning and Modeling",
       description:
-        "A strong foundation in mathematics and statistics is crucial for developing and understanding AI models.",
-      children: [
-        {
-          name: "Linear Algebra",
-          description:
-            "Understanding vectors, matrices, and their operations is essential for machine learning algorithms.",
-        },
-        {
-          name: "Calculus",
-          description:
-            "Fundamental for grasping concepts like gradients and optimization in model training.",
-        },
-        {
-          name: "Probability and Statistics",
-          description:
-            "Provides the foundation for making inferences and predictions from data, including concepts like hypothesis testing and regression analysis.",
-        },
-      ],
-    },
-    {
-      name: "Machine Learning",
-      description:
-        "Developing models that can learn from data to make predictions or decisions.",
+        "Dive into machine learning algorithms and model development.",
       children: [
         {
           name: "Supervised Learning",
-          description:
-            "Training models using labeled data for tasks like classification and regression.",
+          description: "Training models with labeled data.",
+          children: [
+            {
+              name: "Regression Analysis",
+              description: "Linear, logistic, and polynomial regression.",
+            },
+            {
+              name: "Classification Techniques",
+              description:
+                "Decision trees, support vector machines, k-nearest neighbors.",
+            },
+          ],
         },
         {
           name: "Unsupervised Learning",
-          description:
-            "Identifying patterns in data without predefined labels, such as clustering and dimensionality reduction.",
+          description: "Identifying patterns in unlabeled data.",
+          children: [
+            {
+              name: "Clustering Methods",
+              description: "K-means, hierarchical clustering, DBSCAN.",
+            },
+            {
+              name: "Dimensionality Reduction",
+              description: "Principal component analysis, t-SNE.",
+            },
+          ],
         },
         {
           name: "Reinforcement Learning",
-          description:
-            "Training agents to make decisions by rewarding desired behaviors.",
+          description: "Training agents through rewards and penalties.",
+          children: [
+            {
+              name: "Markov Decision Processes",
+              description: "Framework for modeling decision making.",
+            },
+            {
+              name: "Q-Learning",
+              description: "Model-free reinforcement learning algorithm.",
+            },
+            {
+              name: "Policy Gradient Methods",
+              description: "Techniques for optimizing agent policies.",
+            },
+          ],
         },
         {
-          name: "Deep Learning",
-          description:
-            "Utilizing neural networks with multiple layers to model complex patterns in data.",
+          name: "Model Evaluation and Optimization",
+          description: "Assess and enhance model performance.",
+          children: [
+            {
+              name: "Cross-Validation",
+              description: "Techniques to evaluate model generalizability.",
+            },
+            {
+              name: "Hyperparameter Tuning",
+              description:
+                "Optimizing model parameters for better performance.",
+            },
+            {
+              name: "Model Deployment",
+              description: "Integrating models into production environments.",
+            },
+          ],
         },
       ],
+      dividerText: "understanding Deep Learning and Neural Networks in AI",
     },
     {
-      name: "Big Data Technologies",
+      name: "Deep Learning and Neural Networks",
       description:
-        "Tools and platforms for processing and analyzing large-scale datasets.",
+        "Explore advanced neural network architectures and applications.",
       children: [
         {
-          name: "Apache Hadoop",
-          description:
-            "A framework for distributed storage and processing of large datasets.",
+          name: "Neural Network",
+          description: "Basics of neural networks and training processes.",
+          children: [
+            {
+              name: "Perceptrons and Multilayer Perceptrons",
+              description: "Building blocks of neural networks.",
+            },
+            {
+              name: "Activation Functions",
+              description: "Functions introducing non-linearity into networks.",
+            },
+            {
+              name: "Backpropagation",
+              description: "Algorithm for training neural networks.",
+            },
+          ],
         },
         {
-          name: "Apache Spark",
-          description:
-            "An open-source unified analytics engine for large-scale data processing.",
+          name: "CNNs",
+          description: "Deep learning models for image processing.",
+          children: [
+            {
+              name: "Convolution and Pooling Layers",
+              description: "Core components of CNNs.",
+            },
+            {
+              name: "Architectures",
+              description:
+                "Popular CNN models like VGG, ResNet, and Inception.",
+            },
+            {
+              name: "Applications",
+              description:
+                "Image classification, object detection, and segmentation.",
+            },
+          ],
         },
         {
-          name: "Cloud Platforms",
-          description:
-            "Services like AWS, Google Cloud, and Azure offer scalable resources for big data processing.",
+          name: "RNNs",
+          description: "Models for sequential data processing.",
+          children: [
+            {
+              name: "LSTM and GRU Networks",
+              description:
+                "Advanced RNN architectures for capturing long-term dependencies.",
+            },
+            {
+              name: "Sequence-to-Sequence Models",
+              description:
+                "Translating sequences to other sequences, e.g., language translation.",
+            },
+            {
+              name: "Applications",
+              description:
+                "Time series forecasting, speech recognition, and text generation.",
+            },
+          ],
+        },
+        {
+          name: " Mechanisms and Architectures",
+          description: "Modern architectures for handling sequential data.",
+          children: [
+            {
+              name: "Self-Attention Mechanism",
+              description: "Foundation of transformer models.",
+            },
+            {
+              name: "Transformer Architecture",
+              description:
+                "Model structure enabling parallel processing of sequences.",
+            },
+            {
+              name: "Applications",
+              description:
+                "Natural language processing tasks like translation and summarization.",
+            },
+          ],
         },
       ],
+      dividerText: "understanding Data Processing and cloud computing",
     },
     {
-      name: "Data Engineering",
-      description:
-        "Building and maintaining the infrastructure required for data generation, storage, and processing.",
+      name: "Big Data and Data Engineering",
+      description: "Manage and process large-scale data efficiently.",
       children: [
+        {
+          name: "Big Data Technologies",
+          description: "Tools and frameworks for handling vast datasets.",
+          children: [
+            {
+              name: "Apache Hadoop",
+              description: "Framework for distributed storage and processing.",
+            },
+            {
+              name: "Apache Spark",
+              description:
+                "Unified analytics engine for large-scale data processing.",
+            },
+            {
+              name: "Kafka",
+              description: "Platform for real-time data streaming.",
+            },
+          ],
+        },
         {
           name: "Data Warehousing",
-          description:
-            "Centralized repositories for storing and managing large volumes of structured data.",
+          description: "Storing and transforming data for analysis.",
+          children: [
+            {
+              name: "ETL Tools",
+              description: "Extract, Transform, Load processes and tools.",
+            },
+            {
+              name: "Data Lakes",
+              description: "Storage repositories for raw data.",
+            },
+            {
+              name: "Cloud Data Warehouses",
+              description:
+                "Scalable storage solutions like Amazon Redshift and Google BigQuery.",
+            },
+          ],
         },
         {
-          name: "ETL Processes",
-          description:
-            "Extracting, transforming, and loading data from various sources into a data warehouse.",
-        },
-        {
-          name: "Data Pipeline Automation",
-          description:
-            "Automating the flow of data from source to destination to ensure timely and accurate data availability.",
+          name: "Cloud Computing",
+          description: "Leveraging cloud platforms for AI applications.",
+          children: [
+            {
+              name: "AWS AI Services",
+              description:
+                "Amazon's suite of AI and machine learning services.",
+            },
+            {
+              name: "Google Cloud AI",
+              description: "Google's AI and machine learning tools.",
+            },
+            { name: "Azure AI", description: "Microsoft." },
+            {
+              name: "Specialized AI Domains",
+              description: "Deepen expertise in specific AI application areas.",
+            },
+            {
+              name: "AI in Production",
+              description:
+                "Deploying and maintaining AI models in real-world applications.",
+            },
+          ],
         },
       ],
     },
     {
-      name: "Natural Language Processing (NLP)",
-      description:
-        "Techniques for enabling machines to understand and interpret human language.",
+      name: "Ethics and Bias in AI",
+      description: "Understanding moral implications and ensuring fairness.",
       children: [
         {
-          name: "Text Processing",
+          name: "Bias Detection and Mitigation",
           description:
-            "Cleaning and preparing text data for analysis, including tokenization and stemming.",
+            "Identifying biases in data and models and implementing strategies to minimize them for fair AI systems.",
+          children: [
+            {
+              name: "Fairness Metrics",
+              description: "Quantifying fairness in AI models.",
+            },
+            {
+              name: "Bias Correction Techniques",
+              description: "Algorithms to reduce bias in models.",
+            },
+          ],
         },
         {
-          name: "Sentiment Analysis",
+          name: "Explainability and Interpretability",
           description:
-            "Determining the sentiment or emotional tone behind a body of text.",
+            "Ensuring AI models are transparent and their decision-making process can be understood by humans.",
+          children: [
+            {
+              name: "Interpretability Techniques",
+              description: "Methods for explaining AI model behavior.",
+            },
+            {
+              name: "Visualizations",
+              description: "Tools for visualizing AI model behavior.",
+            },
+          ],
         },
         {
-          name: "Language Modeling",
+          name: "Data Privacy and Security",
           description:
-            "Developing models that can predict the next word in a sequence or generate human-like text.",
+            "Protecting sensitive user data and complying with regulations such as GDPR and CCPA.",
         },
       ],
     },
     {
-      name: "Computer Vision",
-      description:
-        "Enabling machines to interpret and process visual information from the world.",
-      children: [
-        {
-          name: "Image Processing",
-          description:
-            "Techniques for enhancing and manipulating images for analysis.",
-        },
-        {
-          name: "Object Detection",
-          description:
-            "Identifying and locating objects within images or videos.",
-        },
-        {
-          name: "Facial Recognition",
-          description:
-            "Identifying or verifying individuals in images or videos.",
-        },
-      ],
-    },
-    {
-      name: "AI Ethics and Governance",
-      description:
-        "Ensuring the responsible development and deployment of AI systems.",
-      children: [
-        {
-          name: "Bias Mitigation",
-          description:
-            "Identifying and reducing biases in data and models to ensure fairness.",
-        },
-        {
-          name: "Explainable AI",
-          description:
-            "Developing models whose decisions can be easily understood by humans.",
-        },
-        {
-          name: "Data Privacy",
-          description:
-            "Protecting sensitive information and ensuring compliance with data protection regulations.",
-        },
-      ],
-    },
-    {
-      name: "Domain Knowledge",
-      description:
-        "Understanding the specific context and requirements of the industry you are working in.",
-      children: [
-        {
-          name: "Healthcare",
-          description:
-            "Applying AI to medical data for improved patient outcomes and operational efficiency.",
-        },
-        {
-          name: "Finance",
-          description:
-            "Utilizing AI for risk assessment, fraud detection, and investment strategies.",
-        },
-        {
-          name: "Retail",
-          description:
-            "Analyzing consumer data to optimize inventory, pricing, and personalized marketing.",
-        },
-      ],
-    },
-    {
-      name: "Soft Skills",
-      description:
-        "Non-technical skills essential for effective collaboration and problem-solving.",
-      children: [
-        {
-          name: "Communication",
-          description:
-            "Ability to convey complex information clearly to both technical and non-technical stakeholders.",
-        },
-        {
-          name: "Problem-Solving",
-          description:
-            "Analytical skills to identify issues, interpret data, and develop actionable solutions.",
-        },
-        {
-          name: "Time Management",
-          description:
-            "Prioritizing tasks and managing workload effectively to meet deadlines.",
-        },
-        {
-          name: "Collaboration",
-          description:
-            "Working efficiently with teams, including data engineers, analysts, and business stakeholders.",
-        },
-      ],
-    },
-    {
-      name: "Continuous Learning",
-      description:
-        "Staying updated with evolving AI technologies, methodologies, and industry trends.",
+      name: "Continuous Learning and Professional Development",
+      description: "Staying updated with the evolving AI landscape.",
     },
   ],
 };
 
-export default artificialIntelligenceRoadmap;
+export default aiEngineerRoadmap;

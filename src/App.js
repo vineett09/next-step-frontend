@@ -6,13 +6,16 @@ import webDevelopmentRoadmap from "./data/WebDevelopement";
 import Navbar from "./components/Navbar";
 import Maincontent from "./components/Maincontent";
 import dataScienceRoadmap from "./data/DataScience";
-import artificialIntelligenceRoadmap from "./data/ArtificialIntelligence";
+import aiEngineerRoadmap from "./data/ArtificialIntelligence";
 import cybersecurityRoadmap from "./data/CyberSecurity";
 import mobileDevelopmentRoadmap from "./data/MobileDevelopement";
-import machineLearningRoadmap from "./data/MachineLearning";
+import mlOpsRoadmap from "./data/MLOps";
 import cloudComputingRoadmap from "./data/CloudComputing";
+import gameDevelopmentRoadmap from "./data/GameDevelopment";
 import blockchainDeveloperRoadmap from "./data/Blockchain";
+import devOpsRoadmap from "./data/Devops";
 import Footer from "./components/Footer";
+import roboticsRoadmap from "./data/Robotics";
 function App() {
   return (
     <Router>
@@ -27,17 +30,14 @@ function App() {
             path="/web-development"
             element={<Roadmap data={webDevelopmentRoadmap} />}
           />
-          <Route
-            path="/machine-learning"
-            element={<Roadmap data={machineLearningRoadmap} />}
-          />
+          <Route path="/mLOps" element={<Roadmap data={mlOpsRoadmap} />} />
           <Route
             path="/data-science"
             element={<Roadmap data={dataScienceRoadmap} />}
           />
           <Route
             path="/artificial-intelligence"
-            element={<Roadmap data={artificialIntelligenceRoadmap} />}
+            element={<Roadmap data={aiEngineerRoadmap} />}
           />
           <Route
             path="/cybersecurity"
@@ -54,6 +54,15 @@ function App() {
           <Route
             path="/blockchain"
             element={<Roadmap data={blockchainDeveloperRoadmap} />}
+          />
+          <Route path="/devops" element={<Roadmap data={devOpsRoadmap} />} />
+          <Route
+            path="/game-development"
+            element={<Roadmap data={gameDevelopmentRoadmap} />}
+          />
+          <Route
+            path="/robotics"
+            element={<Roadmap data={roboticsRoadmap} />}
           />
         </Routes>
         <Footer />

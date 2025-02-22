@@ -1,188 +1,292 @@
-const cybersecurityRoadmap = {
-  name: "Cybersecurity Roadmap 2025",
+const cybersecurityITRoadmap = {
+  name: "Cybersecurity & IT Skills Roadmap 2025",
   description:
-    "A comprehensive guide to essential cybersecurity skills and technologies for 2025.",
+    "A comprehensive guide to mastering IT fundamentals, networking, cybersecurity, and cloud technologies, progressing from foundational to advanced skills.",
   children: [
     {
-      name: "Foundational Knowledge",
+      name: "Fundamentals of IT Skills",
       description:
-        "Core concepts and principles that form the basis of cybersecurity.",
+        "Basic computer skills and IT knowledge necessary for a cybersecurity career.",
       children: [
+        {
+          name: "Hardware & Software Basics",
+          description:
+            "Understanding computer components, storage, and OS interaction.",
+        },
+        {
+          name: "Command Line & Shell Scripting",
+          description:
+            "Familiarity with CLI for Linux (Bash) and Windows (PowerShell).",
+        },
+        {
+          name: "File Systems & Permissions",
+          description:
+            "Managing file structures, access control, and permissions.",
+        },
+        {
+          name: "Virtualization & Cloud Basics",
+          description:
+            "Introduction to virtual machines and cloud computing concepts.",
+        },
+      ],
+      dividerText:
+        "Learn how operating systems function and interact with networks.",
+    },
+    {
+      name: "Operating Systems & Networking",
+      description:
+        "Mastering OS administration and network infrastructure fundamentals.",
+      children: [
+        {
+          name: "Operating System Administration",
+          description: "Configuring and managing Windows, Linux, and macOS.",
+          children: [
+            {
+              name: "Linux",
+              description: "File structure, package management, and security.",
+            },
+            {
+              name: "Windows",
+              description: "Registry, Group Policy, and Active Directory.",
+            },
+            {
+              name: "macOS",
+              description: "System preferences and Unix-based commands.",
+            },
+          ],
+        },
         {
           name: "Networking Fundamentals",
           description:
-            "Understanding network protocols, architectures, and devices to identify and mitigate potential vulnerabilities.",
+            "Understanding network types, IP addressing, and configurations.",
+          children: [
+            {
+              name: "OSI & TCP/IP Model",
+              description: "How network communication works.",
+            },
+            {
+              name: "Subnetting & VLANs",
+              description: "IP addressing and network segmentation.",
+            },
+            {
+              name: "Routing & Switching",
+              description: "Configuring and troubleshooting networks.",
+            },
+          ],
         },
         {
-          name: "Operating Systems",
+          name: "Network Security Basics",
           description:
-            "Proficiency in various operating systems, including Windows, Linux, and macOS, to secure and administer them effectively.",
+            "Protecting networks from unauthorized access and attacks.",
+          children: [
+            {
+              name: "Firewalls & IDS/IPS",
+              description: "Monitoring and filtering network traffic.",
+            },
+            { name: "NAT & VPNs", description: "Secure remote connections." },
+            {
+              name: "Wireless Security",
+              description: "Securing Wi-Fi networks.",
+            },
+            {
+              name: "Intrusion Detection Systems (IDS)",
+              description: "Monitoring and alerting on suspicious activity.",
+            },
+          ],
+        },
+      ],
+      dividerText: "Learn how to secure systems and detect vulnerabilities.",
+    },
+    {
+      name: "Security Skills & Knowledge",
+      description:
+        "Core cybersecurity skills required to protect systems and data.",
+      children: [
+        {
+          name: "Cryptography & Encryption",
+          description:
+            "Understanding encryption techniques and secure communication.",
+          children: [
+            {
+              name: "Symmetric & Asymmetric Encryption",
+              description: "AES, RSA, and ECC encryption.",
+            },
+            {
+              name: "Hashing Algorithms",
+              description: "MD5, SHA-256, and bcrypt.",
+            },
+            {
+              name: "PKI & Certificates",
+              description: "SSL/TLS and digital signatures.",
+            },
+          ],
         },
         {
-          name: "Programming and Scripting",
+          name: "Cyber Threats & Attacks",
           description:
-            "Knowledge of programming languages like Python, JavaScript, or C++ to develop security tools and automate tasks.",
+            "Recognizing and mitigating different types of cyber attacks.",
+          children: [
+            {
+              name: "Malware Analysis",
+              description:
+                "Detecting and removing viruses, worms, and Trojans.",
+            },
+            {
+              name: "Phishing & Social Engineering",
+              description: "Defensive strategies against scams.",
+            },
+            {
+              name: "Denial of Service (DoS/DDoS)",
+              description: "Mitigating volumetric and protocol attacks.",
+            },
+          ],
+        },
+        {
+          name: "Security Tools & Techniques",
+          description:
+            "Hands-on experience with security tools for defense and offense.",
+          children: [
+            {
+              name: "Penetration Testing",
+              description: "Using Kali Linux, Metasploit, and Burp Suite.",
+            },
+            {
+              name: "SIEM & Log Analysis",
+              description: "Security monitoring and event correlation.",
+            },
+            {
+              name: "Incident Response",
+              description:
+                "Steps to contain, eradicate, and recover from attacks.",
+            },
+          ],
+        },
+      ],
+      dividerText: "Learn how security works in cloud environments.",
+    },
+    {
+      name: "Cloud Security & Advanced Topics",
+      description:
+        "Mastering security in cloud environments and emerging technologies.",
+      children: [
+        {
+          name: "Cloud Computing & Security",
+          description:
+            "Securing cloud environments and understanding cloud-based security models.",
+          children: [
+            {
+              name: "AWS Security",
+              description: "IAM, VPC, and encryption services.",
+            },
+            {
+              name: "Azure Security",
+              description: "Azure Sentinel, AD, and compliance.",
+            },
+            {
+              name: "Google Cloud Security",
+              description: "Identity-aware proxy and secure network layers.",
+            },
+          ],
+        },
+        {
+          name: "Zero Trust Security",
+          description: "Implementing a ‘never trust, always verify’ model.",
+          children: [
+            {
+              name: "Microsegmentation",
+              description: "Restricting access within the network.",
+            },
+            {
+              name: "Identity and Access Management (IAM)",
+              description: "Controlling access to resources.",
+            },
+          ],
+        },
+        {
+          name: "Threat Intelligence & AI",
+          description:
+            "Leveraging AI and data analytics for cybersecurity defense.",
+          children: [
+            {
+              name: "AI-Based Threat Detection",
+              description: "Using AI to detect anomalies and cyber threats.",
+            },
+            {
+              name: "Malware Analysis with AI",
+              description: "Using AI to detect and remove malware.",
+            },
+
+            {
+              name: "Cyber Threat Intelligence",
+              description: "Gathering and analyzing security threats.",
+            },
+          ],
+        },
+      ],
+      dividerText:
+        "Prepare for cybersecurity certifications and career growth.",
+    },
+    {
+      name: "Cybersecurity Certifications",
+      description: "Validating skills with industry-recognized certifications.",
+      children: [
+        {
+          name: "CompTIA Security+",
+          description: "Entry-level cybersecurity certification.",
+        },
+        {
+          name: "Certified Ethical Hacker (CEH)",
+          description: "Ethical hacking and penetration testing.",
+        },
+        {
+          name: "Certified Information Systems Security Professional (CISSP)",
+          description: "Advanced security certification for professionals.",
+        },
+        {
+          name: "Certified Cloud Security Professional (CCSP)",
+          description: "Cloud security certification.",
         },
       ],
     },
     {
-      name: "Security Domains",
+      name: "Soft Skills & Career Growth",
       description:
-        "Specialized areas within cybersecurity focusing on different aspects of protection and defense.",
+        "Developing communication, leadership, and problem-solving skills.",
       children: [
         {
-          name: "Network Security",
-          description:
-            "Implementing measures to protect data during transfer and prevent unauthorized access.",
+          name: "Communication & Presentation",
+          description: "Explaining cybersecurity concepts clearly.",
         },
         {
-          name: "Application Security",
-          description:
-            "Ensuring software applications are designed and coded securely to prevent breaches.",
+          name: "Problem-Solving & Critical Thinking",
+          description: "Analyzing security incidents effectively.",
         },
         {
-          name: "Cloud Security",
-          description:
-            "Protecting data and resources stored in cloud environments from potential threats.",
-        },
-        {
-          name: "Endpoint Security",
-          description:
-            "Securing individual devices like computers and mobile devices against malicious attacks.",
-        },
-        {
-          name: "Identity and Access Management (IAM)",
-          description:
-            "Managing user identities and controlling access to critical resources.",
+          name: "Team Collaboration & Project Management",
+          description: "Working in SOC teams and security operations.",
         },
       ],
     },
     {
-      name: "Threat Management",
+      name: "Continuous Learning & Research",
       description:
-        "Identifying, analyzing, and responding to various cybersecurity threats.",
+        "Keeping up with the latest cybersecurity threats and innovations.",
       children: [
         {
-          name: "Threat Intelligence",
-          description:
-            "Gathering and analyzing information about current and emerging threats to inform defense strategies.",
+          name: "Capture The Flag (CTF) Challenges",
+          description: "Practicing ethical hacking in competitions.",
         },
         {
-          name: "Incident Response",
-          description:
-            "Developing and implementing plans to respond effectively to security breaches or attacks.",
+          name: "Bug Bounty Programs",
+          description: "Finding and reporting security vulnerabilities.",
         },
         {
-          name: "Vulnerability Management",
-          description:
-            "Identifying, evaluating, and mitigating weaknesses in systems and applications.",
-        },
-        {
-          name: "Penetration Testing",
-          description:
-            "Simulating attacks to identify and address security weaknesses before they can be exploited.",
-        },
-      ],
-    },
-    {
-      name: "Compliance and Governance",
-      description:
-        "Ensuring adherence to laws, regulations, and standards governing cybersecurity practices.",
-      children: [
-        {
-          name: "Regulatory Compliance",
-          description:
-            "Understanding and implementing measures to comply with laws like GDPR, HIPAA, and others.",
-        },
-        {
-          name: "Security Frameworks",
-          description:
-            "Applying structured approaches like NIST, ISO/IEC 27001, or CIS Controls to manage and reduce cybersecurity risks.",
-        },
-        {
-          name: "Policy Development",
-          description:
-            "Creating and enforcing organizational policies to guide secure practices and behaviors.",
-        },
-      ],
-    },
-    {
-      name: "Emerging Technologies and Trends",
-      description:
-        "Staying abreast of new technologies and methodologies shaping the future of cybersecurity.",
-      children: [
-        {
-          name: "Artificial Intelligence and Machine Learning",
-          description:
-            "Leveraging AI/ML to detect anomalies, predict threats, and automate security responses.",
-        },
-        {
-          name: "Quantum Computing",
-          description:
-            "Understanding the implications of quantum computing on encryption and developing quantum-resistant algorithms.",
-        },
-        {
-          name: "Zero Trust Architecture",
-          description:
-            "Implementing a security model that assumes no implicit trust, verifying every access request as though it originates from an open network.",
-        },
-        {
-          name: "DevSecOps",
-          description:
-            "Integrating security practices into the DevOps process to ensure continuous and automated security assessments.",
-        },
-      ],
-    },
-    {
-      name: "Soft Skills",
-      description:
-        "Non-technical skills essential for effective collaboration and problem-solving.",
-      children: [
-        {
-          name: "Communication",
-          description:
-            "Ability to convey complex security concepts clearly to both technical and non-technical stakeholders.",
-        },
-        {
-          name: "Problem-Solving",
-          description:
-            "Analytical skills to identify issues, interpret data, and develop actionable solutions.",
-        },
-        {
-          name: "Time Management",
-          description:
-            "Prioritizing tasks and managing workload effectively to meet deadlines.",
-        },
-        {
-          name: "Collaboration",
-          description:
-            "Working efficiently with teams, including IT staff, developers, and business stakeholders.",
-        },
-      ],
-    },
-    {
-      name: "Continuous Learning",
-      description:
-        "Staying updated with evolving cybersecurity threats, technologies, and industry trends.",
-      children: [
-        {
-          name: "Certifications",
-          description:
-            "Pursuing recognized certifications like CISSP, CEH, or CompTIA Security+ to validate expertise.",
-        },
-        {
-          name: "Conferences and Workshops",
-          description:
-            "Participating in industry events to network and learn from peers and experts.",
-        },
-        {
-          name: "Research and Development",
-          description:
-            "Engaging in ongoing research to discover new threats and develop innovative security solutions.",
+          name: "Cybersecurity Blogs & Conferences",
+          description: "Staying updated with industry trends.",
         },
       ],
     },
   ],
 };
 
-export default cybersecurityRoadmap;
+export default cybersecurityITRoadmap;

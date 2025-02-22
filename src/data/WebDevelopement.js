@@ -1,279 +1,356 @@
 const webDevelopmentRoadmap = {
   name: "Web Development Roadmap 2025",
   description:
-    "A comprehensive guide to essential web development skills and technologies for 2025.",
+    "A comprehensive guide to essential web development skills and technologies for 2025 to become a full-stack developer.",
   children: [
     {
-      name: "HTML",
-      description: "Fundamental language for structuring web content.",
-    },
-    {
-      name: "CSS",
-      description: "Styling language for designing web pages.",
+      name: "Front-End Fundamentals",
+      description:
+        "Master the core technologies required to build user interfaces and user experiences.",
       children: [
         {
-          name: "Responsive Design",
-          description: "Creating layouts that adapt to various screen sizes.",
+          name: "HTML",
+          description: "Fundamental language for structuring web content.",
         },
         {
-          name: "Tailwind CSS",
-          description: "Utility-first CSS framework for rapid UI development.",
+          name: "CSS",
+          description: "Styling language for designing web pages.",
+          children: [
+            {
+              name: "Bootstrap",
+              description: "CSS framework for building responsive web pages.",
+            },
+            {
+              name: "Tailwind CSS",
+              description:
+                "Utility-first CSS framework for rapid UI development.",
+            },
+          ],
+          dividerText: "Front-End Development",
         },
         {
-          name: "Bootstrap",
-          description:
-            "Popular framework for responsive, mobile-first projects.",
+          name: "JavaScript",
+          description: "Essential programming language for web interactivity.",
+          children: [
+            {
+              name: "React",
+              description: "JavaScript library for building user interfaces.",
+            },
+            {
+              name: "Vue.js",
+              description: "JavaScript framework for building user interfaces.",
+            },
+            {
+              name: "Angular",
+              description:
+                "TypeScript-based framework for building user interfaces.",
+            },
+          ],
         },
-      ],
-      dividerText: "Front-End Development",
-    },
-    {
-      name: "JavaScript",
-      description: "Essential programming language for web interactivity.",
-      children: [
-        {
-          name: "ES6+ Features",
-          description: "Modern JavaScript syntax and features.",
-        },
-        {
-          name: "React",
-          description: "Widely-used library for building user interfaces.",
-        },
-        {
-          name: "Vue.js",
-          description: "Progressive framework for building UIs.",
-        },
-        {
-          name: "Angular",
-          description: "Robust framework for building client applications.",
-        },
-        {
-          name: "Redux",
-          description: "Predictable state container for JavaScript apps.",
-        },
-      ],
-      dividerText: "Collaboration & Code Management",
-    },
-    {
-      name: "Version Control Systems",
-      description: "Tools for tracking changes in code.",
-      children: [
-        { name: "Git", description: "Distributed version control system." },
-        {
-          name: "GitHub",
-          description:
-            "Platform for hosting and collaborating on Git repositories.",
-        },
-      ],
-      dividerText: "Dependency Management",
-    },
-    {
-      name: "Package Managers",
-      description: "Tools for managing project dependencies.",
-      children: [
-        { name: "npm", description: "Default package manager for Node.js." },
-        {
-          name: "Yarn",
-          description: "Fast, reliable, and secure dependency management.",
-        },
-      ],
-    },
-    {
-      name: "Build Tools",
-      description: "Automation tools for optimizing workflow.",
-      children: [
-        {
-          name: "Webpack",
-          description: "Module bundler for JavaScript applications.",
-        },
-        { name: "Vite", description: "Next-generation front-end build tool." },
       ],
       dividerText: "Back-End Development",
     },
     {
-      name: "Back-End Development",
-      description: "Server-side programming and database management.",
+      name: "Back-End Fundamentals",
+      description:
+        "Develop server-side logic and connect to databases to power web applications.",
       children: [
         {
-          name: "Node.js",
-          description: "JavaScript runtime for server-side development.",
-        },
-        {
-          name: "Express.js",
-          description: "Minimalist web framework for Node.js.",
-        },
-        { name: "PostgreSQL", description: "Relational database system." },
-        {
-          name: "MySQL",
-          description: "Popular open-source relational database.",
-        },
-        {
-          name: "MongoDB",
-          description: "NoSQL database for flexible data storage.",
-        },
-        {
-          name: "REST APIs",
-          description: "Architectural style for networked applications.",
-        },
-        { name: "GraphQL", description: "Query language for APIs." },
-      ],
-      dividerText: "Deployment & Cloud Computing",
-    },
-    {
-      name: "DevOps and Deployment",
-      description: "Practices for efficient development and deployment.",
-      children: [
-        {
-          name: "Docker",
+          name: "Server-Side Languages",
           description:
-            "Platform for developing, shipping, and running applications in containers.",
+            "Choose a language to handle business logic and API development.",
+          children: [
+            {
+              name: "Node.js",
+              description: "Event-driven JavaScript runtime.",
+            },
+            {
+              name: "Python",
+              description: "Popular language for back-end and data science.",
+            },
+            {
+              name: "Ruby",
+              description: "Ruby on Rails for convention-over-configuration.",
+            },
+          ],
         },
         {
-          name: "Jenkins",
-          description: "Automation server for building and deploying code.",
+          name: "Databases",
+          description: "Store and manage structured or unstructured data.",
+          children: [
+            {
+              name: "Relational Databases",
+              description: "Use cases and concepts for structured data.",
+            },
+            {
+              name: "NoSQL Databases",
+              description: "Flexible schemas for semi-structured data.",
+            },
+          ],
         },
         {
-          name: "GitHub Actions",
-          description: "Automated workflows directly in GitHub repositories.",
+          name: "API Development",
+          description: "Build RESTful APIs or adopt GraphQL for modern apps.",
+          children: [
+            {
+              name: "RESTful APIs",
+              description: "Architectural style for networked applications.",
+            },
+            {
+              name: "GraphQL",
+              description: "Query language for efficient data fetching.",
+            },
+          ],
         },
-        { name: "AWS", description: "Comprehensive cloud computing services." },
-        { name: "Azure", description: "Microsoft's cloud computing platform." },
         {
-          name: "Google Cloud",
-          description: "Google's suite of cloud computing services.",
+          name: "Authentication & Authorization",
+          description: "Secure user access control for web applications.",
+          children: [
+            {
+              name: "JWT",
+              description: "Token-based authentication with JSON Web Tokens.",
+            },
+            {
+              name: "OAuth",
+              description: "Delegated authentication with providers.",
+            },
+            {
+              name: "RBAC",
+              description: "Role-based access control for permissions.",
+            },
+          ],
         },
       ],
-      dividerText: "Testing & Debugging",
+      dividerText: "Deployment & DevOps",
     },
     {
-      name: "Testing",
-      description: "Ensuring code quality and functionality.",
+      name: "Deployment & DevOps",
+      description:
+        "Automate workflows, manage infrastructure, and release software efficiently.",
       children: [
-        { name: "Jest", description: "JavaScript testing framework." },
         {
-          name: "Mocha",
-          description: "Feature-rich JavaScript test framework.",
+          name: "Version Control Systems",
+          description: "Tools for tracking changes in code.",
+          children: [
+            {
+              name: "Git",
+              description: "Distributed version control system.",
+            },
+            {
+              name: "GitHub",
+              description:
+                "Platform for hosting and collaborating on Git repositories.",
+            },
+          ],
         },
         {
-          name: "Cypress",
-          description: "JavaScript end-to-end testing framework.",
+          name: "CI/CD",
+          description: "Continuous Integration and Deployment pipelines.",
+          children: [
+            {
+              name: "Jenkins",
+              description: "Classic CI/CD server.",
+            },
+            {
+              name: "CircleCI",
+              description: "Cloud-based CI/CD service.",
+            },
+            {
+              name: "Travis CI",
+              description: "Hosted CI/CD platform.",
+            },
+          ],
         },
-        { name: "Selenium", description: "Tool for automating web browsers." },
+        {
+          name: "Cloud Hosting",
+          description: "Deploying applications to cloud servers.",
+          children: [
+            {
+              name: "AWS",
+              description: "Comprehensive cloud computing services.",
+            },
+            {
+              name: "Azure",
+              description: "Microsoft's cloud computing platform.",
+            },
+            {
+              name: "Google Cloud",
+              description: "Google's suite of cloud computing services.",
+            },
+          ],
+        },
+        {
+          name: "Containerization",
+          description: "Packaging applications into containers.",
+          children: [
+            {
+              name: "Docker",
+              description: "Platform for developing and running containers.",
+            },
+            {
+              name: "Kubernetes",
+              description: "Open-source container orchestration platform.",
+            },
+          ],
+        },
       ],
-      dividerText: "Web Performance Optimization",
+      dividerText: "Performance & Security",
     },
     {
-      name: "Performance Optimization",
-      description: "Enhancing the speed and efficiency of web applications.",
+      name: "Performance & Security",
+      description: "Optimize application speed and protect user data.",
       children: [
         {
-          name: "Lazy Loading",
-          description: "Deferring loading of non-critical resources.",
-        },
-        {
-          name: "Code Splitting",
+          name: "Web Performance Optimization",
           description:
-            "Breaking code into smaller bundles for efficient loading.",
+            "Enhancing the speed and efficiency of web applications.",
+          children: [
+            {
+              name: "Critical Rendering Path",
+              description: "Optimizing initial page load.",
+            },
+            {
+              name: "Lazy Loading",
+              description: "Deferring non-critical resources.",
+            },
+            {
+              name: "Caching Strategies",
+              description: "Browser and server-side caching.",
+            },
+            {
+              name: "Code Splitting",
+              description: "Separating code into multiple bundles.",
+            },
+          ],
         },
         {
-          name: "Caching Strategies",
-          description: "Storing data for faster subsequent access.",
-        },
-        {
-          name: "Image Optimization",
-          description: "Compressing and optimizing images for faster loading.",
-        },
-        {
-          name: "Minification",
-          description: "Removing unnecessary whitespace and comments.",
-        },
-        {
-          name: "CSS Optimization",
-          description:
-            "Minifying and compressing CSS files for faster loading.",
-        },
-        {
-          name: "Browser Compatibility",
-          description: "Ensuring cross-browser compatibility.",
+          name: "Security Best Practices",
+          description: "Protecting web applications from vulnerabilities.",
+          children: [
+            {
+              name: "HTTPS",
+              description: "Securing data transfer with SSL/TLS.",
+            },
+            {
+              name: "CSP",
+              description: "Preventing cross-site scripting attacks.",
+            },
+            {
+              name: "Rate Limiting",
+              description: "Preventing abuse and DOS attacks.",
+            },
+          ],
         },
       ],
-      dividerText: "Web Security",
-    },
-    {
-      name: "Security Best Practices",
-      description: "Protecting web applications from vulnerabilities.",
-      children: [
-        { name: "HTTPS", description: "Securing data transfer with SSL/TLS." },
-        {
-          name: "Content Security Policy (CSP)",
-          description: "Preventing cross-site scripting attacks.",
-        },
-        {
-          name: "Authentication and Authorization",
-          description: "Ensuring secure user access control.",
-        },
-      ],
-      dividerText: "Future Trends",
+      dividerText: "Emerging Technologies",
     },
     {
       name: "Emerging Technologies",
-      description:
-        "Keeping up with the latest advancements in web development.",
+      description: "Exploring new trends and innovations in web development.",
       children: [
         {
           name: "WebAssembly",
-          description: "Enables high-performance applications on web browsers.",
+          description:
+            "Enabling high-performance applications on web browsers.",
+          children: [
+            {
+              name: "Rust for WebAssembly",
+              description: "Compiling Rust to WebAssembly.",
+            },
+            {
+              name: "WASI",
+              description: "WebAssembly System Interface for server-side apps.",
+            },
+          ],
         },
         {
           name: "Serverless Architecture",
           description:
             "Cloud-based execution without managing backend servers.",
-        },
-        {
-          name: "JAMstack",
-          description:
-            "Modern web architecture for fast, secure, and scalable applications.",
-        },
-        {
-          name: "Edge Computing",
-          description:
-            "Processing data closer to users for low-latency applications.",
+          children: [
+            {
+              name: "AWS Lambda",
+              description: "Event-driven serverless runtime.",
+            },
+            {
+              name: "Netlify Functions",
+              description: "Serverless functions integrated with static sites.",
+            },
+          ],
         },
         {
           name: "AI-Powered Development",
           description:
-            "Integrating AI tools for automating web development workflows.",
+            "Integrating AI tools for automating tasks and workflows.",
+          children: [
+            {
+              name: "GitHub Copilot",
+              description: "AI-powered pair programmer.",
+            },
+            {
+              name: "Code Completion Tools",
+              description: "Reducing boilerplate and enhancing productivity.",
+            },
+          ],
         },
       ],
-      dividerText: "Soft Skills & Career Development",
+      dividerText: "Professional Development",
     },
     {
-      name: "Soft Skills",
-      description: "Non-technical skills essential for web developers.",
+      name: "Professional Development",
+      description:
+        "Skills to navigate the workplace and grow your career as a developer.",
       children: [
         {
-          name: "Communication",
+          name: "Soft Skills",
+          description: "Non-technical skills essential for web developers.",
+          children: [
+            {
+              name: "Communication",
+              description:
+                "Explaining technical concepts to non-technical stakeholders.",
+            },
+            {
+              name: "Problem-Solving",
+              description: "Debugging complex issues and optimizing code.",
+            },
+            {
+              name: "Team Collaboration",
+              description: "Working in agile teams and giving code reviews.",
+            },
+          ],
+        },
+        {
+          name: "Portfolio & Resume",
           description:
-            "Effectively conveying ideas to team members and clients.",
+            "Showcasing your skills and projects to potential employers.",
+          children: [
+            {
+              name: "Project Development",
+              description:
+                "Building applications that demonstrate proficiency.",
+            },
+            {
+              name: "Code Readability",
+              description: "Writing clean, maintainable, and efficient code.",
+            },
+          ],
         },
         {
-          name: "Problem-Solving",
-          description: "Analytical skills for debugging and optimizing code.",
-        },
-        {
-          name: "Time Management",
-          description: "Prioritizing tasks and meeting deadlines efficiently.",
-        },
-        {
-          name: "Collaboration",
-          description: "Working effectively in development teams.",
+          name: "Interview Preparation",
+          description: "Preparing for technical and behavioral interviews.",
+          children: [
+            {
+              name: "Algorithms & Data Structures",
+              description: "Common interview topics and problem-solving.",
+            },
+            {
+              name: "System Design",
+              description: "Scaling applications and architecture patterns.",
+            },
+          ],
         },
       ],
-    },
-    {
-      name: "Continuous Learning",
-      description: "Staying updated with evolving web technologies.",
-      dividerText: "Lifelong Learning",
     },
   ],
 };

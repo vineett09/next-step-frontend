@@ -70,9 +70,9 @@ const techFields = [
   },
   {
     id: 9,
-    title: "Machine Learning",
+    title: "MLOps",
     icon: "🧠",
-    link: "/machine-learning",
+    link: "/mLops",
     description:
       "Machine Learning, a subset of AI, enables systems to learn from data and improve without explicit programming. It uses algorithms like regression, neural networks, and decision trees to predict outcomes or classify information. Applications include image recognition, fraud detection, and personalized recommendations. Practitioners leverage tools like TensorFlow and Python to build models that adapt to real-world challenges.",
   },

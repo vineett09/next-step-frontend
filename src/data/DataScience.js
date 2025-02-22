@@ -1,264 +1,313 @@
 const dataScienceRoadmap = {
   name: "Data Science Roadmap 2025",
   description:
-    "A comprehensive guide to essential data science skills and technologies for 2025.",
+    "A comprehensive guide to essential data science skills and technologies for 2025, from beginner to advanced levels.",
   children: [
     {
-      name: "Programming Languages",
+      name: "Foundational Knowledge",
       description:
-        "Proficiency in programming languages is fundamental for data manipulation and analysis.",
+        "Establish a strong base in mathematics, programming, and data handling.",
       children: [
         {
-          name: "Python",
+          name: "Mathematics and Statistics",
           description:
-            "The most widely used language in data science, known for its simplicity and extensive libraries like Pandas, NumPy, and Scikit-learn.",
+            "Understand the mathematical concepts underpinning data science.",
+          children: [
+            {
+              name: "Linear Algebra",
+              description:
+                "Study of vectors, matrices, and linear transformations.",
+            },
+            {
+              name: "Calculus",
+              description:
+                "Focus on differentiation and integration relevant to optimization.",
+            },
+            {
+              name: "Probability and Statistics",
+              description:
+                "Learn about distributions, statistical tests, and data variability.",
+            },
+          ],
         },
         {
-          name: "R",
+          name: "Programming Skills",
           description:
-            "A language specifically designed for statistical analysis and data visualization, offering robust packages for data manipulation.",
+            "Develop proficiency in programming languages commonly used in data science.",
+          children: [
+            {
+              name: "Python",
+              description:
+                "Primary language for data science with extensive libraries.",
+            },
+            {
+              name: "R",
+              description: "Statistical computing and graphics language.",
+            },
+            {
+              name: "SQL",
+              description:
+                "Language for managing and querying relational databases.",
+            },
+          ],
         },
         {
-          name: "SQL",
+          name: "Data Manipulation and Analysis",
           description:
-            "Essential for querying and managing data in relational databases, enabling efficient data extraction and manipulation.",
+            "Learn to handle, process, and analyze data effectively.",
+          children: [
+            {
+              name: "Pandas",
+              description: "Python library for data manipulation and analysis.",
+            },
+            {
+              name: "NumPy",
+              description: "Library for numerical computations in Python.",
+            },
+            {
+              name: "Data Cleaning",
+              description:
+                "Techniques for handling missing or inconsistent data.",
+            },
+          ],
         },
       ],
+      dividerText:
+        "Understand machine learning algorithms, model evaluation, and deep learning architectures.",
     },
     {
-      name: "Mathematics and Statistics",
+      name: "Machine Learning and Modeling",
       description:
-        "A strong foundation in mathematics and statistics is crucial for developing and understanding data science models.",
-      children: [
-        {
-          name: "Linear Algebra",
-          description:
-            "Understanding vectors, matrices, and their operations is crucial for machine learning algorithms.",
-        },
-        {
-          name: "Calculus",
-          description:
-            "Fundamental for grasping concepts like gradients and optimization in model training.",
-        },
-        {
-          name: "Probability and Statistics",
-          description:
-            "Provides the foundation for making inferences and predictions from data, including concepts like hypothesis testing and regression analysis.",
-        },
-      ],
-    },
-    {
-      name: "Data Manipulation and Analysis",
-      description:
-        "Skills for cleaning, transforming, and analyzing data are essential for extracting meaningful insights.",
-      children: [
-        {
-          name: "Data Wrangling",
-          description:
-            "Techniques for cleaning and transforming raw data into a usable format.",
-        },
-        {
-          name: "Data Visualization",
-          description:
-            "Creating visual representations of data to communicate insights effectively.",
-        },
-        {
-          name: "Exploratory Data Analysis (EDA)",
-          description:
-            "Techniques for summarizing the main characteristics of datasets, often using visual methods.",
-        },
-      ],
-    },
-    {
-      name: "Machine Learning",
-      description:
-        "Developing models that can learn from data to make predictions or decisions.",
+        "Dive into algorithms, model building, and advanced machine learning techniques.",
       children: [
         {
           name: "Supervised Learning",
           description:
-            "Training models using labeled data for tasks like classification and regression.",
+            "Learn algorithms that make predictions based on labeled data.",
+          children: [
+            {
+              name: "Regression",
+              description: "Techniques like linear and logistic regression.",
+            },
+            {
+              name: "Classification",
+              description: "Algorithms such as decision trees, SVMs, and k-NN.",
+            },
+          ],
         },
         {
           name: "Unsupervised Learning",
-          description:
-            "Identifying patterns in data without predefined labels, such as clustering and dimensionality reduction.",
-        },
-        {
-          name: "Reinforcement Learning",
-          description:
-            "Training agents to make decisions by rewarding desired behaviors.",
+          description: "Explore patterns in data without predefined labels.",
+          children: [
+            {
+              name: "Clustering",
+              description: "Methods like k-means, hierarchical clustering.",
+            },
+            {
+              name: "Dimensionality Reduction",
+              description: "Techniques such as PCA and t-SNE.",
+            },
+          ],
         },
         {
           name: "Deep Learning",
-          description:
-            "Utilizing neural networks with multiple layers to model complex patterns in data.",
+          description: "Study neural networks and advanced architectures.",
+          children: [
+            {
+              name: "Neural Networks",
+              description:
+                "Fundamentals of perceptrons and multilayer networks.",
+            },
+            {
+              name: "Convolutional Neural Networks (CNNs)",
+              description: "Specialized for image data processing.",
+            },
+            {
+              name: "Recurrent Neural Networks (RNNs)",
+              description: "Designed for sequential data analysis.",
+            },
+            {
+              name: "Transformers",
+              description:
+                "Architecture for handling sequential data with attention mechanisms.",
+            },
+          ],
+        },
+        {
+          name: "Model Evaluation and Validation",
+          description: "Assess model performance and ensure generalizability.",
+          children: [
+            {
+              name: "Cross-Validation",
+              description: "Techniques like k-fold cross-validation.",
+            },
+            {
+              name: "Metrics",
+              description:
+                "Evaluation metrics such as accuracy, precision, recall, and F1-score.",
+            },
+            {
+              name: "Bias-Variance Tradeoff",
+              description:
+                "Understanding the balance between model complexity and performance.",
+            },
+          ],
         },
       ],
+      dividerText:
+        "understand handling large-scale data, processing pipelines, cloud computing, and big data technologies.",
     },
     {
-      name: "Big Data Technologies",
+      name: "Data Engineering and Big Data",
       description:
-        "Tools and platforms for processing and analyzing large-scale datasets.",
-      children: [
-        {
-          name: "Apache Hadoop",
-          description:
-            "A framework for distributed storage and processing of large datasets.",
-        },
-        {
-          name: "Apache Spark",
-          description:
-            "An open-source unified analytics engine for large-scale data processing.",
-        },
-        {
-          name: "Cloud Platforms",
-          description:
-            "Services like AWS, Google Cloud, and Azure offer scalable resources for big data processing.",
-        },
-      ],
-    },
-    {
-      name: "Data Engineering",
-      description:
-        "Building and maintaining the infrastructure required for data generation, storage, and processing.",
+        "Focus on the tools and techniques for handling large-scale data processing and storage.",
       children: [
         {
           name: "Data Warehousing",
-          description:
-            "Centralized repositories for storing and managing large volumes of structured data.",
+          description: "Systems for reporting and data analysis.",
+          children: [
+            {
+              name: "ETL Processes",
+              description: "Extract, Transform, Load workflows.",
+            },
+            {
+              name: "Data Lakes",
+              description:
+                "Storage repositories for large amounts of raw data.",
+            },
+          ],
         },
         {
-          name: "ETL Processes",
-          description:
-            "Extracting, transforming, and loading data from various sources into a data warehouse.",
+          name: "Big Data Technologies",
+          description: "Tools for processing and analyzing large datasets.",
+          children: [
+            {
+              name: "Apache Hadoop",
+              description: "Framework for distributed storage and processing.",
+            },
+            {
+              name: "Apache Spark",
+              description:
+                "Unified analytics engine for large-scale data processing.",
+            },
+            {
+              name: "Kafka",
+              description: "Distributed event streaming platform.",
+            },
+          ],
         },
         {
-          name: "Data Pipeline Automation",
-          description:
-            "Automating the flow of data from source to destination to ensure timely and accurate data availability.",
+          name: "Cloud Platforms",
+          description: "Utilize cloud services for scalable data solutions.",
+          children: [
+            {
+              name: "AWS",
+              description: "Amazon's cloud computing services.",
+            },
+            {
+              name: "Google Cloud Platform",
+              description: "Google's suite of cloud services.",
+            },
+            {
+              name: "Microsoft Azure",
+              description: "Microsoft's cloud computing platform.",
+            },
+          ],
         },
       ],
+      dividerText:
+        "cutting-edge fields like NLP, Explainable AI (XAI), AutoML, MLOps, and data visualization.",
     },
     {
-      name: "Natural Language Processing (NLP)",
+      name: "Specialized Areas and Emerging Trends",
       description:
-        "Techniques for enabling machines to understand and interpret human language.",
+        "Stay updated with the latest advancements and niche areas in data science.",
       children: [
         {
-          name: "Text Processing",
+          name: "Natural Language Processing (NLP)",
           description:
-            "Cleaning and preparing text data for analysis, including tokenization and stemming.",
+            "Techniques for processing and analyzing human language data.",
+          children: [
+            {
+              name: "Sentiment Analysis",
+              description: "Determining sentiment from text data.",
+            },
+            {
+              name: "Language Modeling",
+              description: "Predicting the next word in a sequence.",
+            },
+            {
+              name: "Transformers and BERT",
+              description:
+                "Advanced models for understanding context in language.",
+            },
+          ],
         },
         {
-          name: "Sentiment Analysis",
-          description:
-            "Determining the sentiment or emotional tone behind a body of text.",
+          name: "Explainable AI (XAI)",
+          description: "Making AI decisions transparent and interpretable.",
+          children: [
+            {
+              name: "Model Interpretability",
+              description: "Understanding how models make decisions.",
+            },
+            {
+              name: "LIME and SHAP",
+              description: "Tools for explaining model outputs.",
+            },
+          ],
         },
         {
-          name: "Language Modeling",
+          name: "AutoML and MLOps",
+          description: "Automating model development and operationalization.",
+          children: [
+            {
+              name: "AutoKeras",
+              description: "Automated machine learning library.",
+            },
+            {
+              name: "H2O.ai",
+              description: "Open-source platform for AutoML.",
+            },
+            {
+              name: "MLOps Practices",
+              description: "CI/CD pipelines for machine learning models.",
+            },
+          ],
+        },
+        {
+          name: "Data Visualization",
           description:
-            "Developing models that can predict the next word in a sequence or generate human-like text.",
+            "Develop skills to effectively visualize data and communicate insights.",
+          children: [
+            {
+              name: "Data Visualization Tools",
+              description:
+                "Learn to create compelling visual representations of data.",
+            },
+            {
+              name: "Dashboard Development",
+              description:
+                "Build interactive dashboards to monitor and report data metrics.",
+            },
+            {
+              name: "Storytelling with Data",
+              description:
+                "Craft narratives that effectively communicate data-driven insights.",
+            },
+          ],
         },
       ],
     },
     {
-      name: "Data Visualization Tools",
+      name: "Final Projects",
       description:
-        "Software for creating graphical representations of data to facilitate understanding.",
-      children: [
-        {
-          name: "Tableau",
-          description:
-            "A powerful tool for creating interactive and shareable dashboards.",
-        },
-        {
-          name: "Power BI",
-          description:
-            "A business analytics tool by Microsoft for visualizing data and sharing insights.",
-        },
-        {
-          name: "Matplotlib/Seaborn",
-          description:
-            "Python libraries for creating static, animated, and interactive visualizations.",
-        },
-      ],
+        "Apply your knowledge to real-world challenges and create impactful projects.",
     },
     {
-      name: "AI Ethics and Governance",
+      name: "Ethics and Professional Development",
       description:
-        "Ensuring the responsible development and deployment of AI systems.",
-      children: [
-        {
-          name: "Bias Mitigation",
-          description:
-            "Identifying and reducing biases in data and models to ensure fairness.",
-        },
-        {
-          name: "Explainable AI",
-          description:
-            "Developing models whose decisions can be easily understood by humans.",
-        },
-        {
-          name: "Data Privacy",
-          description:
-            "Protecting sensitive information and ensuring compliance with data protection regulations.",
-        },
-      ],
-    },
-    {
-      name: "Domain Knowledge",
-      description:
-        "Understanding the specific context and requirements of the industry you are working in.",
-      children: [
-        {
-          name: "Healthcare",
-          description:
-            "Applying data science to medical data for improved patient outcomes and operational efficiency.",
-        },
-        {
-          name: "Finance",
-          description:
-            "Utilizing data analysis for risk assessment, fraud detection, and investment strategies.",
-        },
-        {
-          name: "Retail",
-          description:
-            "Analyzing consumer data to optimize inventory, pricing, and personalized marketing.",
-        },
-      ],
-    },
-    {
-      name: "Soft Skills",
-      description:
-        "Non-technical skills essential for effective collaboration and problem-solving.",
-      children: [
-        {
-          name: "Communication",
-          description:
-            "Ability to convey complex information clearly to both technical and non-technical stakeholders.",
-        },
-        {
-          name: "Problem-Solving",
-          description:
-            "Analytical skills to identify issues, interpret data, and develop actionable solutions.",
-        },
-        {
-          name: "Time Management",
-          description:
-            "Prioritizing tasks and managing workload effectively to meet deadlines.",
-        },
-        {
-          name: "Collaboration",
-          description:
-            "Working efficiently with teams, including data engineers, analysts, and business stakeholders.",
-        },
-      ],
-    },
-    {
-      name: "Continuous Learning",
-      description:
-        "Staying updated with evolving data science technologies, methodologies, and industry trends.",
+        "Understand the ethical implications of data science and focus on continuous professional growth.",
     },
   ],
 };

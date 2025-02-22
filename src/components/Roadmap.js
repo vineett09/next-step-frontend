@@ -65,13 +65,20 @@ const Roadmap = ({ data }) => {
             parent.children?.map((child) => ({
               ...child,
               dimensions: calculateNodeDimensions(child.name),
+              // Add nested children with the same structure
+              children:
+                child.children?.map((nestedChild) => ({
+                  ...nestedChild,
+                  dimensions: calculateNodeDimensions(nestedChild.name),
+                })) || [],
             })) || [],
         })),
       };
 
       const minParentSpacing = 100;
-      const childVerticalGap = 30;
+      const childVerticalGap = 100;
       const childrenSpaceFactor = 0.5;
+      const minNestedGroupGap = 0; // Adjust this value for spacing
 
       const svg = svgElement
         .append("g")
@@ -285,12 +292,11 @@ const Roadmap = ({ data }) => {
           const leftChildren = parent.children.slice(0, mid);
           const rightChildren = parent.children.slice(mid);
 
-          const getChildrenTotalHeight = (children) =>
+          const getChildrenTotalHeight = (children, gap = childVerticalGap) =>
             children.reduce(
-              (total, child) =>
-                total + child.dimensions.height + childVerticalGap,
+              (total, child) => total + child.dimensions.height + gap,
               0
-            ) - childVerticalGap;
+            ) - gap;
 
           const drawChildren = (children, isLeft) => {
             const totalHeight = getChildrenTotalHeight(children);
@@ -361,6 +367,113 @@ const Roadmap = ({ data }) => {
                 .attr("opacity", 0.7)
                 .attr("stroke-dasharray", "5,5");
 
+              // Add nested children if they exist
+              if (child.children?.length > 0) {
+                const nestedMid = Math.ceil(child.children.length / 2);
+                const nestedLeftChildren = child.children.slice(0, nestedMid);
+                const nestedRightChildren = child.children.slice(nestedMid);
+
+                // Draw nested children using the same pattern
+                const drawNestedChildren = (nestedChildren, isNestedLeft) => {
+                  const nestedTotalHeight = getChildrenTotalHeight(
+                    nestedChildren,
+                    minNestedGroupGap
+                  );
+                  let currentNestedY = currentChildY - nestedTotalHeight / 2;
+                  nestedChildren.forEach((nestedChild) => {
+                    const nestedXOffset = isNestedLeft
+                      ? -Math.max(
+                          0,
+                          (nestedChild.dimensions.width - BASE_BOX_WIDTH) / 2
+                        )
+                      : Math.max(
+                          0,
+                          (nestedChild.dimensions.width - BASE_BOX_WIDTH) / 2
+                        );
+
+                    const nestedX = isNestedLeft
+                      ? baseChildX -
+                        child.dimensions.width / 2 -
+                        FIXED_LINE_LENGTH -
+                        (nestedChild.dimensions.width / 2 + nestedXOffset)
+                      : baseChildX +
+                        child.dimensions.width / 2 +
+                        FIXED_LINE_LENGTH +
+                        nestedChild.dimensions.width / 2 -
+                        nestedXOffset;
+
+                    const nestedGroup = svg
+                      .append("g")
+                      .attr("class", "node")
+                      .attr(
+                        "transform",
+                        `translate(${nestedX},${currentNestedY})`
+                      )
+                      .on("click", () => {
+                        setSelectedNode({
+                          name: nestedChild.name,
+                          description: nestedChild.description,
+                        });
+                        setIsSidebarOpen(true);
+                      });
+
+                    createNode(
+                      nestedGroup,
+                      nestedChild.name,
+                      nestedChild.dimensions,
+                      "#A5D6A7", // Slightly lighter green for nested children
+                      "black",
+                      isNestedLeft
+                    );
+
+                    const childConnectX =
+                      baseChildX +
+                      (isNestedLeft
+                        ? -child.dimensions.width / 2 + childXOffset
+                        : child.dimensions.width / 2 + childXOffset);
+                    const nestedConnectX = isNestedLeft
+                      ? nestedX +
+                        nestedChild.dimensions.width / 2 +
+                        nestedXOffset
+                      : nestedX -
+                        nestedChild.dimensions.width / 2 +
+                        nestedXOffset;
+
+                    const nestedPath = d3.path();
+                    nestedPath.moveTo(nestedConnectX, currentNestedY);
+                    nestedPath.bezierCurveTo(
+                      (nestedConnectX + childConnectX) / 2,
+                      currentNestedY,
+                      (nestedConnectX + childConnectX) / 2,
+                      currentChildY,
+                      childConnectX,
+                      currentChildY
+                    );
+
+                    svg
+                      .append("path")
+                      .attr("class", "nested-link")
+                      .attr("d", nestedPath.toString())
+                      .attr("stroke", "#4CAF50")
+                      .attr("stroke-width", 2)
+                      .attr("fill", "none")
+                      .attr("opacity", 0.7)
+                      .attr("stroke-dasharray", "5,5");
+
+                    currentNestedY +=
+                      nestedChild.dimensions.height + minNestedGroupGap;
+                  });
+                };
+
+                // Only draw nested children on the same side as their parent
+                if (isLeft) {
+                  drawNestedChildren(child.children, true);
+                } else {
+                  drawNestedChildren(child.children, false);
+                }
+                currentChildY += minNestedGroupGap;
+              }
+
               currentChildY += child.dimensions.height + childVerticalGap;
             });
           };
@@ -382,7 +495,6 @@ const Roadmap = ({ data }) => {
   return (
     <div className="roadmap-container">
       <Header title={roadmapTitle} />
-      <FieldCard title={roadmapTitle} description={roadmapDescription} />{" "}
       <div ref={d3Container} />
       <Sidebar
         isOpen={isSidebarOpen}
