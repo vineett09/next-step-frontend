@@ -8,7 +8,7 @@ import Maincontent from "./components/Maincontent";
 import dataScienceRoadmap from "./data/DataScience";
 import aiEngineerRoadmap from "./data/ArtificialIntelligence";
 import cybersecurityRoadmap from "./data/CyberSecurity";
-import mobileDevelopmentRoadmap from "./data/MobileDevelopement";
+import androidDeveloperRoadmap from "./data/AndroidDeveloper";
 import mlOpsRoadmap from "./data/MLOps";
 import cloudComputingRoadmap from "./data/CloudComputing";
 import gameDevelopmentRoadmap from "./data/GameDevelopment";
@@ -16,6 +16,11 @@ import blockchainDeveloperRoadmap from "./data/Blockchain";
 import devOpsRoadmap from "./data/Devops";
 import Footer from "./components/Footer";
 import roboticsRoadmap from "./data/Robotics";
+import uiUxRoadmap from "./data/UI-UXDesigner";
+import dataAnalystRoadmap from "./data/DataAnalyst";
+import embeddedIotDeveloperRoadmap from "./data/EmbeddedIoTDeveloper";
+import iotApplicationDeveloperRoadmap from "./data/IoTApplicationDeveloper";
+import iosDeveloperRoadmap from "./data/IosDeveloper";
 function App() {
   return (
     <Router>
@@ -44,8 +49,8 @@ function App() {
             element={<Roadmap data={cybersecurityRoadmap} />}
           />
           <Route
-            path="/mobile-development"
-            element={<Roadmap data={mobileDevelopmentRoadmap} />}
+            path="/android-developer"
+            element={<Roadmap data={androidDeveloperRoadmap} />}
           />
           <Route
             path="/cloud-computing"
@@ -63,6 +68,26 @@ function App() {
           <Route
             path="/robotics"
             element={<Roadmap data={roboticsRoadmap} />}
+          />
+          <Route
+            path="/ui-ux-design"
+            element={<Roadmap data={uiUxRoadmap} />}
+          />
+          <Route
+            path="/data-analyst"
+            element={<Roadmap data={dataAnalystRoadmap} />}
+          />
+          <Route
+            path="/embedded-iot-developer"
+            element={<Roadmap data={embeddedIotDeveloperRoadmap} />}
+          />
+          <Route
+            path="/iot-application-developer"
+            element={<Roadmap data={iotApplicationDeveloperRoadmap} />}
+          />
+          <Route
+            path="/ios-developer"
+            element={<Roadmap data={iosDeveloperRoadmap} />}
           />
         </Routes>
         <Footer />

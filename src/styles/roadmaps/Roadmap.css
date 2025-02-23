@@ -2,7 +2,7 @@
 .roadmap-container {
   width: 100%;
   min-height: 100vh;
-  background-color: #021526;
+  background-color: #FFF3DA;
   padding: 20px;
   overflow-x: hidden;
   display: flex;
@@ -54,7 +54,7 @@
   right: -30%; /* Start off-screen */
   width: 30%;
   height: 100%;
-  background-color: #fff;
+  background-color: #F9F6E6;
   box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   z-index: 1000;

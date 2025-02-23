@@ -46,11 +46,11 @@ const techFields = [
   },
   {
     id: 6,
-    title: "Mobile Development",
+    title: "Android Developer",
     icon: "📱",
-    link: "/mobile-development",
+    link: "/android-developer",
     description:
-      "Mobile Development focuses on creating applications for smartphones and tablets, primarily for iOS (using Swift) and Android (using Kotlin or Java). Developers design intuitive interfaces and optimize performance for diverse devices, integrating features like GPS, cameras, and push notifications. This field powers apps for gaming, productivity, and e-commerce, meeting the growing demand for mobile-first solutions in today’s digital ecosystem.",
+      "Android Development involves creating applications for devices running the Android operating system, used by billions of users worldwide. Developers use Java or Kotlin to build mobile apps, games, and utilities, leveraging Android Studio and the Android SDK. They design interfaces, integrate APIs, and publish apps on Google Play, ensuring compatibility and performance across a diverse range of smartphones and tablets.",
   },
   {
     id: 7,
@@ -86,19 +86,19 @@ const techFields = [
   },
   {
     id: 11,
-    title: "IoT",
+    title: "Embedded IoT Developer",
     icon: "📱",
-    link: "/iot",
+    link: "/embedded-iot-developer",
     description:
       "The Internet of Things (IoT) connects everyday devices—like appliances, cars, and wearables—to the internet, enabling data exchange and automation. It relies on sensors, networks, and platforms like AWS IoT to monitor and control systems remotely. IoT developers create solutions for smart homes, healthcare, and industrial automation, driving efficiency and innovation across interconnected ecosystems.",
   },
   {
     id: 12,
-    title: "Virtual Reality",
-    icon: "🎮",
-    link: "/virtual-reality",
+    title: "IoT Application Developer",
+    icon: "📱",
+    link: "/iot-application-developer",
     description:
-      "Virtual Reality (VR) creates fully immersive digital environments using headsets and motion-tracking technology, often built with tools like Unity or Unreal Engine. It’s used in gaming, training simulations, and virtual tours, offering users a sense of presence in a 3D world. VR developers design interactive experiences, blending graphics, audio, and haptics to redefine entertainment and education.",
+      "IoT Application Developers design and build software applications that interact with connected devices in the Internet of Things (IoT) ecosystem. They use programming languages like Python, JavaScript, or C++ to develop IoT applications that collect, analyze, and visualize data from sensors and devices. IoT Application Developers create user interfaces, dashboards, and automation systems that enable users to monitor and control IoT devices remotely, enhancing efficiency and convenience in various industries.",
   },
   {
     id: 13,
@@ -118,19 +118,19 @@ const techFields = [
   },
   {
     id: 15,
-    title: "Database",
+    title: "Data Analyst",
     icon: "💻",
-    link: "/database",
+    link: "/data-analyst",
     description:
-      "Database management involves designing, implementing, and maintaining systems to store, retrieve, and organize data efficiently. Technologies like SQL, NoSQL, and MongoDB support structured and unstructured data for applications in business, web, and analytics. Database professionals ensure data integrity, security, and performance, enabling organizations to handle large-scale information and drive decision-making processes effectively.",
+      "Data Analysts collect, process, and analyze data to derive insights and support decision-making in organizations. They use tools like SQL, Excel, and Tableau to query databases, create visualizations, and generate reports. Data Analysts identify trends, patterns, and anomalies, helping businesses understand their operations, customers, and markets through data-driven strategies and actionable recommendations.",
   },
   {
     id: 16,
-    title: "Computer Vision",
-    icon: "🔍",
-    link: "/computer-vision",
+    title: "ios Developer",
+    icon: "📱",
+    link: "/ios-developer",
     description:
-      "Computer Vision enables machines to interpret and analyze visual data, such as images or videos, using techniques like deep learning and OpenCV. It powers facial recognition, autonomous driving, and medical imaging. Developers train models to detect objects, recognize patterns, and extract insights, transforming how technology interacts with and understands the visual world around us.",
+      "iOS Development focuses on creating applications for Apple devices like iPhones and iPads using Swift or Objective-C. Developers use Xcode and UIKit to design interfaces, integrate APIs, and publish apps on the App Store. iOS developers optimize performance, ensure compatibility, and deliver engaging user experiences, driving innovation and accessibility in mobile software for millions of users worldwide.",
   },
   {
     id: 17,

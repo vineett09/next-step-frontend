@@ -76,7 +76,7 @@ const Roadmap = ({ data }) => {
       };
 
       const minParentSpacing = 100;
-      const childVerticalGap = 100;
+      const childVerticalGap = 120;
       const childrenSpaceFactor = 0.5;
       const minNestedGroupGap = 0; // Adjust this value for spacing
 
@@ -102,7 +102,7 @@ const Roadmap = ({ data }) => {
         .attr("y", -titleDimensions.height / 2)
         .attr("rx", 10)
         .attr("ry", 10)
-        .attr("fill", "#FFD700") // Gold color to highlight title
+        .attr("fill", "#E8BCB9") // Gold color to highlight title
         .attr("stroke", "black")
         .attr("stroke-width", 2);
 
@@ -283,7 +283,7 @@ const Roadmap = ({ data }) => {
           parentGroup,
           parent.name,
           parent.dimensions,
-          "#64B5F6",
+          "#E8BCB9",
           "black"
         );
 
@@ -334,7 +334,7 @@ const Roadmap = ({ data }) => {
                 childGroup,
                 child.name,
                 child.dimensions,
-                "#81C784",
+                "#E17564",
                 "black",
                 isLeft
               );
@@ -421,7 +421,7 @@ const Roadmap = ({ data }) => {
                       nestedGroup,
                       nestedChild.name,
                       nestedChild.dimensions,
-                      "#A5D6A7", // Slightly lighter green for nested children
+                      "#FFF4B7", // Slightly lighter green for nested children
                       "black",
                       isNestedLeft
                     );
