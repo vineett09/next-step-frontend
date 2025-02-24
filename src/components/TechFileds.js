@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 const techFields = [
   {
     id: 1,
-    title: "Web Development",
+    title: "Full Stack Developer",
     icon: "💻",
-    link: "/web-development",
+    link: "/full-stack-developer",
     description:
-      "Web Development involves creating and maintaining websites and web applications that run on the internet. It includes front-end development, which focuses on user interfaces using HTML, CSS, and JavaScript, and back-end development, which handles server-side logic, databases, and APIs with languages like Python, Ruby, or PHP. Full-stack developers bridge both areas, ensuring seamless functionality and responsive design for an optimal user experience across devices.",
+      "Full Stack Development involves building web applications that handle both front-end and back-end responsibilities. Full Stack Developers work with databases, servers, systems engineering, and clients, using languages like HTML, CSS, JavaScript, and frameworks like React, Angular, or Node.js. They create responsive, interactive applications, ensuring seamless user experiences and high performance across the entire software stack.",
   },
   {
     id: 2,
-    title: "Data Science",
+    title: "Data Scientist",
     icon: "📊",
     link: "/data-science",
     description:
@@ -22,7 +22,7 @@ const techFields = [
   },
   {
     id: 3,
-    title: "Artificial Intelligence",
+    title: "AI Engineer",
     icon: "🤖",
     link: "/artificial-intelligence",
     description:
@@ -100,22 +100,7 @@ const techFields = [
     description:
       "IoT Application Developers design and build software applications that interact with connected devices in the Internet of Things (IoT) ecosystem. They use programming languages like Python, JavaScript, or C++ to develop IoT applications that collect, analyze, and visualize data from sensors and devices. IoT Application Developers create user interfaces, dashboards, and automation systems that enable users to monitor and control IoT devices remotely, enhancing efficiency and convenience in various industries.",
   },
-  {
-    id: 13,
-    title: "Augmented Reality",
-    icon: "🎮",
-    link: "/augmented-reality",
-    description:
-      "Augmented Reality (AR) overlays digital information—like images or data—onto the real world through devices like smartphones or AR glasses. Built with tools like ARKit or ARCore, it enhances experiences in gaming, retail, and education. AR developers craft applications that blend physical and virtual elements, enabling interactive navigation, visualization, and real-time engagement.",
-  },
-  {
-    id: 14,
-    title: "Quantum Computing",
-    icon: "🔑",
-    link: "/quantum-computing",
-    description:
-      "Quantum Computing leverages quantum mechanics principles, like superposition and entanglement, to process information exponentially faster than classical computers for specific tasks. It’s explored using languages like Q# and platforms like IBM Quantum. Researchers and developers aim to solve complex problems in cryptography, optimization, and material simulation, pushing the boundaries of computational power and scientific discovery.",
-  },
+
   {
     id: 15,
     title: "Data Analyst",
@@ -132,13 +117,14 @@ const techFields = [
     description:
       "iOS Development focuses on creating applications for Apple devices like iPhones and iPads using Swift or Objective-C. Developers use Xcode and UIKit to design interfaces, integrate APIs, and publish apps on the App Store. iOS developers optimize performance, ensure compatibility, and deliver engaging user experiences, driving innovation and accessibility in mobile software for millions of users worldwide.",
   },
+
   {
     id: 17,
-    title: "Natural Language Processing",
-    icon: "💻",
-    link: "/natural-language-processing",
+    title: "Frontend Developer",
+    icon: "🖥️",
+    link: "/frontend-developer",
     description:
-      "Natural Language Processing (NLP) allows computers to understand, generate, and respond to human language, using tools like NLTK and transformers. It drives chatbots, translation systems, and sentiment analysis. NLP experts develop algorithms to process text and speech, enabling machines to engage in conversations, extract meaning, and automate tasks that require linguistic comprehension and interaction.",
+      "Frontend Development focuses on building user interfaces and experiences for websites and applications. Frontend Developers use HTML, CSS, and JavaScript to create responsive layouts, interactive features, and engaging designs. They work with frameworks like React, Angular, or Vue.js to develop client-side code, ensuring seamless navigation and accessibility across browsers and devices for optimal user engagement.",
   },
   {
     id: 18,
@@ -158,11 +144,11 @@ const techFields = [
   },
   {
     id: 20,
-    title: "Embedded Systems",
-    icon: "🔧",
-    link: "/embedded-systems",
+    title: "Backend Developer",
+    icon: "🔙",
+    link: "/backend-developer",
     description:
-      "Embedded Systems involve designing and programming specialized hardware-software combinations within devices like cars, appliances, and medical equipment. Using languages like C and microcontrollers, developers create efficient, real-time solutions for specific tasks. This field drives functionality in IoT, robotics, and consumer electronics, requiring expertise in low-level programming, hardware integration, and power optimization for reliable performance.",
+      "Backend Development involves building server-side applications that manage data, logic, and security for websites and software. Backend Developers use languages like Python, Java, or Node.js to create APIs, databases, and servers, ensuring smooth functionality and performance. They work with frameworks like Django, Spring, or Express to handle requests, process data, and support front-end interactions in web applications.",
   },
 ];
 

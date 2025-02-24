@@ -2,7 +2,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Roadmap from "./components/Roadmap";
-import webDevelopmentRoadmap from "./data/WebDevelopement";
+import fullStackDeveloperRoadmap from "./data/FullStackDeveloper";
 import Navbar from "./components/Navbar";
 import Maincontent from "./components/Maincontent";
 import dataScienceRoadmap from "./data/DataScience";
@@ -21,6 +21,9 @@ import dataAnalystRoadmap from "./data/DataAnalyst";
 import embeddedIotDeveloperRoadmap from "./data/EmbeddedIoTDeveloper";
 import iotApplicationDeveloperRoadmap from "./data/IoTApplicationDeveloper";
 import iosDeveloperRoadmap from "./data/IosDeveloper";
+import frontendDeveloperRoadmap from "./data/FrontentDeveloper";
+import backendDeveloperRoadmap from "./data/BackendDeveloper";
+import quantumComputingRoadmap from "./data/QuantumComputing";
 function App() {
   return (
     <Router>
@@ -32,8 +35,20 @@ function App() {
 
           {/* Tech Fields */}
           <Route
-            path="/web-development"
-            element={<Roadmap data={webDevelopmentRoadmap} />}
+            path="/full-stack-developer"
+            element={<Roadmap data={fullStackDeveloperRoadmap} />}
+          />
+          <Route
+            path="/frontend-developer"
+            element={<Roadmap data={frontendDeveloperRoadmap} />}
+          />
+          <Route
+            path="/backend-developer"
+            element={<Roadmap data={backendDeveloperRoadmap} />}
+          />
+          <Route
+            path="/quantum-computing"
+            element={<Roadmap data={quantumComputingRoadmap} />}
           />
           <Route path="/mLOps" element={<Roadmap data={mlOpsRoadmap} />} />
           <Route

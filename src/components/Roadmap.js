@@ -4,7 +4,8 @@ import { useLocation } from "react-router-dom";
 import "../styles/roadmaps/Roadmap.css";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-import FieldCard from "./FieldCard";
+import TechSkills from "./TechSkills";
+import TechRoles from "./TechRoles";
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
   const [selectedNode, setSelectedNode] = useState({
@@ -495,7 +496,11 @@ const Roadmap = ({ data }) => {
   return (
     <div className="roadmap-container">
       <Header title={roadmapTitle} />
+      <TechRoles />
+      <TechSkills />
+
       <div ref={d3Container} />
+
       <Sidebar
         isOpen={isSidebarOpen}
         onClose={closeDescription}
