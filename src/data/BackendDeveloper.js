@@ -58,6 +58,7 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Web basics down—pick your backend language and dive in.",
     },
     {
       name: "Choosing and Mastering a Programming Language",
@@ -66,6 +67,7 @@ const backendDeveloperRoadmap = {
       children: [
         {
           name: "Node.js (JavaScript)",
+          preferred: true,
           description:
             "Node.js is a powerful platform that leverages JavaScript for full-stack development, enabling you to build efficient, scalable back-end systems. This section covers the basics of Node.js, including event-driven programming, asynchronous operations, and package management with npm. By mastering these concepts, you will be able to write efficient, non-blocking code that can handle high volumes of concurrent connections. Node.js is particularly well-suited for real-time applications, such as chat services and live updates, making it a popular choice for modern web development.",
           children: [
@@ -153,6 +155,8 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "Master your chosen language—now, let's dive deeper into the back-end ecosystem.",
     },
     {
       name: "Exploring the Language Ecosystem",
@@ -166,6 +170,7 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "ESLint",
+              preferred: true,
               description:
                 "ESLint is a powerful linter for JavaScript and Node.js projects, providing a flexible way to enforce coding standards and catch errors. It allows you to configure rules and plugins to suit your project's needs, ensuring that your code is consistent and free of common issues. By mastering ESLint, you will be able to write high-quality JavaScript code that adheres to best practices, making it easier to maintain and collaborate on projects.",
             },
@@ -188,6 +193,7 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "Webpack",
+              preferred: true,
               description:
                 "Webpack is a powerful module bundler for JavaScript applications, allowing you to package and optimize your code for deployment. It supports a wide range of plugins and loaders, making it a versatile tool for handling various types of assets and dependencies. By mastering Webpack, you will be able to configure efficient build processes, optimize your code for production, and ensure that your applications load quickly and efficiently.",
             },
@@ -250,6 +256,8 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "Tools and best practices in place—now, collaborate and control code with Git",
     },
     {
       name: "Version Control and Collaboration",
@@ -284,6 +292,7 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Code synced—store and manage data efficiently.",
     },
     {
       name: "Database Management",
@@ -297,37 +306,14 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "PostgreSQL",
+              preferred: true,
               description:
                 "PostgreSQL is a powerful, open-source relational database known for its robustness, scalability, and support for advanced data types and indexing. This section covers the basics of setting up a PostgreSQL database, creating tables with primary and foreign keys, and writing efficient SQL queries. By mastering PostgreSQL, you will be able to build scalable, reliable back-end systems that can handle complex data relationships and ensure data integrity.",
-              children: [
-                {
-                  name: "Tables",
-                  description:
-                    "Creating tables is a fundamental aspect of database design, allowing you to define the structure and relationships of your data. By mastering the creation of tables with primary and foreign keys, you will be able to design efficient, scalable database schemas that ensure data integrity and support complex queries. Proper table design is essential for building robust back-end systems that can handle large volumes of data and complex business logic.",
-                },
-                {
-                  name: "Queries",
-                  description:
-                    "Writing efficient SQL queries is essential for retrieving and manipulating data in a relational database. This includes mastering SELECT, INSERT, UPDATE, and DELETE statements, as well as advanced topics like joins, subqueries, and indexing. By writing efficient queries, you will be able to optimize database performance and ensure that your applications can handle large volumes of data and complex business logic.",
-                },
-              ],
             },
             {
               name: "MySQL",
               description:
                 "MySQL is a popular open-source relational database known for its ease of use, performance, and scalability. This section covers topics such as indexing, joins, and query optimization, providing you with the skills needed to design efficient, scalable database schemas. By mastering MySQL, you will be able to build robust back-end systems that can handle complex data relationships and ensure data integrity.",
-              children: [
-                {
-                  name: "Indexes",
-                  description:
-                    "Indexes are a powerful tool for optimizing query performance in relational databases. By creating indexes on frequently queried columns, you can significantly improve the speed of data retrieval. Understanding how to create and manage indexes is essential for optimizing database performance and ensuring that your applications can handle large volumes of data and complex queries.",
-                },
-                {
-                  name: "Joins",
-                  description:
-                    "Joins are a fundamental concept in relational databases, allowing you to combine data from multiple tables based on common columns. By mastering different types of joins, such as inner joins, outer joins, and cross joins, you will be able to retrieve complex data sets and build robust data access layers for your back-end applications. Proper use of joins is essential for ensuring data integrity and optimizing query performance.",
-                },
-              ],
             },
           ],
         },
@@ -340,35 +326,11 @@ const backendDeveloperRoadmap = {
               name: "MongoDB",
               description:
                 "MongoDB is a popular NoSQL database that uses a document-based storage model, allowing you to store and retrieve data in a flexible, schema-less format. This section covers the basics of MongoDB, including creating collections, performing CRUD operations, and optimizing queries. By mastering MongoDB, you will be able to build scalable, high-performance back-end systems that can handle large volumes of unstructured data and support modern web applications.",
-              children: [
-                {
-                  name: "Collections",
-                  description:
-                    "Collections in MongoDB are used to store JSON-like documents, providing a flexible and schema-less way to manage data. By mastering the creation and management of collections, you will be able to design efficient, scalable data storage solutions that can handle large volumes of unstructured data. Proper collection design is essential for ensuring data integrity and optimizing query performance.",
-                },
-                {
-                  name: "Queries",
-                  description:
-                    "Performing CRUD operations is a fundamental aspect of working with MongoDB. By mastering the MongoDB API for creating, reading, updating, and deleting documents, you will be able to build robust data access layers for your back-end applications. Efficient querying is essential for optimizing performance and ensuring that your applications can handle large volumes of data.",
-                },
-              ],
             },
             {
               name: "Cassandra",
               description:
                 "Cassandra is a highly scalable, distributed NoSQL database designed for handling large volumes of data across multiple nodes. This section covers the basics of Cassandra, including keyspaces, tables, and the Cassandra Query Language (CQL). By mastering Cassandra, you will be able to build robust, fault-tolerant back-end systems that can handle high volumes of traffic and ensure data availability.",
-              children: [
-                {
-                  name: "Keyspaces",
-                  description:
-                    "Keyspaces in Cassandra are used to organize data into logical groups, similar to databases in relational systems. By mastering the creation and management of keyspaces, you will be able to design efficient, scalable data storage solutions that can handle large volumes of data and support complex queries. Proper keyspace design is essential for ensuring data integrity and optimizing query performance.",
-                },
-                {
-                  name: "CQL",
-                  description:
-                    "The Cassandra Query Language (CQL) is used to interact with Cassandra databases, allowing you to perform CRUD operations and manage data. By mastering CQL, you will be able to build robust data access layers for your back-end applications, ensuring that your applications can handle large volumes of data and complex queries efficiently. Proper use of CQL is essential for optimizing performance and ensuring data integrity.",
-                },
-              ],
             },
           ],
         },
@@ -379,6 +341,7 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "Sequelize",
+              preferred: true,
               description:
                 "Sequelize is a popular ORM for Node.js, providing a powerful way to interact with SQL databases using JavaScript. It allows you to define database models using classes and methods, simplifying database interactions and ensuring data integrity. By mastering Sequelize, you will be able to write more efficient, maintainable code and streamline your database interactions, making it easier to build robust back-end systems.",
             },
@@ -390,6 +353,7 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Data ready—build APIs to connect your backend.",
     },
     {
       name: "API Development",
@@ -398,21 +362,25 @@ const backendDeveloperRoadmap = {
       children: [
         {
           name: "RESTful APIs",
+          preferred: true,
           description:
             "RESTful APIs are a popular choice for building web services, following a set of principles that ensure scalability, maintainability, and ease of use. This section covers the basics of designing RESTful APIs, including defining endpoints, using HTTP status codes appropriately, and building APIs with popular frameworks like Express.js and Flask. By mastering RESTful API development, you will be able to create robust, scalable APIs that can handle complex business logic and support modern web applications.",
           children: [
             {
               name: "Endpoints",
+              preferred: true,
               description:
                 "Defining clear, intuitive endpoints is essential for building RESTful APIs. Endpoints represent the resources and actions available in your API, allowing front-end applications to interact with your back-end services. By mastering the design of endpoints, you will be able to create APIs that are easy to use, scalable, and maintainable. Proper endpoint design is crucial for ensuring a seamless user experience and supporting complex business logic.",
             },
             {
               name: "HTTP Status Codes",
+              preferred: true,
               description:
                 "Using HTTP status codes appropriately is essential for ensuring clear, consistent communication between your API and front-end applications. Status codes provide information about the success or failure of API requests, helping developers troubleshoot issues and build more robust applications. By mastering the use of HTTP status codes, you will be able to create APIs that are easy to use and maintain, ensuring a seamless user experience.",
             },
             {
               name: "Express.js",
+              preferred: true,
               description:
                 "Express.js is a popular Node.js framework for building web applications and APIs. It provides a flexible, lightweight way to handle HTTP requests and responses, making it an excellent choice for building RESTful APIs. By mastering Express.js, you will be able to create efficient, scalable APIs that can handle complex business logic and support modern web applications.",
             },
@@ -446,6 +414,7 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "APIs live—secure them with user access controls.",
     },
     {
       name: "Authentication and Authorization",
@@ -476,6 +445,7 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "JWT",
+              preferred: true,
               description:
                 "JSON Web Tokens (JWTs) are a popular method for securely transmitting information between parties as a JSON object. By mastering the generation and verification of JWTs, you will be able to implement secure, stateless authentication in your APIs. JWTs are widely used for token-based authentication, providing a flexible, efficient way to manage user sessions and protect user data.",
             },
@@ -509,6 +479,7 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Access secured—enhance servers with middleware magic.",
     },
     {
       name: "Web Servers and Middleware",
@@ -522,32 +493,14 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "Nginx",
+              preferred: true,
               description:
                 "Nginx is a powerful, high-performance web server known for its efficiency and scalability. This section covers the basics of configuring Nginx as a reverse proxy, including writing nginx.conf files for routing and setting up load balancing. By mastering Nginx, you will be able to build robust, scalable web applications that can handle high volumes of traffic and provide a seamless user experience.",
-              children: [
-                {
-                  name: "Config",
-                  description:
-                    "Writing nginx.conf files is essential for configuring Nginx to handle incoming requests and route them to the appropriate back-end services. By mastering nginx.conf, you will be able to build efficient, scalable web applications that can handle complex routing and load balancing requirements. Proper configuration is crucial for ensuring optimal performance and a seamless user experience.",
-                },
-                {
-                  name: "Load Balancing",
-                  description:
-                    "Load balancing is a critical feature of Nginx, allowing you to distribute incoming traffic across multiple servers to ensure high availability and optimal performance. By mastering load balancing with Nginx, you will be able to build robust, scalable web applications that can handle high volumes of traffic and provide a seamless user experience.",
-                },
-              ],
             },
             {
               name: "Apache",
               description:
                 "Apache is a widely-used web server known for its flexibility and extensive configuration options. This section covers the basics of configuring Apache, including the use of .htaccess files for customizing server behavior. By mastering Apache, you will be able to build robust, scalable web applications that can handle complex configuration requirements and provide a seamless user experience.",
-              children: [
-                {
-                  name: ".htaccess",
-                  description:
-                    "The .htaccess file is a powerful tool for customizing Apache server behavior, allowing you to define rewrite rules, set environment variables, and configure access control. By mastering .htaccess, you will be able to build flexible, scalable web applications that can handle complex routing and configuration requirements. Proper use of .htaccess is essential for ensuring optimal performance and a seamless user experience.",
-                },
-              ],
             },
           ],
         },
@@ -574,6 +527,7 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Servers humming—test and debug for reliability..",
     },
     {
       name: "Testing and Debugging",
@@ -587,6 +541,7 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "Jest",
+              preferred: true,
               description:
                 "Jest is a powerful, flexible testing framework for JavaScript and Node.js applications. It provides a wide range of features, including test runners, matchers, and mock functions, making it an excellent choice for writing comprehensive unit tests. By mastering Jest, you will be able to write efficient, reliable tests that ensure your Node.js APIs are free of common errors and maintainable over time.",
             },
@@ -604,6 +559,7 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "Supertest",
+              preferred: true,
               description:
                 "Supertest is a popular library for testing API endpoints in Node.js applications. It provides a flexible, efficient way to make HTTP requests and assert responses, making it an excellent choice for writing comprehensive integration tests. By mastering Supertest, you will be able to write efficient, reliable tests that ensure your Node.js APIs are free of common errors and maintainable over time.",
             },
@@ -632,6 +588,7 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Bugs squashed—optimize for speed and scale.",
     },
     {
       name: "Performance Optimization",
@@ -645,6 +602,7 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "Redis",
+              preferred: true,
               description:
                 "Redis is a popular in-memory caching solution that provides fast, efficient data storage and retrieval. By implementing Redis in your back-end systems, you can reduce the load on your databases and improve response times, making your applications more efficient and scalable. Mastering Redis is essential for optimizing performance and ensuring that your applications can handle high volumes of traffic and complex business logic.",
             },
@@ -662,6 +620,7 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "Nginx",
+              preferred: true,
               description:
                 "Nginx is a powerful, high-performance web server that can also be used for load balancing. By configuring Nginx to distribute incoming traffic across multiple servers, you can ensure high availability and optimal performance. Mastering load balancing with Nginx is essential for building robust, scalable back-end systems that can handle high volumes of traffic and complex business logic.",
             },
@@ -690,6 +649,7 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Performance tuned—deploy with DevOps precision.",
     },
     {
       name: "Deployment and DevOps",
@@ -705,18 +665,6 @@ const backendDeveloperRoadmap = {
               name: "Docker",
               description:
                 "Docker is a popular containerization platform that allows you to package your applications and their dependencies into a consistent, portable format. By creating Dockerfiles and building images, you can ensure that your applications run consistently across different environments. Mastering Docker is essential for building robust, scalable back-end systems that can handle complex business logic and provide a seamless user experience.",
-              children: [
-                {
-                  name: "Images",
-                  description:
-                    "Docker images are the foundation of containerization, providing a consistent, portable format for packaging your applications and their dependencies. By mastering the creation and management of Docker images, you can ensure that your applications run consistently across different environments. Proper image management is essential for building robust, scalable back-end systems that can handle complex business logic and provide a seamless user experience.",
-                },
-                {
-                  name: "Compose",
-                  description:
-                    "Docker Compose is a powerful tool for managing multi-container applications. By defining your application's services, networks, and volumes in a docker-compose.yml file, you can easily deploy and manage complex applications. Mastering Docker Compose is essential for building robust, scalable back-end systems that can handle complex business logic and provide a seamless user experience.",
-                },
-              ],
             },
           ],
         },
@@ -727,6 +675,7 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "GitHub Actions",
+              preferred: true,
               description:
                 "GitHub Actions is a powerful CI/CD platform that allows you to automate your development and deployment workflows directly within GitHub. By defining workflows in YAML files, you can automate testing, building, and deploying your applications, ensuring that your code is always up-to-date and reliable. Mastering GitHub Actions is essential for building robust, scalable back-end systems that can handle complex business logic and provide a seamless user experience.",
             },
@@ -744,6 +693,7 @@ const backendDeveloperRoadmap = {
           children: [
             {
               name: "AWS",
+              preferred: true,
               description:
                 "AWS is a popular cloud platform that provides a wide range of services for deploying and managing back-end applications. By using services like EC2 for virtual machines and Elastic Beanstalk for application deployment, you can build robust, scalable back-end systems that can handle complex business logic and provide a seamless user experience. Mastering AWS is essential for deploying and managing modern back-end applications.",
             },
@@ -760,6 +710,7 @@ const backendDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Apps deployed—lock them down with security.",
     },
     {
       name: "Security Best Practices",
@@ -820,7 +771,7 @@ const backendDeveloperRoadmap = {
       ],
     },
     {
-      name: "Continuous Learning and Career Readiness",
+      name: "Career Readiness",
       description:
         "Preparing for a successful career in back-end development requires continuous learning and engagement with the developer community. This section covers various strategies for showcasing your skills, contributing to open-source projects, and staying updated with the latest trends and best practices. By mastering these concepts, you will be well-prepared for a successful career in back-end development and able to build robust, scalable back-end systems that can handle complex business logic and provide a seamless user experience.",
       children: [

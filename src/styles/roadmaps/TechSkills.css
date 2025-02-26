@@ -1,40 +1,44 @@
-.role-card {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 100%;
-    max-width: 400px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-  }
+.skills-card {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  width: 100%;
+  max-width: 400px;
+  background: #000;
+  border-radius: 10px;
+  box-shadow: 
+  0 0 5px #e61dff, 
+  0 0 10px #3cc7fa, 
+  0 0 15px #857dfd, 
+  0 0 20px #9d65fc;
+  padding: 20px;
+  text-align: center;
   
-  .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 15px;
-  }
-  
-  .role-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .role-badge {
-    background: #31891d;
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    display: inline-block;
-    white-space: nowrap;
-    cursor: pointer;
-  
-  }
-  
+}
+
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.skills-badge {
+  background: #31891d;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-block;
+  white-space: nowrap;
+  cursor: pointer;
+}

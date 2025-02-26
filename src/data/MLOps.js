@@ -15,6 +15,7 @@ const mlOpsRoadmap = {
           children: [
             {
               name: "Python",
+              preferred: true,
               description:
                 "Python, the core language for ML and MLOps, leverages libraries like TensorFlow and Pandas, taught with scripting examples. This section covers data manipulation and model building. It’s a dominant skill in 2025, essential for its versatility and ecosystem in MLOps development and deployment.",
             },
@@ -63,6 +64,7 @@ const mlOpsRoadmap = {
           ],
         },
       ],
+      dividerText: "Foundations built—master MLOps principles next.",
     },
     {
       name: "MLOps Principles",
@@ -81,6 +83,7 @@ const mlOpsRoadmap = {
             },
             {
               name: "Docker",
+              preferred: true,
               description:
                 "Docker containerizes environments, taught with Dockerfile creation for ML apps. This section ensures dependency consistency in MLOps. It’s a key skill in 2025, standardizing runtime environments for reproducible model training and deployment across platforms.",
             },
@@ -98,6 +101,7 @@ const mlOpsRoadmap = {
           children: [
             {
               name: "MLflow",
+              preferred: true,
               description:
                 "MLflow logs model parameters and artifacts, taught with tracking setups. This section manages MLOps lifecycles efficiently. It’s a core skill in 2025, providing a unified platform for versioning and monitoring ML models in production.",
             },
@@ -163,6 +167,8 @@ const mlOpsRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "Principles mastered—leverage MLOps tools and technologies next.",
     },
     {
       name: "MLOps Tools and Technologies",
@@ -176,6 +182,7 @@ const mlOpsRoadmap = {
           children: [
             {
               name: "MLflow",
+              preferred: true,
               description:
                 "MLflow tracks experiments, taught with logging parameters and metrics. This section manages MLOps lifecycles end-to-end. It’s a core skill in 2025, offering a unified platform for experiment tracking and model management in production.",
             },
@@ -198,11 +205,13 @@ const mlOpsRoadmap = {
           children: [
             {
               name: "Docker",
+              preferred: true,
               description:
                 "Docker containerizes ML apps, taught with image creation. This section ensures consistent deployment in MLOps. It’s a core skill in 2025, standardizing environments for model serving across development and production stages.",
             },
             {
               name: "Kubernetes",
+              preferred: true,
               description:
                 "Kubernetes orchestrates ML deployments, taught with pod setups. This section scales inference in MLOps efficiently. It’s a key skill in 2025, managing containerized models for high availability and resilience in production.",
             },
@@ -224,6 +233,7 @@ const mlOpsRoadmap = {
           ],
         },
       ],
+      dividerText: "Tools in hand—automate workflows with CI/CD for ML next.",
     },
     {
       name: "CI/CD for ML",
@@ -237,6 +247,7 @@ const mlOpsRoadmap = {
           children: [
             {
               name: "Pytest",
+              preferred: true,
               description:
                 "Pytest writes unit tests for ML code, taught with examples. This section tests Python scripts in MLOps pipelines. It’s a core skill in 2025, ensuring code reliability and integration in automated ML workflows.",
             },
@@ -259,6 +270,7 @@ const mlOpsRoadmap = {
           children: [
             {
               name: "Kubeflow",
+              preferred: true,
               description:
                 "Kubeflow orchestrates ML on Kubernetes, taught with pipeline examples. This section manages MLOps workflows scalably. It’s an advanced skill in 2025, integrating ML with cloud-native orchestration for robust production systems.",
             },
@@ -281,6 +293,7 @@ const mlOpsRoadmap = {
           children: [
             {
               name: "Terraform",
+              preferred: true,
               description:
                 "Terraform defines cloud resources, taught with HCL for AWS. This section provisions MLOps infra declaratively. It’s a core skill in 2025, enabling reproducible, multi-cloud setups for ML workloads efficiently.",
             },
@@ -297,6 +310,8 @@ const mlOpsRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "CI/CD pipelines set—leverage cloud and infrastructure for MLOps next.",
     },
     {
       name: "Cloud and Infrastructure",
@@ -310,6 +325,7 @@ const mlOpsRoadmap = {
           children: [
             {
               name: "AWS SageMaker",
+              preferred: true,
               description:
                 "AWS SageMaker manages ML workflows, taught with training examples. This section covers end-to-end MLOps on AWS. It’s a top skill in 2025, leveraging AWS’s power for scalable, production-ready ML solutions.",
             },
@@ -348,6 +364,8 @@ const mlOpsRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "Cloud infrastructure ready—monitor and ensure observability next.",
     },
     {
       name: "Monitoring and Observability",
@@ -428,6 +446,7 @@ const mlOpsRoadmap = {
           ],
         },
       ],
+      dividerText: "Observability secured—ensure security and compliance next.",
     },
     {
       name: "Security and Compliance",
@@ -511,6 +530,8 @@ const mlOpsRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "Security and compliance ensured—apply skills to practical projects next.",
     },
     {
       name: "Projects",
@@ -626,6 +647,8 @@ const mlOpsRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "Projects completed—advance your MLOps career with professional development next.",
     },
     {
       name: "Professional Development",
@@ -661,6 +684,7 @@ const mlOpsRoadmap = {
           children: [
             {
               name: "AWS ML Specialty",
+              preferred: true,
               description:
                 "AWS ML Specialty certifies SageMaker skills, taught with exam prep. This section validates MLOps on AWS. It’s a top skill in 2025, enhancing AWS expertise.",
             },
@@ -699,6 +723,8 @@ const mlOpsRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "Career ready—commit to continuous learning for long-term success.",
     },
     {
       name: "Continuous Learning",

@@ -8,7 +8,7 @@ const roles = [
   "DevOps Engineer",
   "Data Scientist",
   "Data Analyst",
-  "Cloud Engineer",
+  "Cloud Computing",
   "Blockchain Developer",
   "Full Stack Developer",
 ];
@@ -18,9 +18,9 @@ const TechRoles = () => {
     <div className="role-card">
       <h2 className="card-title">Trending Tech Roles in 2025</h2>
       <div className="role-list">
-        {roles.map((skill, index) => (
+        {roles.map((roles, index) => (
           <span key={index} className="role-badge">
-            {skill}
+            {roles}
           </span>
         ))}
       </div>

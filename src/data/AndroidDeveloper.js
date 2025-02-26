@@ -10,6 +10,7 @@ const androidDeveloperRoadmap = {
       children: [
         {
           name: "Kotlin",
+          preferred: true,
           description:
             "Kotlin, Google’s preferred language for Android, offers concise syntax, null safety, and robust features for modern app development. This section dives into its interoperability with Java and its role in reducing boilerplate code. Learners master Kotlin to build safer, more efficient apps, aligning with 2025’s industry standards for cutting-edge Android development.",
           children: [
@@ -58,6 +59,7 @@ const androidDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Languages mastered—dive into Android’s core toolkit.",
     },
     {
       name: "Android Development Fundamentals",
@@ -141,6 +143,7 @@ const androidDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Foundation set—level up with modern Android techniques.",
     },
     {
       name: "Advanced Android Development",
@@ -149,6 +152,7 @@ const androidDeveloperRoadmap = {
       children: [
         {
           name: "Jetpack Compose",
+          preferred: true,
           description:
             "Jetpack Compose revolutionizes Android UI development with a declarative, native toolkit. This section teaches learners to build dynamic, responsive interfaces with less code than XML. It’s a transformative skill in 2025, rapidly adopted for its efficiency and alignment with Google’s vision for future Android development.",
           children: [
@@ -203,6 +207,7 @@ const androidDeveloperRoadmap = {
           children: [
             {
               name: "Hilt",
+              preferred: true,
               description:
                 "Hilt simplifies DI in Android with predefined annotations and scopes, built on Dagger. This section teaches learners to inject dependencies into Activities or ViewModels. It’s a streamlined skill in 2025, reducing boilerplate and accelerating development for modern, Jetpack-aligned apps.",
             },
@@ -230,6 +235,7 @@ const androidDeveloperRoadmap = {
           children: [
             {
               name: "MVVM",
+              preferred: true,
               description:
                 "MVVM (Model-View-ViewModel) pairs with Jetpack for separation of concerns, using LiveData or Flow. This section teaches learners to bind UI to ViewModels. It’s a dominant skill in 2025, simplifying state management and testing, aligning with Google’s recommended architecture for Android apps.",
             },
@@ -246,6 +252,7 @@ const androidDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Skills sharpened—reach beyond Android to iOS (optional).",
     },
     {
       name: "Cross-Platform Development",
@@ -276,6 +283,7 @@ const androidDeveloperRoadmap = {
         },
         {
           name: "Flutter",
+          preferred: true,
           description:
             "Flutter builds cross-platform apps with a single Dart codebase, rendering UIs natively. This section teaches learners to create Android and iOS apps efficiently from one source. It’s a popular skill in 2025, offering rapid development and high performance, appealing to developers targeting broad mobile audiences.",
           children: [
@@ -302,6 +310,7 @@ const androidDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "Platforms united—power your apps with backend services.",
     },
     {
       name: "Backend Integration",
@@ -315,6 +324,7 @@ const androidDeveloperRoadmap = {
           children: [
             {
               name: "Retrofit",
+              preferred: true,
               description:
                 "Retrofit simplifies RESTful API calls in Android with type-safe Kotlin interfaces. This section guides learners to define endpoints, handle responses, and manage errors. It’s a popular skill in 2025, streamlining networking and boosting productivity for developers building data-driven mobile applications.",
             },
@@ -340,11 +350,6 @@ const androidDeveloperRoadmap = {
               description:
                 "Apollo Client integrates GraphQL into Android, managing queries and caching. This section guides learners to set up Apollo, write queries, and handle mutations. It’s a modern skill in 2025, simplifying complex data interactions and enhancing app performance with GraphQL backends.",
             },
-            {
-              name: "Query Optimization",
-              description:
-                "Query Optimization in GraphQL fetches only required data, minimizing bandwidth. This section teaches learners to craft precise queries and use fragments effectively. It’s a valuable skill in 2025, improving efficiency and responsiveness in Android apps relying on GraphQL for dynamic content.",
-            },
           ],
         },
         {
@@ -365,6 +370,174 @@ const androidDeveloperRoadmap = {
           ],
         },
       ],
+      dividerText: "streamline your Android workflow.",
+    },
+
+    {
+      name: "Development Tools & Practices",
+      description:
+        "This section masters tools and workflows for efficient Android development, from version control to optimization. Learners streamline coding, testing, and deployment processes. It’s a practical skill set in 2025, ensuring high-quality apps are delivered quickly and reliably in a professional, collaborative environment.",
+      children: [
+        {
+          name: "Version Control Systems (VCS)",
+          description:
+            "Version Control Systems manage Android codebases, enabling collaboration and version tracking. This section teaches learners to use Git and platforms for team workflows. It’s an indispensable skill in 2025, keeping projects organized and facilitating seamless contributions in distributed development teams.",
+          children: [
+            {
+              name: "Git",
+              description:
+                "Git tracks changes in Android projects with branching, merging, and rebasing capabilities. This section covers cloning, committing, and resolving conflicts effectively. It’s a foundational skill in 2025, enabling developers to maintain code integrity and collaborate on complex app development cycles.",
+            },
+            {
+              name: "GitHub/GitLab",
+              description:
+                "GitHub and GitLab host Android repositories, supporting code reviews and CI/CD integration. This section teaches learners to manage repos and collaborate online. It’s a key skill in 2025, enhancing visibility and teamwork, critical for open-source or enterprise Android projects.",
+            },
+            {
+              name: "Pull Requests",
+              description:
+                "Pull Requests facilitate code reviews and merging in VCS platforms for Android apps. This section guides learners to submit and review changes constructively. It’s a collaborative skill in 2025, ensuring quality and fostering team communication in professional development workflows.",
+            },
+          ],
+        },
+        {
+          name: "CI/CD",
+          description:
+            "CI/CD automates building, testing, and deploying Android apps for rapid iteration. This section teaches learners to set up pipelines for consistent releases. It’s a high-value skill in 2025, reducing errors and accelerating delivery, a must for teams aiming for agile, efficient development cycles.",
+          children: [
+            {
+              name: "GitHub Actions",
+              preferred: true,
+              description:
+                "GitHub Actions automates Android workflows, like building APKs or running tests. This section covers YAML configuration for CI/CD in repositories. It’s an accessible skill in 2025, integrating seamlessly with GitHub, ideal for developers seeking efficient automation within a familiar platform.",
+            },
+            {
+              name: "Jenkins",
+              description:
+                "Jenkins configures CI/CD pipelines for Android, supporting custom builds and deployments. This section teaches learners to set up jobs and plugins. It’s a versatile skill in 2025, favored in enterprise settings for its flexibility in managing complex, large-scale app release processes.",
+            },
+            {
+              name: "Fastlane",
+              description:
+                "Fastlane automates Android app deployment to Google Play, handling signing and uploads. This section guides learners to script tasks for efficiency. It’s a time-saving skill in 2025, streamlining repetitive release steps and ensuring consistent, error-free delivery to the Play Store.",
+            },
+          ],
+        },
+        {
+          name: "Testing",
+          description:
+            "Testing ensures Android app quality and reliability through unit, UI, and performance checks. This section teaches learners to write and automate tests effectively. It’s a critical skill in 2025, guaranteeing robust apps that meet user expectations and perform well across diverse devices.",
+          children: [
+            {
+              name: "Unit Testing",
+              description:
+                "Unit Testing with JUnit and Mockito validates individual Android components, like functions. This section teaches learners to write isolated, repeatable tests. It’s a foundational skill in 2025, ensuring code correctness and supporting refactoring in fast-paced development environments.",
+            },
+            {
+              name: "UI Testing",
+              description:
+                "UI Testing with Espresso automates Android interface validation, simulating user actions. This section covers writing tests for clicks and inputs. It’s an essential skill in 2025, verifying app usability and catching UI bugs early, critical for delivering polished mobile experiences.",
+            },
+            {
+              name: "Integration Testing",
+              description:
+                "Integration Testing with Robolectric checks component interactions in Android apps. This section teaches learners to simulate Android environments for thorough testing. It’s a practical skill in 2025, ensuring modules work together seamlessly, vital for complex, interdependent app architectures.",
+            },
+            {
+              name: "Performance Testing",
+              description:
+                "Performance Testing profiles Android apps for speed, memory, and battery use with Studio tools. This section guides learners to optimize resource consumption. It’s a key skill in 2025, enhancing app efficiency and user satisfaction on resource-constrained mobile devices.",
+            },
+          ],
+        },
+        {
+          name: "App Optimization",
+          description:
+            "App Optimization improves Android performance and user experience by reducing resource use. This section teaches learners to profile and refine apps for efficiency. It’s a high-impact skill in 2025, ensuring fast, lightweight apps that compete effectively in the crowded mobile marketplace.",
+          children: [
+            {
+              name: "Profiling Tools",
+              description:
+                "Profiling Tools in Android Studio analyze CPU, memory, and battery usage. This section teaches learners to identify bottlenecks and optimize performance. It’s a crucial skill in 2025, enabling developers to fine-tune apps for smooth operation across Android’s diverse hardware landscape.",
+            },
+            {
+              name: "APK Size Reduction",
+              description:
+                "APK Size Reduction with R8 and app bundles minimizes Android app footprints. This section covers code shrinking and resource optimization techniques. It’s a practical skill in 2025, improving download rates and storage efficiency, key for user adoption in emerging markets.",
+            },
+            {
+              name: "Startup Time",
+              description:
+                "Startup Time optimization reduces Android app launch latency for instant access. This section teaches learners to defer tasks and streamline initialization. It’s an important skill in 2025, enhancing user retention by delivering quick, responsive experiences from the first tap.",
+            },
+          ],
+        },
+      ],
+      dividerText: "Process optimized—fortify your apps for safety.",
+    },
+    {
+      name: "Security & Privacy",
+      description:
+        "This section protects Android apps and user data with robust security and privacy measures. Learners master encryption, authentication, and hardening techniques. It’s a non-negotiable skill in 2025, ensuring trustworthiness and compliance as cyber threats and regulations grow in the mobile space.",
+      children: [
+        {
+          name: "Data Protection",
+          description:
+            "Data Protection secures sensitive information within Android apps, like passwords or personal data. This section teaches learners to implement encryption and safe storage. It’s a critical skill in 2025, safeguarding user privacy and meeting legal standards in an era of heightened data security awareness.",
+          children: [
+            {
+              name: "Encryption",
+              description:
+                "Encryption with AES or RSA secures Android app data against unauthorized access. This section covers implementing algorithms for files or network traffic. It’s an essential skill in 2025, protecting sensitive information and ensuring compliance with privacy regulations in mobile development.",
+            },
+            {
+              name: "Secure Storage",
+              description:
+                "Secure Storage with EncryptedSharedPreferences protects persistent data in Android apps. This section teaches learners to encrypt key-value pairs safely. It’s a practical skill in 2025, providing a simple, secure way to store user settings or credentials without external dependencies.",
+            },
+            {
+              name: "Keystore",
+              description:
+                "Keystore manages cryptographic keys securely in Android, protecting encryption processes. This section guides learners to generate and use keys for signing or data protection. It’s a key skill in 2025, ensuring robust security foundations for apps handling sensitive operations or transactions.",
+            },
+          ],
+        },
+        {
+          name: "Authentication & Authorization",
+          description:
+            "Authentication and Authorization secure Android app access with user verification and permissions. This section teaches learners to implement modern login systems. It’s a vital skill in 2025, balancing security and usability while protecting user accounts in an increasingly connected mobile landscape.",
+          children: [
+            {
+              name: "OAuth2",
+              description:
+                "OAuth2 integrates third-party authentication (e.g., Google) into Android apps securely. This section covers token flows and refresh mechanisms for seamless logins. It’s a popular skill in 2025, enhancing user convenience and security with trusted identity providers in mobile apps.",
+            },
+            {
+              name: "Firebase Authentication",
+              description:
+                "Firebase Authentication adds email, social, or anonymous logins to Android apps easily. This section teaches learners to integrate and manage user sessions. It’s a practical skill in 2025, offering a scalable, low-setup solution for secure authentication in rapid development cycles.",
+            },
+          ],
+        },
+        {
+          name: "App Hardening",
+          description:
+            "App Hardening prevents tampering and reverse engineering of Android apps. This section teaches learners to obfuscate code and detect threats. It’s a specialized skill in 2025, protecting intellectual property and user data from malicious actors in a competitive app ecosystem.",
+          children: [
+            {
+              name: "ProGuard/R8",
+              description:
+                "ProGuard and R8 obfuscate Android code, shrinking and securing APKs. This section teaches learners to configure rules for hiding logic from reverse engineering. It’s a key skill in 2025, safeguarding apps while optimizing size, essential for professional-grade deployment.",
+            },
+            {
+              name: "Runtime Checks",
+              description:
+                "Runtime Checks detect rooted devices or emulators to prevent unauthorized app use. This section covers implementing safety nets and integrity checks. It’s an advanced skill in 2025, ensuring app security in untrusted environments, critical for apps handling sensitive data or payments.",
+            },
+          ],
+        },
+      ],
+      dividerText: "Data connected—pioneer Android’s next-gen features.",
     },
     {
       name: "Emerging Technologies",
@@ -378,6 +551,7 @@ const androidDeveloperRoadmap = {
           children: [
             {
               name: "TensorFlow Lite",
+              preferred: true,
               description:
                 "TensorFlow Lite runs lightweight ML models on Android devices for on-device inference. This section covers model integration and optimization for mobile. It’s a key skill in 2025, enabling AI features like speech recognition without heavy server reliance, ideal for performance and privacy.",
             },
@@ -456,174 +630,6 @@ const androidDeveloperRoadmap = {
               name: "IoT Connectivity",
               description:
                 "IoT Connectivity links Android apps to devices via MQTT or Bluetooth, like smart home controls. This section teaches learners to integrate and manage IoT protocols. It’s an innovative skill in 2025, enabling developers to create unified experiences across phones and IoT hardware.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: "Development Tools & Practices",
-      description:
-        "This section masters tools and workflows for efficient Android development, from version control to optimization. Learners streamline coding, testing, and deployment processes. It’s a practical skill set in 2025, ensuring high-quality apps are delivered quickly and reliably in a professional, collaborative environment.",
-      children: [
-        {
-          name: "Version Control Systems (VCS)",
-          description:
-            "Version Control Systems manage Android codebases, enabling collaboration and version tracking. This section teaches learners to use Git and platforms for team workflows. It’s an indispensable skill in 2025, keeping projects organized and facilitating seamless contributions in distributed development teams.",
-          children: [
-            {
-              name: "Git",
-              description:
-                "Git tracks changes in Android projects with branching, merging, and rebasing capabilities. This section covers cloning, committing, and resolving conflicts effectively. It’s a foundational skill in 2025, enabling developers to maintain code integrity and collaborate on complex app development cycles.",
-            },
-            {
-              name: "GitHub/GitLab",
-              description:
-                "GitHub and GitLab host Android repositories, supporting code reviews and CI/CD integration. This section teaches learners to manage repos and collaborate online. It’s a key skill in 2025, enhancing visibility and teamwork, critical for open-source or enterprise Android projects.",
-            },
-            {
-              name: "Pull Requests",
-              description:
-                "Pull Requests facilitate code reviews and merging in VCS platforms for Android apps. This section guides learners to submit and review changes constructively. It’s a collaborative skill in 2025, ensuring quality and fostering team communication in professional development workflows.",
-            },
-          ],
-        },
-        {
-          name: "CI/CD",
-          description:
-            "CI/CD automates building, testing, and deploying Android apps for rapid iteration. This section teaches learners to set up pipelines for consistent releases. It’s a high-value skill in 2025, reducing errors and accelerating delivery, a must for teams aiming for agile, efficient development cycles.",
-          children: [
-            {
-              name: "GitHub Actions",
-              description:
-                "GitHub Actions automates Android workflows, like building APKs or running tests. This section covers YAML configuration for CI/CD in repositories. It’s an accessible skill in 2025, integrating seamlessly with GitHub, ideal for developers seeking efficient automation within a familiar platform.",
-            },
-            {
-              name: "Jenkins",
-              description:
-                "Jenkins configures CI/CD pipelines for Android, supporting custom builds and deployments. This section teaches learners to set up jobs and plugins. It’s a versatile skill in 2025, favored in enterprise settings for its flexibility in managing complex, large-scale app release processes.",
-            },
-            {
-              name: "Fastlane",
-              description:
-                "Fastlane automates Android app deployment to Google Play, handling signing and uploads. This section guides learners to script tasks for efficiency. It’s a time-saving skill in 2025, streamlining repetitive release steps and ensuring consistent, error-free delivery to the Play Store.",
-            },
-          ],
-        },
-        {
-          name: "Testing",
-          description:
-            "Testing ensures Android app quality and reliability through unit, UI, and performance checks. This section teaches learners to write and automate tests effectively. It’s a critical skill in 2025, guaranteeing robust apps that meet user expectations and perform well across diverse devices.",
-          children: [
-            {
-              name: "Unit Testing",
-              description:
-                "Unit Testing with JUnit and Mockito validates individual Android components, like functions. This section teaches learners to write isolated, repeatable tests. It’s a foundational skill in 2025, ensuring code correctness and supporting refactoring in fast-paced development environments.",
-            },
-            {
-              name: "UI Testing",
-              description:
-                "UI Testing with Espresso automates Android interface validation, simulating user actions. This section covers writing tests for clicks and inputs. It’s an essential skill in 2025, verifying app usability and catching UI bugs early, critical for delivering polished mobile experiences.",
-            },
-            {
-              name: "Integration Testing",
-              description:
-                "Integration Testing with Robolectric checks component interactions in Android apps. This section teaches learners to simulate Android environments for thorough testing. It’s a practical skill in 2025, ensuring modules work together seamlessly, vital for complex, interdependent app architectures.",
-            },
-            {
-              name: "Performance Testing",
-              description:
-                "Performance Testing profiles Android apps for speed, memory, and battery use with Studio tools. This section guides learners to optimize resource consumption. It’s a key skill in 2025, enhancing app efficiency and user satisfaction on resource-constrained mobile devices.",
-            },
-          ],
-        },
-        {
-          name: "App Optimization",
-          description:
-            "App Optimization improves Android performance and user experience by reducing resource use. This section teaches learners to profile and refine apps for efficiency. It’s a high-impact skill in 2025, ensuring fast, lightweight apps that compete effectively in the crowded mobile marketplace.",
-          children: [
-            {
-              name: "Profiling Tools",
-              description:
-                "Profiling Tools in Android Studio analyze CPU, memory, and battery usage. This section teaches learners to identify bottlenecks and optimize performance. It’s a crucial skill in 2025, enabling developers to fine-tune apps for smooth operation across Android’s diverse hardware landscape.",
-            },
-            {
-              name: "APK Size Reduction",
-              description:
-                "APK Size Reduction with R8 and app bundles minimizes Android app footprints. This section covers code shrinking and resource optimization techniques. It’s a practical skill in 2025, improving download rates and storage efficiency, key for user adoption in emerging markets.",
-            },
-            {
-              name: "Startup Time",
-              description:
-                "Startup Time optimization reduces Android app launch latency for instant access. This section teaches learners to defer tasks and streamline initialization. It’s an important skill in 2025, enhancing user retention by delivering quick, responsive experiences from the first tap.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: "Security & Privacy",
-      description:
-        "This section protects Android apps and user data with robust security and privacy measures. Learners master encryption, authentication, and hardening techniques. It’s a non-negotiable skill in 2025, ensuring trustworthiness and compliance as cyber threats and regulations grow in the mobile space.",
-      children: [
-        {
-          name: "Data Protection",
-          description:
-            "Data Protection secures sensitive information within Android apps, like passwords or personal data. This section teaches learners to implement encryption and safe storage. It’s a critical skill in 2025, safeguarding user privacy and meeting legal standards in an era of heightened data security awareness.",
-          children: [
-            {
-              name: "Encryption",
-              description:
-                "Encryption with AES or RSA secures Android app data against unauthorized access. This section covers implementing algorithms for files or network traffic. It’s an essential skill in 2025, protecting sensitive information and ensuring compliance with privacy regulations in mobile development.",
-            },
-            {
-              name: "Secure Storage",
-              description:
-                "Secure Storage with EncryptedSharedPreferences protects persistent data in Android apps. This section teaches learners to encrypt key-value pairs safely. It’s a practical skill in 2025, providing a simple, secure way to store user settings or credentials without external dependencies.",
-            },
-            {
-              name: "Keystore",
-              description:
-                "Keystore manages cryptographic keys securely in Android, protecting encryption processes. This section guides learners to generate and use keys for signing or data protection. It’s a key skill in 2025, ensuring robust security foundations for apps handling sensitive operations or transactions.",
-            },
-          ],
-        },
-        {
-          name: "Authentication & Authorization",
-          description:
-            "Authentication and Authorization secure Android app access with user verification and permissions. This section teaches learners to implement modern login systems. It’s a vital skill in 2025, balancing security and usability while protecting user accounts in an increasingly connected mobile landscape.",
-          children: [
-            {
-              name: "OAuth2",
-              description:
-                "OAuth2 integrates third-party authentication (e.g., Google) into Android apps securely. This section covers token flows and refresh mechanisms for seamless logins. It’s a popular skill in 2025, enhancing user convenience and security with trusted identity providers in mobile apps.",
-            },
-            {
-              name: "Firebase Authentication",
-              description:
-                "Firebase Authentication adds email, social, or anonymous logins to Android apps easily. This section teaches learners to integrate and manage user sessions. It’s a practical skill in 2025, offering a scalable, low-setup solution for secure authentication in rapid development cycles.",
-            },
-            {
-              name: "Biometrics",
-              description:
-                "Biometrics use fingerprint or face recognition for Android app logins, enhancing security. This section covers integrating BiometricPrompt APIs for user authentication. It’s a modern skill in 2025, providing fast, secure access while aligning with user expectations for advanced mobile security features.",
-            },
-          ],
-        },
-        {
-          name: "App Hardening",
-          description:
-            "App Hardening prevents tampering and reverse engineering of Android apps. This section teaches learners to obfuscate code and detect threats. It’s a specialized skill in 2025, protecting intellectual property and user data from malicious actors in a competitive app ecosystem.",
-          children: [
-            {
-              name: "ProGuard/R8",
-              description:
-                "ProGuard and R8 obfuscate Android code, shrinking and securing APKs. This section teaches learners to configure rules for hiding logic from reverse engineering. It’s a key skill in 2025, safeguarding apps while optimizing size, essential for professional-grade deployment.",
-            },
-            {
-              name: "Runtime Checks",
-              description:
-                "Runtime Checks detect rooted devices or emulators to prevent unauthorized app use. This section covers implementing safety nets and integrity checks. It’s an advanced skill in 2025, ensuring app security in untrusted environments, critical for apps handling sensitive data or payments.",
             },
           ],
         },

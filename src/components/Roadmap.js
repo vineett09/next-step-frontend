@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import TechSkills from "./TechSkills";
 import TechRoles from "./TechRoles";
+
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
   const [selectedNode, setSelectedNode] = useState({
@@ -13,13 +14,22 @@ const Roadmap = ({ data }) => {
     description: "",
   });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Remove the preferredNodes state since we'll use the data directly
+
   const location = useLocation();
   const roadmapTitle =
     location.state?.title || "Explore Your Path to Tech Excellence";
   const roadmapDescription =
     location.state?.description || "Select a field to learn more.";
 
-  useEffect(() => {
+  // Function to get node color based on preference
+  const getNodeColor = (node, defaultColor) => {
+    return node.preferred ? "#FF8C00" : defaultColor; // Use orange for preferred nodes
+  };
+
+  // Render roadmap function
+  const renderRoadmap = () => {
     if (data && d3Container.current) {
       d3.select(d3Container.current).selectAll("*").remove();
 
@@ -84,6 +94,7 @@ const Roadmap = ({ data }) => {
       const svg = svgElement
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
+
       // Title node dimensions
       const titleText = roadmapTitle; // Use the title from state
       const titleDimensions = calculateNodeDimensions(titleText);
@@ -103,7 +114,7 @@ const Roadmap = ({ data }) => {
         .attr("y", -titleDimensions.height / 2)
         .attr("rx", 10)
         .attr("ry", 10)
-        .attr("fill", "#E8BCB9") // Gold color to highlight title
+        .attr("fill", getNodeColor(data, "#E8BCB9")) // Use the root data node for the title
         .attr("stroke", "black")
         .attr("stroke-width", 2);
 
@@ -115,6 +126,15 @@ const Roadmap = ({ data }) => {
         .attr("font-family", "Arial, sans-serif")
         .attr("fill", "black")
         .text(titleText);
+
+      // Add click handler for title
+      titleGroup.on("click", () => {
+        setSelectedNode({
+          name: titleText,
+          description: roadmapDescription,
+        });
+        setIsSidebarOpen(true);
+      });
 
       // Connect the title to the first node
       const TITLE_LINE_LENGTH = 150;
@@ -194,7 +214,7 @@ const Roadmap = ({ data }) => {
               .attr("dominant-baseline", "middle")
               .attr("font-size", "14px")
               .attr("font-family", "Arial, sans-serif")
-              .attr("fill", "#666")
+              .attr("fill", "#fff")
               .text(prevPosition.node.dividerText);
 
             // Line below divider
@@ -226,9 +246,9 @@ const Roadmap = ({ data }) => {
 
       const createNode = (
         group,
-        text,
+        node,
         dimensions,
-        fillColor,
+        defaultFillColor,
         strokeColor,
         isLeft = null
       ) => {
@@ -239,6 +259,9 @@ const Roadmap = ({ data }) => {
           const growthOffset = Math.max(0, (boxWidth - BASE_BOX_WIDTH) / 2);
           xOffset = isLeft ? -growthOffset : growthOffset;
         }
+
+        // Apply preferred color if node is marked as preferred
+        const fillColor = getNodeColor(node, defaultFillColor);
 
         group
           .append("rect")
@@ -259,7 +282,7 @@ const Roadmap = ({ data }) => {
           .attr("font-size", "14px")
           .attr("font-family", "Arial, sans-serif")
           .attr("x", xOffset)
-          .text(text);
+          .text(node.name);
 
         return { boxWidth, xOffset };
       };
@@ -282,7 +305,7 @@ const Roadmap = ({ data }) => {
 
         const parentBox = createNode(
           parentGroup,
-          parent.name,
+          parent,
           parent.dimensions,
           "#E8BCB9",
           "black"
@@ -333,7 +356,7 @@ const Roadmap = ({ data }) => {
 
               createNode(
                 childGroup,
-                child.name,
+                child,
                 child.dimensions,
                 "#E17564",
                 "black",
@@ -420,9 +443,9 @@ const Roadmap = ({ data }) => {
 
                     createNode(
                       nestedGroup,
-                      nestedChild.name,
+                      nestedChild,
                       nestedChild.dimensions,
-                      "#FFF4B7", // Slightly lighter green for nested children
+                      "#FFF4B7", // Default color for nested children
                       "black",
                       isNestedLeft
                     );
@@ -486,6 +509,11 @@ const Roadmap = ({ data }) => {
 
       measureSvg.remove();
     }
+  };
+
+  // Effect to render roadmap when data changes
+  useEffect(() => {
+    renderRoadmap();
   }, [data]);
 
   const closeDescription = () => {
@@ -493,9 +521,16 @@ const Roadmap = ({ data }) => {
     setIsSidebarOpen(false);
   };
 
+  // Remove the helper message about right-click functionality since we're not using it anymore
+
   return (
     <div className="roadmap-container">
       <Header title={roadmapTitle} />
+      <div class="container">
+        <div class="color-box"></div>
+        <span class="text">Recommended/Required</span>
+      </div>
+
       <TechRoles />
       <TechSkills />
 

@@ -10,6 +10,7 @@ const iosDeveloperRoadmap = {
       children: [
         {
           name: "Swift",
+          preferred: true,
           description:
             "Swift, Apple’s modern language, offers type safety and expressiveness, taught with practical projects. This section focuses on performance and readability. It’s a dominant skill in 2025, essential for developing cutting-edge iOS apps with Swift’s powerful, concise features.",
           children: [

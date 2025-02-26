@@ -82,12 +82,19 @@ const fullStackDeveloperRoadmap = {
               description:
                 "ES6+ introduces modern JavaScript syntax like arrow functions, template literals, destructuring, and classes, enhancing code readability and efficiency. This section guides learners through these updates, applying them to real-world projects like modular apps. It’s essential for staying current, writing concise code, and aligning with industry standards in 2025’s development landscape.",
             },
+            {
+              name: "TypeScript",
+              description:
+                "TypeScript adds static typing to JavaScript, catching errors early and improving code scalability. This section guides learners through interfaces, types, and generics, enhancing projects like Angular apps. It’s increasingly essential in 2025, enabling cleaner, more reliable codebases for teams building sophisticated, error-resistant web applications.",
+            },
           ],
         },
       ],
     },
     {
       name: "Advanced Front-End Development",
+      dividerText:
+        "Front-end conquered—time to power up with server-side skills.",
       description:
         "This stage elevates front-end skills by integrating powerful frameworks and advanced styling tools. Learners explore libraries like React and CSS solutions like Tailwind to build sophisticated, scalable user interfaces. It’s about speeding up development, enhancing design consistency, and mastering tools that dominate the 2025 job market, preparing developers for complex, real-world projects.",
       children: [
@@ -97,15 +104,17 @@ const fullStackDeveloperRoadmap = {
             "CSS frameworks accelerate styling by providing pre-built solutions for common design challenges. This section introduces tools to create polished, responsive layouts with minimal effort, teaching learners to leverage libraries effectively. It’s ideal for developers aiming to streamline workflows, maintain consistency, and meet tight deadlines while delivering visually stunning websites in a competitive industry.",
           children: [
             {
+              name: "Tailwind CSS",
+              preferred: true,
+              description:
+                "Tailwind CSS revolutionizes styling with utility classes for custom, flexible designs. This section explores applying classes like ‘flex’ or ‘bg-blue-500’ directly in HTML, teaching learners to craft unique UIs fast. It’s a modern skill for developers who value speed, customization, and avoiding CSS bloat, highly prized in 2025’s front-end scene.",
+            },
+            {
               name: "Bootstrap",
               description:
                 "Bootstrap is a popular CSS framework offering a grid system, components, and utilities for rapid development. This section teaches learners to build responsive layouts, modals, and navigation bars quickly. It’s perfect for prototyping or delivering production-ready designs, making it a go-to skill for developers needing efficiency without sacrificing quality in 2025.",
             },
-            {
-              name: "Tailwind CSS",
-              description:
-                "Tailwind CSS revolutionizes styling with utility classes for custom, flexible designs. This section explores applying classes like ‘flex’ or ‘bg-blue-500’ directly in HTML, teaching learners to craft unique UIs fast. It’s a modern skill for developers who value speed, customization, and avoiding CSS bloat, highly prized in 2025’s front-end scene.",
-            },
+
             {
               name: "Sass",
               description:
@@ -120,6 +129,7 @@ const fullStackDeveloperRoadmap = {
           children: [
             {
               name: "React",
+              preferred: true,
               description:
                 "React, a leading JavaScript library, enables developers to build reusable UI components for fast, interactive applications. This section explores JSX, state management, and hooks, guiding learners to create dynamic interfaces like dashboards. It’s a top skill in 2025, prized for its efficiency and dominance in the job market.",
             },
@@ -133,17 +143,13 @@ const fullStackDeveloperRoadmap = {
               description:
                 "Angular, a robust framework by Google, uses TypeScript to build structured, enterprise-level applications. This section covers directives, services, and dependency injection, teaching learners to create complex UIs with strong typing. It’s a valuable skill for developers targeting large-scale projects, offering tools for maintainability and performance in 2025.",
             },
-            {
-              name: "TypeScript",
-              description:
-                "TypeScript adds static typing to JavaScript, catching errors early and improving code scalability. This section guides learners through interfaces, types, and generics, enhancing projects like Angular apps. It’s increasingly essential in 2025, enabling cleaner, more reliable codebases for teams building sophisticated, error-resistant web applications.",
-            },
           ],
         },
       ],
     },
     {
       name: "Back-End Foundations",
+      dividerText: "Build the back-end, now connect and secure it with APIs.",
       description:
         "This section introduces server-side development, empowering learners to create dynamic, data-driven web applications. It covers programming languages, database management, and server logic, bridging the gap between front-end and back-end. It’s the foundation for building full-stack solutions, equipping developers with skills to handle APIs, storage, and business logic in 2025’s tech landscape.",
       children: [
@@ -154,6 +160,8 @@ const fullStackDeveloperRoadmap = {
           children: [
             {
               name: "Node.js",
+              preferred: true,
+
               description:
                 "Node.js brings JavaScript to the server side, leveraging its runtime for fast, event-driven applications. This section teaches learners to build APIs, handle requests, and manage real-time features like chat. It’s a versatile skill in 2025, unifying front-end and back-end with one language, highly valued for its speed and ecosystem.",
             },
@@ -190,6 +198,7 @@ const fullStackDeveloperRoadmap = {
     },
     {
       name: "APIs and Authentication",
+      dividerText: "Systems linked—deploy them live with DevOps fundamentals.",
       description:
         "This stage connects front-end and back-end through APIs while securing user access with authentication. Learners master designing efficient communication channels and implementing robust security protocols. It’s a pivotal skill set in 2025, ensuring seamless data exchange and protecting applications from unauthorized access in an increasingly connected digital world.",
       children: [
@@ -200,6 +209,7 @@ const fullStackDeveloperRoadmap = {
           children: [
             {
               name: "RESTful APIs",
+              preferred: true,
               description:
                 "RESTful APIs use standard HTTP methods (GET, POST, PUT, DELETE) for predictable, scalable communication. This section guides learners to structure endpoints, handle requests, and return JSON responses. It’s a widely adopted standard in 2025, essential for building interoperable systems that power modern web and mobile applications.",
             },
@@ -212,11 +222,14 @@ const fullStackDeveloperRoadmap = {
         },
         {
           name: "Authentication & Authorization",
+
           description:
             "Authentication and authorization secure applications by verifying users and controlling access. This section explores implementing login systems and permissions, ensuring data privacy and security. It’s a critical skill in 2025, protecting user trust and meeting compliance demands in an era of heightened cybersecurity threats across web platforms.",
           children: [
             {
               name: "JWT",
+              preferred: true,
+
               description:
                 "JWT (JSON Web Tokens) provides token-based authentication for secure, stateless user sessions. This section teaches learners to generate, validate, and refresh tokens for APIs. It’s a popular choice in 2025 for its simplicity and scalability, widely used in single-page apps and microservices requiring robust security.",
             },
@@ -236,6 +249,7 @@ const fullStackDeveloperRoadmap = {
     },
     {
       name: "Deployment and DevOps Basics",
+      dividerText: "Apps launched, now optimize speed and lock down security.",
       description:
         "This section introduces deploying applications and automating workflows with DevOps fundamentals. Learners explore version control, cloud hosting, and containerization to bring projects live efficiently. It’s a vital step in 2025 for full-stack developers, bridging development and operations to ensure reliable, scalable delivery of web applications in production environments.",
       children: [
@@ -262,14 +276,15 @@ const fullStackDeveloperRoadmap = {
             "Cloud hosting deploys applications on scalable, remote servers, ensuring accessibility and reliability. This section explores platforms for launching websites, teaching learners to configure and manage deployments. It’s a key skill in 2025, meeting the demand for cost-effective, flexible hosting solutions in an era of cloud-dominated infrastructure.",
           children: [
             {
+              name: "AWS",
+              preferred: true,
+              description:
+                "AWS (Amazon Web Services) offers foundational cloud services like EC2 for computing and S3 for storage. This section introduces launching instances and hosting static sites, teaching scalable deployment basics. It’s a powerhouse skill in 2025, aligning with industry reliance on AWS’s vast ecosystem for robust, enterprise-grade solutions.",
+            },
+            {
               name: "Heroku",
               description:
                 "Heroku, a Platform-as-a-Service (PaaS), simplifies deployment with minimal server management. This section guides learners to push apps live, scale dynos, and integrate add-ons like databases. It’s a beginner-friendly skill in 2025, ideal for rapid prototyping and launching full-stack projects without deep infrastructure knowledge.",
-            },
-            {
-              name: "AWS",
-              description:
-                "AWS (Amazon Web Services) offers foundational cloud services like EC2 for computing and S3 for storage. This section introduces launching instances and hosting static sites, teaching scalable deployment basics. It’s a powerhouse skill in 2025, aligning with industry reliance on AWS’s vast ecosystem for robust, enterprise-grade solutions.",
             },
           ],
         },
@@ -289,6 +304,7 @@ const fullStackDeveloperRoadmap = {
     },
     {
       name: "Performance and Security",
+      dividerText: "Fast and safe—scale up with advanced DevOps tools.",
       description:
         "This section focuses on optimizing application speed and safeguarding against threats. Learners master techniques to enhance load times and implement security best practices, ensuring robust, user-friendly web experiences. It’s critical in 2025, addressing user expectations for performance and the growing need to protect applications in a cyber-threat-heavy digital landscape.",
       children: [
@@ -364,6 +380,12 @@ const fullStackDeveloperRoadmap = {
             "CI/CD (Continuous Integration/Continuous Deployment) automates testing and deployment for rapid, reliable releases. This section teaches learners to set up pipelines, reducing manual errors. It’s a cornerstone skill in 2025, streamlining development cycles and ensuring high-quality software delivery in fast-moving, collaborative tech environments.",
           children: [
             {
+              name: "Jenkins",
+              preferred: true,
+              description:
+                "Jenkins, an open-source tool, powers continuous integration with customizable pipelines. This section covers setting up servers, plugins, and jobs for automation. It’s a versatile skill in 2025, favored in enterprise settings for its extensibility, enabling developers to tailor DevOps processes to complex project needs.",
+            },
+            {
               name: "GitHub Actions",
               description:
                 "GitHub Actions automates workflows like testing and deployment directly in repositories. This section guides learners to configure YAML files for CI/CD tasks, integrating with GitHub. It’s a accessible skill in 2025, ideal for developers seeking seamless automation within a widely-used platform for version control.",
@@ -372,11 +394,6 @@ const fullStackDeveloperRoadmap = {
               name: "CircleCI",
               description:
                 "CircleCI provides cloud-based CI/CD pipelines for efficient build-test-deploy cycles. This section teaches learners to configure jobs and workflows, optimizing release speed. It’s a scalable skill in 2025, popular for its flexibility and integration with various stacks, supporting teams in delivering robust applications.",
-            },
-            {
-              name: "Jenkins",
-              description:
-                "Jenkins, an open-source tool, powers continuous integration with customizable pipelines. This section covers setting up servers, plugins, and jobs for automation. It’s a versatile skill in 2025, favored in enterprise settings for its extensibility, enabling developers to tailor DevOps processes to complex project needs.",
             },
           ],
         },
@@ -387,6 +404,8 @@ const fullStackDeveloperRoadmap = {
           children: [
             {
               name: "Kubernetes",
+              preferred: true,
+
               description:
                 "Kubernetes orchestrates containerized apps, managing clusters for scalability and reliability. This section teaches learners basic pod creation, scaling, and service exposure. It’s a dominant skill in 2025, essential for DevOps roles, powering modern infrastructure with automation and resilience across cloud providers.",
             },
@@ -455,6 +474,8 @@ const fullStackDeveloperRoadmap = {
           children: [
             {
               name: "AWS Lambda",
+              preferred: true,
+
               description:
                 "AWS Lambda executes code in response to events, like HTTP requests, without server upkeep. This section teaches learners to write and deploy functions, integrating with AWS services. It’s a high-demand skill in 2025, powering serverless apps with AWS’s vast ecosystem for efficient, scalable development.",
             },

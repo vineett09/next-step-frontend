@@ -102,6 +102,8 @@ const uiUxRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "Foundational principles mastered—explore research methods next.",
     },
     {
       name: "Research Methods",
@@ -197,6 +199,7 @@ const uiUxRoadmap = {
           ],
         },
       ],
+      dividerText: "Research skills developed—enhance design skills next.",
     },
     {
       name: "Design Skills",
@@ -248,6 +251,7 @@ const uiUxRoadmap = {
           ],
         },
       ],
+      dividerText: "Design skills sharpened—master tools proficiency next.",
     },
     {
       name: "Tools Proficiency",
@@ -261,6 +265,7 @@ const uiUxRoadmap = {
           children: [
             {
               name: "Figma",
+              preferred: true,
               description:
                 "A cloud-based design tool for interface design and prototyping. Figma allows designers to create, collaborate, and share designs in real-time, making it a popular choice for teams working on UI/UX projects.",
             },
@@ -310,6 +315,7 @@ const uiUxRoadmap = {
           children: [
             {
               name: "Google Analytics",
+              preferred: true,
               description:
                 "A web analytics service that tracks and reports website traffic. Google Analytics provides detailed insights into user behavior, including metrics like page views, bounce rates, and conversion rates, helping designers understand how users interact with a website.",
             },
@@ -321,6 +327,7 @@ const uiUxRoadmap = {
           ],
         },
       ],
+      dividerText: "Tools mastered—grasp development basics next.",
     },
     {
       name: "Development Basics",
@@ -389,6 +396,8 @@ const uiUxRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "Development basics understood—advance your career development next.",
     },
     {
       name: "Career Development",
@@ -457,6 +466,8 @@ const uiUxRoadmap = {
           ],
         },
       ],
+      dividerText:
+        "Career strategies in place—commit to continuous learning next.",
     },
     {
       name: "Continuous Learning",

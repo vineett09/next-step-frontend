@@ -23,12 +23,12 @@ import iotApplicationDeveloperRoadmap from "./data/IoTApplicationDeveloper";
 import iosDeveloperRoadmap from "./data/IosDeveloper";
 import frontendDeveloperRoadmap from "./data/FrontentDeveloper";
 import backendDeveloperRoadmap from "./data/BackendDeveloper";
-import quantumComputingRoadmap from "./data/QuantumComputing";
 function App() {
   return (
     <Router>
       <div className="App">
         <Navbar />
+
         <Routes>
           {/* Homepage */}
           <Route path="/" element={<Maincontent />} />
@@ -46,10 +46,7 @@ function App() {
             path="/backend-developer"
             element={<Roadmap data={backendDeveloperRoadmap} />}
           />
-          <Route
-            path="/quantum-computing"
-            element={<Roadmap data={quantumComputingRoadmap} />}
-          />
+
           <Route path="/mLOps" element={<Roadmap data={mlOpsRoadmap} />} />
           <Route
             path="/data-science"

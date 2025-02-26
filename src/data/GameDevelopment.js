@@ -1,449 +1,554 @@
 const gameDevelopmentRoadmap = {
   name: "Game Development Roadmap 2025",
   description:
-    "A comprehensive guide to essential game development skills and technologies for 2025, covering beginner to advanced levels. This roadmap is designed to help aspiring game developers build a solid foundation in the core concepts and skills required to succeed in the field. By following this roadmap, you will gain the necessary expertise to develop engaging, visually stunning games and be well-prepared for a successful career in game development.",
+    "This comprehensive guide equips aspiring game developers with essential skills for 2025, progressing from foundational concepts to advanced techniques. It covers programming, game design, engines, graphics, gameplay, and career readiness, with practical tools and emerging trends like VR and AI. Designed for practical mastery, it ensures readiness to craft engaging, visually stunning games in a dynamic industry.",
   children: [
     {
       name: "Foundations of Game Development",
       description:
-        "Learn the core concepts and skills required to start building games. This foundational step is crucial for building a strong understanding of the core concepts and skills required to succeed in game development. By mastering these basics, you will be well-prepared to tackle more advanced topics and build robust, engaging games.",
+        "Build a strong base in programming, math, and game design, taught with examples like coding a simple 2D game in C# or designing a level in Unity. This section lays the core skills critical for 2025 game development, enabling you to create engaging, robust games from the ground up with confidence and precision.",
       children: [
         {
           name: "Programming Fundamentals",
           description:
-            "Master the basics of programming, which are essential for game development. Programming skills are fundamental to game development, allowing you to build and control the logic of your games.",
+            "Master coding for games, taught with examples like scripting movement in C# for Unity or prototyping in Python. A 2025 foundational skill, this section ensures developers can build and control game logic, forming the backbone of interactive, performant game development effectively.",
           children: [
             {
               name: "C#",
+              preferred: true,
               description:
-                "Primary language for Unity, one of the most popular game engines. C# is a versatile, object-oriented language that provides a powerful way to build game logic and interact with Unity's engine.",
+                "Use C# for Unity, taught with examples. Preferred in 2025 for Unity dominance (Unity, 2023).",
             },
             {
               name: "C++",
               description:
-                "Widely used in Unreal Engine and high-performance game development. C++ is a powerful, high-performance language that provides direct hardware access and efficient memory management, making it ideal for building complex, resource-intensive games.",
+                "Code with C++ for Unreal, taught with performance examples. A 2025 key skill for high-end games.",
             },
             {
               name: "Python",
               description:
-                "Used for scripting, prototyping, and tools development. Python is a versatile, high-level language that provides a flexible way to build tools, scripts, and prototypes, making it a valuable addition to any game developer's toolkit.",
+                "Script with Python, taught with prototype examples. A 2025 practical skill for tools.",
+            },
+            {
+              name: "JavaScript",
+              description:
+                "Use JavaScript for web games, taught with examples. A 2025 skill for browser-based games.",
             },
           ],
         },
         {
           name: "Mathematics for Game Development",
           description:
-            "Understand the math behind game physics, graphics, and mechanics. A strong foundation in mathematics is essential for building realistic and engaging games, allowing you to create complex simulations and visual effects.",
+            "Learn math for game physics and graphics, taught with examples like using vectors in Unity or trigonometry for rotations. A 2025 essential skill, this section provides the quantitative foundation for realistic game mechanics, enabling developers to create immersive, dynamic experiences effectively.",
           children: [
             {
               name: "Linear Algebra",
               description:
-                "Essential for 3D transformations, vectors, and matrices. Linear algebra provides the mathematical framework for describing and manipulating 3D space, making it a critical tool for game developers.",
+                "Apply vectors and matrices, taught with 3D examples. A 2025 core skill for transformations.",
             },
             {
               name: "Trigonometry",
               description:
-                "Used for rotations, angles, and movement. Trigonometry provides a powerful way to describe and manipulate angles and rotations, making it essential for building realistic movement and physics simulations.",
+                "Use angles for rotations, taught with examples. A 2025 key skill for movement.",
             },
             {
               name: "Calculus",
               description:
-                "Important for physics simulations and smooth animations. Calculus provides a powerful way to describe and simulate continuous change, making it essential for building realistic physics simulations and smooth animations.",
+                "Simulate with derivatives, taught with physics examples. A 2025 critical skill for animations.",
+            },
+            {
+              name: "Geometry",
+              description:
+                "Use shapes for levels, taught with examples. A 2025 practical skill for design.",
             },
           ],
         },
         {
           name: "Game Design Principles",
           description:
-            "Learn the basics of game design, including mechanics, dynamics, and aesthetics. Game design principles provide a framework for building engaging, fun games, allowing you to create experiences that resonate with players.",
+            "Understand game mechanics and player engagement, taught with examples designing a loop for a mobile game or balancing a level. A 2025 vital skill, this section ensures developers craft fun, balanced games, creating experiences that resonate with players effectively in 2025.",
           children: [
             {
               name: "Game Loops",
               description:
-                "Understand the core loop that drives player engagement. Game loops provide a powerful way to keep players engaged and motivated, making them a critical component of any successful game.",
+                "Design loops, taught with engagement examples. A 2025 essential skill for retention.",
             },
             {
               name: "Player Psychology",
               description:
-                "Learn how to design for player motivation and engagement. Understanding player psychology allows you to create games that are fun, challenging, and rewarding, keeping players coming back for more.",
+                "Analyze motivation, taught with reward examples. A 2025 key skill for engagement.",
             },
             {
               name: "Level Design",
               description:
-                "Create engaging and balanced levels for players. Level design provides a powerful way to shape the player experience, providing challenges, rewards, and opportunities for exploration.",
+                "Create levels, taught with Unity examples. Preferred in 2025 for impact on gameplay.",
+            },
+            {
+              name: "Game Balancing",
+              description:
+                "Balance difficulty, taught with examples. A 2025 practical skill for fairness.",
             },
           ],
         },
       ],
-      dividerText: "Game Engines & Tools",
+      dividerText: "Foundations set—master game engines and tools.",
     },
     {
       name: "Game Engines & Tools",
       description:
-        "Master the tools and engines used to build modern games. Game engines and tools provide a powerful way to build and deploy games, allowing you to leverage existing technologies and focus on creating unique experiences.",
+        "Leverage engines like Unity and tools like Blender, taught with examples building a 3D game or modeling assets. A 2025 high-demand skill, this section equips developers to build and deploy modern games, leveraging industry-standard platforms for creative, efficient development effectively.",
       children: [
         {
           name: "Unity",
           description:
-            "A versatile game engine for 2D and 3D game development. Unity provides a powerful, flexible platform for building games, offering a wide range of tools and features for developers of all levels.",
+            "Develop with Unity for 2D/3D games, taught with examples scripting a character in C#. A 2025 dominant skill, this section offers a versatile engine for creating engaging games, ensuring developers can craft interactive experiences efficiently across platforms.",
           children: [
             {
               name: "Unity UI",
               description:
-                "Design user interfaces for games. Unity's UI tools provide a powerful way to create intuitive, engaging interfaces for your games, allowing you to build rich, interactive experiences.",
+                "Design UIs, taught with examples. A 2025 essential skill for interfaces.",
             },
             {
               name: "Unity Physics",
               description:
-                "Implement realistic physics in games. Unity's physics engine provides a powerful way to simulate realistic physics, allowing you to create engaging, dynamic gameplay.",
+                "Simulate physics, taught with examples. Preferred in 2025 for realism.",
             },
             {
               name: "Unity Scripting",
               description:
-                "Write game logic using C#. Unity's scripting tools provide a powerful way to build custom game logic, allowing you to create unique experiences and interactions.",
+                "Script with C#, taught with examples. A 2025 key skill for logic.",
+            },
+            {
+              name: "Unity Asset Store",
+              description:
+                "Use assets, taught with examples. A 2025 practical skill for efficiency.",
             },
           ],
         },
         {
           name: "Unreal Engine",
+          preferred: true,
           description:
-            "A powerful engine for high-end 3D games and simulations. Unreal Engine provides a powerful, flexible platform for building high-quality 3D games, offering a wide range of tools and features for developers.",
+            "Build with Unreal for high-end 3D games, taught with examples using Blueprints or C++. A 2025 critical skill, this section provides a powerful engine for visually stunning games, ensuring developers can create complex, performance-driven experiences effectively.",
           children: [
             {
               name: "Blueprints",
               description:
-                "Visual scripting system for non-programmers. Blueprints provide a powerful way to build game logic without writing code, making it easier for artists and designers to contribute to game development.",
+                "Visual script, taught with examples. A 2025 essential skill for non-coders.",
             },
             {
               name: "Unreal C++",
               description:
-                "Write high-performance game logic in C++. Unreal Engine's C++ support provides a powerful way to build high-performance game logic, allowing you to create complex, resource-intensive games.",
+                "Code with C++, taught with examples. A 2025 key skill for performance.",
             },
             {
               name: "Nanite & Lumen",
               description:
-                "Advanced rendering technologies for realistic graphics. Nanite and Lumen provide powerful tools for creating realistic, high-quality graphics, allowing you to build visually stunning games.",
+                "Use rendering, taught with examples. A 2025 critical skill for graphics.",
+            },
+            {
+              name: "Unreal Sequencer",
+              description:
+                "Animate with Sequencer, taught with examples. A 2025 practical skill for cinematics.",
             },
           ],
         },
         {
           name: "Godot",
           description:
-            "An open-source game engine for 2D and 3D games. Godot provides a powerful, flexible platform for building games, offering a wide range of tools and features for developers.",
+            "Develop with Godot for 2D/3D games, taught with examples using GDScript. A 2025 valuable skill, this section offers an open-source engine for creating accessible games, ensuring developers can build efficiently with a lightweight, flexible platform.",
           children: [
             {
               name: "GDScript",
               description:
-                "Godot's Python-like scripting language. GDScript provides a powerful, flexible way to build game logic, making it easier to create custom experiences and interactions.",
+                "Script with GDScript, taught with examples. A 2025 essential skill for Godot.",
             },
             {
               name: "Visual Scripting",
               description:
-                "Node-based scripting for rapid prototyping. Godot's visual scripting tools provide a powerful way to build game logic without writing code, making it easier to prototype and iterate on your ideas.",
+                "Use nodes, taught with examples. A 2025 key skill for prototyping.",
+            },
+            {
+              name: "Godot Shaders",
+              description:
+                "Create shaders, taught with examples. A 2025 practical skill for visuals.",
             },
           ],
         },
         {
           name: "Game Development Tools",
+          preferred: true,
           description:
-            "Learn tools for asset creation, animation, and sound design. Game development tools provide a powerful way to create and manage game assets, allowing you to build rich, engaging experiences.",
+            "Use tools like Blender for assets, taught with examples modeling a character or adding sound with FMOD. A 2025 essential skill, this section equips developers to create rich, engaging game content, enhancing visual and audio quality effectively in game projects.",
           children: [
             {
               name: "Blender",
               description:
-                "3D modeling and animation tool. Blender provides a powerful, flexible platform for creating 3D models and animations, making it a valuable tool for game developers.",
+                "Model with Blender, taught with 3D examples. Preferred in 2025 for versatility.",
             },
             {
               name: "Substance Painter",
               description:
-                "Texture painting for 3D assets. Substance Painter provides a powerful way to create detailed, high-quality textures for your 3D models, allowing you to build visually stunning games.",
+                "Paint textures, taught with examples. A 2025 key skill for assets.",
             },
             {
-              name: "FMOD / Wwise",
+              name: "FMOD/Wwise",
               description:
-                "Audio middleware for game sound design. FMOD and Wwise provide powerful tools for creating and managing game audio, allowing you to build immersive, engaging soundscapes.",
+                "Design audio, taught with sound examples. A 2025 practical skill for immersion.",
+            },
+            {
+              name: "Maya",
+              description:
+                "Use Maya for modeling, taught with examples. A 2025 skill for advanced assets.",
             },
           ],
         },
       ],
-      dividerText: "Graphics & Rendering",
+      dividerText: "Engines mastered—enhance graphics and rendering.",
     },
     {
       name: "Graphics & Rendering",
       description:
-        "Learn the skills required to create visually stunning games. Graphics and rendering skills provide a powerful way to create engaging, visually appealing games, allowing you to build experiences that resonate with players.",
+        "Create visually stunning games with shaders and lighting, taught with examples writing HLSL for Unreal or using Unity’s Post-Processing Stack. A 2025 high-demand skill, this section ensures developers can craft immersive, appealing visuals, meeting player expectations for modern game aesthetics effectively.",
       children: [
         {
           name: "Shaders & Materials",
           description:
-            "Create custom visual effects using shaders. Shaders and materials provide a powerful way to create unique, visually stunning effects, allowing you to build games that stand out from the crowd.",
+            "Develop custom visuals with shaders, taught with examples using Shader Graph in Unity. A 2025 essential skill, this section enables developers to create unique, eye-catching effects, enhancing game graphics for engaging player experiences.",
           children: [
             {
               name: "HLSL/GLSL",
               description:
-                "Languages for writing shaders. HLSL and GLSL provide powerful tools for creating custom shaders, allowing you to build unique visual effects and interactions.",
+                "Write shaders, taught with examples. A 2025 core skill for effects.",
             },
             {
               name: "Shader Graph (Unity)",
+              preferred: true,
               description:
-                "Visual tool for creating shaders in Unity. Shader Graph provides a powerful, flexible way to build custom shaders without writing code, making it easier to create unique visual effects.",
+                "Use Shader Graph, taught with examples. Preferred in 2025 for visual scripting.",
             },
             {
               name: "Material Editor (Unreal)",
               description:
-                "Create complex materials in Unreal Engine. Unreal's Material Editor provides a powerful way to build complex, visually stunning materials, allowing you to create unique visual effects and interactions.",
+                "Edit materials, taught with examples. A 2025 key skill for visuals.",
+            },
+            {
+              name: "Shader Optimization",
+              description:
+                "Optimize shaders, taught with examples. A 2025 practical skill for performance.",
             },
           ],
         },
         {
           name: "Lighting & Shadows",
           description:
-            "Master lighting techniques for realistic or stylized visuals. Lighting and shadows provide a powerful way to create visually stunning, immersive environments, allowing you to build games that resonate with players.",
+            "Master lighting for realism, taught with examples using real-time ray tracing in Unreal. A 2025 critical skill, this section ensures developers can create immersive environments, enhancing visual depth and player engagement in games effectively.",
           children: [
             {
               name: "Global Illumination",
               description:
-                "Simulate realistic light behavior. Global illumination provides a powerful way to simulate realistic lighting, allowing you to create visually stunning, immersive environments.",
+                "Simulate light, taught with examples. A 2025 essential skill for realism.",
             },
             {
               name: "Real-Time Ray Tracing",
               description:
-                "Advanced lighting for next-gen graphics. Real-time ray tracing provides a powerful way to create realistic, high-quality lighting effects, allowing you to build visually stunning games.",
+                "Use ray tracing, taught with examples. Preferred in 2025 for next-gen graphics.",
+            },
+            {
+              name: "Shadow Mapping",
+              description:
+                "Map shadows, taught with examples. A 2025 key skill for visuals.",
             },
           ],
         },
         {
           name: "Post-Processing",
           description:
-            "Enhance visuals with effects like bloom, motion blur, and color grading. Post-processing provides a powerful way to enhance the visual quality of your games, allowing you to create visually stunning, immersive experiences.",
+            "Enhance visuals with effects, taught with examples using Unity’s Post-Processing Stack. A 2025 essential skill, this section improves game aesthetics, ensuring developers can create cinematic, engaging experiences for players effectively.",
           children: [
             {
               name: "Unity Post-Processing Stack",
               description:
-                "Add cinematic effects to Unity games. Unity's Post-Processing Stack provides a powerful way to enhance the visual quality of your games, allowing you to create visually stunning, immersive experiences.",
+                "Add effects, taught with examples. A 2025 core skill for visuals.",
             },
             {
               name: "Unreal Post-Process Volume",
               description:
-                "Apply visual effects in Unreal Engine. Unreal's Post-Process Volume provides a powerful way to enhance the visual quality of your games, allowing you to create visually stunning, immersive experiences.",
+                "Apply effects, taught with examples. A 2025 key skill for rendering.",
+            },
+            {
+              name: "Bloom & Motion Blur",
+              description:
+                "Use effects, taught with examples. A 2025 practical skill for enhancement.",
             },
           ],
         },
       ],
-      dividerText: "Gameplay Programming",
+      dividerText: "Graphics enhanced—program engaging gameplay.",
     },
     {
       name: "Gameplay Programming",
       description:
-        "Develop the core systems that make games fun and interactive. Gameplay programming provides a powerful way to build engaging, interactive experiences, allowing you to create games that resonate with players.",
+        "Build interactive game systems with physics and AI, taught with examples coding a character controller in Unity or pathfinding in Unreal. A 2025 high-demand skill, this section ensures developers can create fun, dynamic games, meeting player expectations for immersive, responsive experiences effectively.",
       children: [
         {
           name: "Physics & Collision",
           description:
-            "Implement realistic or stylized physics interactions. Physics and collision provide a powerful way to create engaging, dynamic gameplay, allowing you to build games that feel realistic and immersive.",
+            "Implement realistic physics, taught with examples simulating rigidbody dynamics in Unity. A 2025 essential skill, this section enables developers to create engaging, dynamic gameplay, enhancing player interaction with realistic mechanics.",
           children: [
             {
               name: "Rigidbody Dynamics",
               description:
-                "Simulate physical objects in games. Rigidbody dynamics provide a powerful way to simulate realistic physics, allowing you to create engaging, dynamic gameplay.",
+                "Simulate objects, taught with examples. A 2025 core skill for physics.",
             },
             {
               name: "Collision Detection",
               description:
-                "Detect and respond to object collisions. Collision detection provides a powerful way to create realistic interactions, allowing you to build games that feel immersive and engaging.",
+                "Detect collisions, taught with examples. A 2025 key skill for interactions.",
             },
             {
               name: "Character Controller",
               description:
-                "Simulate player movement and collisions. Character controllers provide a powerful way to create realistic player movement, allowing you to build games that feel immersive and engaging.",
+                "Move players, taught with examples. Preferred in 2025 for gameplay.",
             },
             {
               name: "Projectile Systems",
               description:
-                "Implement projectile behavior and collisions. Projectile systems provide a powerful way to create dynamic, engaging gameplay, allowing you to build games that feel immersive and engaging.",
+                "Handle projectiles, taught with examples. A 2025 practical skill for combat.",
             },
           ],
         },
         {
           name: "AI & Pathfinding",
           description:
-            "Create intelligent behaviors for NPCs and enemies. AI and pathfinding provide a powerful way to create intelligent, engaging NPCs, allowing you to build games that feel immersive and dynamic.",
+            "Create intelligent behaviors, taught with examples using A* in Unity or behavior trees in Unreal. A 2025 critical skill, this section ensures developers can build smart, engaging NPCs, enhancing gameplay depth and player challenge effectively.",
           children: [
             {
               name: "Finite State Machines",
               description:
-                "Model AI behavior using states. Finite state machines provide a powerful way to model AI behavior, allowing you to create intelligent, engaging NPCs.",
+                "Model AI, taught with examples. A 2025 essential skill for behavior.",
             },
             {
               name: "A* Algorithm",
               description:
-                "Implement pathfinding for NPCs. The A* algorithm provides a powerful way to implement pathfinding, allowing you to create intelligent, engaging NPCs.",
+                "Pathfind with A*, taught with examples. Preferred in 2025 for efficiency.",
             },
             {
               name: "Behavior Trees",
               description:
-                "Advanced AI decision-making system. Behavior trees provide a powerful way to create complex, intelligent AI, allowing you to build games that feel immersive and dynamic.",
+                "Use trees, taught with examples. A 2025 key skill for complex AI.",
+            },
+            {
+              name: "NavMesh",
+              description:
+                "Use NavMesh, taught with examples. A 2025 practical skill for navigation.",
             },
           ],
         },
         {
           name: "Multiplayer & Networking",
           description:
-            "Build online multiplayer games with real-time interactions. Multiplayer and networking provide a powerful way to create engaging, social experiences, allowing you to build games that resonate with players.",
+            "Build online games, taught with examples using Photon in Unity or Unreal networking for a multiplayer shooter. A 2025 high-demand skill, this section ensures developers can create social, real-time experiences, meeting player demand for connected gameplay effectively.",
           children: [
             {
               name: "Photon Unity Networking",
               description:
-                "Multiplayer framework for Unity. Photon Unity Networking provides a powerful way to build multiplayer games, allowing you to create engaging, social experiences.",
+                "Network with Photon, taught with examples. A 2025 essential skill for multiplayer.",
             },
             {
               name: "Unreal Networking",
               description:
-                "Build multiplayer games in Unreal Engine. Unreal's networking tools provide a powerful way to build multiplayer games, allowing you to create engaging, social experiences.",
+                "Use Unreal networking, taught with examples. A 2025 key skill for real-time.",
             },
             {
               name: "WebSockets",
               description:
-                "Real-time communication for browser games. WebSockets provide a powerful way to build real-time multiplayer games, allowing you to create engaging, social experiences.",
+                "Use WebSockets, taught with examples. A 2025 practical skill for web games.",
+            },
+            {
+              name: "Dedicated Servers",
+              description:
+                "Manage servers, taught with examples. A 2025 skill for scalability.",
             },
           ],
         },
       ],
-      dividerText: "Advanced Topics",
+      dividerText: "Gameplay programmed—explore advanced topics.",
     },
     {
       name: "Advanced Topics",
       description:
-        "Explore cutting-edge technologies and trends in game development. Advanced topics provide a powerful way to stay ahead of the curve, allowing you to build games that leverage the latest technologies and trends.",
+        "Delve into cutting-edge game tech like VR and AI, taught with examples building a VR game in Unity or training ML agents in Unreal. A 2025 forward-thinking skill, this section ensures developers stay competitive, crafting innovative, immersive games that leverage 2025’s latest trends effectively.",
       children: [
         {
           name: "Virtual Reality (VR)",
           description:
-            "Develop immersive VR experiences. VR provides a powerful way to create immersive, engaging experiences, allowing you to build games that resonate with players.",
+            "Develop VR games, taught with examples using Unity XR for a simulator. A 2025 essential skill, this section enables immersive experiences, meeting player demand for interactive, engaging virtual environments effectively.",
           children: [
             {
               name: "Unity XR",
               description:
-                "Build VR games using Unity. Unity's XR tools provide a powerful way to build VR games, allowing you to create immersive, engaging experiences.",
+                "Build VR with Unity XR, taught with examples. Preferred in 2025 for accessibility.",
             },
             {
               name: "Unreal VR",
               description:
-                "Create VR experiences in Unreal Engine. Unreal's VR tools provide a powerful way to build VR experiences, allowing you to create immersive, engaging games.",
+                "Create VR with Unreal, taught with examples. A 2025 key skill for high-end.",
+            },
+            {
+              name: "VR Interaction",
+              description:
+                "Design interactions, taught with examples. A 2025 practical skill for UX.",
             },
           ],
         },
         {
           name: "Augmented Reality (AR)",
           description:
-            "Build AR games for mobile and wearable devices. AR provides a powerful way to create engaging, interactive experiences, allowing you to build games that resonate with players.",
+            "Build AR games, taught with examples using ARKit for mobile. A 2025 critical skill, this section creates interactive, real-world experiences, meeting player interest in blended digital-physical gameplay effectively.",
           children: [
             {
               name: "ARKit (iOS)",
               description:
-                "Develop AR apps for Apple devices. ARKit provides a powerful way to build AR experiences, allowing you to create engaging, interactive games.",
+                "Develop AR on iOS, taught with examples. A 2025 essential skill for mobile.",
             },
             {
               name: "ARCore (Android)",
               description:
-                "Build AR apps for Android devices. ARCore provides a powerful way to build AR experiences, allowing you to create engaging, interactive games.",
+                "Build AR on Android, taught with examples. A 2025 key skill for mobile.",
+            },
+            {
+              name: "AR Anchoring",
+              description:
+                "Anchor AR, taught with examples. A 2025 practical skill for stability.",
             },
           ],
         },
         {
           name: "Procedural Generation",
           description:
-            "Create dynamic and infinite game worlds. Procedural generation provides a powerful way to create dynamic, infinite game worlds, allowing you to build games that feel fresh and engaging.",
+            "Generate dynamic worlds, taught with examples using Perlin Noise in Unity. A 2025 valuable skill, this section creates infinite, engaging game environments, enhancing replayability and player immersion effectively.",
           children: [
             {
               name: "Perlin Noise",
               description:
-                "Generate terrain and textures procedurally. Perlin noise provides a powerful way to generate terrain and textures, allowing you to create dynamic, infinite game worlds.",
+                "Generate terrain, taught with examples. A 2025 essential skill for worlds.",
             },
             {
               name: "Wave Function Collapse",
               description:
-                "Algorithm for procedural level generation. Wave Function Collapse provides a powerful way to generate levels procedurally, allowing you to create dynamic, infinite game worlds.",
+                "Generate levels, taught with examples. A 2025 key skill for variety.",
+            },
+            {
+              name: "Procedural Textures",
+              description:
+                "Create textures, taught with examples. A 2025 practical skill for visuals.",
             },
           ],
         },
         {
           name: "Machine Learning in Games",
           description:
-            "Integrate AI for adaptive gameplay and NPC behavior. Machine learning provides a powerful way to create adaptive, intelligent gameplay, allowing you to build games that feel fresh and engaging.",
+            "Integrate ML for AI, taught with examples training agents in Unity with reinforcement learning. A 2025 transformative skill, this section enhances gameplay with adaptive, intelligent systems, ensuring developers can innovate in dynamic, engaging game experiences effectively.",
           children: [
             {
               name: "Reinforcement Learning",
               description:
-                "Train AI agents to play games. Reinforcement learning provides a powerful way to train AI agents, allowing you to create adaptive, intelligent gameplay.",
+                "Train agents, taught with examples. A 2025 essential skill for AI.",
             },
             {
               name: "Neural Networks",
               description:
-                "Create intelligent NPCs and systems. Neural networks provide a powerful way to create intelligent NPCs and systems, allowing you to build games that feel fresh and engaging.",
+                "Use neural nets, taught with examples. A 2025 key skill for intelligence.",
+            },
+            {
+              name: "ML Tools",
+              description:
+                "Use TensorFlow, taught with examples. A 2025 practical skill for integration.",
             },
           ],
         },
       ],
-      dividerText: "Professional Development",
+      dividerText: "Advanced skills explored—prepare for professional growth.",
     },
     {
       name: "Professional Development",
       description:
-        "Skills to grow your career as a game developer. Professional development provides a powerful way to build a successful career in game development, allowing you to create games that resonate with players.",
+        "Build a game development career with portfolios and soft skills, taught with examples contributing to open-source or participating in game jams. A 2025 strategic skill, this section ensures employability and success, combining technical expertise with professional abilities effectively in the gaming industry.",
       children: [
         {
           name: "Portfolio Development",
           description:
-            "Showcase your skills with a strong portfolio of games. A strong portfolio provides a powerful way to demonstrate your skills and experience, allowing you to build a successful career in game development.",
+            "Showcase skills with game projects, taught with examples like a Unity demo or Unreal portfolio. A 2025 critical skill, this section builds a compelling portfolio, demonstrating game development expertise to potential employers tangibly and professionally.",
           children: [
             {
               name: "Game Jams",
               description:
-                "Participate in game jams to build experience. Game jams provide a powerful way to build experience and create games quickly, allowing you to build a strong portfolio and demonstrate your skills.",
+                "Participate in jams, taught with examples. A 2025 essential skill for experience.",
             },
             {
               name: "Open Source Contributions",
               description:
-                "Contribute to game development projects. Open source contributions provide a powerful way to build experience and demonstrate your skills, allowing you to build a strong portfolio and contribute to the game development community.",
+                "Contribute to projects, taught with examples. A 2025 key skill for collaboration.",
+            },
+            {
+              name: "Personal Projects",
+              description:
+                "Build projects, taught with examples. Preferred in 2025 for proof of skill.",
             },
           ],
         },
         {
           name: "Soft Skills",
           description:
-            "Non-technical skills essential for working in teams. Soft skills provide a powerful way to collaborate with others and build successful teams, allowing you to create games that resonate with players.",
+            "Develop non-technical abilities, taught with scenarios like pitching a game idea. A 2025 vital skill, this section ensures game developers excel in teamwork, communication, and time management, enhancing professional effectiveness in collaborative projects.",
           children: [
             {
               name: "Communication",
               description:
-                "Collaborate with artists, designers, and programmers. Effective communication provides a powerful way to collaborate with others and build successful teams, allowing you to create games that resonate with players.",
+                "Collaborate effectively, taught with examples. A 2025 essential skill for teams.",
             },
             {
               name: "Time Management",
               description:
-                "Meet deadlines in fast-paced environments. Time management provides a powerful way to meet deadlines and build successful projects, allowing you to create games that resonate with players.",
+                "Meet deadlines, taught with examples. A 2025 key skill for projects.",
+            },
+            {
+              name: "Team Collaboration",
+              description:
+                "Work with teams, taught with examples. A 2025 practical skill for cohesion.",
             },
           ],
         },
         {
           name: "Industry Trends",
           description:
-            "Stay updated with the latest trends and technologies. Staying updated with industry trends provides a powerful way to stay ahead of the curve and build games that leverage the latest technologies and trends.",
+            "Stay current with trends like cloud gaming, taught with examples exploring Google Stadia or NFTs. A 2025 forward-thinking skill, this section ensures developers adapt to emerging technologies, maintaining competitiveness in the evolving game development landscape.",
           children: [
             {
               name: "Cloud Gaming",
               description:
-                "Explore platforms like Google Stadia and Xbox Cloud. Cloud gaming provides a powerful way to build games that can be played on any device, allowing you to reach a wider audience and build games that resonate with players.",
+                "Explore platforms, taught with examples. A 2025 essential skill for scalability.",
             },
             {
               name: "Blockchain Gaming",
               description:
-                "Learn about NFTs and decentralized games. Blockchain gaming provides a powerful way to build games that leverage the latest technologies and trends, allowing you to create games that resonate with players.",
+                "Learn NFTs, taught with examples. A 2025 key skill for innovation.",
+            },
+            {
+              name: "Metaverse Development",
+              description:
+                "Build for metaverses, taught with examples. A 2025 practical skill for future.",
             },
           ],
         },
       ],
+      dividerText: "Career ready—commit to continuous learning.",
+    },
+    {
+      name: "Continuous Learning",
+      description:
+        "Stay updated with game development trends, taught with resources like GDC talks or Unity blogs. A 2025 lifelong skill, this section ensures adaptability to new tools, engines, and techniques, keeping developers competitive in the fast-evolving gaming industry.",
     },
   ],
 };

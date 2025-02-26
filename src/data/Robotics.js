@@ -15,6 +15,7 @@ const roboticsRoadmap = {
           children: [
             {
               name: "Python",
+              preferred: true,
               description:
                 "Python, widely used in robotics, simplifies control and automation with libraries like ROS and NumPy. This section teaches syntax and scripting for robot tasks. It’s a dominant skill in 2025, prized for its versatility and ease, making it essential for rapid prototyping and AI integration in robotics.",
             },
@@ -70,7 +71,7 @@ const roboticsRoadmap = {
           ],
         },
       ],
-      dividerText: "Core Robotics Skills",
+      dividerText: "Foundations established—develop core robotics skills next.",
     },
     {
       name: "Core Robotics Skills",
@@ -129,7 +130,8 @@ const roboticsRoadmap = {
           ],
         },
       ],
-      dividerText: "Artificial Intelligence and Machine Learning",
+      dividerText:
+        "Core skills refined—integrate AI and machine learning next.",
     },
     {
       name: "AI and Machine Learning",
@@ -177,6 +179,7 @@ const roboticsRoadmap = {
           children: [
             {
               name: "TensorFlow",
+              preferred: true,
               description:
                 "TensorFlow powers deep learning, taught with robot vision models. This section covers its ecosystem for training and inference. It’s a key skill in 2025, widely used for scalable AI in robotics across industries like manufacturing and healthcare.",
             },
@@ -188,7 +191,8 @@ const roboticsRoadmap = {
           ],
         },
       ],
-      dividerText: "Advanced Robotics Concepts",
+      dividerText:
+        "AI and ML integrated—master advanced robotics concepts next.",
     },
     {
       name: "Advanced Robotics Concepts",
@@ -247,7 +251,8 @@ const roboticsRoadmap = {
           ],
         },
       ],
-      dividerText: "Tools and Frameworks",
+      dividerText:
+        "Advanced concepts mastered—leverage tools and frameworks next.",
     },
     {
       name: "Tools and Frameworks",
@@ -289,7 +294,8 @@ const roboticsRoadmap = {
           ],
         },
       ],
-      dividerText: "Projects and Applications",
+      dividerText:
+        "Tools and frameworks mastered—apply skills to projects and applications next.",
     },
     {
       name: "Projects and Applications",
@@ -317,7 +323,8 @@ const roboticsRoadmap = {
             "Develop an AI-powered robot with deep learning for object manipulation, taught with TensorFlow. This project integrates perception and action. It’s an advanced skill in 2025, showcasing cutting-edge robotics for autonomous, intelligent systems in complex environments.",
         },
       ],
-      dividerText: "Continuous Learning and Trends",
+      dividerText:
+        "Projects completed—commit to continuous learning and trends next.",
     },
     {
       name: "Continuous Learning",

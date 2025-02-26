@@ -1,339 +1,416 @@
 const dataScienceRoadmap = {
   name: "Data Science Roadmap 2025",
   description:
-    "This comprehensive roadmap guides learners through essential data science skills and technologies for 2025, from foundational knowledge to advanced techniques. It covers mathematics, programming, machine learning, big data, and emerging trends like NLP and MLOps. Designed for beginners to advanced practitioners, it ensures mastery of tools and concepts to solve real-world problems effectively in a data-driven era.",
+    "This comprehensive roadmap guides learners through essential data science skills and technologies for 2025, from foundational mathematics to advanced AI and big data techniques. It covers programming, machine learning, data engineering, and emerging trends like NLP and MLOps, with practical tools and projects. Designed for all levels, it ensures mastery to solve real-world problems in a data-driven era.",
   children: [
     {
       name: "Foundational Knowledge",
       description:
-        "This section establishes a robust base for data science by focusing on mathematics, programming, and data handling skills. Learners build the theoretical and practical groundwork needed to manipulate data, understand algorithms, and derive insights. It’s the critical starting point in 2025 for anyone aiming to excel in this interdisciplinary field, blending science and technology seamlessly.",
+        "Build a strong foundation in mathematics, programming, and data handling, taught with examples like matrix operations in NumPy or data cleaning with Pandas. This section equips you with the theoretical and practical skills to manipulate data, understand algorithms, and derive insights—crucial in 2025 for excelling in the interdisciplinary field of data science.",
       children: [
         {
           name: "Mathematics and Statistics",
           description:
-            "Mathematics and Statistics form the bedrock of data science, providing the tools to analyze and model data accurately. This section dives into key concepts driving algorithms and statistical inference, equipping learners with the quantitative skills needed. It’s essential in 2025 for understanding machine learning, optimization, and data interpretation in a precision-focused industry.",
+            "Master the mathematical and statistical foundations of data science, taught with Python examples like PCA in Scikit-learn or hypothesis tests in Statsmodels. This section provides the quantitative tools for 2025 analysts to model data, optimize algorithms, and interpret results with precision across industries like tech and healthcare.",
           children: [
             {
               name: "Linear Algebra",
               description:
-                "Linear Algebra explores vectors, matrices, and linear transformations, foundational to data science applications like machine learning and PCA. This section teaches learners to perform operations like matrix multiplication and eigenvalue decomposition. It’s a core skill in 2025, enabling efficient handling of multidimensional data and underpinning advanced analytical techniques.",
+                "Learn vectors, matrices, and transformations with NumPy examples like matrix multiplication or SVD. A 2025 skill for machine learning and data transformations.",
             },
             {
               name: "Calculus",
               description:
-                "Calculus focuses on differentiation and integration, crucial for optimization in data science models like neural networks. This section guides learners through gradients, partial derivatives, and their role in minimizing errors. It’s a vital skill in 2025, powering the training of algorithms and fine-tuning predictive models for real-world applications.",
+                "Understand derivatives and integrals with SymPy examples like gradient descent. Key in 2025 for optimizing neural networks and models.",
             },
             {
               name: "Probability and Statistics",
               description:
-                "Probability and Statistics cover distributions, hypothesis testing, and data variability, key to drawing insights from uncertainty. This section teaches learners to analyze trends, assess significance, and model randomness. It’s indispensable in 2025, forming the basis for statistical inference and decision-making in data-driven industries like finance or healthcare.",
+                "Study distributions and tests with SciPy examples like binomial or t-tests. Essential in 2025 for data inference and uncertainty modeling.",
+            },
+            {
+              name: "Bayesian Statistics",
+              description:
+                "Apply Bayesian methods with PyMC3 examples for probabilistic modeling. A 2025 skill for advanced inference and decision-making.",
             },
           ],
         },
         {
           name: "Programming Skills",
           description:
-            "Programming Skills develop proficiency in languages critical for data science workflows, from data processing to modeling. This section emphasizes practical coding for analysis, visualization, and database querying. It’s a cornerstone in 2025, enabling learners to implement solutions efficiently and adapt to the evolving toolkit of the data science profession.",
+            "Develop proficiency in data science programming with Python, R, and SQL, taught with examples like Pandas dataframes, R visualizations, or SQL queries. A 2025 cornerstone skill, this section enables you to process, analyze, and manage data efficiently, adapting to modern tools and workflows seamlessly.",
           children: [
             {
               name: "Python",
+              preferred: true,
               description:
-                "Python, the primary language for data science, offers extensive libraries like Pandas and Scikit-learn for analysis and modeling. This section teaches learners syntax, data structures, and library usage for rapid prototyping. It’s a dominant skill in 2025, prized for its versatility and community support in cutting-edge data projects.",
+                "Master Python with Pandas and Scikit-learn, taught with data analysis projects. Preferred in 2025 for its versatility and ecosystem (Stack Overflow, 2023).",
             },
             {
               name: "R",
               description:
-                "R excels in statistical computing and graphics, ideal for exploratory data analysis and visualization. This section covers its syntax, packages like ggplot2, and statistical functions for deep insights. It’s a key skill in 2025, particularly in academia and industries needing advanced statistical tools for research and reporting.",
+                "Use R with ggplot2 and dplyr for stats and visuals, taught with EDA examples. Key in 2025 for statistical research.",
             },
             {
               name: "SQL",
               description:
-                "SQL (Structured Query Language) manages and queries relational databases, a staple for data retrieval in data science. This section teaches learners to write efficient joins, aggregations, and subqueries. It’s an essential skill in 2025, enabling seamless data extraction from enterprise systems for analysis and decision-making.",
+                "Query with SQL in MySQL or PostgreSQL, taught with JOIN examples. A 2025 skill for data retrieval.",
+            },
+            {
+              name: "Julia",
+              description:
+                "Learn Julia for high-performance computing, taught with numerical examples. A 2025 skill for speed-focused tasks.",
             },
           ],
         },
         {
           name: "Data Manipulation and Analysis",
           description:
-            "Data Manipulation and Analysis teach learners to process, clean, and analyze datasets effectively using Python tools. This section focuses on transforming raw data into actionable insights through libraries and techniques. It’s a foundational skill in 2025, critical for preparing high-quality data as the first step in any data science pipeline.",
+            "Manipulate and analyze data with Python tools like Pandas and NumPy, taught with examples cleaning datasets or computing stats. A 2025 skill to transform raw data into insights, this section ensures data quality and readiness for modeling and visualization workflows efficiently.",
           children: [
             {
               name: "Pandas",
+              preferred: true,
               description:
-                "Pandas, a Python library, streamlines data manipulation with DataFrames for filtering, grouping, and merging datasets. This section teaches learners to handle tabular data efficiently for analysis. It’s a must-have skill in 2025, simplifying workflows and enabling rapid exploration of structured data in real-world projects.",
+                "Use Pandas for DataFrames, taught with filtering and merging examples. Preferred in 2025 for its data handling power.",
             },
             {
               name: "NumPy",
               description:
-                "NumPy powers numerical computations in Python with arrays and mathematical functions for data science tasks. This section covers array operations, linear algebra, and random sampling. It’s a core skill in 2025, underpinning fast, scalable calculations essential for machine learning and statistical modeling.",
+                "Perform array operations with NumPy, taught with linear algebra examples. A 2025 skill for numerical computations.",
             },
             {
               name: "Data Cleaning",
               description:
-                "Data Cleaning addresses missing values, inconsistencies, and outliers to ensure dataset reliability. This section teaches techniques like imputation, normalization, and error detection using Python. It’s a critical skill in 2025, as clean data drives accurate models, making it a prerequisite for impactful data science outcomes.",
+                "Clean data with OpenRefine or Pandas, taught with examples fixing missing values. Essential in 2025 for quality insights.",
+            },
+            {
+              name: "Data Wrangling",
+              description:
+                "Wrangle data with Python’s tidyr or dplyr, taught with reshaping examples. Key in 2025 for preprocessing.",
             },
           ],
         },
       ],
-      dividerText:
-        "Understand machine learning algorithms, model evaluation, and deep learning architectures.",
+      dividerText: "Foundation built—dive into machine learning and modeling.",
     },
     {
       name: "Machine Learning and Modeling",
       description:
-        "This section dives into machine learning algorithms, model construction, and advanced techniques like deep learning. Learners explore supervised and unsupervised methods to predict and uncover patterns. It’s a pivotal skill set in 2025, enabling data scientists to build intelligent systems that solve complex problems across industries like tech and healthcare.",
+        "Explore machine learning algorithms and modeling, taught with Scikit-learn examples like regression or neural networks in TensorFlow. This section builds 2025 skills to predict, classify, and uncover patterns, enabling you to create intelligent systems for industries like finance, healthcare, and tech with precision and scalability.",
       children: [
         {
           name: "Supervised Learning",
           description:
-            "Supervised Learning uses labeled data to train models for prediction, a staple in data science applications. This section covers regression and classification techniques for practical problem-solving. It’s a foundational skill in 2025, driving tasks like forecasting sales or diagnosing diseases with high accuracy and reliability.",
+            "Train models on labeled data with Scikit-learn, taught with examples like predicting house prices or spam detection. A 2025 skill for forecasting and classification, this section drives practical solutions across domains with reliable, data-driven predictions.",
           children: [
             {
               name: "Regression",
               description:
-                "Regression predicts continuous outcomes using techniques like linear and logistic regression in data science. This section teaches learners to model relationships and optimize fits with Python. It’s an essential skill in 2025, widely applied in finance, real estate, and anywhere numerical predictions are needed.",
+                "Model continuous outcomes with linear regression in Python, taught with sales examples. A 2025 skill for numerical predictions.",
             },
             {
               name: "Classification",
               description:
-                "Classification assigns labels to data using algorithms like decision trees, SVMs, and k-NN. This section guides learners to build and tune models for tasks like spam detection. It’s a key skill in 2025, powering binary or multi-class decisions in industries from marketing to security.",
+                "Classify with SVMs or k-NN in Scikit-learn, taught with churn examples. Key in 2025 for labeling tasks.",
+            },
+            {
+              name: "Logistic Regression",
+              description:
+                "Use logistic regression for binary outcomes, taught with examples in R. A 2025 skill for classification.",
             },
           ],
         },
         {
           name: "Unsupervised Learning",
           description:
-            "Unsupervised Learning uncovers hidden patterns in unlabeled data, ideal for exploration and segmentation. This section teaches clustering and dimensionality reduction for insights without guidance. It’s a valuable skill in 2025, enabling data scientists to discover trends and structures in complex, unstructured datasets.",
+            "Uncover patterns in unlabeled data with clustering and PCA, taught with examples segmenting customers in Python. A 2025 skill for exploratory analysis, this section reveals hidden structures in complex datasets across industries like marketing and bioinformatics.",
           children: [
             {
               name: "Clustering",
               description:
-                "Clustering groups similar data points using methods like k-means and hierarchical clustering. This section teaches learners to segment customers or detect anomalies with Python. It’s a practical skill in 2025, vital for market analysis, bioinformatics, and any field needing pattern recognition without labels.",
+                "Group data with k-means in Scikit-learn, taught with customer examples. A 2025 skill for segmentation.",
             },
             {
               name: "Dimensionality Reduction",
               description:
-                "Dimensionality Reduction simplifies high-dimensional data with techniques like PCA and t-SNE for visualization and efficiency. This section covers their application in Python. It’s an advanced skill in 2025, reducing noise and computational cost in machine learning, critical for big data analysis.",
+                "Reduce features with PCA in Python, taught with visualization examples. Key in 2025 for efficiency.",
+            },
+            {
+              name: "Anomaly Detection",
+              description:
+                "Detect outliers with Isolation Forest, taught with fraud examples. A 2025 skill for rare events.",
             },
           ],
         },
         {
           name: "Deep Learning",
           description:
-            "Deep Learning leverages neural networks for complex tasks like image and speech recognition. This section explores architectures and frameworks like TensorFlow for cutting-edge models. It’s a transformative skill in 2025, driving AI breakthroughs in autonomous systems, healthcare diagnostics, and more, with growing industry demand.",
+            "Leverage neural networks with TensorFlow and PyTorch, taught with examples like image recognition or text prediction. A 2025 skill for complex tasks, this section drives AI innovations in autonomous systems, NLP, and more with advanced architectures.",
           children: [
             {
               name: "Neural Networks",
               description:
-                "Neural Networks, built on perceptrons and multilayer structures, model intricate data patterns. This section teaches learners to design and train them with Python frameworks. It’s a foundational skill in 2025, enabling data scientists to tackle nonlinear problems in AI and predictive analytics effectively.",
+                "Build neural nets with TensorFlow, taught with classification examples. A 2025 skill for nonlinear modeling.",
             },
             {
               name: "Convolutional Neural Networks (CNNs)",
               description:
-                "CNNs specialize in image processing, using convolution layers to extract features. This section covers building CNNs with TensorFlow for tasks like object detection. It’s a high-demand skill in 2025, powering computer vision in self-driving cars, medical imaging, and facial recognition systems.",
+                "Process images with CNNs in PyTorch, taught with detection examples. Key in 2025 for vision tasks.",
             },
             {
               name: "Recurrent Neural Networks (RNNs)",
               description:
-                "RNNs excel in sequential data analysis, like time series or text, with memory of previous inputs. This section teaches learners to implement RNNs for forecasting. It’s a key skill in 2025, vital for NLP, stock prediction, and any domain with temporal dependencies.",
+                "Analyze sequences with RNNs in TensorFlow, taught with time-series examples. A 2025 skill for temporal data.",
             },
             {
               name: "Transformers",
               description:
-                "Transformers use attention mechanisms to process sequential data, revolutionizing NLP and beyond. This section covers their architecture and implementation with Python libraries. It’s a cutting-edge skill in 2025, driving advancements in language models like BERT, essential for modern AI applications.",
+                "Use transformers with Hugging Face, taught with NLP examples. A 2025 skill for advanced language tasks.",
+            },
+            {
+              name: "Generative Models",
+              description:
+                "Create data with GANs in PyTorch, taught with image generation examples. A 2025 skill for creativity.",
             },
           ],
         },
         {
           name: "Model Evaluation and Validation",
           description:
-            "Model Evaluation and Validation assess performance and ensure models generalize well to new data. This section teaches metrics and techniques for robust analysis. It’s a critical skill in 2025, guaranteeing reliable predictions and avoiding overfitting in data science projects across industries.",
+            "Assess and validate models with metrics and techniques, taught with Scikit-learn examples like k-fold validation or ROC curves. A 2025 skill for reliability, this section ensures models generalize well, avoiding pitfalls like overfitting in real-world data science applications.",
           children: [
             {
               name: "Cross-Validation",
               description:
-                "Cross-Validation, like k-fold, tests model stability by splitting data into subsets. This section teaches learners to implement it in Python for unbiased evaluation. It’s an essential skill in 2025, ensuring models perform consistently and reliably on unseen data in real-world scenarios.",
+                "Test stability with k-fold in Python, taught with examples. A 2025 skill for robust evaluation.",
             },
             {
               name: "Metrics",
               description:
-                "Metrics like accuracy, precision, recall, and F1-score quantify model performance. This section guides learners to choose and compute them for specific tasks. It’s a practical skill in 2025, enabling data scientists to interpret results and communicate effectiveness to stakeholders accurately.",
+                "Measure with accuracy and F1-score in Scikit-learn, taught with examples. Key in 2025 for performance.",
             },
             {
               name: "Bias-Variance Tradeoff",
               description:
-                "Bias-Variance Tradeoff balances model complexity to optimize performance, avoiding underfitting or overfitting. This section teaches learners to diagnose and adjust models. It’s a key skill in 2025, ensuring predictive power and generalization in machine learning, critical for robust data science solutions.",
+                "Balance complexity with examples in Python, taught with diagnostics. A 2025 skill for model optimization.",
+            },
+            {
+              name: "Hyperparameter Tuning",
+              description:
+                "Tune with GridSearchCV, taught with examples in Scikit-learn. A 2025 skill for model enhancement.",
             },
           ],
         },
       ],
       dividerText:
-        "Understand handling large-scale data, processing pipelines, cloud computing, and big data technologies.",
+        "Modeling mastered—scale up with data engineering and big data.",
     },
     {
       name: "Data Engineering and Big Data",
       description:
-        "This section focuses on tools and techniques for managing and processing large-scale data efficiently. Learners master data warehousing, big data frameworks, and cloud solutions. It’s a vital skill set in 2025, addressing the growing demand for handling massive datasets in industries like tech, finance, and retail.",
+        "Manage and process large-scale data with tools like Spark and AWS, taught with examples building ETL pipelines or querying data lakes. A 2025 skill for handling massive datasets, this section equips you to engineer robust data workflows for analytics in industries like tech and finance.",
       children: [
         {
           name: "Data Warehousing",
           description:
-            "Data Warehousing organizes data for reporting and analysis, supporting business intelligence workflows. This section teaches learners to design and query warehouses effectively. It’s a foundational skill in 2025, enabling data scientists to store and access structured data for strategic insights in enterprise environments.",
+            "Organize data for analytics with warehouses and lakes, taught with examples like Snowflake queries or S3 setups. A 2025 skill for business intelligence, this section ensures efficient storage and access for strategic insights in enterprise data ecosystems.",
           children: [
             {
               name: "ETL Processes",
               description:
-                "ETL (Extract, Transform, Load) workflows move and refine data into warehouses for analysis. This section covers tools like Apache Airflow to automate pipelines. It’s a practical skill in 2025, ensuring clean, usable data flows from sources to systems, critical for decision-making processes.",
+                "Build ETL pipelines with Apache Airflow, taught with examples extracting sales data. A 2025 skill for data flow.",
             },
             {
               name: "Data Lakes",
               description:
-                "Data Lakes store vast amounts of raw, unstructured data for flexible analysis. This section teaches learners to manage lakes with tools like AWS S3. It’s a key skill in 2025, supporting diverse data types and advanced analytics in scalable, cost-effective storage solutions.",
+                "Manage lakes with AWS S3, taught with raw data examples. Key in 2025 for flexible storage.",
+            },
+            {
+              name: "Data Modeling",
+              description:
+                "Model with star schemas in Snowflake, taught with examples. A 2025 skill for structured analytics.",
             },
           ],
         },
         {
           name: "Big Data Technologies",
           description:
-            "Big Data Technologies process and analyze massive datasets beyond traditional tools’ capacity. This section explores frameworks for distributed computing and streaming. It’s a high-demand skill in 2025, enabling data scientists to tackle large-scale challenges in real-time applications like fraud detection or IoT.",
+            "Process massive datasets with Hadoop and Kafka, taught with examples analyzing logs or streaming IoT data in PySpark. A 2025 skill for scalability, this section tackles big data challenges in real-time applications like fraud detection or social media analytics.",
           children: [
             {
               name: "Apache Hadoop",
               description:
-                "Apache Hadoop provides distributed storage (HDFS) and processing (MapReduce) for big data. This section teaches learners to set up and run Hadoop clusters. It’s a foundational skill in 2025, supporting scalable analytics in industries managing terabytes of data daily.",
+                "Use Hadoop HDFS and MapReduce, taught with cluster examples. A 2025 skill for distributed data.",
             },
             {
               name: "Apache Spark",
+              preferred: true,
               description:
-                "Apache Spark offers a fast, unified engine for big data processing, with in-memory computation. This section covers Spark SQL, MLlib, and PySpark for analytics. It’s a dominant skill in 2025, accelerating large-scale data tasks and machine learning in dynamic, data-heavy environments.",
+                "Process with Spark and PySpark, taught with log examples. Preferred in 2025 for its speed (Databricks, 2023).",
             },
             {
               name: "Kafka",
               description:
-                "Kafka, a distributed streaming platform, handles real-time data feeds with high throughput. This section teaches learners to publish and subscribe to data streams. It’s a critical skill in 2025, powering live analytics and event-driven systems in applications like social media or logistics.",
+                "Stream with Kafka, taught with real-time examples. A 2025 skill for live data feeds.",
+            },
+            {
+              name: "Flink",
+              description:
+                "Analyze streams with Flink, taught with examples. A 2025 skill for advanced streaming.",
             },
           ],
         },
         {
           name: "Cloud Platforms",
           description:
-            "Cloud Platforms provide scalable infrastructure for data storage, processing, and analytics. This section explores leading services for flexible data solutions. It’s an essential skill in 2025, as businesses shift to cloud-native architectures, demanding expertise in leveraging these platforms for cost-effective, agile data science.",
+            "Leverage cloud platforms like AWS and Azure, taught with examples deploying Redshift or Synapse Analytics for data tasks. A 2025 skill for scalable infrastructure, this section meets the demand for cloud-native data science in cost-effective, agile environments.",
           children: [
             {
               name: "AWS",
+              preferred: true,
               description:
-                "AWS (Amazon Web Services) offers cloud tools like S3, Redshift, and SageMaker for data science. This section teaches learners to deploy and manage data workflows. It’s a top skill in 2025, dominating the cloud market and enabling scalable, serverless analytics for diverse industries.",
+                "Use AWS S3 and SageMaker, taught with examples. Preferred in 2025 for market lead (Synergy, 2023).",
             },
             {
               name: "Google Cloud Platform",
               description:
-                "Google Cloud Platform (GCP) provides BigQuery, AI Platform, and storage for data tasks. This section covers its integration with Python for analytics. It’s a valuable skill in 2025, leveraging Google’s AI and big data strengths for innovative, high-performance data science solutions.",
+                "Deploy BigQuery on GCP, taught with query examples. A 2025 skill for AI integration.",
             },
             {
               name: "Microsoft Azure",
               description:
-                "Microsoft Azure delivers cloud services like Synapse Analytics and ML Studio for data science. This section teaches learners to utilize Azure’s ecosystem for processing. It’s a key skill in 2025, popular in enterprise settings for its integration with business tools and robust analytics capabilities.",
+                "Leverage Azure Synapse, taught with analytics examples. Key in 2025 for enterprise tools.",
+            },
+            {
+              name: "Snowflake",
+              description:
+                "Query with Snowflake on cloud, taught with examples. A 2025 skill for multi-cloud warehousing.",
             },
           ],
         },
       ],
-      dividerText:
-        "Cutting-edge fields like NLP, Explainable AI (XAI), AutoML, MLOps, and data visualization.",
+      dividerText: "Big data scaled—explore specialized areas and trends.",
     },
     {
       name: "Specialized Areas and Emerging Trends",
       description:
-        "This section keeps learners ahead with advancements in NLP, Explainable AI, AutoML, and visualization. It explores niche skills shaping data science’s future. It’s a forward-thinking skill set in 2025, ensuring data scientists remain competitive and innovative in a rapidly evolving, technology-driven field.",
+        "Stay ahead with NLP, XAI, AutoML, and visualization, taught with examples like sentiment analysis in Hugging Face or dashboards in Power BI. A 2025 skill set to innovate, this section ensures you master niche areas and emerging trends shaping the future of data science.",
       children: [
         {
           name: "Natural Language Processing (NLP)",
           description:
-            "Natural Language Processing (NLP) analyzes and generates human language data for insights. This section teaches learners to process text with Python and advanced models. It’s a high-demand skill in 2025, powering chatbots, sentiment analysis, and translation in industries like tech and customer service.",
+            "Analyze text with NLP tools like Hugging Face, taught with examples classifying reviews or translating text. A 2025 skill for language insights, this section powers chatbots, sentiment analysis, and more in tech and customer-focused industries.",
           children: [
             {
               name: "Sentiment Analysis",
               description:
-                "Sentiment Analysis determines emotions in text, like positive or negative tones, using NLP. This section teaches learners to classify opinions with Python libraries. It’s a practical skill in 2025, vital for social media monitoring, customer feedback, and market research in data-driven businesses.",
+                "Determine emotions with NLTK, taught with review examples. A 2025 skill for customer insights.",
             },
             {
               name: "Language Modeling",
               description:
-                "Language Modeling predicts the next word in sequences, foundational to NLP applications. This section covers building models with Python and frameworks like PyTorch. It’s a key skill in 2025, enabling text generation and autocomplete features in smart assistants and writing tools.",
+                "Predict text with PyTorch, taught with autocomplete examples. Key in 2025 for generation.",
             },
             {
               name: "Transformers and BERT",
+              preferred: true,
               description:
-                "Transformers and BERT leverage attention for context-aware NLP, revolutionizing text understanding. This section teaches learners to fine-tune these models with Hugging Face. It’s a cutting-edge skill in 2025, driving state-of-the-art performance in search, translation, and conversational AI systems.",
+                "Fine-tune BERT with Hugging Face, taught with NLP examples. Preferred in 2025 for top performance.",
+            },
+            {
+              name: "Text Preprocessing",
+              description:
+                "Clean text with spaCy, taught with tokenization examples. A 2025 skill for NLP prep.",
             },
           ],
         },
         {
           name: "Explainable AI (XAI)",
           description:
-            "Explainable AI (XAI) makes machine learning decisions transparent and interpretable for trust. This section explores tools to demystify black-box models. It’s an emerging skill in 2025, critical for regulatory compliance and stakeholder confidence in AI-driven sectors like healthcare and finance.",
+            "Make AI transparent with XAI tools like SHAP, taught with examples explaining model predictions. A 2025 skill for trust and compliance, this section ensures stakeholders understand AI decisions in regulated fields like healthcare and finance.",
           children: [
             {
               name: "Model Interpretability",
               description:
-                "Model Interpretability reveals how machine learning models make predictions, enhancing trust. This section teaches learners to analyze feature importance and decision paths. It’s a vital skill in 2025, ensuring transparency in AI applications where understanding outcomes is as important as accuracy.",
+                "Reveal predictions with feature importance, taught with examples in Python. A 2025 skill for clarity.",
             },
             {
               name: "LIME and SHAP",
+              preferred: true,
               description:
-                "LIME and SHAP explain model outputs by highlighting influential features in predictions. This section covers their application in Python for interpretability. It’s a practical skill in 2025, enabling data scientists to justify AI decisions to non-technical audiences in regulated industries.",
+                "Explain with SHAP in Python, taught with examples. Preferred in 2025 for robust XAI (arXiv, 2023).",
+            },
+            {
+              name: "Feature Contribution",
+              description:
+                "Analyze contributions with ELI5, taught with examples. A 2025 skill for model insights.",
             },
           ],
         },
         {
           name: "AutoML and MLOps",
           description:
-            "AutoML and MLOps automate model building and operationalize machine learning workflows. This section teaches learners to streamline development and deployment. It’s a transformative skill in 2025, boosting efficiency and scalability, meeting the demand for rapid, reliable AI solutions in production environments.",
+            "Automate and operationalize ML with AutoKeras and MLflow, taught with examples building pipelines or automating models. A 2025 skill for efficiency, this section streamlines development and deployment for scalable, reliable AI solutions in production environments.",
           children: [
             {
               name: "AutoKeras",
               description:
-                "AutoKeras automates neural network design with Keras, simplifying deep learning. This section teaches learners to use it for quick model prototyping in Python. It’s an accessible skill in 2025, democratizing AI for non-experts and accelerating experimentation in data science projects.",
+                "Automate neural nets with AutoKeras, taught with examples in Python. A 2025 skill for quick ML.",
             },
             {
               name: "H2O.ai",
               description:
-                "H2O.ai, an open-source AutoML platform, automates model selection and tuning. This section covers its use for regression, classification, and more. It’s a valuable skill in 2025, enabling fast, high-quality model development with minimal manual effort, ideal for rapid analytics.",
+                "Use H2O.ai for AutoML, taught with regression examples. A 2025 skill for fast modeling.",
             },
             {
               name: "MLOps Practices",
+              preferred: true,
               description:
-                "MLOps Practices implement CI/CD pipelines for machine learning, ensuring model reliability. This section teaches learners to automate training, testing, and deployment. It’s a critical skill in 2025, bridging development and operations for scalable, maintainable AI systems in enterprise settings.",
+                "Deploy with MLflow, taught with CI/CD examples. Preferred in 2025 for production ML.",
+            },
+            {
+              name: "Model Monitoring",
+              description:
+                "Monitor with Prometheus, taught with examples. A 2025 skill for ML maintenance.",
             },
           ],
         },
         {
           name: "Data Visualization",
           description:
-            "Data Visualization crafts compelling visuals to communicate insights effectively to stakeholders. This section teaches learners tools and techniques for impactful representation. It’s an essential skill in 2025, blending art and science to make complex data accessible, driving decisions in business and research.",
+            "Create impactful visuals with Tableau and Seaborn, taught with examples like sales dashboards or heatmaps. A 2025 skill to communicate insights, this section blends art and science to make data accessible and actionable for stakeholders across industries.",
           children: [
             {
               name: "Data Visualization Tools",
+              preferred: true,
               description:
-                "Data Visualization Tools like Matplotlib, Seaborn, and Tableau create charts and graphs. This section teaches learners to design clear, informative visuals in Python. It’s a key skill in 2025, translating raw data into intuitive graphics that resonate with technical and non-technical audiences alike.",
+                "Use Tableau and Seaborn, taught with dashboard examples. Preferred in 2025 for versatility.",
             },
             {
               name: "Dashboard Development",
               description:
-                "Dashboard Development builds interactive tools in Tableau or Power BI to monitor metrics. This section covers layout design and real-time data integration. It’s a practical skill in 2025, enabling data scientists to deliver actionable insights through dynamic, user-friendly interfaces for decision-makers.",
+                "Build dashboards in Power BI, taught with real-time examples. A 2025 skill for monitoring.",
             },
             {
               name: "Storytelling with Data",
               description:
-                "Storytelling with Data crafts narratives around visualizations to convey insights powerfully. This section teaches learners to structure findings for impact and clarity. It’s a high-value skill in 2025, enhancing communication and persuasion, ensuring data influences strategy and action across organizations.",
+                "Craft narratives with Plotly, taught with examples. A 2025 skill for impactful insights.",
+            },
+            {
+              name: "Interactive Visuals",
+              description:
+                "Create with Dash, taught with Python examples. A 2025 skill for dynamic displays.",
             },
           ],
         },
       ],
+      dividerText: "Trends explored—apply skills in final projects.",
     },
     {
       name: "Final Projects",
       description:
-        "Final Projects apply data science knowledge to real-world challenges, synthesizing skills into impactful solutions. Learners design, analyze, and present end-to-end projects like predictive models or dashboards. It’s a culminating skill in 2025, showcasing expertise and creativity, critical for portfolios and career advancement in the field.",
+        "Synthesize your data science skills into real-world projects like predictive models or NLP dashboards, taught with examples using Spark or TensorFlow. A 2025 capstone skill, this section builds a portfolio to showcase expertise, critical for career advancement or solving industry challenges effectively.",
     },
   ],
 };
