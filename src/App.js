@@ -2,27 +2,36 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Roadmap from "./components/Roadmap";
-import fullStackDeveloperRoadmap from "./data/FullStackDeveloper";
+import fullStackDeveloperRoadmap from "./data/techroles/FullStackDeveloper";
 import Navbar from "./components/Navbar";
-import Maincontent from "./components/Maincontent";
-import dataScienceRoadmap from "./data/DataScience";
-import aiEngineerRoadmap from "./data/ArtificialIntelligence";
-import cybersecurityRoadmap from "./data/CyberSecurity";
-import androidDeveloperRoadmap from "./data/AndroidDeveloper";
-import mlOpsRoadmap from "./data/MLOps";
-import cloudComputingRoadmap from "./data/CloudComputing";
-import gameDevelopmentRoadmap from "./data/GameDevelopment";
-import blockchainDeveloperRoadmap from "./data/Blockchain";
-import devOpsRoadmap from "./data/Devops";
 import Footer from "./components/Footer";
-import roboticsRoadmap from "./data/Robotics";
-import uiUxRoadmap from "./data/UI-UXDesigner";
-import dataAnalystRoadmap from "./data/DataAnalyst";
-import embeddedIotDeveloperRoadmap from "./data/EmbeddedIoTDeveloper";
-import iotApplicationDeveloperRoadmap from "./data/IoTApplicationDeveloper";
-import iosDeveloperRoadmap from "./data/IosDeveloper";
-import frontendDeveloperRoadmap from "./data/FrontentDeveloper";
-import backendDeveloperRoadmap from "./data/BackendDeveloper";
+import Maincontent from "./components/Maincontent";
+import dataScienceRoadmap from "./data/techroles/DataScience";
+import aiEngineerRoadmap from "./data/techroles/ArtificialIntelligence";
+import cybersecurityRoadmap from "./data/techroles/CyberSecurity";
+import androidDeveloperRoadmap from "./data/techroles/AndroidDeveloper";
+import mlOpsRoadmap from "./data/techroles/MLOps";
+import cloudComputingRoadmap from "./data/techroles/CloudComputing";
+import gameDevelopmentRoadmap from "./data/techroles/GameDevelopment";
+import blockchainDeveloperRoadmap from "./data/techroles/Blockchain";
+import devOpsRoadmap from "./data/techroles/Devops";
+import roboticsRoadmap from "./data/techroles/Robotics";
+import uiUxRoadmap from "./data/techroles/UI-UXDesigner";
+import dataAnalystRoadmap from "./data/techroles/DataAnalyst";
+import embeddedIotDeveloperRoadmap from "./data/techroles/EmbeddedIoTDeveloper";
+import iotApplicationDeveloperRoadmap from "./data/techroles/IoTApplicationDeveloper";
+import iosDeveloperRoadmap from "./data/techroles/IosDeveloper";
+import frontendDeveloperRoadmap from "./data/techroles/FrontentDeveloper";
+import backendDeveloperRoadmap from "./data/techroles/BackendDeveloper";
+import reactDeveloperRoadmap from "./data/techskills/React";
+import javascriptDeveloperRoadmap from "./data/techskills/Javascript";
+import pythonDeveloperRoadmap from "./data/techskills/Python";
+import nodejsDeveloperRoadmap from "./data/techskills/Nodejs";
+import sqldeveloperRoadmap from "./data/techskills/SQL";
+import dockerRoadmap from "./data/techskills/Docker";
+import kubernetesRoadmap from "./data/techskills/Kubernetes";
+import tensorflowRoadmap from "./data/techskills/Tensorflow";
+import gitandGithubRoadmap from "./data/techskills/GitandGithub";
 function App() {
   return (
     <Router>
@@ -100,6 +109,37 @@ function App() {
           <Route
             path="/ios-developer"
             element={<Roadmap data={iosDeveloperRoadmap} />}
+          />
+          {/* Tech Skills */}
+          <Route
+            path="/react"
+            element={<Roadmap data={reactDeveloperRoadmap} />}
+          />
+          <Route
+            path="/javascript"
+            element={<Roadmap data={javascriptDeveloperRoadmap} />}
+          />
+          <Route
+            path="/python"
+            element={<Roadmap data={pythonDeveloperRoadmap} />}
+          />
+          <Route
+            path="/nodejs"
+            element={<Roadmap data={nodejsDeveloperRoadmap} />}
+          />
+          <Route path="/sql" element={<Roadmap data={sqldeveloperRoadmap} />} />
+          <Route path="/docker" element={<Roadmap data={dockerRoadmap} />} />
+          <Route
+            path="/kubernetes"
+            element={<Roadmap data={kubernetesRoadmap} />}
+          />
+          <Route
+            path="/tensorflow"
+            element={<Roadmap data={tensorflowRoadmap} />}
+          />
+          <Route
+            path="/gitandgithub"
+            element={<Roadmap data={gitandGithubRoadmap} />}
           />
         </Routes>
         <Footer />

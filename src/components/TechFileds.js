@@ -219,11 +219,11 @@ const techSkills = [
   },
   {
     id: 9,
-    title: "Git",
+    title: "Git and Github",
     icon: "🐙",
-    link: "/git",
+    link: "/gitandgithub",
     description:
-      "Git is a distributed version control system that tracks changes in code, enabling collaboration among developers on projects of all sizes. It supports branching, merging, and rollbacks, with platforms like GitHub enhancing teamwork. Programmers use Git to manage source code, maintain project history, and coordinate contributions, ensuring efficient and reliable software development workflows.",
+      "Git is a distributed version control system that tracks changes in source code during software development, enabling collaboration and versioning. GitHub is a platform for hosting Git repositories, providing tools for project management and code review. Developers use Git and GitHub to manage codebases, track issues, and contribute to open-source projects, fostering transparency and efficiency in software development workflows.",
   },
   {
     id: 10,
