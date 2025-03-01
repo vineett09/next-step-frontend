@@ -32,6 +32,18 @@ import dockerRoadmap from "./data/techskills/Docker";
 import kubernetesRoadmap from "./data/techskills/Kubernetes";
 import tensorflowRoadmap from "./data/techskills/Tensorflow";
 import gitandGithubRoadmap from "./data/techskills/GitandGithub";
+import awsRoadmap from "./data/techskills/AWS";
+import microsoftAzureRoadmap from "./data/techskills/MicrosoftAzure";
+import linuxRoadmap from "./data/techskills/Linux";
+import JavaDeveloper from "./data/techskills/Java";
+import cppRoadmap from "./data/techskills/Cpp";
+import rustRoadmap from "./data/techskills/Rust";
+import golangRoadmap from "./data/techskills/Golang";
+import rubyRoadmap from "./data/techskills/Ruby";
+import phpRoadmap from "./data/techskills/Php";
+import kotlinRoadmap from "./data/techskills/Kotlin";
+import monogodbRoadmap from "./data/techskills/MongoDB";
+import typescriptRoadmap from "./data/techskills/Typescript";
 function App() {
   return (
     <Router>
@@ -140,6 +152,24 @@ function App() {
           <Route
             path="/gitandgithub"
             element={<Roadmap data={gitandGithubRoadmap} />}
+          />
+          <Route path="/aws" element={<Roadmap data={awsRoadmap} />} />
+          <Route
+            path="/microsoft-azure"
+            element={<Roadmap data={microsoftAzureRoadmap} />}
+          />
+          <Route path="/linux" element={<Roadmap data={linuxRoadmap} />} />
+          <Route path="/java" element={<Roadmap data={JavaDeveloper} />} />
+          <Route path="/cpp" element={<Roadmap data={cppRoadmap} />} />
+          <Route path="/rust" element={<Roadmap data={rustRoadmap} />} />
+          <Route path="/golang" element={<Roadmap data={golangRoadmap} />} />
+          <Route path="/ruby" element={<Roadmap data={rubyRoadmap} />} />
+          <Route path="/php" element={<Roadmap data={phpRoadmap} />} />
+          <Route path="/kotlin" element={<Roadmap data={kotlinRoadmap} />} />
+          <Route path="/mongodb" element={<Roadmap data={monogodbRoadmap} />} />
+          <Route
+            path="/typescript"
+            element={<Roadmap data={typescriptRoadmap} />}
           />
         </Routes>
         <Footer />

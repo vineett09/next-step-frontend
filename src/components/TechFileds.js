@@ -235,9 +235,9 @@ const techSkills = [
   },
   {
     id: 11,
-    title: "Azure",
+    title: "Microsoft Azure",
     icon: "🔷",
-    link: "/azure",
+    link: "/microsoft-azure",
     description:
       "Microsoft Azure is a cloud computing platform providing a wide range of services, including virtual machines, AI tools, and data analytics, competing with AWS. It supports hybrid environments and integrates with Microsoft products. Azure developers build and manage scalable applications, leveraging its global network for high availability, security, and enterprise-grade solutions across industries.",
   },
@@ -277,7 +277,7 @@ const techSkills = [
     id: 16,
     title: "Go",
     icon: "🐹",
-    link: "/go",
+    link: "/golang",
     description:
       "Go, created by Google, is a fast, statically typed language designed for simplicity and concurrency, making it ideal for scalable web services and cloud applications. It features goroutines for parallel processing. Go developers use it with tools like Docker and Kubernetes, building efficient, reliable back-ends that power modern, high-performance distributed systems with minimal complexity.",
   },

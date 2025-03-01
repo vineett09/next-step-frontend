@@ -82,11 +82,6 @@ const fullStackDeveloperRoadmap = {
               description:
                 "ES6+ introduces modern JavaScript syntax like arrow functions, template literals, destructuring, and classes, enhancing code readability and efficiency. This section guides learners through these updates, applying them to real-world projects like modular apps. It’s essential for staying current, writing concise code, and aligning with industry standards in 2025’s development landscape.",
             },
-            {
-              name: "TypeScript",
-              description:
-                "TypeScript adds static typing to JavaScript, catching errors early and improving code scalability. This section guides learners through interfaces, types, and generics, enhancing projects like Angular apps. It’s increasingly essential in 2025, enabling cleaner, more reliable codebases for teams building sophisticated, error-resistant web applications.",
-            },
           ],
         },
       ],
