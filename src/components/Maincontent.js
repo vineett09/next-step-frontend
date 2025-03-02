@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/Maincontent.css";
-import TechFields from "../components/TechFileds.js";
+import TechFields from "./TechFields.js";
 const Maincontent = () => {
   return (
     <div>

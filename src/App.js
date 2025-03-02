@@ -44,6 +44,13 @@ import phpRoadmap from "./data/techskills/Php";
 import kotlinRoadmap from "./data/techskills/Kotlin";
 import monogodbRoadmap from "./data/techskills/MongoDB";
 import typescriptRoadmap from "./data/techskills/Typescript";
+import angularRoadmap from "./data/techskills/Angular";
+import VueRoadmap from "./data/techskills/Vue";
+import flutterRoadmap from "./data/techskills/Flutter";
+import terraformRoadmap from "./data/techskills/Terraform";
+import redisRoadmap from "./data/techskills/Redis";
+import springbootRoadmap from "./data/techskills/SpringBoot";
+import grapgqlRoadmap from "./data/techskills/GraphQL";
 function App() {
   return (
     <Router>
@@ -70,7 +77,7 @@ function App() {
 
           <Route path="/mLOps" element={<Roadmap data={mlOpsRoadmap} />} />
           <Route
-            path="/data-science"
+            path="/data-scientist"
             element={<Roadmap data={dataScienceRoadmap} />}
           />
           <Route
@@ -90,10 +97,13 @@ function App() {
             element={<Roadmap data={cloudComputingRoadmap} />}
           />
           <Route
-            path="/blockchain"
+            path="/blockchain-developer"
             element={<Roadmap data={blockchainDeveloperRoadmap} />}
           />
-          <Route path="/devops" element={<Roadmap data={devOpsRoadmap} />} />
+          <Route
+            path="/devops-engineer"
+            element={<Roadmap data={devOpsRoadmap} />}
+          />
           <Route
             path="/game-development"
             element={<Roadmap data={gameDevelopmentRoadmap} />}
@@ -171,6 +181,19 @@ function App() {
             path="/typescript"
             element={<Roadmap data={typescriptRoadmap} />}
           />
+          <Route path="/angular" element={<Roadmap data={angularRoadmap} />} />
+          <Route path="/vuejs" element={<Roadmap data={VueRoadmap} />} />
+          <Route path="/flutter" element={<Roadmap data={flutterRoadmap} />} />
+          <Route
+            path="/terraform"
+            element={<Roadmap data={terraformRoadmap} />}
+          />
+          <Route path="/redis" element={<Roadmap data={redisRoadmap} />} />
+          <Route
+            path="/springboot"
+            element={<Roadmap data={springbootRoadmap} />}
+          />
+          <Route path="/graphql" element={<Roadmap data={grapgqlRoadmap} />} />
         </Routes>
         <Footer />
       </div>

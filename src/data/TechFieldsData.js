@@ -1,9 +1,5 @@
-// src/components/TechFields.js
-import React from "react";
-import "../styles/TechFields.css";
-import { useNavigate } from "react-router-dom";
-
-const techFields = [
+// src/data/techFieldsData.js
+export const techFields = [
   {
     id: 1,
     title: "Full Stack Developer",
@@ -16,7 +12,7 @@ const techFields = [
     id: 2,
     title: "Data Scientist",
     icon: "📊",
-    link: "/data-science",
+    link: "/data-scientist",
     description:
       "Data Science is the field of extracting actionable insights from vast datasets using statistical analysis, machine learning, and data visualization techniques. It combines programming skills (e.g., Python, R) with domain knowledge to uncover trends, predict outcomes, and solve complex problems. Data scientists clean, process, and interpret data, enabling businesses to make informed decisions in areas like marketing, healthcare, and finance.",
   },
@@ -54,9 +50,9 @@ const techFields = [
   },
   {
     id: 7,
-    title: "Blockchain",
+    title: "Blockchain Developer",
     icon: "🔑",
-    link: "/blockchain",
+    link: "/blockchain-developer",
     description:
       "Blockchain is a decentralized, secure technology for recording transactions across a network of computers, best known for powering cryptocurrencies like Bitcoin and Ethereum. It ensures transparency and immutability through cryptographic techniques, enabling applications in finance, supply chain, and smart contracts. Developers in this field build distributed ledgers and decentralized apps (DApps), revolutionizing trust and data management in various industries.",
   },
@@ -128,9 +124,9 @@ const techFields = [
   },
   {
     id: 18,
-    title: "DevOps",
+    title: "DevOps Engineer",
     icon: "🔄",
-    link: "/devops",
+    link: "/devops-engineer",
     description:
       "DevOps bridges development and operations to streamline software delivery through automation, collaboration, and continuous integration/deployment (CI/CD). Tools like Docker, Kubernetes, and Jenkins enhance efficiency and reliability. DevOps engineers manage infrastructure, monitor systems, and optimize workflows, ensuring rapid, scalable, and high-quality releases while fostering a culture of shared responsibility and agile development practices.",
   },
@@ -152,7 +148,7 @@ const techFields = [
   },
 ];
 
-const techSkills = [
+export const techSkills = [
   {
     id: 1,
     title: "JavaScript",
@@ -275,7 +271,7 @@ const techSkills = [
   },
   {
     id: 16,
-    title: "Go",
+    title: "Golang",
     icon: "🐹",
     link: "/golang",
     description:
@@ -291,11 +287,11 @@ const techSkills = [
   },
   {
     id: 18,
-    title: "Swift",
-    icon: "🐦",
-    link: "/swift",
+    title: "Terraform",
+    icon: "🌍",
+    link: "/terraform",
     description:
-      "Swift is Apple’s powerful, open-source programming language for iOS, macOS, and watchOS apps, combining safety with high performance. It offers modern syntax and features like optionals to prevent errors. Swift developers build responsive, visually rich mobile applications, using tools like Xcode to create seamless user experiences for Apple’s ecosystem with efficiency and reliability.",
+      "Terraform is an open-source infrastructure as code (IaC) tool for building, changing, and versioning infrastructure efficiently. It uses declarative configuration files to manage services and providers like AWS, Azure, and Docker. DevOps engineers use Terraform to automate provisioning, ensure consistency, and scale resources, simplifying cloud operations and enabling infrastructure changes with minimal downtime.",
   },
   {
     id: 19,
@@ -315,11 +311,11 @@ const techSkills = [
   },
   {
     id: 21,
-    title: "C",
-    icon: "🟩",
-    link: "/c",
+    title: "Redis",
+    icon: "🔴",
+    link: "/redis",
     description:
-      "C is a foundational, low-level programming language known for its speed and control over hardware, forming the basis of operating systems and embedded systems. It influences languages like C++ and Java. C developers write efficient, portable code for kernels, drivers, and firmware, mastering pointers and manual memory management for performance-critical applications.",
+      "Redis is an open-source, in-memory data structure store known for its speed and flexibility, used as a caching layer or message broker in web applications. It supports data structures like strings, hashes, and sets, enabling advanced operations and performance optimizations. Redis developers design efficient, scalable systems, leveraging its key-value store for real-time analytics, session management, and queuing mechanisms.",
   },
   {
     id: 22,
@@ -347,28 +343,21 @@ const techSkills = [
   },
   {
     id: 25,
-    title: "Django",
-    icon: "🌐",
-    link: "/django",
+    title: "Flutter",
+    icon: "✨",
+    link: "/flutter",
     description:
-      "Django is a high-level Python web framework that promotes rapid development and clean, pragmatic design for building secure, scalable applications. It includes ORM, authentication, and admin tools. Django developers create robust back-ends for websites and APIs, leveraging its ‘batteries-included’ philosophy to handle databases, security, and routing efficiently in projects from startups to enterprises.",
+      " Flutter is Google’s open-source UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase. It uses Dart, a fast, object-oriented language. Flutter developers create beautiful, responsive apps with a flexible UI, hot reload for quick updates, and native performance, enabling rapid prototyping and cross-platform development for iOS, Android, and beyond.",
   },
   {
     id: 26,
-    title: "Flask",
-    icon: "✨",
-    link: "/flask",
+    title: "Spring Boot",
+    icon: "🌲",
+    link: "/springboot",
     description:
-      "Flask is a lightweight Python web framework for building simple, flexible web applications and APIs with minimal setup. It offers routing, templating, and extensions for added functionality. Flask developers create custom, small-scale back-ends, using its microframework approach to maintain control and simplicity, ideal for prototyping, small projects, or integrating with machine learning workflows.",
+      "Spring Boot is an open-source Java framework for building microservices and standalone applications with minimal configuration. It simplifies Spring development with auto-configuration, embedded servers, and production-ready features. Spring Boot developers create robust, scalable back-end systems, leveraging its ecosystem for data access, security, and cloud integration, accelerating Java-based projects with efficiency and ease.",
   },
-  {
-    id: 27,
-    title: "Python",
-    icon: "🐍",
-    link: "/python",
-    description:
-      "Python is a versatile, high-level language loved for its readability and broad applicability in web development, data science, AI, and automation. Its rich libraries (e.g., NumPy, Flask) support diverse tasks. Python developers build scalable solutions, from scripts to complex systems, leveraging its ease of use and community-driven ecosystem for rapid development across multiple domains.",
-  },
+
   {
     id: 28,
     title: "MongoDB",
@@ -377,22 +366,7 @@ const techSkills = [
     description:
       "MongoDB is a NoSQL database that stores data in flexible, JSON-like documents, ideal for handling unstructured or semi-structured data in modern applications. It scales horizontally with ease. MongoDB developers design schemas, manage collections, and optimize queries, supporting web, mobile, and big data projects with its agility and performance in dynamic, data-intensive environments.",
   },
-  {
-    id: 29,
-    title: "PostgreSQL",
-    icon: "🐘",
-    link: "/postgresql",
-    description:
-      "PostgreSQL is an open-source, relational database system known for its robustness, extensibility, and support for advanced SQL features like JSON and full-text search. It ensures data integrity and reliability. PostgreSQL developers build and manage structured databases for enterprise applications, leveraging its ACID compliance and scalability for analytics, web, and business intelligence solutions.",
-  },
-  {
-    id: 30,
-    title: "Firebase",
-    icon: "🔥",
-    link: "/firebase",
-    description:
-      "Firebase, by Google, is a platform for building mobile and web applications with real-time databases, authentication, and cloud functions. It simplifies backend development with hosted services. Firebase developers create responsive, serverless apps, integrating features like push notifications and analytics to enhance user engagement and streamline deployment for startups and small-scale projects efficiently.",
-  },
+
   {
     id: 31,
     title: "GraphQL",
@@ -418,49 +392,3 @@ const techSkills = [
       "Selenium is an open-source tool for automating web browser interactions, primarily used for testing web applications across different platforms and browsers. It supports languages like Python and Java. QA engineers and developers use Selenium to write scripts that simulate user actions, ensuring functionality, performance, and reliability in web development through automated regression and cross-browser testing.",
   },
 ];
-
-const TechFields = () => {
-  const navigate = useNavigate();
-
-  const handleFieldClick = (field) => {
-    navigate(field.link, {
-      state: { title: field.title, description: field.description },
-    });
-  };
-
-  return (
-    <section className="tech-fields">
-      {/* Tech Fields Section */}
-      <h2>Explore Tech Fields</h2>
-      <div className="tech-grid">
-        {techFields.map((field) => (
-          <div
-            key={field.id}
-            className="tech-card"
-            onClick={() => handleFieldClick(field)}
-          >
-            <div className="tech-icon">{field.icon}</div>
-            <h3>{field.title}</h3>
-          </div>
-        ))}
-      </div>
-
-      {/* Tech Skills Section */}
-      <h2>Explore Tech Skills</h2>
-      <div className="tech-grid">
-        {techSkills.map((skill) => (
-          <div
-            key={skill.id}
-            className="tech-card"
-            onClick={() => handleFieldClick(skill)}
-          >
-            <div className="tech-icon">{skill.icon}</div>
-            <h3>{skill.title}</h3>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-export default TechFields;
