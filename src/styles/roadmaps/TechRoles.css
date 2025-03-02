@@ -15,7 +15,13 @@
   text-align: center;
   
 }
-
+@media (max-width: 768px) {
+  .role-card {
+    position: static; /* Change to static for smaller screens */
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+}
 
 .card-title {
   font-size: 1.5rem;
