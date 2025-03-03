@@ -33,7 +33,7 @@ const TechRoles = () => {
 
   return (
     <div className="role-card">
-      <h2 className="card-title">Trending Tech Roles in 2025</h2>
+      <h2 className="card-title">Trending Tech Roles in 2025 🔥</h2>
       <div className="role-list">
         {roles.map((role, index) => (
           <span

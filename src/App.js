@@ -1,6 +1,9 @@
 // src/App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Register from "./components/Register";
 import Roadmap from "./components/Roadmap";
 import fullStackDeveloperRoadmap from "./data/techroles/FullStackDeveloper";
 import Navbar from "./components/Navbar";
@@ -60,7 +63,9 @@ function App() {
         <Routes>
           {/* Homepage */}
           <Route path="/" element={<Maincontent />} />
-
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<ProtectedRoute />} />
           {/* Tech Fields */}
           <Route
             path="/full-stack-developer"

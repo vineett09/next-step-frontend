@@ -1,20 +1,110 @@
 .roadmap-container {
   width: 100%;
-  min-height: 100vh;
   --color: rgba(114, 114, 114, 0.3);
     background-color: #191a1a;
     background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
       linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
       background-size: 55px 55px;
   padding: 20px;
+  max-width: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 }
+.node:hover rect {
+  filter: brightness(1.15);
+}
+/* Wrapper for the D3 container to center and constrain the roadmap */
+.roadmap-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  margin: 20px 0;
+}
 
-.roadmap-content {
+/* D3 container styling with responsive sizing */
+.d3-container {
+  max-width: 100%;
+  min-width: 320px; /* Minimum width for very small screens */
+  position: relative;
+}
+
+/* Make the SVG responsive within its container */
+.roadmap-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 1600px; /* Maximum width on large screens */
+  margin: 0 auto;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+/* Mobile styles */
+@media (max-width: 767px) {
+  .roadmap-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .d3-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .TechRoles, .TechSkills {
+    width: 100%;
+    max-width: 350px;
+    margin: 10px 0;
+  }
+}
+
+/* Tablet/Desktop styles */
+@media (min-width: 768px) {
+  .roadmap-wrapper {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+  }
+  
+  .TechRoles, .TechSkills {
+    flex: 1;
+    margin: 10px;
+  }
+  
+  .d3-container {
+    flex: 2;
+    min-width: 600px;
+  }
+}
+/* Desktop styles */
+@media (min-width: 1024px) {
+  .roadmap-wrapper {
+    padding: 0 20px;
+  }
+  
+  .d3-container {
+    width: 1400px; /* Full width for desktop screens */
+    max-width: 90vw; /* Ensure it doesn't go off-screen */
+  }
+}
+
+/* Make nodes responsive to hover/touch */
+.node {
+  cursor: pointer;
+}
+
+p-content {
   display: flex;
   flex-direction: row;
   align-items: flex-start; /* Align card and tree at the top */
@@ -40,9 +130,6 @@
   stroke-dasharray: 5, 5; /* Makes the connection dotted */
 }
 
-.node rect {
-  cursor: pointer; /* Indicate clickable nodes */
-}
 
 .node text {
   pointer-events: none; /* Prevent text from blocking clicks */
@@ -63,8 +150,8 @@
 .sidebar {
   position: fixed; /* Fixed position to stay in place during scrolling */
   top: 0;
-  right: -30%; /* Start off-screen */
-  width: 30%;
+  right: -100%; /* Start off-screen */
+  width: 100%; /* Full width on mobile */
   height: 100%;
   background-color: #F9F6E6;
   box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.1);
@@ -115,19 +202,34 @@
   line-height: 1.6;
   color: #000; /* Softer text color for the description */
 }
+
+/* Responsive adjustments for the sidebar */
+@media (min-width: 768px) {
+  .sidebar {
+    width: 50%; /* Smaller width on tablets */
+    right: -50%; /* Adjust off-screen position */
+  }
+}
+
+@media (min-width: 1024px) {
+  .sidebar {
+    width: 30%; /* Original width on desktops */
+    right: -30%; /* Adjust off-screen position */
+  }
+}
 .container {
   display: flex;
   align-items: center;
   justify-content: flex-start; /* Aligns to the left */
   position: absolute;
-  left: 50px; /* Adjust as needed */
-  top: 300px; /* Adjust vertical position */
+  left: 100px; /* Default position */
+  top: 400px; /* Default vertical position */
 }
 
 .color-box {
   width: 20px;
-  height:20px;
-  background-color: #FF8C00; /* Change to any color */
+  height: 20px;
+  background-color: #FF8C00; /* Default color */
   margin-right: 5px; /* Space between box and text */
 }
 
@@ -135,4 +237,62 @@
   font-size: 16px;
   margin-left: 2px;
   color: #fff;
+}
+
+/* Medium Screens (Tablets) */
+@media (max-width: 1024px) {
+  .container {
+    left: 30px; /* Adjust position */
+    top: 450px;
+  }
+  
+  .color-box {
+    width: 18px;
+    height: 18px;
+    background-color: #FF8C00; /* Slightly lighter orange */
+  }
+  
+  .text {
+    font-size: 14px;
+  }
+}
+
+/* Small Screens (Mobile) */
+@media (max-width: 768px) {
+  .container {
+    left: 10px; /* Move closer to the left */
+    top: 600px;
+  }
+
+  .color-box {
+    width: 16px;
+    height: 16px;
+    background-color: #FF8C00; /* Lighter gold color */
+  }
+
+  .text {
+    font-size: 12px;
+  }
+}
+
+/* Extra Small Screens */
+@media (max-width: 480px) {
+  .container {
+    position: relative; /* Make it part of normal flow */
+    left: auto;
+    top: auto;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .color-box {
+    width: 14px;
+    height: 14px;
+    background-color: #FF8C00; /* Yellow for high visibility */
+  }
+
+  .text {
+    font-size: 10px;
+    text-align: center;
+  }
 }

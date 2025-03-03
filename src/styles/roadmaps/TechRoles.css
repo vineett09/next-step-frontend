@@ -1,44 +1,61 @@
 .role-card {
-  position: absolute;
-  top: 20px;
-  left: 10px;
-  width: 100%;
-  max-width: 400px;
-  background: #000;
-  border-radius: 10px;
+  width: auto; /* Full width */
+  background: #000; /* Dark background */
   box-shadow: 
-  0 0 5px #e61dff, 
-  0 0 10px #3cc7fa, 
-  0 0 15px #857dfd, 
-  0 0 20px #9d65fc;
-  padding: 20px;
+    0 0 5px #e61dff, 
+    0 0 10px #3cc7fa, 
+    0 0 15px #857dfd, 
+    0 0 20px #9d65fc;
+    border-radius: 10px;
+  padding: 10px 20px; /* Adjust padding for navbar */
   text-align: center;
-  
+  display: flex;
+  flex-direction: column; /* Stack items vertically on small screens */
+  align-items: flex-start; /* Align items to the left */
 }
 
-
 .card-title {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #fff;
-  margin-bottom: 15px;
+  margin: 0; /* Remove margin for navbar */
 }
 
 .role-list {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 10px; /* Space between badges */
+  align-items: center; /* Center items vertically */
+  margin-left: 0; /* Remove left margin on small screens */
+  margin-top: 10px; /* Add space between title and badges */
 }
 
 .role-badge {
   background: #31891d;
   color: #fff;
   padding: 8px 12px;
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 0.9rem;
   font-weight: 500;
-  display: inline-block;
   white-space: nowrap;
   cursor: pointer;
+  transition: background 0.3s ease; /* Smooth hover effect */
+}
+
+.role-badge:hover {
+  background: #1f5a13; /* Darker shade on hover */
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .role-card {
+    flex-direction: row; /* Horizontal layout on larger screens */
+    align-items: center; /* Center items vertically */
+  }
+
+  .role-list {
+    flex-wrap: nowrap; /* Prevent wrapping on larger screens */
+    margin-left: 40px; /* Restore left margin */
+    margin-top: 0; /* Remove top margin */
+  }
 }

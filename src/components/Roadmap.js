@@ -15,8 +15,6 @@ const Roadmap = ({ data }) => {
   });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Remove the preferredNodes state since we'll use the data directly
-
   const location = useLocation();
   const roadmapTitle =
     location.state?.title || "Explore Your Path to Tech Excellence";
@@ -33,6 +31,7 @@ const Roadmap = ({ data }) => {
     if (data && d3Container.current) {
       d3.select(d3Container.current).selectAll("*").remove();
 
+      // Fixed dimensions for the diagram - will be scaled by CSS
       const width = 1200;
       const margin = { top: 50, right: 200, bottom: 50, left: 200 };
       const FIXED_LINE_LENGTH = 100;
@@ -43,14 +42,17 @@ const Roadmap = ({ data }) => {
         .select(d3Container.current)
         .append("svg")
         .attr("width", width + margin.left + margin.right)
-        .attr("height", 1000);
+        .attr("height", 1000)
+        .attr("class", "roadmap-svg")
+        .attr("preserveAspectRatio", "xMidYMid meet")
+        .attr("viewBox", `0 0 ${width + margin.left + margin.right} 1000`);
 
       const measureSvg = svgElement.append("g").style("visibility", "hidden");
 
       const measureText = (text) => {
         const textElement = measureSvg
           .append("text")
-          .attr("font-size", "14px")
+          .attr("font-size", "15px")
           .attr("font-family", "Arial, sans-serif")
           .text(text);
         const bbox = textElement.node().getBBox();
@@ -122,7 +124,7 @@ const Roadmap = ({ data }) => {
         .append("text")
         .attr("dy", "0.35em")
         .attr("text-anchor", "middle")
-        .attr("font-size", "16px")
+        .attr("font-size", "15px")
         .attr("font-family", "Arial, sans-serif")
         .attr("fill", "black")
         .text(titleText);
@@ -183,6 +185,10 @@ const Roadmap = ({ data }) => {
 
       const totalHeight = currentY + margin.top + margin.bottom;
       svgElement.attr("height", totalHeight);
+      svgElement.attr(
+        "viewBox",
+        `0 0 ${width + margin.left + margin.right} ${totalHeight}`
+      );
 
       // Draw main spine with gaps for divider text
       parentPositions.forEach((position, index) => {
@@ -279,7 +285,7 @@ const Roadmap = ({ data }) => {
           .append("text")
           .attr("dy", "0.35em")
           .attr("text-anchor", "middle")
-          .attr("font-size", "14px")
+          .attr("font-size", "15px")
           .attr("font-family", "Arial, sans-serif")
           .attr("x", xOffset)
           .text(node.name);
@@ -514,6 +520,9 @@ const Roadmap = ({ data }) => {
   // Effect to render roadmap when data changes
   useEffect(() => {
     renderRoadmap();
+    // Add window resize listener
+    window.addEventListener("resize", renderRoadmap);
+    return () => window.removeEventListener("resize", renderRoadmap);
   }, [data]);
 
   const closeDescription = () => {
@@ -521,20 +530,20 @@ const Roadmap = ({ data }) => {
     setIsSidebarOpen(false);
   };
 
-  // Remove the helper message about right-click functionality since we're not using it anymore
-
   return (
     <div className="roadmap-container">
-      <Header title={roadmapTitle} />
-      <div class="container">
-        <div class="color-box"></div>
-        <span class="text">Recommended/Required</span>
-      </div>
-
       <TechRoles />
       <TechSkills />
+      <Header title={roadmapTitle} />
 
-      <div ref={d3Container} />
+      <div className="roadmap-wrapper">
+        <div ref={d3Container} className="d3-container" />
+        <div className="container">
+          <div className="color-box"></div>
+          <span className="text">Recommended/Required</span>
+        </div>
+        <div className="cards-container"></div>
+      </div>
 
       <Sidebar
         isOpen={isSidebarOpen}

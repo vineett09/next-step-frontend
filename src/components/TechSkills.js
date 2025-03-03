@@ -31,7 +31,7 @@ const TechSkills = () => {
 
   return (
     <div className="skills-card">
-      <h2 className="card-title">Trending Languages in 2025</h2>
+      <h2 className="card-title">Trending Languages in 2025 🔥</h2>
       <div className="skills-list">
         {skills.map((skill, index) => (
           <span

@@ -1,30 +1,52 @@
-// src/components/Navbar.js
-import React, { useState } from "react";
-import "../styles/Navbar.css"; // We'll update the CSS file next
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../features/authslice";
+import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.auth.user);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
   return (
     <nav className="navbar">
-      <div className="navbar-logo">NextStep</div>
+      <div className="navbar-logo" onClick={() => navigate("/")}>
+        NextStep
+      </div>
       <div className={`navbar-links ${isOpen ? "active" : ""}`}>
-        <a href="/" className="nav-link">
+        <button className="nav-link" onClick={() => navigate("/")}>
           Home
-        </a>
-        <a href="/about" className="nav-link">
-          About
-        </a>
-        <a href="/services" className="nav-link">
-          Services
-        </a>
-        <a href="/contact" className="nav-link">
-          Contact
-        </a>
+        </button>
+
+        {user ? (
+          <>
+            <span className="nav-user">Hello, {user.username}</span>
+            <button className="nav-link" onClick={handleLogout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <button className="nav-link" onClick={() => navigate("/login")}>
+              Login
+            </button>
+            <button className="nav-link" onClick={() => navigate("/register")}>
+              Register
+            </button>
+          </>
+        )}
       </div>
       <div className="navbar-toggle" onClick={toggleMenu}>
         <span className={`bar ${isOpen ? "change" : ""}`}></span>
