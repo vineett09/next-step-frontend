@@ -1,0 +1,93 @@
+/* Wrapper to keep button at the bottom */
+.tipbox-wrapper {
+    position: fixed;
+    left: 90px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Floating button styling */
+  .tipbox-btn {
+    padding: 6px 15px;
+    font-size: 18px;
+    color: #ffffff;
+    border: 1px solid #ffffff;   
+    background-color: transparent ;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+
+  
+  /* Tooltip (TipBox) styling */
+  .tipbox-container {
+    position: absolute;
+    bottom: 60px; /* Appears above the button */
+    right: 50%;
+    transform: translateX(50%) translateY(10px);
+    visibility: hidden;
+    opacity: 0;
+    width: 240px;
+    background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 15px;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    box-shadow: 0px 10px 20px rgba(0, 123, 255, 0.3);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+  }
+  
+  /* Show tooltip smoothly */
+  .tipbox-container.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(50%) translateY(-10px);
+  }
+  
+  /* Tooltip arrow */
+  .tipbox-arrow {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #007bff;
+  }
+  
+  /* Legend item styling */
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  
+  .color-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  
+  .tipbox-text {
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .instruction-text {
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 5px;
+  }
+  

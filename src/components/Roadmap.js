@@ -6,6 +6,10 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import TechSkills from "./TechSkills";
 import TechRoles from "./TechRoles";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import TipBox from "./TipBox";
+import Chatbot from "./Chatbot"; // Import Chatbot
 
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
@@ -14,15 +18,130 @@ const Roadmap = ({ data }) => {
     description: "",
   });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+  const [completedNodes, setCompletedNodes] = useState({});
+  const { user, token } = useSelector((state) => state.auth);
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const location = useLocation();
+  const roadmapId = location.pathname.split("/").pop(); // Extract roadmap ID from URL
   const roadmapTitle =
     location.state?.title || "Explore Your Path to Tech Excellence";
   const roadmapDescription =
     location.state?.description || "Select a field to learn more.";
 
-  // Function to get node color based on preference
+  // Fetch user progress for this roadmap when component mounts
+  useEffect(() => {
+    if (user && token && roadmapId) {
+      fetchUserProgress();
+      fetchBookmarkStatus();
+    }
+  }, [user, token, roadmapId]);
+
+  // Function to fetch user progress
+  const fetchUserProgress = async () => {
+    try {
+      const response = await axios.get(`/api/progress/${roadmapId}`, {
+        headers: {
+          "x-auth-token": token,
+          Authorization: `Bearer ${token}`, // Add this as an alternative
+        },
+      });
+
+      // Convert array of completed nodes to an object for easier lookup
+      const progressMap = response.data.reduce((acc, item) => {
+        acc[item.nodeId] = {
+          completed: true,
+          timestamp: item.timestamp,
+        };
+        return acc;
+      }, {});
+
+      setCompletedNodes(progressMap);
+    } catch (error) {
+      console.error("Error fetching user progress:", error);
+    }
+  };
+  const fetchBookmarkStatus = async () => {
+    try {
+      const response = await axios.get("/api/bookmark/bookmarks", {
+        headers: {
+          "x-auth-token": token,
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setIsBookmarked(response.data.includes(roadmapId));
+    } catch (error) {
+      console.error("Error fetching bookmark status:", error);
+    }
+  };
+  // Function to toggle node completion status
+  const toggleNodeCompletion = async (nodeId) => {
+    if (!user || !token) {
+      // Prompt user to log in
+      alert("Please log in to mark as completed");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "/api/progress/toggle",
+        { roadmapId, nodeId },
+        {
+          headers: {
+            "x-auth-token": token,
+            Authorization: `Bearer ${token}`, // Add this as an alternative
+          },
+        }
+      );
+
+      if (response.data.success) {
+        setCompletedNodes((prev) => {
+          const newState = { ...prev };
+          if (response.data.completed) {
+            newState[nodeId] = {
+              completed: true,
+              timestamp: response.data.timestamp,
+            };
+          } else {
+            delete newState[nodeId];
+          }
+          return newState;
+        });
+      }
+    } catch (error) {
+      console.error("Error updating progress:", error);
+    }
+  };
+  const toggleBookmark = async () => {
+    if (!user || !token) {
+      alert("Please log in to bookmark this roadmap");
+      return;
+    }
+    try {
+      const response = await axios.post(
+        "/api/bookmark/bookmark-toggle",
+        { roadmapId },
+        {
+          headers: {
+            "x-auth-token": token,
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data.success) {
+        setIsBookmarked(response.data.bookmarked);
+      }
+    } catch (error) {
+      console.error("Error toggling bookmark:", error);
+    }
+  };
+  // Function to get node color based on preference and completion status
   const getNodeColor = (node, defaultColor) => {
+    const nodeId = node.id || node.name; // Use ID if available, otherwise name
+
+    if (completedNodes[nodeId]) {
+      return "#4CAF50"; // Green for completed nodes
+    }
+
     return node.preferred ? "#FF8C00" : defaultColor; // Use orange for preferred nodes
   };
 
@@ -116,7 +235,7 @@ const Roadmap = ({ data }) => {
         .attr("y", -titleDimensions.height / 2)
         .attr("rx", 10)
         .attr("ry", 10)
-        .attr("fill", getNodeColor(data, "#E8BCB9")) // Use the root data node for the title
+        .attr("fill", getNodeColor(data, "#FFD93D")) // Use the root data node for the title
         .attr("stroke", "black")
         .attr("stroke-width", 2);
 
@@ -129,13 +248,19 @@ const Roadmap = ({ data }) => {
         .attr("fill", "black")
         .text(titleText);
 
-      // Add click handler for title
+      // Add left-click handler for title (sidebar info)
       titleGroup.on("click", () => {
         setSelectedNode({
           name: titleText,
           description: roadmapDescription,
         });
         setIsSidebarOpen(true);
+      });
+
+      // Add right-click handler for title (mark complete)
+      titleGroup.on("contextmenu", (event) => {
+        event.preventDefault(); // Prevent browser context menu
+        toggleNodeCompletion(data.id || titleText);
       });
 
       // Connect the title to the first node
@@ -149,7 +274,7 @@ const Roadmap = ({ data }) => {
         .attr("y1", lineStartY)
         .attr("x2", width / 2)
         .attr("y2", lineEndY)
-        .attr("stroke", "#1565C0")
+        .attr("stroke", "#FFD93D")
         .attr("stroke-width", 3)
         .attr("opacity", 0.7)
         .attr("stroke-dasharray", "5,5");
@@ -207,7 +332,7 @@ const Roadmap = ({ data }) => {
               .attr("y1", startY)
               .attr("x2", width / 2)
               .attr("y2", prevPosition.dividerY - DIVIDER_PADDING)
-              .attr("stroke", "#1565C0")
+              .attr("stroke", "#FFD93D")
               .attr("stroke-width", 3)
               .attr("opacity", 0.7);
 
@@ -231,7 +356,7 @@ const Roadmap = ({ data }) => {
               .attr("y1", prevPosition.dividerY + DIVIDER_PADDING)
               .attr("x2", width / 2)
               .attr("y2", endY)
-              .attr("stroke", "#1565C0")
+              .attr("stroke", "#FFD93D")
               .attr("stroke-width", 3)
               .attr("opacity", 0.7);
           } else {
@@ -243,7 +368,7 @@ const Roadmap = ({ data }) => {
               .attr("y1", startY)
               .attr("x2", width / 2)
               .attr("y2", endY)
-              .attr("stroke", "#1565C0")
+              .attr("stroke", "#FFD93D")
               .attr("stroke-width", 3)
               .attr("opacity", 0.7);
           }
@@ -266,7 +391,7 @@ const Roadmap = ({ data }) => {
           xOffset = isLeft ? -growthOffset : growthOffset;
         }
 
-        // Apply preferred color if node is marked as preferred
+        // Apply appropriate color based on completion status and preferences
         const fillColor = getNodeColor(node, defaultFillColor);
 
         group
@@ -307,13 +432,17 @@ const Roadmap = ({ data }) => {
               description: parent.description,
             });
             setIsSidebarOpen(true);
+          })
+          .on("contextmenu", (event) => {
+            event.preventDefault(); // Prevent browser context menu
+            toggleNodeCompletion(parent.id || parent.name);
           });
 
         const parentBox = createNode(
           parentGroup,
           parent,
           parent.dimensions,
-          "#E8BCB9",
+          "#FFD93D",
           "black"
         );
 
@@ -358,13 +487,17 @@ const Roadmap = ({ data }) => {
                     description: child.description,
                   });
                   setIsSidebarOpen(true);
+                })
+                .on("contextmenu", (event) => {
+                  event.preventDefault(); // Prevent browser context menu
+                  toggleNodeCompletion(child.id || child.name);
                 });
 
               createNode(
                 childGroup,
                 child,
                 child.dimensions,
-                "#E17564",
+                "#FFE69A",
                 "black",
                 isLeft
               );
@@ -391,7 +524,7 @@ const Roadmap = ({ data }) => {
                 .append("path")
                 .attr("class", "child-link")
                 .attr("d", path.toString())
-                .attr("stroke", "#4CAF50")
+                .attr("stroke", "#FFD93D")
                 .attr("stroke-width", 2)
                 .attr("fill", "none")
                 .attr("opacity", 0.7)
@@ -445,13 +578,19 @@ const Roadmap = ({ data }) => {
                           description: nestedChild.description,
                         });
                         setIsSidebarOpen(true);
+                      })
+                      .on("contextmenu", (event) => {
+                        event.preventDefault(); // Prevent browser context menu
+                        toggleNodeCompletion(
+                          nestedChild.id || nestedChild.name
+                        );
                       });
 
                     createNode(
                       nestedGroup,
                       nestedChild,
                       nestedChild.dimensions,
-                      "#FFF4B7", // Default color for nested children
+                      "#FFFFDD", // Default color for nested children
                       "black",
                       isNestedLeft
                     );
@@ -484,7 +623,7 @@ const Roadmap = ({ data }) => {
                       .append("path")
                       .attr("class", "nested-link")
                       .attr("d", nestedPath.toString())
-                      .attr("stroke", "#4CAF50")
+                      .attr("stroke", "#FFD93D")
                       .attr("stroke-width", 2)
                       .attr("fill", "none")
                       .attr("opacity", 0.7)
@@ -517,13 +656,13 @@ const Roadmap = ({ data }) => {
     }
   };
 
-  // Effect to render roadmap when data changes
+  // Effect to render roadmap when data or completedNodes changes
   useEffect(() => {
     renderRoadmap();
     // Add window resize listener
     window.addEventListener("resize", renderRoadmap);
     return () => window.removeEventListener("resize", renderRoadmap);
-  }, [data]);
+  }, [data, completedNodes]);
 
   const closeDescription = () => {
     setSelectedNode({ name: "", description: "" });
@@ -534,17 +673,19 @@ const Roadmap = ({ data }) => {
     <div className="roadmap-container">
       <TechRoles />
       <TechSkills />
-      <Header title={roadmapTitle} />
+
+      <Header
+        title={roadmapTitle}
+        toggleBookmark={toggleBookmark}
+        isBookmarked={isBookmarked}
+      />
 
       <div className="roadmap-wrapper">
         <div ref={d3Container} className="d3-container" />
-        <div className="container">
-          <div className="color-box"></div>
-          <span className="text">Recommended/Required</span>
-        </div>
+        <Chatbot roadmapTitle={roadmapTitle} data={data} /> {/* Add chatbot */}
         <div className="cards-container"></div>
       </div>
-
+      <TipBox />
       <Sidebar
         isOpen={isSidebarOpen}
         onClose={closeDescription}

@@ -26,10 +26,6 @@ const Navbar = () => {
         NextStep
       </div>
       <div className={`navbar-links ${isOpen ? "active" : ""}`}>
-        <button className="nav-link" onClick={() => navigate("/")}>
-          Home
-        </button>
-
         {user ? (
           <>
             <span className="nav-user">Hello, {user.username}</span>
@@ -43,7 +39,7 @@ const Navbar = () => {
               Login
             </button>
             <button className="nav-link" onClick={() => navigate("/register")}>
-              Register
+              Sign Up
             </button>
           </>
         )}

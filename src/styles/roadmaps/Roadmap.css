@@ -1,10 +1,51 @@
 .roadmap-container {
   width: 100%;
-  --color: rgba(114, 114, 114, 0.3);
-    background-color: #191a1a;
-    background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent),
-      linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
-      background-size: 55px 55px;
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        #282828 23.5%,
+        rgba(255, 170, 0, 0) 0
+      )
+      21px 30px,
+    radial-gradient(
+        circle farthest-side at 0% 50%,
+        #2c3539 24%,
+        rgba(240, 166, 17, 0) 0
+      )
+      19px 30px,
+    linear-gradient(
+        #282828 14%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 85%,
+        #282828 0
+      )
+      0 0,
+    linear-gradient(
+        150deg,
+        #282828 24%,
+        #2c3539 0,
+        #2c3539 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        #2c3539 0,
+        #2c3539 76%,
+        #282828 0
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        #282828 24%,
+        #2c3539 0,
+        #2c3539 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        #2c3539 0,
+        #2c3539 76%,
+        #282828 0
+      )
+      0 0,
+    linear-gradient(90deg, #2c3539 2%, #282828 0, #282828 98%, #2c3539 0%) 0 0
+      #282828;
+  background-size: 40px 60px;
   padding: 20px;
   max-width: 100%;
   overflow-x: hidden;
@@ -217,82 +258,5 @@ p-content {
     right: -30%; /* Adjust off-screen position */
   }
 }
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Aligns to the left */
-  position: absolute;
-  left: 100px; /* Default position */
-  top: 400px; /* Default vertical position */
-}
 
-.color-box {
-  width: 20px;
-  height: 20px;
-  background-color: #FF8C00; /* Default color */
-  margin-right: 5px; /* Space between box and text */
-}
 
-.text {
-  font-size: 16px;
-  margin-left: 2px;
-  color: #fff;
-}
-
-/* Medium Screens (Tablets) */
-@media (max-width: 1024px) {
-  .container {
-    left: 30px; /* Adjust position */
-    top: 450px;
-  }
-  
-  .color-box {
-    width: 18px;
-    height: 18px;
-    background-color: #FF8C00; /* Slightly lighter orange */
-  }
-  
-  .text {
-    font-size: 14px;
-  }
-}
-
-/* Small Screens (Mobile) */
-@media (max-width: 768px) {
-  .container {
-    left: 10px; /* Move closer to the left */
-    top: 600px;
-  }
-
-  .color-box {
-    width: 16px;
-    height: 16px;
-    background-color: #FF8C00; /* Lighter gold color */
-  }
-
-  .text {
-    font-size: 12px;
-  }
-}
-
-/* Extra Small Screens */
-@media (max-width: 480px) {
-  .container {
-    position: relative; /* Make it part of normal flow */
-    left: auto;
-    top: auto;
-    justify-content: center;
-    margin-top: 10px;
-  }
-
-  .color-box {
-    width: 14px;
-    height: 14px;
-    background-color: #FF8C00; /* Yellow for high visibility */
-  }
-
-  .text {
-    font-size: 10px;
-    text-align: center;
-  }
-}
