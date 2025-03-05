@@ -15,7 +15,7 @@ const TechFields = () => {
 
   return (
     <section className="tech-fields">
-      <h2>Explore Tech Fields</h2>
+      <h2>Explore Tech Roles</h2>
       <div className="tech-grid">
         {techFields.map((field) => (
           <div

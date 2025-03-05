@@ -55,12 +55,12 @@ const Chatbot = ({ roadmapTitle, data }) => {
     <>
       {!isOpen && (
         <div className="chatbot-icon" onClick={() => setIsOpen(true)}>
-          <button class="sparkle-button">
-            <span class="spark"></span>
+          <button className="sparkle-button">
+            <span className="spark"></span>
 
-            <span class="backdrop"></span>
+            <span className="backdrop"></span>
             <svg
-              class="sparkle"
+              className="sparkle"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -87,12 +87,12 @@ const Chatbot = ({ roadmapTitle, data }) => {
                 stroke-linejoin="round"
               ></path>
             </svg>
-            <span class="text">Ask AI</span>
+            <span className="text">Ask AI</span>
           </button>
-          <div class="bodydrop"></div>
-          <span aria-hidden="true" class="particle-pen">
+          <div className="bodydrop"></div>
+          <span aria-hidden="true" className="particle-pen">
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +106,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +120,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +134,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +148,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +162,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +176,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +190,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +204,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +218,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -232,7 +232,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -246,7 +246,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -260,7 +260,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -274,7 +274,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -288,7 +288,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -302,7 +302,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -316,7 +316,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -330,7 +330,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -344,7 +344,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -358,7 +358,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               ></path>
             </svg>
             <svg
-              class="particle"
+              className="particle"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

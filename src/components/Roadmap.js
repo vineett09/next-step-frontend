@@ -10,7 +10,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import TipBox from "./TipBox";
 import Chatbot from "./Chatbot"; // Import Chatbot
-
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
   const [selectedNode, setSelectedNode] = useState({
@@ -690,30 +691,34 @@ const Roadmap = ({ data }) => {
   };
 
   return (
-    <div className="roadmap-container">
-      <TechRoles />
-      <TechSkills />
+    <div className="roadmap">
+      <Navbar />
+      <div className="roadmap-container">
+        <TechRoles />
+        <TechSkills />
 
-      <Header
-        title={roadmapTitle}
-        toggleBookmark={toggleBookmark}
-        isBookmarked={isBookmarked}
-        completedNodes={completedNodes}
-        totalNodes={totalNodes}
-      />
+        <Header
+          title={roadmapTitle}
+          toggleBookmark={toggleBookmark}
+          isBookmarked={isBookmarked}
+          completedNodes={completedNodes}
+          totalNodes={totalNodes}
+        />
 
-      <div className="roadmap-wrapper">
-        <div ref={d3Container} className="d3-container" />
-        <Chatbot roadmapTitle={roadmapTitle} data={data} />
-        <div className="cards-container"></div>
+        <div className="roadmap-wrapper">
+          <div ref={d3Container} className="d3-container" />
+          <Chatbot roadmapTitle={roadmapTitle} data={data} />
+          <div className="cards-container"></div>
+        </div>
+        <TipBox />
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onClose={closeDescription}
+          name={selectedNode.name}
+          description={selectedNode.description}
+        />
       </div>
-      <TipBox />
-      <Sidebar
-        isOpen={isSidebarOpen}
-        onClose={closeDescription}
-        name={selectedNode.name}
-        description={selectedNode.description}
-      />
+      <Footer />
     </div>
   );
 };

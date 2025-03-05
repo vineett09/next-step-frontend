@@ -6,8 +6,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./components/Register";
 import Roadmap from "./components/Roadmap";
 import fullStackDeveloperRoadmap from "./data/techroles/FullStackDeveloper";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import Maincontent from "./components/Maincontent";
 import dataScienceRoadmap from "./data/techroles/DataScience";
 import aiEngineerRoadmap from "./data/techroles/ArtificialIntelligence";
@@ -58,8 +56,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
-
         <Routes>
           {/* Homepage */}
           <Route path="/" element={<Maincontent />} />
@@ -200,7 +196,6 @@ function App() {
           />
           <Route path="/graphql" element={<Roadmap data={grapgqlRoadmap} />} />
         </Routes>
-        <Footer />
       </div>
     </Router>
   );

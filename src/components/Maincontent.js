@@ -1,9 +1,14 @@
 import React from "react";
 import "../styles/Maincontent.css";
 import TechFields from "./TechFields.js";
+import Footer from "./Footer.js";
+import Navbar from "./Navbar.js";
+import { useNavigate } from "react-router-dom";
 const Maincontent = () => {
+  const navigate = useNavigate();
   return (
     <div>
+      <Navbar />
       <section className="hero">
         <div className="hero-content">
           <h1>Your Path to Success Starts Here</h1>
@@ -11,17 +16,6 @@ const Maincontent = () => {
             Discover personalized roadmaps to master new skills, advance your
             career, and achieve your goals.
           </p>
-          <div className="hero-buttons">
-            <a href="/signup" className="btn-primary">
-              Get Started
-            </a>
-            <a href="/explore" className="btn-secondary">
-              Explore Roadmaps
-            </a>
-          </div>
-        </div>
-        <div className="hero-image">
-          <img src="roadmap-hero.png" alt="Roadmap Illustration" />
         </div>
       </section>
       <TechFields />
@@ -31,10 +25,11 @@ const Maincontent = () => {
           Join thousands of learners who are achieving their goals with our
           roadmaps.
         </p>
-        <a href="/signup" className="btn-primary">
+        <button className="btn-primary" onClick={() => navigate("/register")}>
           Sign Up Now
-        </a>
+        </button>
       </section>
+      <Footer />
     </div>
   );
 };
