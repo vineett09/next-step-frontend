@@ -18,6 +18,7 @@
   padding-top: 50px;
   display: flex;
   flex-direction: column;
+  display: inline-block;
 }
 
 .roadmap-header h1 {
@@ -43,6 +44,27 @@
   color: #fff;
   background-color: transparent;
 }
+
+
+.progress-wrapper {
+  display: flex;
+  justify-content: flex-start; /* Aligns text to the left */
+  width: fit-content; /* Takes only necessary space */
+  margin-bottom: 10px; /* Adds spacing between text and h1 */
+}
+
+.progress-text {
+  display: inline-block; /* Ensures it takes only necessary space */
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  text-align: left;
+  font-style: italic;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 5px 5px;
+}
+
 
 .back-button svg {
   width: 24px;

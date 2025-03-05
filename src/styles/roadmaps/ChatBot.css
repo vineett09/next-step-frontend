@@ -250,7 +250,8 @@
 
 /* Chatbot Header */
 .chatbot-header {
-  background: radial-gradient(circle at top, #7f00ff, #e100ff); /* Adjusted gradient */
+  background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff7eb3);
+  
   color: white;
   padding: 12px;
   display: flex;
@@ -260,6 +261,21 @@
   font-weight: bold;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+}
+.welcome-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #666; /* Adjust color as needed */
+  font-size: 1.1em; /* Adjust size as needed */
+  background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff7eb3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  display: inline-block;color: linear-gradient(90deg, #ff7eb3, #ff758c, #ff7eb3);
+  font-weight: 600;
 }
 
 
@@ -284,6 +300,7 @@
   gap: 10px; /* Adds spacing between messages */
   scrollbar-width: thin;
   scrollbar-color: #d1d1d1 transparent;
+  position: relative; /* Add this to allow absolute positioning of welcome message */
 }
 
 .chatbot-messages::-webkit-scrollbar {

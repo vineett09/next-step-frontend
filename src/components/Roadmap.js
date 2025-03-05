@@ -27,7 +27,25 @@ const Roadmap = ({ data }) => {
     location.state?.title || "Explore Your Path to Tech Excellence";
   const roadmapDescription =
     location.state?.description || "Select a field to learn more.";
+  const [totalNodes, setTotalNodes] = useState(0);
+  // New function to count total nodes recursively
+  const countTotalNodes = (nodes) => {
+    let count = 0;
+    const countRecursive = (nodeList) => {
+      nodeList.forEach((node) => {
+        count++;
+        if (node.children) {
+          countRecursive(node.children);
+        }
+      });
+    };
 
+    if (nodes.children) {
+      countRecursive(nodes.children);
+    }
+
+    return count;
+  };
   // Fetch user progress for this roadmap when component mounts
   useEffect(() => {
     if (user && token && roadmapId) {
@@ -35,6 +53,14 @@ const Roadmap = ({ data }) => {
       fetchBookmarkStatus();
     }
   }, [user, token, roadmapId]);
+
+  // New useEffect to count total nodes
+  useEffect(() => {
+    if (data) {
+      const nodeCount = countTotalNodes(data);
+      setTotalNodes(nodeCount);
+    }
+  }, [data]);
 
   // Function to fetch user progress
   const fetchUserProgress = async () => {
@@ -255,12 +281,6 @@ const Roadmap = ({ data }) => {
           description: roadmapDescription,
         });
         setIsSidebarOpen(true);
-      });
-
-      // Add right-click handler for title (mark complete)
-      titleGroup.on("contextmenu", (event) => {
-        event.preventDefault(); // Prevent browser context menu
-        toggleNodeCompletion(data.id || titleText);
       });
 
       // Connect the title to the first node
@@ -678,11 +698,13 @@ const Roadmap = ({ data }) => {
         title={roadmapTitle}
         toggleBookmark={toggleBookmark}
         isBookmarked={isBookmarked}
+        completedNodes={completedNodes}
+        totalNodes={totalNodes}
       />
 
       <div className="roadmap-wrapper">
         <div ref={d3Container} className="d3-container" />
-        <Chatbot roadmapTitle={roadmapTitle} data={data} /> {/* Add chatbot */}
+        <Chatbot roadmapTitle={roadmapTitle} data={data} />
         <div className="cards-container"></div>
       </div>
       <TipBox />

@@ -1,30 +1,40 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { IoChatbubbleEllipses, IoClose, IoSend } from "react-icons/io5";
+import { IoClose, IoSend } from "react-icons/io5";
 import "../styles/roadmaps/ChatBot.css";
-
+import { useSelector } from "react-redux"; // Add this import
 const Chatbot = ({ roadmapTitle, data }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const messagesEndRef = useRef(null);
+  const { user, token } = useSelector((state) => state.auth);
+  const isAuthenticated = user && token;
 
   const handleSend = async () => {
-    if (!input.trim()) return;
+    if (!input.trim() || !isAuthenticated) return;
 
     const userMessage = { sender: "user", text: input };
     setMessages([...messages, userMessage]);
 
     try {
-      const response = await axios.post("/api/chatbot", {
-        message: input,
-        roadmapTitle,
-        roadmapData: JSON.stringify(data), // Send roadmap content as well
-      });
+      const response = await axios.post(
+        "/api/chatbot",
+        {
+          message: input,
+          roadmapTitle,
+          roadmapData: JSON.stringify(data),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const botMessage = {
         sender: "bot",
-        text: response.data.reply.replace(/\n/g, "<br/>"), // Preserve line breaks
+        text: response.data.reply.replace(/\n/g, "<br/>"),
       };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
@@ -37,7 +47,6 @@ const Chatbot = ({ roadmapTitle, data }) => {
 
     setInput("");
   };
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -378,11 +387,26 @@ const Chatbot = ({ roadmapTitle, data }) => {
           </div>
 
           <div className="chatbot-messages">
-            {messages.map((msg, index) => (
-              <div key={index} className={`chat-message ${msg.sender}`}>
-                <span dangerouslySetInnerHTML={{ __html: msg.text }} />
+            {!isAuthenticated && (
+              <div className="chat-message bot">
+                <span>
+                  Please login to use the chatbot.{" "}
+                  <a href="/login">Click here to login</a>
+                </span>
               </div>
-            ))}
+            )}
+            {isAuthenticated && messages.length === 0 && (
+              <div className="welcome-message">
+                <span>Hello {user.username}! How can i help you?</span>
+              </div>
+            )}
+            {isAuthenticated &&
+              messages.length > 0 &&
+              messages.map((msg, index) => (
+                <div key={index} className={`chat-message ${msg.sender}`}>
+                  <span dangerouslySetInnerHTML={{ __html: msg.text }} />
+                </div>
+              ))}
             <div ref={messagesEndRef} />
           </div>
 
@@ -392,8 +416,9 @@ const Chatbot = ({ roadmapTitle, data }) => {
               placeholder="Ask about this roadmap..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              disabled={!isAuthenticated}
             />
-            <button onClick={handleSend}>
+            <button onClick={handleSend} disabled={!isAuthenticated}>
               <IoSend size={20} />
             </button>
           </div>
