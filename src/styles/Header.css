@@ -45,16 +45,15 @@
   background-color: transparent;
 }
 
-
 .progress-wrapper {
   display: flex;
-  justify-content: flex-start; /* Aligns text to the left */
-  width: fit-content; /* Takes only necessary space */
-  margin-bottom: 10px; /* Adds spacing between text and h1 */
+  justify-content: flex-start;
+  width: fit-content;
+  margin-bottom: 10px;
 }
 
 .progress-text {
-  display: inline-block; /* Ensures it takes only necessary space */
+  display: inline-block;
   font-size: 14px;
   font-weight: bold;
   color: #fff;
@@ -65,18 +64,74 @@
   padding: 5px 5px;
 }
 
-
 .back-button svg {
   width: 24px;
   height: 24px;
   fill: #fff;
 }
 
+.generate-roadmap {
+  padding: 0.9em 1.6em;
+  border: none;
+  outline: none;
+  color: #FFF;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 0;
+  border-radius: 10px;
+  position: absolute;
+  top: 10px;
+  right: 60px; 
+ }
+ 
+ .generate-roadmap::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(46, 46, 46);
+  left: 0;
+  top: 0;
+  border-radius: 8px;
+ }
+ /* glow */
+ .generate-roadmap::before {
+  content: "";
+  background: linear-gradient(
+     45deg,
+     #FF0000, #002BFF, #FF00C8, #002BFF,
+       #FF0000, #002BFF, #FF00C8, #002BFF
+ );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 600%;
+  z-index: -1;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  filter: blur(8px);
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+  opacity: 0;
+ }
+ 
+
+ 
+ /* hover */
+ .generate-roadmap:hover::before {
+  opacity: 1;
+ }
+ 
+
+/* Bookmark Button Styles */
 .bookmark-button {
   position: absolute;
   top: 10px;
   right: 10px;
-  padding: 3px; /* Reduced padding to fit icon */
+  padding: 3px;
   border: 1px solid #fff;
   border-radius: 4px;
   background-color: transparent;
@@ -87,7 +142,7 @@
 .bookmark-button svg {
   width: 24px;
   height: 24px;
-  transition: fill 0.3s; /* Smooth transition for fill color */
+  transition: fill 0.3s;
 }
 
 .bookmark-button:hover {
@@ -95,13 +150,12 @@
 }
 
 .bookmark-button:hover svg {
-  fill: #000; /* Icon turns black on hover when not bookmarked */
+  fill: #000;
 }
 
 .bookmark-button.bookmarked {
   background-color: #fff;
 }
-
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
@@ -112,4 +166,9 @@
   .roadmap-header h1 {
     font-size: 1rem;
   }
+
+  .info-button {
+    right: 55px; /* Adjust spacing for smaller screens */
+  }
 }
+

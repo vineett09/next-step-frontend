@@ -52,6 +52,7 @@ import terraformRoadmap from "./data/techskills/Terraform";
 import redisRoadmap from "./data/techskills/Redis";
 import springbootRoadmap from "./data/techskills/SpringBoot";
 import grapgqlRoadmap from "./data/techskills/GraphQL";
+import DynamicRoadmap from "./components/AI Roadmap";
 function App() {
   return (
     <Router>
@@ -62,6 +63,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<ProtectedRoute />} />
+          <Route path="/generate-roadmap" element={<DynamicRoadmap />} />
           {/* Tech Fields */}
           <Route
             path="/full-stack-developer"

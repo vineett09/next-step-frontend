@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
-
+import { useNavigate } from "react-router-dom";
 const Header = ({
   title,
   toggleBookmark,
@@ -10,10 +10,11 @@ const Header = ({
   completedNodes = {},
   totalNodes = 0,
 }) => {
-  // Calculate progress percentage
+  const navigate = useNavigate();
   const completedNodesCount = Object.keys(completedNodes).length;
   const progressPercentage =
     totalNodes > 0 ? Math.round((completedNodesCount / totalNodes) * 100) : 0;
+
   return (
     <div>
       <section className="roadmap-header">
@@ -28,13 +29,20 @@ const Header = ({
             {`A comprehensive roadmap to achieve ${title} field in 2025.` ||
               "Explore Your Path to Tech Excellence"}
           </h1>
-          {/* Progress Bar */}
           <div className="progress-wrapper">
             <span className="progress-text">
               {completedNodesCount} / {totalNodes} Completed (
               {progressPercentage}%)
             </span>
           </div>
+
+          <button
+            className="generate-roadmap"
+            aria-label="Show information"
+            onClick={() => navigate("/generate-roadmap")}
+          >
+            Generate AI Roadmap ✨
+          </button>
 
           <button
             onClick={toggleBookmark}
