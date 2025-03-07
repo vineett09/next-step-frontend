@@ -1,8 +1,12 @@
-// components/Header.js
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import AuthModal from "./AuthModal"; // Import the AuthModal component
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
 const Header = ({
   title,
   toggleBookmark,
@@ -11,9 +15,96 @@ const Header = ({
   totalNodes = 0,
 }) => {
   const navigate = useNavigate();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false); // State to manage AuthModal visibility
+  const user = useSelector((state) => state.auth.user); // Get user from Redux store
+
   const completedNodesCount = Object.keys(completedNodes).length;
   const progressPercentage =
     totalNodes > 0 ? Math.round((completedNodesCount / totalNodes) * 100) : 0;
+  const handleDownloadPDF = () => {
+    const d3Container = document.querySelector(".d3-container"); // Get the D3 tree container
+
+    if (!d3Container) {
+      alert("Roadmap not found!");
+      return;
+    }
+
+    // Clone the container to avoid modifying the original
+    const containerClone = d3Container.cloneNode(true);
+
+    // Create a temporary div to hold our clone with background
+    const tempDiv = document.createElement("div");
+    tempDiv.style.position = "absolute";
+    tempDiv.style.left = "-9999px";
+    tempDiv.style.backgroundColor = "#333333"; // Grey background
+    tempDiv.style.width = d3Container.scrollWidth + "px";
+    tempDiv.style.height = d3Container.scrollHeight + "px";
+    tempDiv.style.padding = "20px"; // Adding some padding
+
+    // Append clone to temp div
+    tempDiv.appendChild(containerClone);
+    document.body.appendChild(tempDiv);
+
+    // Options to reduce file size
+    const html2canvasOptions = {
+      scale: 1.5, // Reduced from 2 to save memory
+      height: tempDiv.scrollHeight,
+      width: tempDiv.scrollWidth,
+      backgroundColor: "#333333", // Set canvas background to grey
+      logging: false, // Disable logging to improve performance
+      imageTimeout: 0, // No timeout for image loading
+      useCORS: true, // Use CORS to handle cross-origin images
+      allowTaint: true, // Allow tainted canvas to improve performance
+    };
+
+    html2canvas(tempDiv, html2canvasOptions).then((canvas) => {
+      // Reduce image quality to save file size
+      const imgData = canvas.toDataURL("image/jpeg", 0.9);
+
+      // Create a PDF document in landscape mode
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "mm",
+        format: "a4",
+        compress: true, // Enable compression
+      });
+
+      // Get PDF dimensions
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+
+      // Calculate scaling to fit the entire tree on one page
+      const widthRatio = pdfWidth / canvas.width;
+      const heightRatio = pdfHeight / canvas.height;
+      const ratio = Math.min(widthRatio, heightRatio) * 0.95; // 95% of available space for margins
+
+      // Calculate centered position
+      const xPos = (pdfWidth - canvas.width * ratio) / 2;
+      const yPos = (pdfHeight - canvas.height * ratio) / 2;
+
+      // Add image to PDF scaled to fit
+      pdf.addImage(
+        imgData,
+        "JPEG",
+        xPos,
+        yPos,
+        canvas.width * ratio,
+        canvas.height * ratio
+      );
+
+      pdf.save("roadmap.pdf");
+
+      // Clean up the temporary div
+      document.body.removeChild(tempDiv);
+    });
+  };
+  const handleGenerateRoadmapClick = () => {
+    if (!user) {
+      setIsAuthModalOpen(true); // Open AuthModal if user is not logged in
+    } else {
+      navigate("/generate-roadmap"); // Navigate to generate roadmap if user is logged in
+    }
+  };
 
   return (
     <div>
@@ -39,30 +130,53 @@ const Header = ({
           <button
             className="generate-roadmap"
             aria-label="Show information"
-            onClick={() => navigate("/generate-roadmap")}
+            onClick={handleGenerateRoadmapClick}
           >
             Generate AI Roadmap ✨
           </button>
 
-          <button
-            onClick={toggleBookmark}
-            className={`bookmark-button ${isBookmarked ? "bookmarked" : ""}`}
-            aria-label={
-              isBookmarked ? "Unbookmark roadmap" : "Bookmark roadmap"
-            }
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              fill={isBookmarked ? "#000" : "#fff"}
+          <div className="button-group">
+            <button
+              onClick={toggleBookmark}
+              className={`bookmark-button ${isBookmarked ? "bookmarked" : ""}`}
+              aria-label={
+                isBookmarked ? "Unbookmark roadmap" : "Bookmark roadmap"
+              }
             >
-              <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z" />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill={isBookmarked ? "#000" : "#fff"}
+              >
+                <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z" />
+              </svg>
+            </button>
+            <button
+              className="download-pdf"
+              onClick={handleDownloadPDF}
+              aria-label="Download roadmap as PDF"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="#fff"
+              >
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
+      {!user && (
+        <AuthModal
+          isOpen={isAuthModalOpen}
+          onClose={() => setIsAuthModalOpen(false)}
+        />
+      )}
     </div>
   );
 };

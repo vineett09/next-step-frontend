@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/authslice";
 import { useNavigate, Link } from "react-router-dom";
@@ -7,11 +7,24 @@ import "../styles/Auth.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { error } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (error) {
+      setErrorMessage(error);
+
+      const timer = setTimeout(() => {
+        setErrorMessage("");
+      }, 3000); // Hide the error after 3 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +35,6 @@ function Login() {
         loginUser({
           email,
           password,
-          rememberMe,
         })
       );
 
@@ -63,22 +75,12 @@ function Login() {
             <label htmlFor="password">Password</label>
           </div>
 
-          <div className="remember-me">
-            <input
-              type="checkbox"
-              id="remember"
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
-            />
-            <label htmlFor="remember">Remember me</label>
-          </div>
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
 
           <button type="submit" disabled={isLoading}>
             {isLoading ? "Signing in..." : "Sign In"}
           </button>
         </form>
-
-        {error && <div className="error-message">{error}</div>}
 
         <div className="auth-link">
           Don't have an account? <Link to="/register">Create an account</Link>

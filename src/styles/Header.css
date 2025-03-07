@@ -83,8 +83,8 @@
   border-radius: 10px;
   position: absolute;
   top: 10px;
-  right: 60px; 
- }
+  right: 90px; /* Increased from 60px to give more space for button group */
+}
  
  .generate-roadmap::after {
   content: "";
@@ -92,7 +92,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgb(46, 46, 46);
+  background-color: rgb(137, 113, 245);
   left: 0;
   top: 0;
   border-radius: 8px;
@@ -126,17 +126,46 @@
  }
  
 
-/* Bookmark Button Styles */
-.bookmark-button {
+ .button-group {
   position: absolute;
   top: 10px;
   right: 10px;
+  display: flex;
+  gap: 8px;
+  z-index: 1;
+}
+
+.bookmark-button {
   padding: 3px;
   border: 1px solid #fff;
   border-radius: 4px;
   background-color: transparent;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.download-pdf {
+  padding: 3px; /* Match bookmark button padding */
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Style the SVG inside download button */
+.download-pdf svg {
+  width: 24px;
+  height: 24px;
+  transition: fill 0.3s;
+}
+
+.download-pdf:hover {
+  background-color: #fff;
+}
+
+.download-pdf:hover svg {
+  fill: #000; /* Change icon color on hover to match bookmark */
 }
 
 .bookmark-button svg {
@@ -157,7 +186,6 @@
   background-color: #fff;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .roadmap-content {
     padding-top: 60px;
@@ -167,8 +195,11 @@
     font-size: 1rem;
   }
 
-  .info-button {
-    right: 55px; /* Adjust spacing for smaller screens */
+  .generate-roadmap {
+    right: 90px;
+  }
+
+  .button-group {
+    right: 5px;
   }
 }
-

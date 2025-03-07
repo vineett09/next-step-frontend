@@ -12,6 +12,7 @@ import TipBox from "./TipBox";
 import Chatbot from "./Chatbot"; // Import Chatbot
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import AuthModal from "./AuthModal"; // Import the new AuthModal component
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
   const [selectedNode, setSelectedNode] = useState({
@@ -20,6 +21,7 @@ const Roadmap = ({ data }) => {
   });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [completedNodes, setCompletedNodes] = useState({});
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const { user, token } = useSelector((state) => state.auth);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const location = useLocation();
@@ -103,8 +105,7 @@ const Roadmap = ({ data }) => {
   // Function to toggle node completion status
   const toggleNodeCompletion = async (nodeId) => {
     if (!user || !token) {
-      // Prompt user to log in
-      alert("Please log in to mark as completed");
+      setShowAuthModal(true);
       return;
     }
 
@@ -140,7 +141,7 @@ const Roadmap = ({ data }) => {
   };
   const toggleBookmark = async () => {
     if (!user || !token) {
-      alert("Please log in to bookmark this roadmap");
+      setShowAuthModal(true);
       return;
     }
     try {
@@ -718,7 +719,14 @@ const Roadmap = ({ data }) => {
           description={selectedNode.description}
         />
       </div>
+
       <Footer />
+      {showAuthModal && (
+        <AuthModal
+          isOpen={showAuthModal}
+          onClose={() => setShowAuthModal(false)}
+        />
+      )}
     </div>
   );
 };
