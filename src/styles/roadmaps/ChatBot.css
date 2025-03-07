@@ -390,3 +390,49 @@
   background: linear-gradient(135deg, #0056b3, #0041a3);
 }
 
+/* Formatted text styling */
+.chat-message p {
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.chat-message p:last-child {
+  margin-bottom: 0;
+}
+
+.chat-message ul, .chat-message ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.chat-message ul li, .chat-message ol li {
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.chat-message strong {
+  font-weight: 600;
+}
+
+.chat-message em {
+  font-style: italic;
+}
+
+.chat-message br {
+  display: block;
+  content: "";
+  margin-top: 5px;
+}
+
+/* Fix for bullet items */
+.chat-message li.bullet-item::before {
+  content: "•";
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* Fix for numbered items */
+.chat-message li.numbered-item {
+  list-style: decimal;
+}

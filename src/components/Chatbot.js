@@ -3,6 +3,8 @@ import axios from "axios";
 import { IoClose, IoSend } from "react-icons/io5";
 import "../styles/roadmaps/ChatBot.css";
 import { useSelector } from "react-redux"; // Add this import
+import DOMPurify from "dompurify"; // Add this import for security
+
 const Chatbot = ({ roadmapTitle, data }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -10,7 +12,55 @@ const Chatbot = ({ roadmapTitle, data }) => {
   const messagesEndRef = useRef(null);
   const { user, token } = useSelector((state) => state.auth);
   const isAuthenticated = user && token;
+  // Format text with markdown-like syntax
+  const formatText = (text) => {
+    if (!text) return "";
 
+    // Sanitize the input to prevent XSS
+    let sanitizedText = DOMPurify.sanitize(text);
+
+    // Handle numbered lists (lines starting with "1.", "2.", etc.)
+    sanitizedText = sanitizedText.replace(
+      /^(\d+\.\s.*)$/gm,
+      "<li class='numbered-item'>$1</li>"
+    );
+    sanitizedText = sanitizedText.replace(
+      /(<li class='numbered-item'>.*?<\/li>)+/gs,
+      "<ol>$&</ol>"
+    );
+
+    // Handle bullet points (lines starting with "•", "-", or "*")
+    sanitizedText = sanitizedText.replace(
+      /^([\*\-\•]\s.*)$/gm,
+      "<li class='bullet-item'>$1</li>"
+    );
+    sanitizedText = sanitizedText.replace(
+      /(<li class='bullet-item'>.*?<\/li>)+/gs,
+      "<ul>$&</ul>"
+    );
+
+    // Handle paragraphs (consecutive lines)
+    sanitizedText = sanitizedText.replace(/\n\n/g, "</p><p>");
+
+    // Handle single line breaks
+    sanitizedText = sanitizedText.replace(/\n/g, "<br>");
+
+    // Handle bold text (text between ** or __)
+    sanitizedText = sanitizedText.replace(
+      /(\*\*|__)(.*?)\1/g,
+      "<strong>$2</strong>"
+    );
+
+    // Handle italic text (text between * or _)
+    sanitizedText = sanitizedText.replace(/(\*|_)(.*?)\1/g, "<em>$2</em>");
+
+    // Wrap in paragraph tags if not already wrapped
+    if (!sanitizedText.startsWith("<")) {
+      sanitizedText = `<p>${sanitizedText}</p>`;
+    }
+
+    return sanitizedText;
+  };
   const handleSend = async () => {
     if (!input.trim() || !isAuthenticated) return;
 
@@ -34,19 +84,23 @@ const Chatbot = ({ roadmapTitle, data }) => {
 
       const botMessage = {
         sender: "bot",
-        text: response.data.reply.replace(/\n/g, "<br/>"),
+        text: formatText(response.data.reply), // Use our formatting function
       };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error("Chatbot error:", error);
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", text: "Sorry, I couldn't process that request." },
+        {
+          sender: "bot",
+          text: "<p>Sorry, I couldn't process that request.</p>",
+        },
       ]);
     }
 
     setInput("");
   };
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -397,7 +451,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
             )}
             {isAuthenticated && messages.length === 0 && (
               <div className="welcome-message">
-                <span>Hello {user.username}! How can i help you?</span>
+                <span>Hello {user.username}! How can I help you?</span>
               </div>
             )}
             {isAuthenticated &&
@@ -416,6 +470,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
               placeholder="Ask about this roadmap..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => e.key === "Enter" && handleSend()}
               disabled={!isAuthenticated}
             />
             <button onClick={handleSend} disabled={!isAuthenticated}>
