@@ -36,9 +36,15 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
+      // Clear stored chat messages for the user
+      if (state.user && state.user.id) {
+        localStorage.removeItem(`chat_messages_${state.user.id}`);
+      }
+
+      // Clear auth state
       state.user = null;
       state.token = null;
-      localStorage.removeItem("user"); // Clear storage on logout
+      localStorage.removeItem("user");
       localStorage.removeItem("token");
     },
   },
@@ -48,7 +54,7 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.user = action.payload.user;
         state.error = null;
-        localStorage.setItem("user", JSON.stringify(action.payload.user)); // Store user in localStorage
+        localStorage.setItem("user", JSON.stringify(action.payload.user));
         localStorage.setItem("token", action.payload.token);
       })
       .addCase(loginUser.rejected, (state, action) => {

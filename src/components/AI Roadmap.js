@@ -33,25 +33,6 @@ const DynamicRoadmap = () => {
     }
   };
 
-  // Function to count total nodes recursively (only parent and first-level children)
-  const countTotalNodes = (nodes) => {
-    let count = 0;
-
-    if (nodes && nodes.children) {
-      // Count main parent nodes
-      count += nodes.children.length;
-
-      // Count first-level children only
-      nodes.children.forEach((parent) => {
-        if (parent.children) {
-          count += parent.children.length;
-        }
-      });
-    }
-
-    return count;
-  };
-
   // Render roadmap function - simplified to only show first-level children
   const renderRoadmap = () => {
     if (!data || !d3Container.current) return;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/Header.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import AuthModal from "./AuthModal"; // Import the AuthModal component
+import AuthModal from "./AuthModal";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
@@ -15,15 +15,14 @@ const Header = ({
   totalNodes = 0,
 }) => {
   const navigate = useNavigate();
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false); // State to manage AuthModal visibility
-  const user = useSelector((state) => state.auth.user); // Get user from Redux store
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const user = useSelector((state) => state.auth.user);
 
   const completedNodesCount = Object.keys(completedNodes).length;
   const progressPercentage =
     totalNodes > 0 ? Math.round((completedNodesCount / totalNodes) * 100) : 0;
   const handleDownloadPDF = () => {
-    const d3Container = document.querySelector(".d3-container"); // Get the D3 tree container
-
+    const d3Container = document.querySelector(".d3-container");
     if (!d3Container) {
       alert("Roadmap not found!");
       return;
@@ -36,10 +35,10 @@ const Header = ({
     const tempDiv = document.createElement("div");
     tempDiv.style.position = "absolute";
     tempDiv.style.left = "-9999px";
-    tempDiv.style.backgroundColor = "#333333"; // Grey background
+    tempDiv.style.backgroundColor = "#333333";
     tempDiv.style.width = d3Container.scrollWidth + "px";
     tempDiv.style.height = d3Container.scrollHeight + "px";
-    tempDiv.style.padding = "20px"; // Adding some padding
+    tempDiv.style.padding = "20px";
 
     // Append clone to temp div
     tempDiv.appendChild(containerClone);
@@ -94,15 +93,14 @@ const Header = ({
 
       pdf.save("roadmap.pdf");
 
-      // Clean up the temporary div
       document.body.removeChild(tempDiv);
     });
   };
   const handleGenerateRoadmapClick = () => {
     if (!user) {
-      setIsAuthModalOpen(true); // Open AuthModal if user is not logged in
+      setIsAuthModalOpen(true);
     } else {
-      navigate("/generate-roadmap"); // Navigate to generate roadmap if user is logged in
+      navigate("/generate-roadmap");
     }
   };
 
