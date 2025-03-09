@@ -85,11 +85,226 @@ const LineNode = ({ data, isConnectable, selected }) => {
     </>
   );
 };
+const ContainerBox = ({ data, isConnectable, selected }) => {
+  return (
+    <>
+      <Handle
+        type="target"
+        position="top"
+        id="top"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+        className="connection-handle"
+      />
+      <Handle
+        type="target"
+        position="left"
+        id="left"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+        className="connection-handle"
+      />
+      <div
+        style={{
+          padding: "10px",
+          color: data.textColor || "#000",
+          width: "100%",
+          height: "100%",
+          boxSizing: "border-box",
+          border: `2px dashed ${data.borderColor || "#666"}`,
+          backgroundColor: "transparent",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          position: "relative",
+        }}
+      >
+        {data.label && (
+          <div
+            style={{
+              fontWeight: "bold",
+              position: "absolute",
+              top: "-25px",
+              backgroundColor: data.labelBgColor || "white",
+              padding: "0 5px",
+              borderRadius: "3px",
+              zIndex: 1,
+            }}
+          >
+            {data.label}
+          </div>
+        )}
+      </div>
+      <Handle
+        type="source"
+        position="right"
+        id="right"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+        className="connection-handle"
+      />
+      <Handle
+        type="source"
+        position="bottom"
+        id="bottom"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+        className="connection-handle"
+      />
+    </>
+  );
+};
+const MilestoneNode = ({ data, isConnectable }) => {
+  return (
+    <>
+      <Handle
+        type="target"
+        position="top"
+        id="top"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+      />
+      <Handle
+        type="target"
+        position="left"
+        id="left"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+      />
+      <div
+        style={{
+          padding: "10px",
+          color: data.textColor || "#000",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "20px",
+            marginBottom: "5px",
+            textAlign: "center",
+          }}
+        >
+          🏆
+        </div>
+        <div
+          style={{
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          {data.label}
+        </div>
+      </div>
+      <Handle
+        type="source"
+        position="right"
+        id="right"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+      />
+      <Handle
+        type="source"
+        position="bottom"
+        id="bottom"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+      />
+    </>
+  );
+};
 
+// Text Label Node - For adding free-standing text
+const TextLabelNode = ({ data, isConnectable }) => {
+  return (
+    <>
+      <div
+        style={{
+          padding: "10px",
+          color: data.textColor || "#000",
+          fontSize: data.fontSize || "14px",
+          fontStyle: data.fontStyle || "normal",
+          fontWeight: data.fontWeight || "normal",
+          textAlign: "center",
+          backgroundColor: "transparent",
+          border: "none",
+        }}
+      >
+        {data.label}
+      </div>
+    </>
+  );
+};
+
+// Resource Node - For linking to resources
+const ResourceNode = ({ data, isConnectable }) => {
+  return (
+    <>
+      <Handle
+        type="target"
+        position="top"
+        id="top"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+      />
+      <Handle
+        type="target"
+        position="left"
+        id="left"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+      />
+      <div
+        style={{
+          padding: "10px",
+          color: data.textColor || "#000",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          style={{
+            fontWeight: "bold",
+            marginBottom: "5px",
+          }}
+        >
+          {data.label}
+        </div>
+        {data.resourceType && (
+          <div style={{ fontSize: "12px" }}>
+            {data.resourceType}: {data.resourceLink || "No link"}
+          </div>
+        )}
+      </div>
+      <Handle
+        type="source"
+        position="right"
+        id="right"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+      />
+      <Handle
+        type="source"
+        position="bottom"
+        id="bottom"
+        isConnectable={isConnectable}
+        style={{ background: "#555" }}
+      />
+    </>
+  );
+};
 // Register custom node types
 const nodeTypes = {
   customNode: CustomNode,
+  containerBox: ContainerBox,
   lineNode: LineNode,
+  milestone: MilestoneNode,
+  textLabel: TextLabelNode,
+  resourceNode: ResourceNode,
 };
 
 const RoadmapBuilder = () => {
@@ -194,6 +409,109 @@ const RoadmapBuilder = () => {
     setSelectedElement(lineNode);
     setSelectedElementType("node");
   };
+  const addContainerBox = () => {
+    const newContainer = {
+      id: `container-${Date.now()}`,
+      type: "containerBox",
+      position: { x: 200, y: 200 },
+      data: {
+        label: "Container Group",
+        borderColor: "#fff",
+        textColor: "#000",
+        labelBgColor: "white",
+      },
+      style: {
+        width: 300,
+        height: 200,
+        backgroundColor: "rgba(255, 255, 255, 0.1)",
+        borderRadius: "5px",
+        zIndex: -1,
+      },
+    };
+
+    setNodes((nds) => [...nds, newContainer]);
+    setSelectedElement(newContainer);
+    setSelectedElementType("node");
+  };
+  const addMilestone = () => {
+    const newNode = {
+      id: `milestone-${Date.now()}`,
+      type: "milestone",
+      position: { x: 250, y: 250 },
+      data: {
+        label: "Milestone",
+        textColor: "#000",
+      },
+      style: {
+        background: "#FFC107",
+        borderRadius: "50%",
+        border: "2px solid #FFA000",
+        padding: "10px",
+        width: 120,
+        height: 120,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      },
+    };
+
+    setNodes((nds) => [...nds, newNode]);
+    setSelectedElement(newNode);
+    setSelectedElementType("node");
+  };
+
+  // Add a text label
+  const addTextLabel = () => {
+    const newNode = {
+      id: `text-${Date.now()}`,
+      type: "textLabel",
+      position: { x: 250, y: 250 },
+      data: {
+        label: "Text Label",
+        textColor: "#000",
+        fontSize: "14px",
+        fontWeight: "normal",
+        fontStyle: "normal",
+      },
+      style: {
+        background: "white",
+        border: "none",
+        width: 150,
+      },
+    };
+
+    setNodes((nds) => [...nds, newNode]);
+    setSelectedElement(newNode);
+    setSelectedElementType("node");
+  };
+
+  // Add a decision node
+
+  // Add a resource node
+  const addResourceNode = () => {
+    const newNode = {
+      id: `resource-${Date.now()}`,
+      type: "resourceNode",
+      position: { x: 250, y: 250 },
+      data: {
+        label: "Resource",
+        resourceType: "URL",
+        resourceLink: "",
+        textColor: "#000",
+      },
+      style: {
+        background: "#B3E5FC",
+        borderRadius: "10px",
+        border: "1px solid #03A9F4",
+        padding: "10px",
+        width: 180,
+      },
+    };
+
+    setNodes((nds) => [...nds, newNode]);
+    setSelectedElement(newNode);
+    setSelectedElementType("node");
+  };
 
   // Delete the selected element
   const deleteSelected = () => {
@@ -218,6 +536,7 @@ const RoadmapBuilder = () => {
   };
 
   // Handle property changes for selected element
+  // Handle property changes for selected element
   const handlePropertyChange = (property, value) => {
     if (!selectedElement) return;
 
@@ -225,13 +544,38 @@ const RoadmapBuilder = () => {
       setNodes((nds) =>
         nds.map((node) => {
           if (node.id === selectedElement.id) {
-            // Update node data or styles based on property
-            if (property === "label" || property === "description") {
+            // Basic text properties
+            if (
+              property === "label" ||
+              property === "description" ||
+              property === "resourceType" ||
+              property === "resourceLink" ||
+              property === "textColor"
+            ) {
               return {
                 ...node,
                 data: { ...node.data, [property]: value },
               };
-            } else if (property === "color") {
+            }
+            // Font properties for text labels
+            else if (
+              property === "fontSize" ||
+              property === "fontStyle" ||
+              property === "fontWeight"
+            ) {
+              return {
+                ...node,
+                data: { ...node.data, [property]: value },
+                // For some properties we may want to update style as well
+                ...(property === "fontSize"
+                  ? {
+                      style: { ...node.style, fontSize: value },
+                    }
+                  : {}),
+              };
+            }
+            // Style properties that affect background
+            else if (property === "color") {
               return {
                 ...node,
                 style: {
@@ -240,10 +584,61 @@ const RoadmapBuilder = () => {
                   backgroundColor: value,
                 },
               };
-            } else if (property === "width" || property === "height") {
+            }
+            // Container box specific properties
+            else if (
+              property === "borderColor" ||
+              property === "labelBgColor"
+            ) {
+              return {
+                ...node,
+                data: { ...node.data, [property]: value },
+              };
+            }
+            // Dimension properties
+            else if (property === "width" || property === "height") {
               return {
                 ...node,
                 style: { ...node.style, [property]: parseInt(value) },
+              };
+            }
+            // Border properties
+            else if (property === "borderWidth" || property === "borderStyle") {
+              let borderValue =
+                property === "borderWidth" ? `${value}px` : value;
+
+              return {
+                ...node,
+                style: {
+                  ...node.style,
+                  border: node.style.border.replace(
+                    property === "borderWidth"
+                      ? /^\d+px/
+                      : /solid|dashed|dotted/,
+                    borderValue
+                  ),
+                },
+              };
+            }
+            // Border radius for rounded corners
+            else if (property === "borderRadius") {
+              return {
+                ...node,
+                style: { ...node.style, borderRadius: `${value}px` },
+              };
+            }
+            // Opacity control
+            else if (property === "opacity") {
+              return {
+                ...node,
+                style: { ...node.style, opacity: value },
+              };
+            }
+            // Node position in the z-index stack
+            else if (property === "zIndex") {
+              return {
+                ...node,
+                style: { ...node.style, zIndex: parseInt(value) },
               };
             }
           }
@@ -251,39 +646,131 @@ const RoadmapBuilder = () => {
         })
       );
 
-      // Update the selected element reference
-      if (property === "label" || property === "description") {
+      // Update the selected element reference to reflect changes
+      if (
+        property === "label" ||
+        property === "description" ||
+        property === "resourceType" ||
+        property === "resourceLink" ||
+        property === "textColor" ||
+        property === "fontSize" ||
+        property === "fontStyle" ||
+        property === "fontWeight" ||
+        property === "borderColor" ||
+        property === "labelBgColor"
+      ) {
         setSelectedElement((prev) => ({
           ...prev,
           data: { ...prev.data, [property]: value },
         }));
-      } else if (
-        property === "color" ||
-        property === "width" ||
-        property === "height"
-      ) {
+      } else if (property === "color") {
         setSelectedElement((prev) => ({
           ...prev,
           style: {
             ...prev.style,
-            [property === "color" ? "background" : property]:
-              property === "color" ? value : parseInt(value),
-            ...(property === "color" ? { backgroundColor: value } : {}),
+            background: value,
+            backgroundColor: value,
           },
+        }));
+      } else if (property === "width" || property === "height") {
+        setSelectedElement((prev) => ({
+          ...prev,
+          style: {
+            ...prev.style,
+            [property]: parseInt(value),
+          },
+        }));
+      } else if (property === "borderWidth" || property === "borderStyle") {
+        let borderValue = property === "borderWidth" ? `${value}px` : value;
+
+        setSelectedElement((prev) => ({
+          ...prev,
+          style: {
+            ...prev.style,
+            border: prev.style.border.replace(
+              property === "borderWidth" ? /^\d+px/ : /solid|dashed|dotted/,
+              borderValue
+            ),
+          },
+        }));
+      } else if (property === "borderRadius") {
+        setSelectedElement((prev) => ({
+          ...prev,
+          style: { ...prev.style, borderRadius: `${value}px` },
+        }));
+      } else if (property === "opacity") {
+        setSelectedElement((prev) => ({
+          ...prev,
+          style: { ...prev.style, opacity: value },
+        }));
+      } else if (property === "zIndex") {
+        setSelectedElement((prev) => ({
+          ...prev,
+          style: { ...prev.style, zIndex: parseInt(value) },
         }));
       }
     } else if (selectedElementType === "edge") {
       setEdges((eds) =>
         eds.map((edge) => {
           if (edge.id === selectedElement.id) {
+            // Edge animation toggle
             if (property === "animated") {
               return { ...edge, animated: value };
-            } else if (property === "type") {
+            }
+            // Edge type (connection style)
+            else if (property === "type") {
               return { ...edge, type: value };
-            } else if (property === "color") {
+            }
+            // Edge color
+            else if (property === "color") {
               return {
                 ...edge,
                 style: { ...edge.style, stroke: value },
+              };
+            }
+            // Edge width/thickness
+            else if (property === "strokeWidth") {
+              return {
+                ...edge,
+                style: { ...edge.style, strokeWidth: parseInt(value) },
+              };
+            }
+            // Edge style (solid/dashed/dotted)
+            else if (property === "strokeStyle") {
+              return {
+                ...edge,
+                style: {
+                  ...edge.style,
+                  strokeDasharray:
+                    value === "solid"
+                      ? "0"
+                      : value === "dashed"
+                      ? "5,5"
+                      : "2,2",
+                },
+              };
+            }
+            // Edge label
+            else if (property === "label") {
+              return {
+                ...edge,
+                label: value,
+                labelStyle: edge.labelStyle || {
+                  fill: "#000",
+                  fontWeight: 700,
+                },
+              };
+            }
+            // Edge label background color
+            else if (property === "labelBgColor") {
+              return {
+                ...edge,
+                labelBgStyle: {
+                  ...edge.labelBgStyle,
+                  fill: value,
+                  fillOpacity: 1,
+                  borderRadius: 4,
+                },
               };
             }
           }
@@ -298,6 +785,36 @@ const RoadmapBuilder = () => {
         setSelectedElement((prev) => ({
           ...prev,
           style: { ...prev.style, stroke: value },
+        }));
+      } else if (property === "strokeWidth") {
+        setSelectedElement((prev) => ({
+          ...prev,
+          style: { ...prev.style, strokeWidth: parseInt(value) },
+        }));
+      } else if (property === "strokeStyle") {
+        setSelectedElement((prev) => ({
+          ...prev,
+          style: {
+            ...prev.style,
+            strokeDasharray:
+              value === "solid" ? "0" : value === "dashed" ? "5,5" : "2,2",
+          },
+        }));
+      } else if (property === "label") {
+        setSelectedElement((prev) => ({
+          ...prev,
+          label: value,
+          labelStyle: prev.labelStyle || { fill: "#000", fontWeight: 700 },
+        }));
+      } else if (property === "labelBgColor") {
+        setSelectedElement((prev) => ({
+          ...prev,
+          labelBgStyle: {
+            ...prev.labelBgStyle,
+            fill: value,
+            fillOpacity: 1,
+            borderRadius: 4,
+          },
         }));
       }
     }
@@ -464,8 +981,20 @@ const RoadmapBuilder = () => {
               <button onClick={() => addLine("vertical")} className="tool-btn">
                 Add Vertical Line
               </button>
-            </div>
+              <button onClick={addContainerBox} className="tool-btn">
+                Add Container Box
+              </button>
+              <button onClick={addMilestone} className="tool-btn">
+                Add Milestone
+              </button>
+              <button onClick={addTextLabel} className="tool-btn">
+                Add Text Label
+              </button>
 
+              <button onClick={addResourceNode} className="tool-btn">
+                Add Resource
+              </button>
+            </div>
             <div className="tool-section">
               <h3>Actions</h3>
               <button
@@ -682,7 +1211,37 @@ const RoadmapBuilder = () => {
                     </div>
                   </>
                 )}
-
+                {selectedElement?.type === "resourceNode" && (
+                  <>
+                    <div className="property-group">
+                      <label>Resource Type:</label>
+                      <select
+                        value={selectedElement.data?.resourceType || "URL"}
+                        onChange={(e) =>
+                          handlePropertyChange("resourceType", e.target.value)
+                        }
+                      >
+                        <option value="URL">URL</option>
+                        <option value="Book">Book</option>
+                        <option value="Video">Video</option>
+                        <option value="Course">Course</option>
+                        <option value="Article">Article</option>
+                        <option value="Tool">Tool</option>
+                      </select>
+                    </div>
+                    <div className="property-group">
+                      <label>Resource Link:</label>
+                      <input
+                        type="text"
+                        value={selectedElement.data?.resourceLink || ""}
+                        onChange={(e) =>
+                          handlePropertyChange("resourceLink", e.target.value)
+                        }
+                        placeholder="Enter link or reference"
+                      />
+                    </div>
+                  </>
+                )}
                 {selectedElementType === "edge" && (
                   <>
                     <div className="property-group">
@@ -720,6 +1279,99 @@ const RoadmapBuilder = () => {
                         }
                       />
                     </div>
+                    {selectedElement?.type === "textLabel" && (
+                      <>
+                        <div className="property-group">
+                          <label>Font Size:</label>
+                          <select
+                            value={selectedElement.data?.fontSize || "14px"}
+                            onChange={(e) =>
+                              handlePropertyChange("fontSize", e.target.value)
+                            }
+                          >
+                            <option value="12px">Small</option>
+                            <option value="14px">Medium</option>
+                            <option value="18px">Large</option>
+                            <option value="24px">X-Large</option>
+                          </select>
+                        </div>
+                        <div className="property-group">
+                          <label>Font Style:</label>
+                          <select
+                            value={selectedElement.data?.fontStyle || "normal"}
+                            onChange={(e) =>
+                              handlePropertyChange("fontStyle", e.target.value)
+                            }
+                          >
+                            <option value="normal">Normal</option>
+                            <option value="italic">Italic</option>
+                          </select>
+                        </div>
+                        <div className="property-group">
+                          <label>Font Weight:</label>
+                          <select
+                            value={selectedElement.data?.fontWeight || "normal"}
+                            onChange={(e) =>
+                              handlePropertyChange("fontWeight", e.target.value)
+                            }
+                          >
+                            <option value="normal">Normal</option>
+                            <option value="bold">Bold</option>
+                          </select>
+                        </div>
+                      </>
+                    )}
+
+                    {selectedElement?.type === "containerBox" && (
+                      <>
+                        <div className="property-group">
+                          <label>Title:</label>
+                          <input
+                            type="text"
+                            value={selectedElement.data?.label || ""}
+                            onChange={(e) =>
+                              handlePropertyChange("label", e.target.value)
+                            }
+                          />
+                        </div>
+                        <div className="property-group">
+                          <label>Border Color:</label>
+                          <input
+                            type="color"
+                            value={selectedElement.data?.borderColor || "#666"}
+                            onChange={(e) =>
+                              handlePropertyChange(
+                                "borderColor",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div className="property-group">
+                          <label>Label Background:</label>
+                          <input
+                            type="color"
+                            value={selectedElement.data?.labelBgColor || "#fff"}
+                            onChange={(e) =>
+                              handlePropertyChange(
+                                "labelBgColor",
+                                e.target.value
+                              )
+                            }
+                          />
+                        </div>
+                        <div className="property-group">
+                          <label>Text Color:</label>
+                          <input
+                            type="color"
+                            value={selectedElement.data?.textColor || "#000"}
+                            onChange={(e) =>
+                              handlePropertyChange("textColor", e.target.value)
+                            }
+                          />
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
               </div>
