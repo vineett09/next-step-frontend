@@ -13,6 +13,7 @@ import Chatbot from "./Chatbot"; // Import Chatbot
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import AuthModal from "./AuthModal"; // Import the new AuthModal component
+import RelatedRoadmaps from "./RelatedRoadmaps";
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
   const [selectedNode, setSelectedNode] = useState({
@@ -719,7 +720,7 @@ const Roadmap = ({ data }) => {
           description={selectedNode.description}
         />
       </div>
-
+      <RelatedRoadmaps />
       <Footer />
       {showAuthModal && (
         <AuthModal

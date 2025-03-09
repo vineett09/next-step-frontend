@@ -53,6 +53,7 @@ import redisRoadmap from "./data/techskills/Redis";
 import springbootRoadmap from "./data/techskills/SpringBoot";
 import grapgqlRoadmap from "./data/techskills/GraphQL";
 import DynamicRoadmap from "./components/AI Roadmap";
+import RoadmapBuilder from "./components/RoadmapBuilder";
 function App() {
   return (
     <Router>
@@ -64,6 +65,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<ProtectedRoute />} />
           <Route path="/generate-roadmap" element={<DynamicRoadmap />} />
+          <Route path="/create-roadmap" element={<RoadmapBuilder />} />
           {/* Tech Fields */}
           <Route
             path="/full-stack-developer"
