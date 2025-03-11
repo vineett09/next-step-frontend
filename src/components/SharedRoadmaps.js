@@ -48,14 +48,14 @@ const SharedRoadmaps = () => {
       <Navbar />
       <div className="public-roadmaps-container">
         <div className="public-roadmaps-header">
-          <h1>Public Roadmaps</h1>
+          <h1>Shared Roadmaps</h1>
           <p>Explore roadmaps shared by the community</p>
         </div>
 
         <div className="roadmaps-section">
           {sharedRoadmaps.length === 0 ? (
             <div className="empty-state">
-              <p>No public roadmaps available yet.</p>
+              <p>No roadmaps are shared yet.</p>
               <Link to="/create-roadmap" className="create-roadmap-btn">
                 Create a Roadmap
               </Link>

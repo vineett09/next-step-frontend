@@ -1,8 +1,7 @@
-/* Navbar Styles */
 :root {
   --primary-color: #ffffff;
   --hover-color: #007bff;
-  --background-color: #1f1f1f;
+  --background-color: #1B2430;
   --text-color: #ffffff;
   --shadow-color: rgba(0, 0, 0, 0.2);
 }
@@ -27,8 +26,6 @@
   transition: color 0.3s ease-in-out;
 }
 
-
-
 .navbar-links {
   display: flex;
   gap: 1.5rem;
@@ -46,22 +43,53 @@
   transition: color 0.3s ease-in-out, transform 0.2s;
 }
 
-
-
 .nav-user-container {
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   cursor: pointer;
+}
+
+.nav-user {
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* From Uiverse.io by ErzenXz */
+.shared-roadmaps-button {
+  width: fit-content;
+  min-width: 100px;
+  height: 45px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: 2.5px solid #E0E1E4;
+  box-shadow: 0px 0px 20px -20px;
+  cursor: pointer;
+  background-color: white;
+  transition: all 0.2s ease-in-out 0ms;
+  user-select: none;
+  font-family: 'Poppins', sans-serif;
+  color: #000; /* Added text color for better visibility */
+}
+
+.shared-roadmaps-button:hover {
+  background-color: #F2F2F2;
+  box-shadow: 0px 0px 20px -18px;
+}
+
+.shared-roadmaps-button:active {
+  transform: scale(0.95);
 }
 
 .dropdown-user-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   background: var(--background-color);
   border-radius: 6px;
   box-shadow: 0 4px 6px var(--shadow-color);
-  min-width: 100px;
+  min-width: 150px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -76,6 +104,7 @@
   cursor: pointer;
   text-align: left;
   width: 100%;
+  transition: background 0.3s ease;
 }
 
 .dropdown-user-menu button:hover {
@@ -83,8 +112,6 @@
   color: white;
 }
 
-
-/* Mobile Menu */
 .navbar-toggle {
   display: none;
   flex-direction: column;
@@ -192,6 +219,7 @@
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
 }
+/* Hamburger menu animation */
 .navbar-toggle .bar.change:nth-child(1) {
   transform: rotate(-45deg) translate(-5px, 6px);
 }
@@ -204,25 +232,52 @@
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Responsive Navbar */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .navbar-links {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      background-color: var(--background-color);
-      position: absolute;
-      top: 60px;
-      left: 0;
-      padding: 1rem 0;
-      box-shadow: 0 4px 6px var(--shadow-color);
-  }
-
-  .navbar-links.active {
-      display: flex;
+  .navbar {
+    flex-wrap: wrap;
   }
 
   .navbar-toggle {
-      display: flex;
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .shared-roadmaps-button {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .nav-user-container {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+  }
+
+  .dropdown-user-menu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-link,
+  .signup-button {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 12px;
+    text-align: center;
   }
 }

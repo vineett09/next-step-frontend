@@ -167,9 +167,6 @@ const Header = ({
               </svg>
             </button>
           </div>
-          <button onClick={() => navigate("/shared-roadmaps")}>
-            Community Roadmaps
-          </button>
         </div>
       </section>
       {!user && (

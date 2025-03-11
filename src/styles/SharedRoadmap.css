@@ -21,7 +21,7 @@
   .public-roadmaps-header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
-    color: #2196f3;
+    color: #fff;
   }
   
   .public-roadmaps-header p {
@@ -30,10 +30,9 @@
   }
   
   .roadmaps-section {
-    background-color: rgba(29, 161, 242, 0.5);
     padding: 20px;
+    border : 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .empty-state {
@@ -44,7 +43,7 @@
   .empty-state p {
     font-size: 1.2rem;
     margin-bottom: 20px;
-    color: #666;
+    color: #fff;
   }
   
   .create-roadmap-btn {
@@ -69,7 +68,7 @@
   }
   
   .roadmap-card {
-    background: #fff;
+    background: #31363F;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -87,17 +86,17 @@
   .roadmap-card-header h3 {
     margin: 0;
     font-size: 1.25rem;
-    color: #333;
+    color: #fff;
   }
   
   .creator {
     font-size: 0.9rem;
-    color: #888;
+    color: #fff;
   }
   
   .roadmap-description {
     font-size: 1rem;
-    color: #666;
+    color: #fff;
     margin-bottom: 15px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -107,7 +106,7 @@
   
   .roadmap-meta {
     font-size: 0.9rem;
-    color: #888;
+    color: #fff;
     margin-bottom: 15px;
   }
   

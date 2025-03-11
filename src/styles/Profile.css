@@ -29,7 +29,6 @@
 .profile-sidebar {
   width: 250px;
   height: 300px; /* Fixed height for the sidebar */
-  background-color: rgba(29, 161, 242, 0.5);
   border-radius: 10px;
   border: 1px solid #ccc;
   padding: 1rem;
@@ -61,7 +60,7 @@
 }
 
 .sidebar-item.active {
-  background-color: #4a6cf7;
+  background-color: #181C14;
   color: white;
 }
 
@@ -81,7 +80,6 @@
   border: 1px solid #ccc;
   padding: 2rem;
   margin-bottom: 2rem;
-  background-color: rgba(29, 161, 242, 0.5);
 }
 
 .profile-title {
@@ -109,7 +107,6 @@
   border: 1px solid #ccc;
   padding: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background-color: rgba(29, 161, 242, 0.5);
 }
 
 .roadmaps-header {
@@ -128,7 +125,7 @@
 
 .roadmap-create-btn {
   display: inline-block;
-  background-color: #4a6cf7;
+  background-color: #181C14;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 5px;
@@ -137,9 +134,6 @@
   transition: background-color 0.2s ease;
 }
 
-.roadmap-create-btn:hover {
-  background-color: #3a56d4;
-}
 
 /* === List Containers for Roadmaps and Bookmarks === */
 .roadmaps-list-container,
@@ -147,11 +141,12 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  
 }
 
 /* === Roadmap List Items === */
 .roadmap-list-item {
-  background-color: #f8f9fa;
+  background-color: #31363F;
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -162,10 +157,6 @@
   align-items: flex-start;
 }
 
-.roadmap-list-item:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f0f5ff;
-}
 
 .roadmap-list-content {
   flex: 1;
@@ -174,18 +165,18 @@
 .roadmap-item-title {
   margin: 0 0 0.75rem 0;
   font-size: 1.2rem;
-  color: #333;
+  color: #fff;
   font-weight: 600;
 }
 
 .roadmap-item-description {
-  color: #555;
+  color: #fff;
   margin-bottom: 1rem;
   line-height: 1.5;
 }
 
 .roadmap-item-metadata {
-  color: #888;
+  color: #fff;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
@@ -228,7 +219,7 @@
   border: none;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #555;
+  color: #fff;
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 50%;
@@ -313,7 +304,7 @@
 
 /* === Bookmark List Items === */
 .bookmark-list-item {
-  background-color: #f8f9fa;
+  background-color: #31363F;
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -321,10 +312,7 @@
   border: 1px solid #eee;
 }
 
-.bookmark-list-item:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f0f5ff;
-}
+
 
 .bookmark-content {
   display: flex;
@@ -335,7 +323,7 @@
 .bookmark-item-title {
   margin: 0;
   font-size: 1.2rem;
-  color: #333;
+  color: #fff;
   font-weight: 600;
 }
 
@@ -359,20 +347,20 @@
 .roadmaps-empty-state, .bookmarks-empty-state {
   text-align: center;
   padding: 3rem 0;
-  background-color: #f8f9fa;
+  background-color: #31363F;
   border-radius: 8px;
   border: 1px dashed #ccc;
 }
 
 .empty-state-message {
   margin-bottom: 1.5rem;
-  color: #666;
+  color: #fff;
   font-size: 1.1rem;
 }
 
 .empty-state-action-btn, .empty-state-explore-btn {
   display: inline-block;
-  background-color: #4a6cf7;
+  background-color: #181C14;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 5px;
@@ -381,15 +369,11 @@
   transition: all 0.2s ease;
 }
 
-.empty-state-action-btn:hover, .empty-state-explore-btn:hover {
-  background-color: #3a56d4;
-  transform: translateY(-2px);
-}
+
 
 /* === Bookmarks Section === */
 .profile-bookmarks-section {
   border-radius: 10px;
-  background-color: rgba(29, 161, 242, 0.5);
   border: 1px solid #ccc;
   padding: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

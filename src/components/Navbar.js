@@ -1,3 +1,4 @@
+// Navbar.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,6 +7,7 @@ import "../styles/Navbar.css";
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
@@ -14,16 +16,30 @@ const Navbar = () => {
     dispatch(logout());
     navigate("/login");
   };
+
   const handleCreateClick = () => {
     navigate("/create-roadmap");
   };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-logo" onClick={() => navigate("/")}>
         NextStep
       </div>
 
-      <div className="navbar-links">
+      <div className={`navbar-links ${mobileMenuOpen ? "active" : ""}`}>
+        {/* Shared Roadmaps button always visible */}
+        <button
+          className="shared-roadmaps-button"
+          onClick={() => navigate("/shared-roadmaps")}
+        >
+          Shared Roadmaps
+        </button>
+
         {user ? (
           <div
             className="nav-user-container"
@@ -54,6 +70,12 @@ const Navbar = () => {
             </button>
           </>
         )}
+      </div>
+
+      <div className="navbar-toggle" onClick={toggleMobileMenu}>
+        <span className={`bar ${mobileMenuOpen ? "change" : ""}`}></span>
+        <span className={`bar ${mobileMenuOpen ? "change" : ""}`}></span>
+        <span className={`bar ${mobileMenuOpen ? "change" : ""}`}></span>
       </div>
     </nav>
   );
