@@ -15,10 +15,10 @@ import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AuthModal from "./AuthModal";
-import "../styles/RoadmapBuilder.css";
+import "../styles/CustomRoadmaps.css";
 
 // Define custom node types
-const CustomNode = ({ data, isConnectable, selected }) => {
+export const CustomNode = ({ data, isConnectable, selected }) => {
   return (
     <>
       <Handle
@@ -60,7 +60,7 @@ const CustomNode = ({ data, isConnectable, selected }) => {
   );
 };
 
-const LineNode = ({ data, isConnectable, selected }) => {
+export const LineNode = ({ data, isConnectable, selected }) => {
   const isHorizontal = data.orientation === "horizontal";
 
   return (
@@ -85,7 +85,7 @@ const LineNode = ({ data, isConnectable, selected }) => {
     </>
   );
 };
-const ContainerBox = ({ data, isConnectable, selected }) => {
+export const ContainerBox = ({ data, isConnectable, selected }) => {
   return (
     <>
       <Handle
@@ -155,7 +155,7 @@ const ContainerBox = ({ data, isConnectable, selected }) => {
     </>
   );
 };
-const MilestoneNode = ({ data, isConnectable }) => {
+export const MilestoneNode = ({ data, isConnectable }) => {
   return (
     <>
       <Handle
@@ -219,7 +219,7 @@ const MilestoneNode = ({ data, isConnectable }) => {
 };
 
 // Text Label Node - For adding free-standing text
-const TextLabelNode = ({ data, isConnectable }) => {
+export const TextLabelNode = ({ data, isConnectable }) => {
   return (
     <>
       <div
@@ -241,7 +241,7 @@ const TextLabelNode = ({ data, isConnectable }) => {
 };
 
 // Resource Node - For linking to resources
-const ResourceNode = ({ data, isConnectable }) => {
+export const ResourceNode = ({ data, isConnectable }) => {
   return (
     <>
       <Handle
@@ -298,7 +298,7 @@ const ResourceNode = ({ data, isConnectable }) => {
   );
 };
 // Register custom node types
-const nodeTypes = {
+export const nodeTypes = {
   customNode: CustomNode,
   containerBox: ContainerBox,
   lineNode: LineNode,
@@ -307,7 +307,7 @@ const nodeTypes = {
   resourceNode: ResourceNode,
 };
 
-const RoadmapBuilder = () => {
+const CustomRoadmaps = () => {
   const navigate = useNavigate();
   const { user, token } = useSelector((state) => state.auth);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -855,12 +855,16 @@ const RoadmapBuilder = () => {
         },
       };
 
-      const response = await axios.post("/api/roadmaps/custom", roadmapData, {
-        headers: {
-          "x-auth-token": token,
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        "/api/roadmaps/custom-roadmap",
+        roadmapData,
+        {
+          headers: {
+            "x-auth-token": token,
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.data.success) {
         navigate(`/roadmap/${response.data.roadmapId}`, {
@@ -1394,4 +1398,4 @@ const RoadmapBuilder = () => {
   );
 };
 
-export default RoadmapBuilder;
+export default CustomRoadmaps;

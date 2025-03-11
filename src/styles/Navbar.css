@@ -48,15 +48,41 @@
 
 
 
-.nav-user {
-  font-size: 1rem;
-  background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff7eb3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
-  display: inline-block;color: linear-gradient(90deg, #ff7eb3, #ff758c, #ff7eb3);
-  font-weight: 600;
+.nav-user-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
+
+.dropdown-user-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--background-color);
+  border-radius: 6px;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  min-width: 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.dropdown-user-menu button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  padding: 8px 12px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.dropdown-user-menu button:hover {
+  background: var(--hover-color);
+  color: white;
+}
+
 
 /* Mobile Menu */
 .navbar-toggle {

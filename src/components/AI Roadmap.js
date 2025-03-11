@@ -5,7 +5,7 @@ import "../styles/roadmaps/Roadmap.css"; // Reuse existing styles
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-const DynamicRoadmap = () => {
+const AIRoadmap = () => {
   const [input, setInput] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -442,4 +442,4 @@ const DynamicRoadmap = () => {
   );
 };
 
-export default DynamicRoadmap;
+export default AIRoadmap;

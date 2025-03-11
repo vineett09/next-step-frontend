@@ -9,11 +9,13 @@ import TechRoles from "./TechRoles";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import TipBox from "./TipBox";
-import Chatbot from "./Chatbot"; // Import Chatbot
+import Chatbot from "./Chatbot";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import AuthModal from "./AuthModal"; // Import the new AuthModal component
+import AuthModal from "./AuthModal";
 import RelatedRoadmaps from "./RelatedRoadmaps";
+import { techFields, techSkills } from "../data/TechFieldsData"; // Import the data
+
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
   const [selectedNode, setSelectedNode] = useState({
@@ -27,12 +29,31 @@ const Roadmap = ({ data }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const location = useLocation();
   const roadmapId = location.pathname.split("/").pop(); // Extract roadmap ID from URL
-  const roadmapTitle =
-    location.state?.title || "Explore Your Path to Tech Excellence";
-  const roadmapDescription =
-    location.state?.description || "Select a field to learn more.";
+
+  // Find the corresponding field or skill from the techFields and techSkills data
+  const findFieldOrSkill = (id) => {
+    const field = techFields.find((field) => field.link === `/${id}`);
+    if (field) return field;
+
+    const skill = techSkills.find((skill) => skill.link === `/${id}`);
+    if (skill) return skill;
+
+    return null;
+  };
+
+  const fieldOrSkill = findFieldOrSkill(roadmapId);
+
+  // Set the title and description from the found field or skill
+  const roadmapTitle = fieldOrSkill
+    ? fieldOrSkill.title
+    : "Explore Your Path to Tech Excellence";
+  const roadmapDescription = fieldOrSkill
+    ? fieldOrSkill.description
+    : "Select a field to learn more.";
+
   const [totalNodes, setTotalNodes] = useState(0);
-  // New function to count total nodes recursively
+
+  // Rest of the code remains the same...
   const countTotalNodes = (nodes) => {
     let count = 0;
     const countRecursive = (nodeList) => {
@@ -50,7 +71,7 @@ const Roadmap = ({ data }) => {
 
     return count;
   };
-  // Fetch user progress for this roadmap when component mounts
+
   useEffect(() => {
     if (user && token && roadmapId) {
       fetchUserProgress();
@@ -58,7 +79,6 @@ const Roadmap = ({ data }) => {
     }
   }, [user, token, roadmapId]);
 
-  // New useEffect to count total nodes
   useEffect(() => {
     if (data) {
       const nodeCount = countTotalNodes(data);
@@ -66,17 +86,15 @@ const Roadmap = ({ data }) => {
     }
   }, [data]);
 
-  // Function to fetch user progress
   const fetchUserProgress = async () => {
     try {
       const response = await axios.get(`/api/progress/${roadmapId}`, {
         headers: {
           "x-auth-token": token,
-          Authorization: `Bearer ${token}`, // Add this as an alternative
+          Authorization: `Bearer ${token}`,
         },
       });
 
-      // Convert array of completed nodes to an object for easier lookup
       const progressMap = response.data.reduce((acc, item) => {
         acc[item.nodeId] = {
           completed: true,
@@ -90,6 +108,7 @@ const Roadmap = ({ data }) => {
       console.error("Error fetching user progress:", error);
     }
   };
+
   const fetchBookmarkStatus = async () => {
     try {
       const response = await axios.get("/api/bookmark/bookmarks", {
@@ -103,7 +122,7 @@ const Roadmap = ({ data }) => {
       console.error("Error fetching bookmark status:", error);
     }
   };
-  // Function to toggle node completion status
+
   const toggleNodeCompletion = async (nodeId) => {
     if (!user || !token) {
       setShowAuthModal(true);
@@ -117,7 +136,7 @@ const Roadmap = ({ data }) => {
         {
           headers: {
             "x-auth-token": token,
-            Authorization: `Bearer ${token}`, // Add this as an alternative
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -140,6 +159,7 @@ const Roadmap = ({ data }) => {
       console.error("Error updating progress:", error);
     }
   };
+
   const toggleBookmark = async () => {
     if (!user || !token) {
       setShowAuthModal(true);
@@ -163,23 +183,21 @@ const Roadmap = ({ data }) => {
       console.error("Error toggling bookmark:", error);
     }
   };
-  // Function to get node color based on preference and completion status
+
   const getNodeColor = (node, defaultColor) => {
-    const nodeId = node.id || node.name; // Use ID if available, otherwise name
+    const nodeId = node.id || node.name;
 
     if (completedNodes[nodeId]) {
-      return "#4CAF50"; // Green for completed nodes
+      return "#4CAF50";
     }
 
-    return node.preferred ? "#FF8C00" : defaultColor; // Use orange for preferred nodes
+    return node.preferred ? "#FF8C00" : defaultColor;
   };
 
-  // Render roadmap function
   const renderRoadmap = () => {
     if (data && d3Container.current) {
       d3.select(d3Container.current).selectAll("*").remove();
 
-      // Fixed dimensions for the diagram - will be scaled by CSS
       const width = 1200;
       const margin = { top: 50, right: 200, bottom: 50, left: 200 };
       const FIXED_LINE_LENGTH = 100;
@@ -226,7 +244,6 @@ const Roadmap = ({ data }) => {
             parent.children?.map((child) => ({
               ...child,
               dimensions: calculateNodeDimensions(child.name),
-              // Add nested children with the same structure
               children:
                 child.children?.map((nestedChild) => ({
                   ...nestedChild,
@@ -239,18 +256,16 @@ const Roadmap = ({ data }) => {
       const minParentSpacing = 100;
       const childVerticalGap = 120;
       const childrenSpaceFactor = 0.5;
-      const minNestedGroupGap = 0; // Adjust this value for spacing
+      const minNestedGroupGap = 0;
 
       const svg = svgElement
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-      // Title node dimensions
-      const titleText = roadmapTitle; // Use the title from state
+      const titleText = roadmapTitle;
       const titleDimensions = calculateNodeDimensions(titleText);
-      const titleY = 0; // Positioning title above roadmap
+      const titleY = 0;
 
-      // Draw the title node
       const titleGroup = svg
         .append("g")
         .attr("class", "title-node")
@@ -264,7 +279,7 @@ const Roadmap = ({ data }) => {
         .attr("y", -titleDimensions.height / 2)
         .attr("rx", 10)
         .attr("ry", 10)
-        .attr("fill", getNodeColor(data, "#FFD93D")) // Use the root data node for the title
+        .attr("fill", getNodeColor(data, "#FFD93D"))
         .attr("stroke", "black")
         .attr("stroke-width", 2);
 
@@ -277,7 +292,6 @@ const Roadmap = ({ data }) => {
         .attr("fill", "black")
         .text(titleText);
 
-      // Add left-click handler for title (sidebar info)
       titleGroup.on("click", () => {
         setSelectedNode({
           name: titleText,
@@ -286,7 +300,6 @@ const Roadmap = ({ data }) => {
         setIsSidebarOpen(true);
       });
 
-      // Connect the title to the first node
       const TITLE_LINE_LENGTH = 150;
       const lineStartY = titleY + titleDimensions.height / 2;
       const lineEndY = lineStartY + TITLE_LINE_LENGTH;
@@ -302,7 +315,6 @@ const Roadmap = ({ data }) => {
         .attr("opacity", 0.7)
         .attr("stroke-dasharray", "5,5");
 
-      // Calculate positions with divider consideration
       let currentY = lineEndY;
       const parentPositions = nodeMetrics.parents.map((parent, index) => {
         let childSpace = 0;
@@ -338,7 +350,6 @@ const Roadmap = ({ data }) => {
         `0 0 ${width + margin.left + margin.right} ${totalHeight}`
       );
 
-      // Draw main spine with gaps for divider text
       parentPositions.forEach((position, index) => {
         if (index > 0) {
           const prevPosition = parentPositions[index - 1];
@@ -347,7 +358,6 @@ const Roadmap = ({ data }) => {
           const endY = position.y - position.node.dimensions.height / 2;
 
           if (prevPosition.node.dividerText) {
-            // Line above divider
             svg
               .append("line")
               .attr("class", "parent-spine")
@@ -359,7 +369,6 @@ const Roadmap = ({ data }) => {
               .attr("stroke-width", 3)
               .attr("opacity", 0.7);
 
-            // Divider text
             svg
               .append("text")
               .attr("x", width / 2)
@@ -371,7 +380,6 @@ const Roadmap = ({ data }) => {
               .attr("fill", "#fff")
               .text(prevPosition.node.dividerText);
 
-            // Line below divider
             svg
               .append("line")
               .attr("class", "parent-spine")
@@ -383,7 +391,6 @@ const Roadmap = ({ data }) => {
               .attr("stroke-width", 3)
               .attr("opacity", 0.7);
           } else {
-            // Continuous line if no divider
             svg
               .append("line")
               .attr("class", "parent-spine")
@@ -414,7 +421,6 @@ const Roadmap = ({ data }) => {
           xOffset = isLeft ? -growthOffset : growthOffset;
         }
 
-        // Apply appropriate color based on completion status and preferences
         const fillColor = getNodeColor(node, defaultFillColor);
 
         group
@@ -441,7 +447,6 @@ const Roadmap = ({ data }) => {
         return { boxWidth, xOffset };
       };
 
-      // Draw parent and child nodes
       parentPositions.forEach(({ node: parent, y }) => {
         const parentX = width / 2;
 
@@ -457,7 +462,7 @@ const Roadmap = ({ data }) => {
             setIsSidebarOpen(true);
           })
           .on("contextmenu", (event) => {
-            event.preventDefault(); // Prevent browser context menu
+            event.preventDefault();
             toggleNodeCompletion(parent.id || parent.name);
           });
 
@@ -512,7 +517,7 @@ const Roadmap = ({ data }) => {
                   setIsSidebarOpen(true);
                 })
                 .on("contextmenu", (event) => {
-                  event.preventDefault(); // Prevent browser context menu
+                  event.preventDefault();
                   toggleNodeCompletion(child.id || child.name);
                 });
 
@@ -553,13 +558,11 @@ const Roadmap = ({ data }) => {
                 .attr("opacity", 0.7)
                 .attr("stroke-dasharray", "5,5");
 
-              // Add nested children if they exist
               if (child.children?.length > 0) {
                 const nestedMid = Math.ceil(child.children.length / 2);
                 const nestedLeftChildren = child.children.slice(0, nestedMid);
                 const nestedRightChildren = child.children.slice(nestedMid);
 
-                // Draw nested children using the same pattern
                 const drawNestedChildren = (nestedChildren, isNestedLeft) => {
                   const nestedTotalHeight = getChildrenTotalHeight(
                     nestedChildren,
@@ -603,7 +606,7 @@ const Roadmap = ({ data }) => {
                         setIsSidebarOpen(true);
                       })
                       .on("contextmenu", (event) => {
-                        event.preventDefault(); // Prevent browser context menu
+                        event.preventDefault();
                         toggleNodeCompletion(
                           nestedChild.id || nestedChild.name
                         );
@@ -613,7 +616,7 @@ const Roadmap = ({ data }) => {
                       nestedGroup,
                       nestedChild,
                       nestedChild.dimensions,
-                      "#FFFFDD", // Default color for nested children
+                      "#FFFFDD",
                       "black",
                       isNestedLeft
                     );
@@ -657,7 +660,6 @@ const Roadmap = ({ data }) => {
                   });
                 };
 
-                // Only draw nested children on the same side as their parent
                 if (isLeft) {
                   drawNestedChildren(child.children, true);
                 } else {
@@ -679,10 +681,8 @@ const Roadmap = ({ data }) => {
     }
   };
 
-  // Effect to render roadmap when data or completedNodes changes
   useEffect(() => {
     renderRoadmap();
-    // Add window resize listener
     window.addEventListener("resize", renderRoadmap);
     return () => window.removeEventListener("resize", renderRoadmap);
   }, [data, completedNodes]);

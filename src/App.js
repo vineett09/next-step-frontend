@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./components/Register";
 import Roadmap from "./components/Roadmap";
+import Profile from "./components/Profile";
 import fullStackDeveloperRoadmap from "./data/techroles/FullStackDeveloper";
 import Maincontent from "./components/Maincontent";
 import dataScienceRoadmap from "./data/techroles/DataScience";
@@ -52,8 +53,10 @@ import terraformRoadmap from "./data/techskills/Terraform";
 import redisRoadmap from "./data/techskills/Redis";
 import springbootRoadmap from "./data/techskills/SpringBoot";
 import grapgqlRoadmap from "./data/techskills/GraphQL";
-import DynamicRoadmap from "./components/AI Roadmap";
-import RoadmapBuilder from "./components/RoadmapBuilder";
+import AIRoadmap from "./components/AI Roadmap";
+import CustomRoadmaps from "./components/CustomRoadmaps";
+import CustomRoadmapEditor from "./components/CustomRoadmapEditor";
+import SharedRoadmaps from "./components/SharedRoadmaps";
 function App() {
   return (
     <Router>
@@ -64,8 +67,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<ProtectedRoute />} />
-          <Route path="/generate-roadmap" element={<DynamicRoadmap />} />
-          <Route path="/create-roadmap" element={<RoadmapBuilder />} />
+          <Route path="/generate-roadmap" element={<AIRoadmap />} />
+          <Route path="/create-roadmap" element={<CustomRoadmaps />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/roadmap/edit/:id" element={<CustomRoadmapEditor />} />
+          <Route path="/shared-roadmaps" element={<SharedRoadmaps />} />
           {/* Tech Fields */}
           <Route
             path="/full-stack-developer"

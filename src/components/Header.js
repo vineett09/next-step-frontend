@@ -103,9 +103,7 @@ const Header = ({
       navigate("/generate-roadmap");
     }
   };
-  const handleCreateClick = () => {
-    navigate("/create-roadmap");
-  };
+
   return (
     <div>
       <section className="roadmap-header">
@@ -134,9 +132,7 @@ const Header = ({
           >
             Generate AI Roadmap ✨
           </button>
-          <button className="create-button" onClick={handleCreateClick}>
-            create
-          </button>
+
           <div className="button-group">
             <button
               onClick={toggleBookmark}
@@ -171,6 +167,9 @@ const Header = ({
               </svg>
             </button>
           </div>
+          <button onClick={() => navigate("/shared-roadmaps")}>
+            Community Roadmaps
+          </button>
         </div>
       </section>
       {!user && (
