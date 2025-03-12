@@ -1,0 +1,155 @@
+.roadmap-viewer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+  
+.viewer-container {
+    flex: 1;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.viewer-header {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 900px;
+    border: 1px solid #ccc;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* New wrapper for header content */
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align all items to the left */
+    text-align: left; /* Ensure text is left-aligned */
+}
+
+/* Header title (h1 - creator) */
+.viewer-header h1 {
+    font-size: 14px;
+    color: #e74c3c;
+    font-style: italic;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Roadmap title (h2) */
+.viewer-header h2 {
+    font-size: 32px;
+    color: #fff;
+    margin: 0 0 15px 0;
+    font-weight: 600;
+    line-height: 1.2;
+    padding-top: 20px;
+
+}
+
+/* Description paragraph */
+.viewer-header .roadmap-description {
+    color: #fff;
+    max-width: 700px;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 0 15px 0; /* Added bottom margin for spacing before button */
+}
+
+/* Back button styles */
+.previous-button {
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 4px 8px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+    background-color: transparent;
+    cursor: pointer;
+  }
+.previous-button svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+  }
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .viewer-header {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .viewer-header h1 {
+        font-size: 16px;
+    }
+
+    .viewer-header h2 {
+        font-size: 24px;
+    }
+
+    .viewer-header .roadmap-description {
+        font-size: 14px;
+    }
+
+    .back-button {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .viewer-header {
+        padding: 10px;
+    }
+
+    .viewer-header h1 {
+        font-size: 14px;
+    }
+
+    .viewer-header h2 {
+        font-size: 20px;
+    }
+
+    .back-button {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+}
+
+.viewer-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.canvas-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.roadmap-viewer-loading,
+.roadmap-viewer-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    font-size: 18px;
+    color: #666;
+}
+
+.roadmap-viewer-error {
+    color: #e74c3c;
+}

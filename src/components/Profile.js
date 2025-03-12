@@ -233,7 +233,7 @@ const Profile = () => {
                             <button className="dropdown-toggle">⋮</button>
                             <div className="dropdown-menu">
                               <Link
-                                to={`/roadmaps/${roadmap._id}`}
+                                to={`/view-roadmap/${roadmap._id}`}
                                 className="dropdown-item"
                               >
                                 View

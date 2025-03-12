@@ -56,9 +56,6 @@ const SharedRoadmaps = () => {
           {sharedRoadmaps.length === 0 ? (
             <div className="empty-state">
               <p>No roadmaps are shared yet.</p>
-              <Link to="/create-roadmap" className="create-roadmap-btn">
-                Create a Roadmap
-              </Link>
             </div>
           ) : (
             <div className="roadmaps-grid">
@@ -78,7 +75,10 @@ const SharedRoadmaps = () => {
                     </span>
                   </div>
                   <div className="roadmap-actions">
-                    <Link to={`/roadmaps/${roadmap._id}`} className="view-btn">
+                    <Link
+                      to={`/public-roadmap/${roadmap._id}`}
+                      className="view-btn"
+                    >
                       View
                     </Link>
                   </div>

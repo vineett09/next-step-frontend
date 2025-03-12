@@ -24,7 +24,42 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
+  .visibility-toggle {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   
+  .visibility-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .status-private {
+    background-color: #ffcccc;
+    color: #cc0000;
+  }
+  
+  .status-public {
+    background-color: #ccffcc;
+    color: #006600;
+  }
+  
+  .toggle-visibility-btn {
+    padding: 6px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  .toggle-visibility-btn:hover {
+    background-color: #e0e0e0;
+  }
   .roadmap-meta {
     display: flex;
     flex-direction: column;

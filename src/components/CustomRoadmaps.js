@@ -877,71 +877,6 @@ const CustomRoadmaps = () => {
     }
   };
 
-  // Export the roadmap as JSON
-  const exportRoadmap = () => {
-    const roadmapData = {
-      title: roadmapTitle,
-      description: roadmapDescription,
-      structure: {
-        nodes,
-        edges,
-      },
-      settings: {
-        palette,
-        background: backgroundSettings,
-      },
-    };
-
-    const dataStr =
-      "data:text/json;charset=utf-8," +
-      encodeURIComponent(JSON.stringify(roadmapData, null, 2));
-
-    const downloadAnchorNode = document.createElement("a");
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute(
-      "download",
-      `${roadmapTitle.replace(/\s+/g, "-")}.json`
-    );
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-  };
-
-  // Import a roadmap from JSON
-  const importRoadmap = (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
-        if (data.title && data.description && data.structure) {
-          setRoadmapTitle(data.title);
-          setRoadmapDescription(data.description);
-          setNodes(data.structure.nodes || []);
-          setEdges(data.structure.edges || []);
-
-          // Import settings if available
-          if (data.settings) {
-            if (data.settings.palette) {
-              setPalette(data.settings.palette);
-            }
-            if (data.settings.background) {
-              setBackgroundSettings(data.settings.background);
-            }
-          }
-        } else {
-          alert("Invalid roadmap file format");
-        }
-      } catch (error) {
-        console.error("Error parsing roadmap file:", error);
-        alert("Failed to import roadmap. Invalid file format.");
-      }
-    };
-    reader.readAsText(file);
-  };
-
   return (
     <div className="roadmap-builder">
       <Navbar />
@@ -1106,18 +1041,6 @@ const CustomRoadmaps = () => {
               <button onClick={saveRoadmap} className="tool-btn primary">
                 Save Roadmap
               </button>
-              <button onClick={exportRoadmap} className="tool-btn">
-                Export Roadmap
-              </button>
-              <label className="file-input-btn">
-                Import Roadmap
-                <input
-                  type="file"
-                  accept=".json"
-                  onChange={importRoadmap}
-                  style={{ display: "none" }}
-                />
-              </label>
             </div>
           </div>
 
