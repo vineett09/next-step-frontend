@@ -14,7 +14,8 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import AuthModal from "./AuthModal";
 import RelatedRoadmaps from "./RelatedRoadmaps";
-import { techFields, techSkills } from "../data/TechFieldsData"; // Import the data
+import { techFields, techSkills } from "../data/TechFieldsData";
+import Loader from "./Loader";
 
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
@@ -28,7 +29,8 @@ const Roadmap = ({ data }) => {
   const { user, token } = useSelector((state) => state.auth);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const location = useLocation();
-  const roadmapId = location.pathname.split("/").pop(); // Extract roadmap ID from URL
+  const roadmapId = location.pathname.split("/").pop();
+  const [isLoading, setIsLoading] = useState(true);
 
   // Find the corresponding field or skill from the techFields and techSkills data
   const findFieldOrSkill = (id) => {
@@ -78,11 +80,11 @@ const Roadmap = ({ data }) => {
       fetchBookmarkStatus();
     }
   }, [user, token, roadmapId]);
-
   useEffect(() => {
     if (data) {
       const nodeCount = countTotalNodes(data);
       setTotalNodes(nodeCount);
+      setIsLoading(false);
     }
   }, [data]);
 
@@ -195,7 +197,7 @@ const Roadmap = ({ data }) => {
   };
 
   const renderRoadmap = () => {
-    if (data && d3Container.current) {
+    if (data && d3Container.current && !isLoading) {
       d3.select(d3Container.current).selectAll("*").remove();
 
       const width = 1200;
@@ -685,7 +687,7 @@ const Roadmap = ({ data }) => {
     renderRoadmap();
     window.addEventListener("resize", renderRoadmap);
     return () => window.removeEventListener("resize", renderRoadmap);
-  }, [data, completedNodes]);
+  }, [data, completedNodes, isLoading]);
 
   const closeDescription = () => {
     setSelectedNode({ name: "", description: "" });
@@ -707,11 +709,19 @@ const Roadmap = ({ data }) => {
           totalNodes={totalNodes}
         />
 
-        <div className="roadmap-wrapper">
-          <div ref={d3Container} className="d3-container" />
-          <Chatbot roadmapTitle={roadmapTitle} data={data} />
-          <div className="cards-container"></div>
-        </div>
+        {isLoading ? (
+          <div className="loading-container">
+            <Loader loading={isLoading} />
+            <p className="loading-text">Creating your roadmap...</p>
+          </div>
+        ) : (
+          <div className="roadmap-wrapper">
+            <div ref={d3Container} className="d3-container" />
+            <Chatbot roadmapTitle={roadmapTitle} data={data} />
+            <div className="cards-container"></div>
+          </div>
+        )}
+
         <TipBox />
         <Sidebar
           isOpen={isSidebarOpen}

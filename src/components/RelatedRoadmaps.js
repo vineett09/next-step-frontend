@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { techFields, techSkills } from "../data/TechFieldsData";
 import "../styles/RelatedRoadmaps.css";
+import Loader from "./Loader";
+
 const RelatedRoadmaps = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   const findCurrentRoadmap = () => {
     const allRoadmaps = [...techFields, ...techSkills];
@@ -18,23 +25,18 @@ const RelatedRoadmaps = () => {
 
     const allRoadmaps = [...techFields, ...techSkills];
 
-    // Create relevance scores for each roadmap
     const scoredRoadmaps = allRoadmaps
       .filter((roadmap) => roadmap.id !== currentRoadmap.id)
       .map((roadmap) => {
-        // Extract meaningful terms from descriptions
         const currentTerms = extractTerms(currentRoadmap.description);
         const roadmapTerms = extractTerms(roadmap.description);
 
-        // Calculate technology relationship score
         let score = calculateRelevanceScore(currentTerms, roadmapTerms);
 
-        // Boost score if titles are in the same domain
         if (areInSameDomain(currentRoadmap.title, roadmap.title)) {
           score += 30;
         }
 
-        // Check if they're complementary technologies
         if (areComplementaryTechnologies(currentRoadmap, roadmap)) {
           score += 25;
         }
@@ -42,19 +44,17 @@ const RelatedRoadmaps = () => {
         return { roadmap, score };
       });
 
-    // Sort by score and take top 4 with some randomization for variety
     return diversifyResults(scoredRoadmaps);
   };
 
-  // Extract meaningful terms from description
   const extractTerms = (description) => {
     return description
       .toLowerCase()
-      .replace(/[^\w\s]/g, "") // Remove punctuation
-      .split(/\s+/) // Split by whitespace
+      .replace(/[^\w\s]/g, "")
+      .split(/\s+/)
       .filter(
         (term) =>
-          term.length > 3 && // Only meaningful words
+          term.length > 3 &&
           ![
             "with",
             "that",
@@ -68,12 +68,10 @@ const RelatedRoadmaps = () => {
       );
   };
 
-  // Calculate relevance score based on shared terms
   const calculateRelevanceScore = (terms1, terms2) => {
     const sharedTerms = terms1.filter((term) => terms2.includes(term));
     const uniqueSharedTerms = [...new Set(sharedTerms)];
 
-    // Weight by technology specificity
     const techTerms = uniqueSharedTerms.filter((term) =>
       [
         "data",
@@ -103,7 +101,6 @@ const RelatedRoadmaps = () => {
     return uniqueSharedTerms.length * 5 + techTerms.length * 10;
   };
 
-  // Check if two technologies are in the same domain
   const areInSameDomain = (title1, title2) => {
     const domains = [
       ["Frontend", "React", "Angular", "Vue", "UI/UX"],
@@ -132,37 +129,28 @@ const RelatedRoadmaps = () => {
     );
   };
 
-  // Check if technologies commonly work together
   const areComplementaryTechnologies = (tech1, tech2) => {
     const complementaryPairs = [
-      // Frontend + Backend pairs
       ["React", "Node.js"],
       ["Angular", "Spring Boot"],
       ["Vue.js", "PHP"],
-      // Mobile dev pairs
       ["Android", "Kotlin"],
       ["iOS", "Swift"],
       ["Mobile", "Flutter"],
-      // Data science ecosystem
       ["Python", "TensorFlow"],
       ["Data Scientist", "SQL"],
       ["Machine Learning", "Data Analyst"],
-      // DevOps toolchain
       ["Docker", "Kubernetes"],
       ["AWS", "Terraform"],
       ["DevOps", "Git"],
-      // Full stack combinations
       ["Frontend", "Backend"],
       ["JavaScript", "Node.js"],
       ["Full Stack", "React"],
-      // Cloud services
       ["Cloud Computing", "AWS"],
       ["Azure", "DevOps"],
       ["Kubernetes", "Cloud"],
-      // Security related
       ["Cybersecurity", "Blockchain"],
       ["Security", "Linux"],
-      // IoT ecosystem
       ["IoT", "Embedded"],
       ["Robotics", "C++"],
       ["IoT", "Cloud"],
@@ -179,25 +167,17 @@ const RelatedRoadmaps = () => {
     );
   };
 
-  // Ensure diverse results by combining high scores with some randomness
   const diversifyResults = (scoredRoadmaps) => {
-    // Sort by score descending
     scoredRoadmaps.sort((a, b) => b.score - a.score);
-
-    // Take top 2 highest scoring roadmaps
     const topRoadmaps = scoredRoadmaps.slice(0, 2).map((item) => item.roadmap);
-
-    // For the other 2, use weighted random selection from the rest
     const remainingRoadmaps = scoredRoadmaps.slice(2);
 
-    // Create weighted probabilities based on scores
     const totalRemaining = remainingRoadmaps.reduce(
       (sum, item) => sum + item.score,
       0
     );
     let selectedRoadmaps = [];
 
-    // Select 2 more using weighted randomness
     for (let i = 0; i < 2 && remainingRoadmaps.length > 0; i++) {
       const randomValue = Math.random() * totalRemaining;
       let accumulator = 0;
@@ -207,13 +187,12 @@ const RelatedRoadmaps = () => {
 
         if (accumulator >= randomValue) {
           selectedRoadmaps.push(remainingRoadmaps[j].roadmap);
-          remainingRoadmaps.splice(j, 1); // Remove the selected roadmap
+          remainingRoadmaps.splice(j, 1);
           break;
         }
       }
     }
 
-    // If we somehow don't have enough, just take from the top scores
     if (selectedRoadmaps.length < 2 && scoredRoadmaps.length > 2) {
       selectedRoadmaps = scoredRoadmaps.slice(2, 4).map((item) => item.roadmap);
     }
@@ -228,6 +207,10 @@ const RelatedRoadmaps = () => {
       state: { title: roadmap.title, description: roadmap.description },
     });
   };
+
+  if (isLoading) {
+    return <Loader loading={true} />; // Show loader while content is loading
+  }
 
   if (relatedRoadmaps.length === 0) return null;
 

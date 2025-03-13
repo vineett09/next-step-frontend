@@ -6,8 +6,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Loader from "./Loader"; // Add Loader import
 import "../styles/CustomRoadmapViewer.css";
-import { nodeTypes } from "./CustomRoadmaps"; // Import the node types from your existing component
+import { nodeTypes } from "./CustomRoadmaps";
 
 const CustomRoadmapViewer = () => {
   const { id } = useParams();
@@ -49,7 +50,12 @@ const CustomRoadmapViewer = () => {
   }, [id, token]);
 
   if (loading) {
-    return <div className="roadmap-viewer-loading">Loading roadmap...</div>;
+    return (
+      <div className="roadmap-viewer-loading">
+        <Loader loading={true} />
+        <p>Loading roadmap...</p>
+      </div>
+    );
   }
 
   if (error) {

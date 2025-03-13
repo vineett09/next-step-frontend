@@ -16,7 +16,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AuthModal from "./AuthModal";
 import "../styles/CustomRoadmaps.css";
-
+import Loader from "./Loader"; // Add Loader import
 // Define custom node types
 export const CustomNode = ({ data, isConnectable, selected }) => {
   return (
@@ -311,6 +311,7 @@ const CustomRoadmaps = () => {
   const navigate = useNavigate();
   const { user, token } = useSelector((state) => state.auth);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
   const [roadmapTitle, setRoadmapTitle] = useState("My Custom Roadmap");
   const [roadmapDescription, setRoadmapDescription] = useState(
     "A personalized learning path"
@@ -841,6 +842,8 @@ const CustomRoadmaps = () => {
       return;
     }
 
+    setIsLoading(true); // Set loading to true when saving starts
+
     try {
       const roadmapData = {
         title: roadmapTitle,
@@ -874,6 +877,8 @@ const CustomRoadmaps = () => {
     } catch (error) {
       console.error("Error saving roadmap:", error);
       alert("Failed to save roadmap. Please try again.");
+    } finally {
+      setIsLoading(false); // Reset loading state
     }
   };
 
@@ -882,377 +887,238 @@ const CustomRoadmaps = () => {
       <Navbar />
 
       <div className="builder-container">
-        <div className="builder-header">
-          <h2>Create Your Custom Roadmap</h2>
-          <div className="roadmap-meta">
-            <input
-              type="text"
-              value={roadmapTitle}
-              onChange={(e) => setRoadmapTitle(e.target.value)}
-              className="title-input"
-              placeholder="Roadmap Title"
-            />
-            <textarea
-              value={roadmapDescription}
-              onChange={(e) => setRoadmapDescription(e.target.value)}
-              className="description-input"
-              placeholder="Roadmap Description"
-            />
+        {isLoading ? (
+          <div className="loader-wrapper">
+            <Loader loading={true} />
+            <p>Saving your roadmap...</p>
           </div>
-        </div>
-
-        <div className="builder-body">
-          <div className="toolbar">
-            <div className="tool-section">
-              <h3>Add Elements</h3>
-              <button onClick={() => addNode("primary")} className="tool-btn">
-                Add Primary Node
-              </button>
-              <button onClick={() => addNode("secondary")} className="tool-btn">
-                Add Secondary Node
-              </button>
-              <button
-                onClick={() => addLine("horizontal")}
-                className="tool-btn"
-              >
-                Add Horizontal Line
-              </button>
-              <button onClick={() => addLine("vertical")} className="tool-btn">
-                Add Vertical Line
-              </button>
-              <button onClick={addContainerBox} className="tool-btn">
-                Add Container Box
-              </button>
-              <button onClick={addMilestone} className="tool-btn">
-                Add Milestone
-              </button>
-              <button onClick={addTextLabel} className="tool-btn">
-                Add Text Label
-              </button>
-
-              <button onClick={addResourceNode} className="tool-btn">
-                Add Resource
-              </button>
-            </div>
-            <div className="tool-section">
-              <h3>Actions</h3>
-              <button
-                onClick={deleteSelected}
-                className="tool-btn danger"
-                disabled={!selectedElement}
-              >
-                Delete Selected
-              </button>
-            </div>
-
-            <div className="tool-section">
-              <h3>Colors</h3>
-              <div className="color-picker">
-                <label>Primary Node:</label>
+        ) : (
+          <>
+            <div className="builder-header">
+              <h2>Create Your Custom Roadmap</h2>
+              <div className="roadmap-meta">
                 <input
-                  type="color"
-                  value={palette.primary}
-                  onChange={(e) =>
-                    setPalette({ ...palette, primary: e.target.value })
-                  }
+                  type="text"
+                  value={roadmapTitle}
+                  onChange={(e) => setRoadmapTitle(e.target.value)}
+                  className="title-input"
+                  placeholder="Roadmap Title"
                 />
-              </div>
-              <div className="color-picker">
-                <label>Secondary Node:</label>
-                <input
-                  type="color"
-                  value={palette.secondary}
-                  onChange={(e) =>
-                    setPalette({ ...palette, secondary: e.target.value })
-                  }
-                />
-              </div>
-              <div className="color-picker">
-                <label>Connection:</label>
-                <input
-                  type="color"
-                  value={palette.connection}
-                  onChange={(e) =>
-                    setPalette({ ...palette, connection: e.target.value })
-                  }
+                <textarea
+                  value={roadmapDescription}
+                  onChange={(e) => setRoadmapDescription(e.target.value)}
+                  className="description-input"
+                  placeholder="Roadmap Description"
                 />
               </div>
             </div>
 
-            <div className="tool-section">
-              <h3>Background</h3>
-              <div className="background-settings">
-                <div className="property-group">
-                  <label>Pattern:</label>
-                  <select
-                    value={backgroundSettings.variant}
-                    onChange={(e) =>
-                      handleBackgroundChange("variant", e.target.value)
-                    }
-                    className="select-input"
+            <div className="builder-body">
+              <div className="toolbar">
+                <div className="tool-section">
+                  <h3>Add Elements</h3>
+                  <button
+                    onClick={() => addNode("primary")}
+                    className="tool-btn"
                   >
-                    <option value="dots">Dots</option>
-                    <option value="lines">Lines</option>
-                    <option value="cross">Cross</option>
-                  </select>
+                    Add Primary Node
+                  </button>
+                  <button
+                    onClick={() => addNode("secondary")}
+                    className="tool-btn"
+                  >
+                    Add Secondary Node
+                  </button>
+                  <button
+                    onClick={() => addLine("horizontal")}
+                    className="tool-btn"
+                  >
+                    Add Horizontal Line
+                  </button>
+                  <button
+                    onClick={() => addLine("vertical")}
+                    className="tool-btn"
+                  >
+                    Add Vertical Line
+                  </button>
+                  <button onClick={addContainerBox} className="tool-btn">
+                    Add Container Box
+                  </button>
+                  <button onClick={addMilestone} className="tool-btn">
+                    Add Milestone
+                  </button>
+                  <button onClick={addTextLabel} className="tool-btn">
+                    Add Text Label
+                  </button>
+                  <button onClick={addResourceNode} className="tool-btn">
+                    Add Resource
+                  </button>
                 </div>
-                <div className="property-group">
-                  <label>Color:</label>
-                  <input
-                    type="color"
-                    value={backgroundSettings.color}
-                    onChange={(e) =>
-                      handleBackgroundChange("color", e.target.value)
-                    }
-                  />
+                <div className="tool-section">
+                  <h3>Actions</h3>
+                  <button
+                    onClick={deleteSelected}
+                    className="tool-btn danger"
+                    disabled={!selectedElement}
+                  >
+                    Delete Selected
+                  </button>
                 </div>
-                <div className="property-group">
-                  <label>Gap Size:</label>
-                  <input
-                    type="range"
-                    min="8"
-                    max="50"
-                    value={backgroundSettings.gap}
-                    onChange={(e) =>
-                      handleBackgroundChange("gap", parseInt(e.target.value))
-                    }
-                  />
-                  <span>{backgroundSettings.gap}px</span>
+
+                <div className="tool-section">
+                  <h3>Colors</h3>
+                  <div className="color-picker">
+                    <label>Primary Node:</label>
+                    <input
+                      type="color"
+                      value={palette.primary}
+                      onChange={(e) =>
+                        setPalette({ ...palette, primary: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="color-picker">
+                    <label>Secondary Node:</label>
+                    <input
+                      type="color"
+                      value={palette.secondary}
+                      onChange={(e) =>
+                        setPalette({ ...palette, secondary: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="color-picker">
+                    <label>Connection:</label>
+                    <input
+                      type="color"
+                      value={palette.connection}
+                      onChange={(e) =>
+                        setPalette({ ...palette, connection: e.target.value })
+                      }
+                    />
+                  </div>
                 </div>
-                <div className="property-group">
-                  <label>Pattern Size:</label>
-                  <input
-                    type="range"
-                    min="0.5"
-                    max="3"
-                    step="0.1"
-                    value={backgroundSettings.size}
-                    onChange={(e) =>
-                      handleBackgroundChange("size", parseFloat(e.target.value))
-                    }
-                  />
-                  <span>{backgroundSettings.size}x</span>
+
+                <div className="tool-section">
+                  <h3>Background</h3>
+                  <div className="background-settings">
+                    <div className="property-group">
+                      <label>Pattern:</label>
+                      <select
+                        value={backgroundSettings.variant}
+                        onChange={(e) =>
+                          handleBackgroundChange("variant", e.target.value)
+                        }
+                        className="select-input"
+                      >
+                        <option value="dots">Dots</option>
+                        <option value="lines">Lines</option>
+                        <option value="cross">Cross</option>
+                      </select>
+                    </div>
+                    <div className="property-group">
+                      <label>Color:</label>
+                      <input
+                        type="color"
+                        value={backgroundSettings.color}
+                        onChange={(e) =>
+                          handleBackgroundChange("color", e.target.value)
+                        }
+                      />
+                    </div>
+                    <div className="property-group">
+                      <label>Gap Size:</label>
+                      <input
+                        type="range"
+                        min="8"
+                        max="50"
+                        value={backgroundSettings.gap}
+                        onChange={(e) =>
+                          handleBackgroundChange(
+                            "gap",
+                            parseInt(e.target.value)
+                          )
+                        }
+                      />
+                      <span>{backgroundSettings.gap}px</span>
+                    </div>
+                    <div className="property-group">
+                      <label>Pattern Size:</label>
+                      <input
+                        type="range"
+                        min="0.5"
+                        max="3"
+                        step="0.1"
+                        value={backgroundSettings.size}
+                        onChange={(e) =>
+                          handleBackgroundChange(
+                            "size",
+                            parseFloat(e.target.value)
+                          )
+                        }
+                      />
+                      <span>{backgroundSettings.size}x</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="tool-section">
+                  <h3>Roadmap</h3>
+                  <button
+                    onClick={saveRoadmap}
+                    className="tool-btn primary"
+                    disabled={isLoading}
+                  >
+                    Save Roadmap
+                  </button>
                 </div>
               </div>
-            </div>
 
-            <div className="tool-section">
-              <h3>Roadmap</h3>
-              <button onClick={saveRoadmap} className="tool-btn primary">
-                Save Roadmap
-              </button>
-            </div>
-          </div>
+              <div
+                className="canvas-container"
+                style={{ height: 800, width: "100%" }}
+              >
+                <ReactFlow
+                  nodes={nodes}
+                  edges={edges}
+                  onNodesChange={onNodesChange}
+                  onEdgesChange={onEdgesChange}
+                  onConnect={onConnect}
+                  onNodeClick={onElementClick}
+                  onEdgeClick={onElementClick}
+                  nodeTypes={nodeTypes}
+                  fitView
+                  snapToGrid={true}
+                  snapGrid={[15, 15]}
+                  defaultEdgeOptions={{
+                    type: "smoothstep",
+                    style: { stroke: palette.connection, strokeWidth: 3 },
+                  }}
+                  connectionLineStyle={{
+                    stroke: palette.connection,
+                    strokeWidth: 3,
+                  }}
+                  connectionLineType="smoothstep"
+                >
+                  <Controls />
+                  <MiniMap />
+                  <Background
+                    variant={backgroundSettings.variant}
+                    color={backgroundSettings.color}
+                    gap={backgroundSettings.gap}
+                    size={backgroundSettings.size}
+                  />
+                </ReactFlow>
+              </div>
 
-          <div
-            className="canvas-container"
-            style={{ height: 800, width: "100%" }}
-          >
-            <ReactFlow
-              nodes={nodes}
-              edges={edges}
-              onNodesChange={onNodesChange}
-              onEdgesChange={onEdgesChange}
-              onConnect={onConnect}
-              onNodeClick={onElementClick}
-              onEdgeClick={onElementClick}
-              nodeTypes={nodeTypes}
-              fitView
-              snapToGrid={true}
-              snapGrid={[15, 15]}
-              defaultEdgeOptions={{
-                type: "smoothstep",
-                style: { stroke: palette.connection, strokeWidth: 3 },
-              }}
-              connectionLineStyle={{
-                stroke: palette.connection,
-                strokeWidth: 3,
-              }}
-              connectionLineType="smoothstep"
-            >
-              <Controls />
-              <MiniMap />
-              <Background
-                variant={backgroundSettings.variant}
-                color={backgroundSettings.color}
-                gap={backgroundSettings.gap}
-                size={backgroundSettings.size}
-              />
-            </ReactFlow>
-          </div>
-
-          <div className="properties-panel">
-            <h3>Properties</h3>
-            {selectedElement ? (
-              <div className="properties-form">
-                {selectedElementType === "node" && (
-                  <>
-                    <div className="property-group">
-                      <label>Name:</label>
-                      <input
-                        type="text"
-                        value={selectedElement.data?.label || ""}
-                        onChange={(e) =>
-                          handlePropertyChange("label", e.target.value)
-                        }
-                      />
-                    </div>
-
-                    <div className="property-group">
-                      <label>Width:</label>
-                      <input
-                        type="number"
-                        value={selectedElement.style?.width || 150}
-                        onChange={(e) =>
-                          handlePropertyChange("width", e.target.value)
-                        }
-                        min="5"
-                        max="500"
-                      />
-                    </div>
-                    <div className="property-group">
-                      <label>Height:</label>
-                      <input
-                        type="number"
-                        value={selectedElement.style?.height || 40}
-                        onChange={(e) =>
-                          handlePropertyChange("height", e.target.value)
-                        }
-                        min="5"
-                        max="500"
-                      />
-                    </div>
-                    <div className="property-group">
-                      <label>Color:</label>
-                      <input
-                        type="color"
-                        value={
-                          selectedElement.style?.background ||
-                          selectedElement.style?.backgroundColor ||
-                          palette.primary
-                        }
-                        onChange={(e) =>
-                          handlePropertyChange("color", e.target.value)
-                        }
-                      />
-                    </div>
-                  </>
-                )}
-                {selectedElement?.type === "resourceNode" && (
-                  <>
-                    <div className="property-group">
-                      <label>Resource Type:</label>
-                      <select
-                        value={selectedElement.data?.resourceType || "URL"}
-                        onChange={(e) =>
-                          handlePropertyChange("resourceType", e.target.value)
-                        }
-                      >
-                        <option value="URL">URL</option>
-                        <option value="Book">Book</option>
-                        <option value="Video">Video</option>
-                        <option value="Course">Course</option>
-                        <option value="Article">Article</option>
-                        <option value="Tool">Tool</option>
-                      </select>
-                    </div>
-                    <div className="property-group">
-                      <label>Resource Link:</label>
-                      <input
-                        type="text"
-                        value={selectedElement.data?.resourceLink || ""}
-                        onChange={(e) =>
-                          handlePropertyChange("resourceLink", e.target.value)
-                        }
-                        placeholder="Enter link or reference"
-                      />
-                    </div>
-                  </>
-                )}
-                {selectedElementType === "edge" && (
-                  <>
-                    <div className="property-group">
-                      <label>Type:</label>
-                      <select
-                        value={selectedElement.type || "smoothstep"}
-                        onChange={(e) =>
-                          handlePropertyChange("type", e.target.value)
-                        }
-                      >
-                        <option value="smoothstep">Curved</option>
-                        <option value="straight">Straight</option>
-                        <option value="step">Stepped</option>
-                      </select>
-                    </div>
-                    <div className="property-group">
-                      <label>Animated:</label>
-                      <input
-                        type="checkbox"
-                        checked={selectedElement.animated || false}
-                        onChange={(e) =>
-                          handlePropertyChange("animated", e.target.checked)
-                        }
-                      />
-                    </div>
-                    <div className="property-group">
-                      <label>Color:</label>
-                      <input
-                        type="color"
-                        value={
-                          selectedElement.style?.stroke || palette.connection
-                        }
-                        onChange={(e) =>
-                          handlePropertyChange("color", e.target.value)
-                        }
-                      />
-                    </div>
-                    {selectedElement?.type === "textLabel" && (
+              <div className="properties-panel">
+                <h3>Properties</h3>
+                {selectedElement ? (
+                  <div className="properties-form">
+                    {selectedElementType === "node" && (
                       <>
                         <div className="property-group">
-                          <label>Font Size:</label>
-                          <select
-                            value={selectedElement.data?.fontSize || "14px"}
-                            onChange={(e) =>
-                              handlePropertyChange("fontSize", e.target.value)
-                            }
-                          >
-                            <option value="12px">Small</option>
-                            <option value="14px">Medium</option>
-                            <option value="18px">Large</option>
-                            <option value="24px">X-Large</option>
-                          </select>
-                        </div>
-                        <div className="property-group">
-                          <label>Font Style:</label>
-                          <select
-                            value={selectedElement.data?.fontStyle || "normal"}
-                            onChange={(e) =>
-                              handlePropertyChange("fontStyle", e.target.value)
-                            }
-                          >
-                            <option value="normal">Normal</option>
-                            <option value="italic">Italic</option>
-                          </select>
-                        </div>
-                        <div className="property-group">
-                          <label>Font Weight:</label>
-                          <select
-                            value={selectedElement.data?.fontWeight || "normal"}
-                            onChange={(e) =>
-                              handlePropertyChange("fontWeight", e.target.value)
-                            }
-                          >
-                            <option value="normal">Normal</option>
-                            <option value="bold">Bold</option>
-                          </select>
-                        </div>
-                      </>
-                    )}
-
-                    {selectedElement?.type === "containerBox" && (
-                      <>
-                        <div className="property-group">
-                          <label>Title:</label>
+                          <label>Name:</label>
                           <input
                             type="text"
                             value={selectedElement.data?.label || ""}
@@ -1261,52 +1127,247 @@ const CustomRoadmaps = () => {
                             }
                           />
                         </div>
+
                         <div className="property-group">
-                          <label>Border Color:</label>
+                          <label>Width:</label>
                           <input
-                            type="color"
-                            value={selectedElement.data?.borderColor || "#666"}
+                            type="number"
+                            value={selectedElement.style?.width || 150}
                             onChange={(e) =>
-                              handlePropertyChange(
-                                "borderColor",
-                                e.target.value
-                              )
+                              handlePropertyChange("width", e.target.value)
                             }
+                            min="5"
+                            max="500"
                           />
                         </div>
                         <div className="property-group">
-                          <label>Label Background:</label>
+                          <label>Height:</label>
                           <input
-                            type="color"
-                            value={selectedElement.data?.labelBgColor || "#fff"}
+                            type="number"
+                            value={selectedElement.style?.height || 40}
                             onChange={(e) =>
-                              handlePropertyChange(
-                                "labelBgColor",
-                                e.target.value
-                              )
+                              handlePropertyChange("height", e.target.value)
                             }
+                            min="5"
+                            max="500"
                           />
                         </div>
                         <div className="property-group">
-                          <label>Text Color:</label>
+                          <label>Color:</label>
                           <input
                             type="color"
-                            value={selectedElement.data?.textColor || "#000"}
+                            value={
+                              selectedElement.style?.background ||
+                              selectedElement.style?.backgroundColor ||
+                              palette.primary
+                            }
                             onChange={(e) =>
-                              handlePropertyChange("textColor", e.target.value)
+                              handlePropertyChange("color", e.target.value)
                             }
                           />
                         </div>
                       </>
                     )}
-                  </>
+                    {selectedElement?.type === "resourceNode" && (
+                      <>
+                        <div className="property-group">
+                          <label>Resource Type:</label>
+                          <select
+                            value={selectedElement.data?.resourceType || "URL"}
+                            onChange={(e) =>
+                              handlePropertyChange(
+                                "resourceType",
+                                e.target.value
+                              )
+                            }
+                          >
+                            <option value="URL">URL</option>
+                            <option value="Book">Book</option>
+                            <option value="Video">Video</option>
+                            <option value="Course">Course</option>
+                            <option value="Article">Article</option>
+                            <option value="Tool">Tool</option>
+                          </select>
+                        </div>
+                        <div className="property-group">
+                          <label>Resource Link:</label>
+                          <input
+                            type="text"
+                            value={selectedElement.data?.resourceLink || ""}
+                            onChange={(e) =>
+                              handlePropertyChange(
+                                "resourceLink",
+                                e.target.value
+                              )
+                            }
+                            placeholder="Enter link or reference"
+                          />
+                        </div>
+                      </>
+                    )}
+                    {selectedElementType === "edge" && (
+                      <>
+                        <div className="property-group">
+                          <label>Type:</label>
+                          <select
+                            value={selectedElement.type || "smoothstep"}
+                            onChange={(e) =>
+                              handlePropertyChange("type", e.target.value)
+                            }
+                          >
+                            <option value="smoothstep">Curved</option>
+                            <option value="straight">Straight</option>
+                            <option value="step">Stepped</option>
+                          </select>
+                        </div>
+                        <div className="property-group">
+                          <label>Animated:</label>
+                          <input
+                            type="checkbox"
+                            checked={selectedElement.animated || false}
+                            onChange={(e) =>
+                              handlePropertyChange("animated", e.target.checked)
+                            }
+                          />
+                        </div>
+                        <div className="property-group">
+                          <label>Color:</label>
+                          <input
+                            type="color"
+                            value={
+                              selectedElement.style?.stroke ||
+                              palette.connection
+                            }
+                            onChange={(e) =>
+                              handlePropertyChange("color", e.target.value)
+                            }
+                          />
+                        </div>
+                        {selectedElement?.type === "textLabel" && (
+                          <>
+                            <div className="property-group">
+                              <label>Font Size:</label>
+                              <select
+                                value={selectedElement.data?.fontSize || "14px"}
+                                onChange={(e) =>
+                                  handlePropertyChange(
+                                    "fontSize",
+                                    e.target.value
+                                  )
+                                }
+                              >
+                                <option value="12px">Small</option>
+                                <option value="14px">Medium</option>
+                                <option value="18px">Large</option>
+                                <option value="24px">X-Large</option>
+                              </select>
+                            </div>
+                            <div className="property-group">
+                              <label>Font Style:</label>
+                              <select
+                                value={
+                                  selectedElement.data?.fontStyle || "normal"
+                                }
+                                onChange={(e) =>
+                                  handlePropertyChange(
+                                    "fontStyle",
+                                    e.target.value
+                                  )
+                                }
+                              >
+                                <option value="normal">Normal</option>
+                                <option value="italic">Italic</option>
+                              </select>
+                            </div>
+                            <div className="property-group">
+                              <label>Font Weight:</label>
+                              <select
+                                value={
+                                  selectedElement.data?.fontWeight || "normal"
+                                }
+                                onChange={(e) =>
+                                  handlePropertyChange(
+                                    "fontWeight",
+                                    e.target.value
+                                  )
+                                }
+                              >
+                                <option value="normal">Normal</option>
+                                <option value="bold">Bold</option>
+                              </select>
+                            </div>
+                          </>
+                        )}
+
+                        {selectedElement?.type === "containerBox" && (
+                          <>
+                            <div className="property-group">
+                              <label>Title:</label>
+                              <input
+                                type="text"
+                                value={selectedElement.data?.label || ""}
+                                onChange={(e) =>
+                                  handlePropertyChange("label", e.target.value)
+                                }
+                              />
+                            </div>
+                            <div className="property-group">
+                              <label>Border Color:</label>
+                              <input
+                                type="color"
+                                value={
+                                  selectedElement.data?.borderColor || "#666"
+                                }
+                                onChange={(e) =>
+                                  handlePropertyChange(
+                                    "borderColor",
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </div>
+                            <div className="property-group">
+                              <label>Label Background:</label>
+                              <input
+                                type="color"
+                                value={
+                                  selectedElement.data?.labelBgColor || "#fff"
+                                }
+                                onChange={(e) =>
+                                  handlePropertyChange(
+                                    "labelBgColor",
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </div>
+                            <div className="property-group">
+                              <label>Text Color:</label>
+                              <input
+                                type="color"
+                                value={
+                                  selectedElement.data?.textColor || "#000"
+                                }
+                                onChange={(e) =>
+                                  handlePropertyChange(
+                                    "textColor",
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </div>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <p>Select an element to edit its properties</p>
                 )}
               </div>
-            ) : (
-              <p>Select an element to edit its properties</p>
-            )}
-          </div>
-        </div>
+            </div>
+          </>
+        )}
       </div>
 
       <Footer />
@@ -1320,5 +1381,4 @@ const CustomRoadmaps = () => {
     </div>
   );
 };
-
 export default CustomRoadmaps;

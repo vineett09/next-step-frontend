@@ -20,7 +20,20 @@
   overflow-x: auto;
   margin: 20px 0;
 }
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  width: 100%;
+}
 
+.loading-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #666;
+}
 /* D3 container styling with responsive sizing */
 .d3-container {
   max-width: 100%;

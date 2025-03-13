@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/authslice";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Auth.css";
+import Loader from "./Loader";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ function Login() {
 
       const timer = setTimeout(() => {
         setErrorMessage("");
-      }, 3000); // Hide the error after 3 seconds
+      }, 3000);
 
       return () => clearTimeout(timer);
     }
@@ -50,41 +51,54 @@ function Login() {
     <div className="auth-container">
       <div className="auth-box">
         <h2 className="auth-title">Welcome Back</h2>
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input
-              type="email"
-              id="email"
-              placeholder=" "
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label htmlFor="email">Email Address</label>
+
+        {isLoading ? (
+          <div className="loader-wrapper">
+            <Loader loading={true} />
+            <p>Signing you in...</p>
           </div>
+        ) : (
+          <>
+            <form className="auth-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  placeholder=" "
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <label htmlFor="email">Email Address</label>
+              </div>
 
-          <div className="form-group">
-            <input
-              type="password"
-              id="password"
-              placeholder=" "
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <label htmlFor="password">Password</label>
-          </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  id="password"
+                  placeholder=" "
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <label htmlFor="password">Password</label>
+              </div>
 
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
+              {errorMessage && (
+                <div className="error-message">{errorMessage}</div>
+              )}
 
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Signing in..." : "Sign In"}
-          </button>
-        </form>
+              <button type="submit" disabled={isLoading}>
+                Sign In
+              </button>
+            </form>
 
-        <div className="auth-link">
-          Don't have an account? <Link to="/register">Create an account</Link>
-        </div>
+            <div className="auth-link">
+              Don't have an account?{" "}
+              <Link to="/register">Create an account</Link>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,16 +1,202 @@
 import React, { useState, useEffect } from "react";
 import ReactFlow, { Controls, Background, MiniMap } from "reactflow";
 import "reactflow/dist/style.css";
-import { useParams, useNavigate } from "react-router-dom"; // Added useNavigate
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/SharedRoadmapViewer.css";
 import { nodeTypes } from "./CustomRoadmaps";
+import Loader from "./Loader";
+const StarRating = ({
+  value,
+  onChange,
+  interactive = false,
+  size = "medium",
+}) => {
+  const [hoverRating, setHoverRating] = useState(0);
+
+  // Round to nearest half for display
+  const roundedValue = Math.round(value * 2) / 2;
+
+  const handleMouseEnter = (rating) => {
+    if (interactive) {
+      setHoverRating(rating);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (interactive) {
+      setHoverRating(0);
+    }
+  };
+
+  const handleClick = (rating) => {
+    if (interactive && onChange) {
+      onChange(rating);
+    }
+  };
+
+  const displayValue = hoverRating > 0 ? hoverRating : roundedValue;
+
+  return (
+    <div
+      className={`star-rating star-rating-${size} ${
+        interactive ? "interactive" : ""
+      }`}
+    >
+      {[1, 2, 3, 4, 5].map((star) => {
+        const isFull = star <= displayValue;
+        const isHalf = !isFull && star - 0.5 === displayValue;
+
+        return (
+          <span
+            key={star}
+            className={`star ${
+              isFull ? "full-star" : isHalf ? "half-star" : "empty-star"
+            }`}
+            onMouseEnter={() => handleMouseEnter(star)}
+            onMouseLeave={handleMouseLeave}
+            onClick={() => handleClick(star)}
+          >
+            {isFull ? "★" : "☆"}
+          </span>
+        );
+      })}
+    </div>
+  );
+};
+
+const RatingSection = ({ roadmapId, creatorId }) => {
+  const [userRating, setUserRating] = useState(0);
+  const [averageRating, setAverageRating] = useState(0);
+  const [ratingCount, setRatingCount] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  const { user } = useSelector((state) => state.auth);
+  const isLoggedIn = !!user;
+  const isCreator = user && user.id === creatorId;
+
+  useEffect(() => {
+    if (isLoggedIn && !isCreator) {
+      fetchUserRating();
+    }
+  }, [roadmapId, isLoggedIn, isCreator]);
+
+  // In SharedRoadmapViewer.js, modify the fetchUserRating function:
+
+  const fetchUserRating = async () => {
+    try {
+      // Get the token from wherever you store it (localStorage, Redux state, etc.)
+      const token = localStorage.getItem("token"); // or from Redux if that's where you store it
+
+      const response = await axios.get(`/api/roadmaps/${roadmapId}/rating`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Make sure this header name matches what your auth middleware expects
+        },
+      });
+
+      if (response.data.success) {
+        setUserRating(response.data.userRating || 0);
+        setAverageRating(response.data.averageRating);
+        setRatingCount(response.data.ratingCount);
+      }
+    } catch (err) {
+      console.error("Error fetching rating:", err);
+    }
+  };
+
+  const handleRatingChange = async (newRating) => {
+    if (!isLoggedIn) {
+      setError("Please log in to rate this roadmap");
+      return;
+    }
+
+    if (isCreator) {
+      setError("You cannot rate your own roadmap");
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      setError(null);
+      setSuccess(null);
+
+      // Get the token
+      const token = localStorage.getItem("token"); // or from Redux
+
+      const response = await axios.post(
+        `/api/roadmaps/${roadmapId}/rating`,
+        { rating: newRating },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.success) {
+        setUserRating(newRating);
+        setAverageRating(response.data.averageRating);
+        setRatingCount(response.data.ratingCount);
+        setSuccess("Your rating has been submitted");
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Error submitting rating");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="roadmap-rating-section">
+      <div className="rating-header">
+        <h3>Roadmap Rating</h3>
+        {averageRating > 0 && (
+          <div className="average-rating">
+            <StarRating value={averageRating} />
+            <span>
+              {averageRating.toFixed(1)} ({ratingCount}{" "}
+              {ratingCount === 1 ? "rating" : "ratings"})
+            </span>
+          </div>
+        )}
+      </div>
+
+      {!isLoggedIn ? (
+        <div className="rating-login-prompt">
+          Please log in to rate this roadmap
+        </div>
+      ) : isCreator ? (
+        <div className="rating-creator-note">
+          You cannot rate your own roadmap
+        </div>
+      ) : (
+        <div className="user-rating-container">
+          <div className="user-rating-prompt">
+            {userRating > 0 ? "Your rating:" : "Rate this roadmap:"}
+          </div>
+          <StarRating
+            value={userRating}
+            onChange={handleRatingChange}
+            interactive={true}
+            size="large"
+          />
+          {isSubmitting && <div className="rating-status">Submitting...</div>}
+          {error && <div className="rating-error">{error}</div>}
+          {success && <div className="rating-success">{success}</div>}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const SharedRoadmapViewer = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // Added for navigation
+  const navigate = useNavigate();
   const [roadmap, setRoadmap] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,7 +226,11 @@ const SharedRoadmapViewer = () => {
   }, [id]);
 
   if (loading) {
-    return <div className="roadmap-viewer-loading">Loading roadmap...</div>;
+    return (
+      <div className="roadmap-viewer-loading">
+        <Loader loading={true} />
+      </div>
+    );
   }
 
   if (error) {
@@ -63,11 +253,7 @@ const SharedRoadmapViewer = () => {
       <div className="viewer-container">
         <div className="viewer-header">
           <div className="header-content">
-            {" "}
-            <button
-              className="previous-button"
-              onClick={() => navigate(-1)} // Goes back to previous page
-            >
+            <button className="previous-button" onClick={() => navigate(-1)}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
               </svg>
@@ -76,6 +262,9 @@ const SharedRoadmapViewer = () => {
             <h2>{title}</h2>
             <p className="roadmap-description">{description}</p>
             <h1>Created by {roadmap.createdBy?.username || "Unknown"}</h1>
+
+            {/* Move the RatingSection component here */}
+            <RatingSection roadmapId={id} creatorId={roadmap.createdBy?._id} />
           </div>
         </div>
 
@@ -107,6 +296,7 @@ const SharedRoadmapViewer = () => {
               />
             </ReactFlow>
           </div>
+          <div className="roadmap-details-section"></div>
         </div>
       </div>
       <Footer />

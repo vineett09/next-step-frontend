@@ -83,7 +83,20 @@ body {
   position: relative;
   overflow: hidden;
 }
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px; /* Adjust based on your design */
+  gap: 15px;
+}
 
+.loader-wrapper p {
+  margin: 0;
+  color: #666;
+  font-size: 1rem;
+}
 /* Background Pattern */
 .auth-container::before {
   content: "";

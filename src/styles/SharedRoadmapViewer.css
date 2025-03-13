@@ -81,8 +81,64 @@
     height: 24px;
     fill: #fff;
   }
-
-
+/* Update to make rating section fit in the header */
+.viewer-header .roadmap-rating-section {
+    background-color: transparent; /* Remove the black background */
+    padding: 0; /* Remove extra padding */
+    margin-top: 16px; /* Space from the element above */
+    box-shadow: none; /* Remove shadow */
+    width: 100%; /* Take up full width of the header */
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .viewer-header .rating-header {
+    margin-bottom: 8px; /* Reduce space */
+  }
+  
+  .viewer-header .rating-header h3 {
+    color: #fff; /* Make the title white to match header text */
+    font-size: 1rem; /* Smaller font for headers */
+  }
+  
+  .viewer-header .average-rating span {
+    color: #ddd; /* Lighter color for text */
+  }
+  
+  .viewer-header .rating-login-prompt, 
+  .viewer-header .rating-creator-note,
+  .viewer-header .rating-status, 
+  .viewer-header .rating-error, 
+  .viewer-header .rating-success {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    color: #fff; /* White text */
+  }
+  
+  .viewer-header .rating-error {
+    background-color: rgba(211, 47, 47, 0.2); /* Semi-transparent red */
+    color: #ffcccb; /* Light red color */
+  }
+  
+  .viewer-header .rating-success {
+    background-color: rgba(46, 125, 50, 0.2); /* Semi-transparent green */
+    color: #b3ffb3; /* Light green color */
+  }
+  
+  .viewer-header .user-rating-prompt {
+    color: #fff; /* White text */
+  }
+  
+  /* Make stars more visible in the header */
+  .viewer-header .star {
+    color: #ffb400; /* Brighter yellow */
+    font-size: 1.2em; /* Larger stars */
+  }
+  
+  .roadmap-details-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .viewer-header {

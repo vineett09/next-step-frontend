@@ -27,7 +27,21 @@
     max-width: 700px;
     margin: 0 auto;
   }
+  .roadmap-viewer-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full viewport height */
+    gap: 15px;
+    width: 100%;
+  }
   
+  .roadmap-viewer-loading p {
+    margin: 0;
+    color: #666;
+    font-size: 1rem;
+  }
   .viewer-body {
     display: flex;
     flex-direction: column;

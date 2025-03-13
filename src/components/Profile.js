@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Loader from "./Loader"; // Add Loader import
 import "../styles/Profile.css";
-import { techFields, techSkills } from "../data/TechFieldsData"; // Import the tech fields data
+import { techFields, techSkills } from "../data/TechFieldsData";
 
 const Profile = () => {
   const { user, token } = useSelector((state) => state.auth);
   const [userRoadmaps, setUserRoadmaps] = useState([]);
   const [bookmarkedRoadmaps, setBookmarkedRoadmaps] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeSection, setActiveSection] = useState("profile"); // State to track active section
+  const [activeSection, setActiveSection] = useState("profile");
 
   useEffect(() => {
     if (token && user) {
@@ -49,7 +50,6 @@ const Profile = () => {
       });
       console.log("Bookmarked roadmaps:", response.data);
 
-      // If response.data is just an array of IDs, convert to objects
       const bookmarks = Array.isArray(response.data)
         ? response.data.map((id) => ({ id }))
         : response.data;
@@ -109,24 +109,26 @@ const Profile = () => {
     }
   };
 
-  // Helper function to find tech field title from ID
   const findTechFieldTitle = (id) => {
-    // Remove leading slash if present
     const cleanId = id.startsWith("/") ? id.substring(1) : id;
-
-    // Check in both techFields and techSkills arrays
     const field = [...techFields, ...techSkills].find(
       (item) =>
         item.link === `/${cleanId}` ||
         item.link === cleanId ||
         item.link.substring(1) === cleanId
     );
-
     return field ? field.title : cleanId;
   };
 
+  // Show loader while loading
   if (loading) {
-    return <div className="profile-loading">Loading profile data...</div>;
+    return (
+      <div className="profile-page">
+        <Navbar />
+        <Loader loading={loading} />
+        <Footer />
+      </div>
+    );
   }
 
   return (
@@ -286,10 +288,8 @@ const Profile = () => {
                 ) : (
                   <div className="bookmarks-list-container">
                     {bookmarkedRoadmaps.map((bookmark) => {
-                      // Get bookmark ID based on data structure
                       const bookmarkId =
                         typeof bookmark === "string" ? bookmark : bookmark.id;
-                      // Find the title from tech fields data
                       const title = findTechFieldTitle(bookmarkId);
 
                       return (

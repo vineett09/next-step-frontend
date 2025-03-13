@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../features/authslice";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Auth.css";
+import Loader from "./Loader"; // Import the Loader component
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -65,65 +66,78 @@ function Register() {
     <div className="auth-container">
       <div className="auth-box">
         <h2 className="auth-title">Create Account</h2>
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              id="username"
-              placeholder=" "
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <label htmlFor="username">Username</label>
+
+        {/* Show Loader when isLoading is true */}
+        {isLoading ? (
+          <div className="loader-wrapper">
+            <Loader loading={true} />
+            <p>Creating your account...</p>
           </div>
+        ) : (
+          <>
+            <form className="auth-form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input
+                  type="text"
+                  id="username"
+                  placeholder=" "
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+                <label htmlFor="username">Username</label>
+              </div>
 
-          <div className="form-group">
-            <input
-              type="email"
-              id="email"
-              placeholder=" "
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label htmlFor="email">Email Address</label>
-          </div>
+              <div className="form-group">
+                <input
+                  type="email"
+                  id="email"
+                  placeholder=" "
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <label htmlFor="email">Email Address</label>
+              </div>
 
-          <div className="form-group">
-            <input
-              type="password"
-              id="password"
-              placeholder=" "
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <label htmlFor="password">Password</label>
-          </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  id="password"
+                  placeholder=" "
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <label htmlFor="password">Password</label>
+              </div>
 
-          <div className="form-group">
-            <input
-              type="password"
-              id="confirmPassword"
-              placeholder=" "
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-            <label htmlFor="confirmPassword">Confirm Password</label>
-          </div>
+              <div className="form-group">
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  placeholder=" "
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+                <label htmlFor="confirmPassword">Confirm Password</label>
+              </div>
 
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
+              {errorMessage && (
+                <div className="error-message">{errorMessage}</div>
+              )}
 
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Creating account..." : "Sign Up"}
-          </button>
-        </form>
+              <button type="submit" disabled={isLoading}>
+                Sign Up
+              </button>
+            </form>
 
-        <div className="auth-link">
-          Already have an account? <Link to="/login">Sign in</Link>
-        </div>
+            <div className="auth-link">
+              Already have an account? <Link to="/login">Sign in</Link>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

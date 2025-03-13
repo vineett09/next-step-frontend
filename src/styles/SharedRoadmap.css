@@ -78,6 +78,7 @@
   .creator {
     font-size: 0.9rem;
     color: #fff;
+    font-style: italic
   }
   
   .roadmap-description {
@@ -114,7 +115,59 @@
   .view-btn:hover {
     background-color: #45a049;
   }
-  
+  /* Star Rating Styles */
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+}
+
+.star {
+  font-size: 1.25rem;
+  cursor: default;
+}
+
+.star-rating-large .star {
+  font-size: 1.75rem;
+}
+
+.star-rating-small .star {
+  font-size: 1rem;
+}
+
+.star-rating.interactive .star {
+  cursor: pointer;
+}
+
+.full-star {
+  color: #f8b400;
+}
+
+.half-star {
+  color: #f8b400;
+}
+
+.empty-star {
+  color: #d1d1d1;
+}
+
+/* Rating container in roadmap cards */
+.rating-container {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  gap: 5px;
+}
+
+.rating-count {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.no-ratings {
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+}
   .loading,
   .error {
     flex: 1;

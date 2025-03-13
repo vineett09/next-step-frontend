@@ -14,9 +14,9 @@ import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AuthModal from "./AuthModal";
+import Loader from "./Loader";
 import "../styles/CustomRoadmaps.css";
 
-// Import custom node types
 import {
   CustomNode,
   LineNode,
@@ -41,17 +41,14 @@ const CustomRoadmapEditor = () => {
   const { user, token } = useSelector((state) => state.auth);
   const [showAuthModal, setShowAuthModal] = useState(false);
 
-  // Roadmap data states
   const [roadmapTitle, setRoadmapTitle] = useState("");
   const [roadmapDescription, setRoadmapDescription] = useState("");
 
-  // React Flow states
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [selectedElement, setSelectedElement] = useState(null);
   const [selectedElementType, setSelectedElementType] = useState(null);
 
-  // Background settings
   const [backgroundSettings, setBackgroundSettings] = useState({
     variant: "dots",
     color: "#aaaaaa",
@@ -59,7 +56,6 @@ const CustomRoadmapEditor = () => {
     size: 1,
   });
 
-  // Color palette
   const [palette, setPalette] = useState({
     primary: "#FFD93D",
     secondary: "#FFE69A",
@@ -67,7 +63,6 @@ const CustomRoadmapEditor = () => {
     text: "#000000",
   });
 
-  // Loading and error states
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -112,7 +107,6 @@ const CustomRoadmapEditor = () => {
     }
   };
 
-  // Handle connecting nodes
   const onConnect = (params) => {
     if (!params.source || !params.target) return;
 
@@ -126,7 +120,6 @@ const CustomRoadmapEditor = () => {
     setEdges((eds) => addEdge(newEdge, eds));
   };
 
-  // Add node functions (same as RoadmapBuilder)
   const addNode = (type) => {
     const newNode = {
       id: `node-${Date.now()}`,
@@ -268,7 +261,6 @@ const CustomRoadmapEditor = () => {
     setSelectedElementType("node");
   };
 
-  // Delete selected element
   const deleteSelected = () => {
     if (!selectedElement) return;
 
@@ -288,7 +280,6 @@ const CustomRoadmapEditor = () => {
     setSelectedElementType(null);
   };
 
-  // Handle property changes (same as RoadmapBuilder)
   const handlePropertyChange = (property, value) => {
     if (!selectedElement) return;
 
@@ -520,7 +511,6 @@ const CustomRoadmapEditor = () => {
     }
   };
 
-  // Handle background setting changes
   const handleBackgroundChange = (property, value) => {
     setBackgroundSettings((prev) => ({
       ...prev,
@@ -528,14 +518,11 @@ const CustomRoadmapEditor = () => {
     }));
   };
 
-  // Element selection handler
   const onElementClick = (event, element) => {
     setSelectedElement(element);
     setSelectedElementType(element.source ? "edge" : "node");
   };
 
-  // Save changes (updated to match previous RoadmapEditor)
-  // In RoadmapEditor.js, update the saveRoadmap function
   const saveRoadmap = async () => {
     if (!user || !token) {
       setShowAuthModal(true);
@@ -543,85 +530,39 @@ const CustomRoadmapEditor = () => {
     }
 
     try {
+      setLoading(true);
       const updatedRoadmap = {
-        title: roadmapTitle, // Now we can send the new title
+        title: roadmapTitle,
         description: roadmapDescription,
         structure: { nodes, edges },
         settings: { palette, background: backgroundSettings },
       };
 
-      const response = await axios.put(
-        `/api/roadmaps/${id}`, // Use PUT with roadmap ID
-        updatedRoadmap,
-        {
-          headers: {
-            "x-auth-token": token,
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.put(`/api/roadmaps/${id}`, updatedRoadmap, {
+        headers: {
+          "x-auth-token": token,
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.data.success) {
         alert("Roadmap updated successfully!");
       }
     } catch (err) {
       setError("Failed to save changes: " + err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Export and import functions
-  const exportRoadmap = () => {
-    const roadmapData = {
-      title: roadmapTitle,
-      description: roadmapDescription,
-      structure: { nodes, edges },
-      settings: { palette, background: backgroundSettings },
-    };
-    const dataStr =
-      "data:text/json;charset=utf-8," +
-      encodeURIComponent(JSON.stringify(roadmapData, null, 2));
-    const downloadAnchorNode = document.createElement("a");
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute(
-      "download",
-      `${roadmapTitle.replace(/\s+/g, "-")}.json`
-    );
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-  };
-
-  const importRoadmap = (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
-        if (data.title && data.description && data.structure) {
-          setRoadmapTitle(data.title);
-          setRoadmapDescription(data.description);
-          setNodes(data.structure.nodes || []);
-          setEdges(data.structure.edges || []);
-          if (data.settings) {
-            if (data.settings.palette) setPalette(data.settings.palette);
-            if (data.settings.background)
-              setBackgroundSettings(data.settings.background);
-          }
-        } else {
-          alert("Invalid roadmap file format");
-        }
-      } catch (error) {
-        console.error("Error parsing roadmap file:", error);
-        alert("Failed to import roadmap. Invalid file format.");
-      }
-    };
-    reader.readAsText(file);
-  };
-
   if (loading) {
-    return <div className="loading">Loading roadmap...</div>;
+    return (
+      <div className="loading-container">
+        <Navbar />
+        <Loader loading={loading} />
+        <Footer />
+      </div>
+    );
   }
 
   if (error) {
@@ -793,18 +734,6 @@ const CustomRoadmapEditor = () => {
               <button onClick={saveRoadmap} className="tool-btn primary">
                 Save Changes
               </button>
-              <button onClick={exportRoadmap} className="tool-btn">
-                Export Roadmap
-              </button>
-              <label className="file-input-btn">
-                Import Roadmap
-                <input
-                  type="file"
-                  accept=".json"
-                  onChange={importRoadmap}
-                  style={{ display: "none" }}
-                />
-              </label>
             </div>
           </div>
 
@@ -812,6 +741,9 @@ const CustomRoadmapEditor = () => {
             className="canvas-container"
             style={{ height: 800, width: "100%" }}
           >
+            {/* Overlay loader for operations within the editor */}
+            {loading && <Loader loading={loading} />}
+
             <ReactFlow
               nodes={nodes}
               edges={edges}

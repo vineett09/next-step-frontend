@@ -4,7 +4,7 @@ import axios from "axios";
 import "../styles/roadmaps/Roadmap.css"; // Reuse existing styles
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
+import Loader from "./Loader"; // Add Loader import
 const AIRoadmap = () => {
   const [input, setInput] = useState("");
   const [data, setData] = useState(null);
@@ -420,14 +420,20 @@ const AIRoadmap = () => {
               disabled={loading}
               className="generate-btn"
             >
-              {loading ? "Generating..." : "Generate✨"}
+              Generate✨
             </button>
           </div>
           {error && <p className="error-message">{error}</p>}
         </div>
 
         <div className="roadmap-wrapper">
-          <div ref={d3Container} className="d3-container" />
+          {loading ? (
+            <div className="loader-wrapper">
+              <Loader loading={true} />
+            </div>
+          ) : (
+            <div ref={d3Container} className="d3-container" />
+          )}
         </div>
 
         <Sidebar

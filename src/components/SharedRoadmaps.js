@@ -3,7 +3,44 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Loader from "./Loader";
 import "../styles/SharedRoadmap.css";
+
+const StarRating = ({ value }) => {
+  // Round to nearest half
+  const roundedValue = Math.round(value * 2) / 2;
+
+  return (
+    <div className="star-rating">
+      {[1, 2, 3, 4, 5].map((star) => {
+        // Full star
+        if (star <= roundedValue) {
+          return (
+            <span key={star} className="star full-star">
+              ★
+            </span>
+          );
+        }
+        // Half star
+        else if (star - 0.5 === roundedValue) {
+          return (
+            <span key={star} className="star half-star">
+              ☆
+            </span>
+          );
+        }
+        // Empty star
+        else {
+          return (
+            <span key={star} className="star empty-star">
+              ☆
+            </span>
+          );
+        }
+      })}
+    </div>
+  );
+};
 
 const SharedRoadmaps = () => {
   const [sharedRoadmaps, setSharedRoadmaps] = useState([]);
@@ -13,8 +50,11 @@ const SharedRoadmaps = () => {
   useEffect(() => {
     fetchSharedRoadmaps();
   }, []);
+
   const fetchSharedRoadmaps = async () => {
     try {
+      // Simulate network delay with setTimeout
+
       const response = await axios.get("/api/roadmaps/shared-roadmaps");
 
       if (response.data.success) {
@@ -33,6 +73,18 @@ const SharedRoadmaps = () => {
     }
   };
 
+  // Show loader while loading
+  if (loading) {
+    return (
+      <div className="shared-roadmaps-page">
+        <Navbar />
+        <Loader loading={loading} />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Show error if there's an error
   if (error) {
     return (
       <div className="error">
@@ -43,13 +95,14 @@ const SharedRoadmaps = () => {
     );
   }
 
+  // Main content when loaded successfully
   return (
     <div className="public-roadmaps-page">
       <Navbar />
       <div className="public-roadmaps-container">
         <div className="public-roadmaps-header">
           <h1>Shared Roadmaps</h1>
-          <p>Explore roadmaps shared by the community</p>
+          <p>Explore roadmaps shared by the other people</p>
         </div>
 
         <div className="roadmaps-section">
@@ -73,6 +126,25 @@ const SharedRoadmaps = () => {
                       Last updated:{" "}
                       {new Date(roadmap.lastUpdated).toLocaleDateString()}
                     </span>
+                    <div className="rating-container">
+                      {roadmap.ratingStats?.ratingCount > 0 ? (
+                        <>
+                          <StarRating
+                            value={roadmap.ratingStats.averageRating}
+                          />
+                          <span className="rating-count">
+                            {roadmap.ratingStats.averageRating.toFixed(1)} (
+                            {roadmap.ratingStats.ratingCount}{" "}
+                            {roadmap.ratingStats.ratingCount === 1
+                              ? "rating"
+                              : "ratings"}
+                            )
+                          </span>
+                        </>
+                      ) : (
+                        <span className="no-ratings">No ratings yet</span>
+                      )}
+                    </div>
                   </div>
                   <div className="roadmap-actions">
                     <Link
