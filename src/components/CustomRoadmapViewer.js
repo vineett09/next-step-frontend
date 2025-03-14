@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ReactFlow, { Controls, Background, MiniMap } from "reactflow";
 import "reactflow/dist/style.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Loader from "./Loader"; // Add Loader import
+import Loader from "./Loader";
 import "../styles/CustomRoadmapViewer.css";
 import { nodeTypes } from "./CustomRoadmaps";
 
@@ -16,6 +16,7 @@ const CustomRoadmapViewer = () => {
   const [roadmap, setRoadmap] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRoadmap = async () => {
@@ -51,7 +52,7 @@ const CustomRoadmapViewer = () => {
 
   if (loading) {
     return (
-      <div className="roadmap-viewer-loading">
+      <div className="roadmap-viewer__loading">
         <Loader loading={true} />
         <p>Loading roadmap...</p>
       </div>
@@ -59,11 +60,11 @@ const CustomRoadmapViewer = () => {
   }
 
   if (error) {
-    return <div className="roadmap-viewer-error">{error}</div>;
+    return <div className="roadmap-viewer__error">{error}</div>;
   }
 
   if (!roadmap) {
-    return <div className="roadmap-viewer-error">Roadmap not found</div>;
+    return <div className="roadmap-viewer__error">Roadmap not found</div>;
   }
 
   const { title, description, structure = {}, settings = {} } = roadmap;
@@ -76,16 +77,21 @@ const CustomRoadmapViewer = () => {
     <div className="roadmap-viewer">
       <Navbar />
 
-      <div className="viewer-container">
-        <div className="viewer-header">
-          <h1>Created by {roadmap.createdBy?.username}</h1>
-          <h2>{title}</h2>
-          <p className="roadmap-description">{description}</p>
+      <div className="roadmap-viewer__container">
+        <div className="roadmap-viewer__header">
+          <button className="goBack-button" onClick={() => navigate(-1)}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            </svg>
+            <span>Back</span>
+          </button>
+          <h2 className="roadmap-viewer__title">{title}</h2>
+          <p className="roadmap-viewer__description">{description}</p>
         </div>
 
-        <div className="viewer-body">
+        <div className="roadmap-viewer__body">
           <div
-            className="canvas-container"
+            className="roadmap-viewer__canvas"
             style={{ height: 800, width: "100%" }}
           >
             <ReactFlow
