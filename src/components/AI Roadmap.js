@@ -4,7 +4,9 @@ import axios from "axios";
 import "../styles/roadmaps/Roadmap.css"; // Reuse existing styles
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Loader from "./Loader"; // Add Loader import
+import Loader from "./Loader";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 const AIRoadmap = () => {
   const [input, setInput] = useState("");
   const [data, setData] = useState(null);
@@ -390,7 +392,87 @@ const AIRoadmap = () => {
       </div>
     );
   };
+  const downloadRoadmapPDF = () => {
+    if (!data) return;
 
+    // Use document.querySelector instead of directly accessing the ref
+    const container = document.querySelector(".d3-container");
+    if (!container) {
+      alert("Roadmap not found!");
+      return;
+    }
+
+    // Create a temporary div to hold our clone with background
+    const tempDiv = document.createElement("div");
+    tempDiv.style.position = "absolute";
+    tempDiv.style.left = "-9999px";
+    tempDiv.style.backgroundColor = "#333333";
+    tempDiv.style.width = container.scrollWidth + "px";
+    tempDiv.style.height = container.scrollHeight + "px";
+    tempDiv.style.padding = "20px";
+
+    // Clone the container to avoid modifying the original
+    const containerClone = container.cloneNode(true);
+    tempDiv.appendChild(containerClone);
+    document.body.appendChild(tempDiv);
+
+    // Options to reduce file size and improve quality
+    const html2canvasOptions = {
+      scale: 1.5,
+      height: tempDiv.scrollHeight,
+      width: tempDiv.scrollWidth,
+      backgroundColor: "#333333",
+      logging: false,
+      imageTimeout: 0,
+      useCORS: true,
+      allowTaint: true,
+    };
+
+    html2canvas(tempDiv, html2canvasOptions).then((canvas) => {
+      // Reduce image quality to save file size
+      const imgData = canvas.toDataURL("image/jpeg", 0.9);
+
+      // Create a PDF document in landscape mode
+      const pdf = new jsPDF({
+        orientation: "landscape",
+        unit: "mm",
+        format: "a4",
+        compress: true,
+      });
+
+      // Get PDF dimensions
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+
+      // Calculate scaling to fit the entire tree on one page
+      const widthRatio = pdfWidth / canvas.width;
+      const heightRatio = pdfHeight / canvas.height;
+      const ratio = Math.min(widthRatio, heightRatio) * 0.95; // 95% of available space for margins
+
+      // Calculate centered position
+      const xPos = (pdfWidth - canvas.width * ratio) / 2;
+      const yPos = (pdfHeight - canvas.height * ratio) / 2;
+
+      // Add image to PDF scaled to fit
+      pdf.addImage(
+        imgData,
+        "JPEG",
+        xPos,
+        yPos,
+        canvas.width * ratio,
+        canvas.height * ratio
+      );
+
+      // Generate filename based on roadmap topic
+      const filename = `${
+        input.trim() ? input.replace(/\s+/g, "-").toLowerCase() : "ai-roadmap"
+      }.pdf`;
+      pdf.save(filename);
+
+      // Clean up
+      document.body.removeChild(tempDiv);
+    });
+  };
   // Effect to render roadmap when data changes
   useEffect(() => {
     if (data) {
@@ -404,6 +486,34 @@ const AIRoadmap = () => {
   return (
     <div className="roadmap">
       <Navbar />
+      <div className="notifications-container">
+        <div className="alert">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 alert-svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                  fill-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+            <div className="alert-prompt-wrap">
+              <p className="text-sm text-yellow-700">
+                These roadmap is AI-generated and has not been reviewed for
+                accuracy. Use it as a reference and verify information from
+                reliable sources.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="roadmap-container">
         <div className="input-section">
           <h2>Create AI Generated Learning Roadmap🤖</h2>
@@ -422,6 +532,22 @@ const AIRoadmap = () => {
             >
               Generate✨
             </button>
+            <button
+              className="download-ai-roadmap-pdf"
+              disabled={loading || !data}
+              onClick={downloadRoadmapPDF}
+              aria-label="Download roadmap as PDF"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                fill="#fff"
+              >
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+              </svg>
+            </button>
           </div>
           {error && <p className="error-message">{error}</p>}
         </div>
@@ -435,7 +561,6 @@ const AIRoadmap = () => {
             <div ref={d3Container} className="d3-container" />
           )}
         </div>
-
         <Sidebar
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}

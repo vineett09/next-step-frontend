@@ -11,6 +11,54 @@
 .node:hover rect {
   filter: brightness(1.15);
 }
+.notifications-container {
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-self: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.alert {
+  background-color: rgb(254 252 232);
+  border-left-width: 4px;
+  border-color: rgb(250 204 21);
+  border-radius: 0.375rem;
+  padding: 1rem;
+}
+
+.alert-svg {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: rgb(250 204 21);
+}
+
+.alert-prompt-wrap {
+  margin-left: 0.75rem;
+  color: rgb(202 138 4);
+}
+
+.alert-prompt-link {
+  font-weight: 500;
+  color: rgb(141, 56, 0);
+  text-decoration: underline;
+}
+
+.alert-prompt-link:hover {
+  color: rgb(202 138 4);
+}
 /* Wrapper for the D3 container to center and constrain the roadmap */
 .roadmap-wrapper {
   width: 100%;
@@ -153,7 +201,29 @@ p-content {
   user-select: none; /* Prevent text selection */
   font-weight: bold; /* Bold text for better readability */
 }
+.download-ai-roadmap-pdf {
+  padding: 3px; /* Match bookmark button padding */
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
+/* Style the SVG inside download button */
+.download-ai-roadmap-pdf svg {
+  width: 24px;
+  height: 18px;
+  transition: fill 0.3s;
+}
+
+.download-ai-roadmap-pdf:hover {
+  background-color: #fff;
+}
+
+.download-ai-roadmap-pdf:hover svg {
+  fill: #000; /* Change icon color on hover to match bookmark */
+}
 /* Sidebar styles */
 .sidebar {
   position: fixed; /* Fixed position to stay in place during scrolling */
@@ -210,64 +280,7 @@ p-content {
   line-height: 1.6;
   color: #000; /* Softer text color for the description */
 }
-.related-roadmaps-container {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
 
-.related-roadmaps-container h3 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.related-roadmaps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  justify-content: center;
-}
-
-.related-roadmap-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-  text-decoration: none;
-  color: inherit;
-}
-
-.related-roadmap-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.related-roadmap-icon {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.related-roadmap-card h4 {
-  font-size: 1rem;
-  text-align: center;
-  margin: 0;
-  color: #333;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .related-roadmaps-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-}
 /* Responsive adjustments for the sidebar */
 @media (min-width: 768px) {
   .sidebar {
