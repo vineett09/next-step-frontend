@@ -1,8 +1,7 @@
-// src/components/TechRoles.js
 import React from "react";
 import "../styles/roadmaps/TechRoles.css";
 import { useNavigate } from "react-router-dom";
-import { techFields } from "../data/TechFieldsData"; // Adjust path based on your structure
+import { techFields } from "../data/TechFieldsData";
 
 const roles = [
   "AI Engineer",
@@ -20,7 +19,6 @@ const TechRoles = () => {
   const navigate = useNavigate();
 
   const handleRoleClick = (role) => {
-    // Find the corresponding tech field by title
     const field = techFields.find((f) => f.title === role);
     if (field) {
       navigate(field.link, {
@@ -40,7 +38,7 @@ const TechRoles = () => {
             key={index}
             className="role-badge"
             onClick={() => handleRoleClick(role)}
-            style={{ cursor: "pointer" }} // Visual cue for clickability
+            style={{ cursor: "pointer" }}
           >
             {role}
           </span>

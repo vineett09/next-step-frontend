@@ -12,7 +12,6 @@
   align-items: center;
   background-color: var(--background-color);
   padding: 1rem 2rem;
-  box-shadow: 0 4px 6px var(--shadow-color);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -56,7 +55,6 @@
   font-weight: 500;
 }
 
-/* From Uiverse.io by ErzenXz */
 .shared-roadmaps-button {
   width: fit-content;
   min-width: 100px;
@@ -70,7 +68,7 @@
   transition: all 0.2s ease-in-out 0ms;
   user-select: none;
   font-family: 'Poppins', sans-serif;
-  color: #000; /* Added text color for better visibility */
+  color: #000; 
 }
 
 .shared-roadmaps-button:hover {
@@ -219,7 +217,6 @@
     background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
 }
-/* Hamburger menu animation */
 .navbar-toggle .bar.change:nth-child(1) {
   transform: rotate(-45deg) translate(-5px, 6px);
 }
@@ -232,7 +229,6 @@
   transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .navbar {
     flex-wrap: wrap;

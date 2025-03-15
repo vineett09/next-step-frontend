@@ -1,8 +1,7 @@
-// src/components/TechSkills.js
 import React from "react";
 import "../styles/roadmaps/TechSkills.css";
 import { useNavigate } from "react-router-dom";
-import { techSkills } from "../data/TechFieldsData"; // Adjust path based on your structure
+import { techSkills } from "../data/TechFieldsData";
 
 const skills = [
   "Rust",
@@ -18,7 +17,6 @@ const TechSkills = () => {
   const navigate = useNavigate();
 
   const handleSkillClick = (skillName) => {
-    // Find the corresponding tech skill by title
     const skill = techSkills.find((s) => s.title === skillName.trim());
     if (skill) {
       navigate(skill.link, {
@@ -38,7 +36,7 @@ const TechSkills = () => {
             key={index}
             className="skills-badge"
             onClick={() => handleSkillClick(skill)}
-            style={{ cursor: "pointer" }} // Visual cue for clickability
+            style={{ cursor: "pointer" }}
           >
             {skill}
           </span>

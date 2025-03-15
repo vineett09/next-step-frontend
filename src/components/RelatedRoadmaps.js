@@ -209,7 +209,7 @@ const RelatedRoadmaps = () => {
   };
 
   if (isLoading) {
-    return <Loader loading={true} />; // Show loader while content is loading
+    return <Loader loading={true} />;
   }
 
   if (relatedRoadmaps.length === 0) return null;

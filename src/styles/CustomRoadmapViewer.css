@@ -1,11 +1,9 @@
-/* Main container */
 .roadmap-viewer {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Loading state */
 .roadmap-viewer__loading {
   display: flex;
   flex-direction: column;
@@ -22,7 +20,6 @@
   font-size: 1rem;
 }
 
-/* Error state */
 .roadmap-viewer__error {
   display: flex;
   justify-content: center;
@@ -32,7 +29,6 @@
   color: #e74c3c;
 }
 
-/* Viewer container */
 .roadmap-viewer__container {
   flex: 1;
   padding: 20px;
@@ -41,10 +37,9 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center horizontally */
-  justify-content: center; /* Center vertically */
+  align-items: center; 
+  justify-content: center; 
 }
-/* Back button styles */
 .goBack-button {
   top: 10px;
   left: 10px;
@@ -66,14 +61,13 @@
   fill: #fff;
 }
 
-/* Header */
 .roadmap-viewer__header {
   margin-bottom: 30px;
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  width: 50%; /* Adjust width as needed */
-  text-align: center; /* Center text inside the header */
+  width: 50%; 
+  text-align: center;
 }
 
 .roadmap-viewer__title {
@@ -94,15 +88,13 @@
   line-height: 1.6;
 }
 
-/* Body */
 .roadmap-viewer__body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 100%; /* Ensure body takes full width */
+  width: 100%; 
 }
 
-/* Canvas */
 .roadmap-viewer__canvas {
   border: 1px solid #ddd;
   border-radius: 8px;

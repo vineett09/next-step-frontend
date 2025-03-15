@@ -17,7 +17,6 @@ const StarRating = ({
 }) => {
   const [hoverRating, setHoverRating] = useState(0);
 
-  // Round to nearest half for display
   const roundedValue = Math.round(value * 2) / 2;
 
   const handleMouseEnter = (rating) => {
@@ -86,16 +85,13 @@ const RatingSection = ({ roadmapId, creatorId }) => {
     }
   }, [roadmapId, isLoggedIn, isCreator]);
 
-  // In SharedRoadmapViewer.js, modify the fetchUserRating function:
-
   const fetchUserRating = async () => {
     try {
-      // Get the token from wherever you store it (localStorage, Redux state, etc.)
-      const token = localStorage.getItem("token"); // or from Redux if that's where you store it
+      const token = localStorage.getItem("token");
 
       const response = await axios.get(`/api/roadmaps/${roadmapId}/rating`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Make sure this header name matches what your auth middleware expects
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -125,8 +121,7 @@ const RatingSection = ({ roadmapId, creatorId }) => {
       setError(null);
       setSuccess(null);
 
-      // Get the token
-      const token = localStorage.getItem("token"); // or from Redux
+      const token = localStorage.getItem("token");
 
       const response = await axios.post(
         `/api/roadmaps/${roadmapId}/rating`,

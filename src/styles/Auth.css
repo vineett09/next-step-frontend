@@ -1,6 +1,4 @@
-/* Modern Authentication UI with Advanced Styling */
 
-/* Base Variables */
 :root {
   /* Color Palette */
   --color-primary: #6366f1;
@@ -88,7 +86,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 200px; /* Adjust based on your design */
+  min-height: 200px; 
   gap: 15px;
 }
 
@@ -176,19 +174,16 @@ body {
   border-radius: var(--border-radius-full);
 }
 
-/* Auth Form */
 .auth-form {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
 }
 
-/* Form Group */
 .form-group {
   position: relative;
 }
 
-/* Input Fields */
 .auth-form input {
   width: 100%;
   padding: var(--space-4) var(--space-5);
@@ -212,7 +207,6 @@ body {
   color: var(--color-gray-400);
 }
 
-/* Input Icons */
 .form-group::before {
   position: absolute;
   left: var(--space-4);
@@ -227,7 +221,6 @@ body {
   color: var(--color-primary);
 }
 
-/* Submit Button */
 .auth-form button {
   display: flex;
   justify-content: center;
@@ -257,7 +250,6 @@ body {
   transform: translateY(0);
 }
 
-/* Button Ripple Effect */
 .auth-form button::after {
   content: "";
   position: absolute;
@@ -287,7 +279,6 @@ body {
   }
 }
 
-/* Button Disabled State */
 .auth-form button:disabled {
   background: var(--color-gray-300);
   cursor: not-allowed;
@@ -295,7 +286,6 @@ body {
   box-shadow: none;
 }
 
-/* Error Message */
 .error-message {
   margin-top: var(--space-4);
   padding: var(--space-3) var(--space-4);
@@ -318,7 +308,6 @@ body {
   }
 }
 
-/* Auth Link */
 .auth-link {
   margin-top: var(--space-8);
   text-align: center;
@@ -356,7 +345,6 @@ body {
   transform-origin: bottom left;
 }
 
-/* Floating Label Animation */
 .form-group {
   position: relative;
 }
@@ -386,7 +374,6 @@ body {
 
 
 
-/* Responsive Adjustments */
 @media (max-width: 640px) {
   .auth-box {
     padding: var(--space-6);
@@ -402,7 +389,6 @@ body {
   }
 }
 
-/* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
   :root {
     --color-primary: #818cf8;

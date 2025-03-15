@@ -16,8 +16,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AuthModal from "./AuthModal";
 import "../styles/CustomRoadmaps.css";
-import Loader from "./Loader"; // Add Loader import
-// Define custom node types
+import Loader from "./Loader";
 export const CustomNode = ({ data, isConnectable, selected }) => {
   return (
     <>
@@ -218,7 +217,6 @@ export const MilestoneNode = ({ data, isConnectable }) => {
   );
 };
 
-// Text Label Node - For adding free-standing text
 export const TextLabelNode = ({ data, isConnectable }) => {
   return (
     <>
@@ -240,7 +238,6 @@ export const TextLabelNode = ({ data, isConnectable }) => {
   );
 };
 
-// Resource Node - For linking to resources
 export const ResourceNode = ({ data, isConnectable }) => {
   return (
     <>
@@ -297,7 +294,6 @@ export const ResourceNode = ({ data, isConnectable }) => {
     </>
   );
 };
-// Register custom node types
 export const nodeTypes = {
   customNode: CustomNode,
   containerBox: ContainerBox,
@@ -311,27 +307,24 @@ const CustomRoadmaps = () => {
   const navigate = useNavigate();
   const { user, token } = useSelector((state) => state.auth);
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false);
   const [roadmapTitle, setRoadmapTitle] = useState("My Custom Roadmap");
   const [roadmapDescription, setRoadmapDescription] = useState(
     "A personalized learning path"
   );
 
-  // React Flow state
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [selectedElement, setSelectedElement] = useState(null);
   const [selectedElementType, setSelectedElementType] = useState(null);
 
-  // Background settings
   const [backgroundSettings, setBackgroundSettings] = useState({
-    variant: "dots", // dots, lines, cross
+    variant: "dots",
     color: "#aaaaaa",
     gap: 16,
     size: 1,
   });
 
-  // Color palette
   const [palette, setPalette] = useState({
     primary: "#FFD93D",
     secondary: "#FFE69A",
@@ -347,7 +340,6 @@ const CustomRoadmaps = () => {
 
   // Handle connecting nodes
   const onConnect = (params) => {
-    // Ensure we have valid source and target
     if (!params.source || !params.target) return;
 
     const newEdge = {
@@ -360,11 +352,10 @@ const CustomRoadmaps = () => {
     setEdges((eds) => addEdge(newEdge, eds));
   };
 
-  // Add a new node to the canvas
   const addNode = (type) => {
     const newNode = {
       id: `node-${Date.now()}`,
-      type: "customNode", // Use our custom node type
+      type: "customNode",
       position: { x: 250, y: 250 },
       data: {
         label: "New Node",
@@ -385,12 +376,11 @@ const CustomRoadmaps = () => {
     setSelectedElementType("node");
   };
 
-  // Add a line node (horizontal or vertical)
   const addLine = (orientation) => {
     const isHorizontal = orientation === "horizontal";
     const lineNode = {
       id: `line-${Date.now()}`,
-      type: "lineNode", // Use our custom line node type
+      type: "lineNode",
       position: { x: 250, y: 250 },
       data: {
         label: isHorizontal ? "Horizontal Line" : "Vertical Line",
@@ -461,7 +451,6 @@ const CustomRoadmaps = () => {
     setSelectedElementType("node");
   };
 
-  // Add a text label
   const addTextLabel = () => {
     const newNode = {
       id: `text-${Date.now()}`,
@@ -486,9 +475,6 @@ const CustomRoadmaps = () => {
     setSelectedElementType("node");
   };
 
-  // Add a decision node
-
-  // Add a resource node
   const addResourceNode = () => {
     const newNode = {
       id: `resource-${Date.now()}`,
@@ -514,13 +500,11 @@ const CustomRoadmaps = () => {
     setSelectedElementType("node");
   };
 
-  // Delete the selected element
   const deleteSelected = () => {
     if (!selectedElement) return;
 
     if (selectedElementType === "node") {
       setNodes((nds) => nds.filter((node) => node.id !== selectedElement.id));
-      // Remove connected edges
       setEdges((eds) =>
         eds.filter(
           (edge) =>
@@ -536,8 +520,6 @@ const CustomRoadmaps = () => {
     setSelectedElementType(null);
   };
 
-  // Handle property changes for selected element
-  // Handle property changes for selected element
   const handlePropertyChange = (property, value) => {
     if (!selectedElement) return;
 
@@ -545,7 +527,6 @@ const CustomRoadmaps = () => {
       setNodes((nds) =>
         nds.map((node) => {
           if (node.id === selectedElement.id) {
-            // Basic text properties
             if (
               property === "label" ||
               property === "description" ||
@@ -557,9 +538,7 @@ const CustomRoadmaps = () => {
                 ...node,
                 data: { ...node.data, [property]: value },
               };
-            }
-            // Font properties for text labels
-            else if (
+            } else if (
               property === "fontSize" ||
               property === "fontStyle" ||
               property === "fontWeight"
@@ -567,7 +546,6 @@ const CustomRoadmaps = () => {
               return {
                 ...node,
                 data: { ...node.data, [property]: value },
-                // For some properties we may want to update style as well
                 ...(property === "fontSize"
                   ? {
                       style: { ...node.style, fontSize: value },
@@ -635,7 +613,7 @@ const CustomRoadmaps = () => {
                 style: { ...node.style, opacity: value },
               };
             }
-            // Node position in the z-index stack
+            // Node position
             else if (property === "zIndex") {
               return {
                 ...node,
@@ -647,7 +625,6 @@ const CustomRoadmaps = () => {
         })
       );
 
-      // Update the selected element reference to reflect changes
       if (
         property === "label" ||
         property === "description" ||
@@ -718,7 +695,7 @@ const CustomRoadmaps = () => {
             if (property === "animated") {
               return { ...edge, animated: value };
             }
-            // Edge type (connection style)
+            // Edge type
             else if (property === "type") {
               return { ...edge, type: value };
             }
@@ -736,7 +713,7 @@ const CustomRoadmaps = () => {
                 style: { ...edge.style, strokeWidth: parseInt(value) },
               };
             }
-            // Edge style (solid/dashed/dotted)
+            // Edge style
             else if (property === "strokeStyle") {
               return {
                 ...edge,
@@ -778,8 +755,6 @@ const CustomRoadmaps = () => {
           return edge;
         })
       );
-
-      // Update the selected element reference
       if (property === "animated" || property === "type") {
         setSelectedElement((prev) => ({ ...prev, [property]: value }));
       } else if (property === "color") {
@@ -821,7 +796,6 @@ const CustomRoadmaps = () => {
     }
   };
 
-  // Handle background setting changes
   const handleBackgroundChange = (property, value) => {
     setBackgroundSettings((prev) => ({
       ...prev,
@@ -829,20 +803,18 @@ const CustomRoadmaps = () => {
     }));
   };
 
-  // Element selection handler
   const onElementClick = (event, element) => {
     setSelectedElement(element);
     setSelectedElementType(element.source ? "edge" : "node");
   };
 
-  // Save the roadmap
   const saveRoadmap = async () => {
     if (!user || !token) {
       setShowAuthModal(true);
       return;
     }
 
-    setIsLoading(true); // Set loading to true when saving starts
+    setIsLoading(true);
 
     try {
       const roadmapData = {
@@ -878,7 +850,7 @@ const CustomRoadmaps = () => {
       console.error("Error saving roadmap:", error);
       alert("Failed to save roadmap. Please try again.");
     } finally {
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
     }
   };
 

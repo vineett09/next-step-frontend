@@ -32,7 +32,6 @@ const Roadmap = ({ data }) => {
   const roadmapId = location.pathname.split("/").pop();
   const [isLoading, setIsLoading] = useState(true);
 
-  // Find the corresponding field or skill from the techFields and techSkills data
   const findFieldOrSkill = (id) => {
     const field = techFields.find((field) => field.link === `/${id}`);
     if (field) return field;
@@ -45,7 +44,6 @@ const Roadmap = ({ data }) => {
 
   const fieldOrSkill = findFieldOrSkill(roadmapId);
 
-  // Set the title and description from the found field or skill
   const roadmapTitle = fieldOrSkill
     ? fieldOrSkill.title
     : "Explore Your Path to Tech Excellence";
@@ -55,7 +53,6 @@ const Roadmap = ({ data }) => {
 
   const [totalNodes, setTotalNodes] = useState(0);
 
-  // Rest of the code remains the same...
   const countTotalNodes = (nodes) => {
     let count = 0;
     const countRecursive = (nodeList) => {

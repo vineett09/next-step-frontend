@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import * as d3 from "d3";
 import axios from "axios";
-import "../styles/roadmaps/Roadmap.css"; // Reuse existing styles
+import "../styles/roadmaps/Roadmap.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Loader from "./Loader";
@@ -35,13 +35,11 @@ const AIRoadmap = () => {
     }
   };
 
-  // Render roadmap function - simplified to only show first-level children
   const renderRoadmap = () => {
     if (!data || !d3Container.current) return;
 
     d3.select(d3Container.current).selectAll("*").remove();
 
-    // Fixed dimensions for the diagram - matching static roadmap
     const width = 1200;
     const margin = { top: 50, right: 200, bottom: 50, left: 200 };
     const FIXED_LINE_LENGTH = 100;
@@ -50,7 +48,6 @@ const AIRoadmap = () => {
     const childrenSpaceFactor = 0.5;
     const minParentSpacing = 120;
 
-    // Create SVG with proper dimensions
     const svgElement = d3
       .select(d3Container.current)
       .append("svg")
@@ -60,7 +57,6 @@ const AIRoadmap = () => {
       .attr("preserveAspectRatio", "xMidYMid meet")
       .attr("viewBox", `0 0 ${width + margin.left + margin.right} 1000`);
 
-    // Create a hidden SVG element for measuring text dimensions
     const measureSvg = svgElement.append("g").style("visibility", "hidden");
 
     const measureText = (text) => {
@@ -74,7 +70,6 @@ const AIRoadmap = () => {
       return bbox;
     };
 
-    // Calculate node dimensions based on text content
     const calculateNodeDimensions = (text) => {
       const paddingX = 20;
       const paddingY = 10;
@@ -85,7 +80,6 @@ const AIRoadmap = () => {
       };
     };
 
-    // Prepare node metrics including dimensions for all nodes
     const nodeMetrics = {
       parents: data.children.map((parent) => ({
         ...parent,
@@ -94,13 +88,11 @@ const AIRoadmap = () => {
           parent.children?.map((child) => ({
             ...child,
             dimensions: calculateNodeDimensions(child.name),
-            // Remove nested children completely
             children: [],
           })) || [],
       })),
     };
 
-    // Create the main SVG group with proper translate
     const svg = svgElement
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
@@ -108,7 +100,7 @@ const AIRoadmap = () => {
     // Title node dimensions
     const titleText = data.name;
     const titleDimensions = calculateNodeDimensions(titleText);
-    const titleY = 0; // Positioning title above roadmap
+    const titleY = 0;
 
     // Draw the title node
     const titleGroup = svg
@@ -137,7 +129,6 @@ const AIRoadmap = () => {
       .attr("fill", "black")
       .text(titleText);
 
-    // Add click handler for title (sidebar info)
     titleGroup.on("click", () => {
       setSelectedNode({
         name: titleText,
@@ -162,7 +153,6 @@ const AIRoadmap = () => {
       .attr("opacity", 0.7)
       .attr("stroke-dasharray", "5,5");
 
-    // Calculate positions with divider consideration
     let currentY = lineEndY;
     const parentPositions = nodeMetrics.parents.map((parent, index) => {
       let childSpace = 0;
@@ -216,7 +206,6 @@ const AIRoadmap = () => {
       }
     });
 
-    // Node creation helper function
     const createNode = (
       group,
       node,
@@ -377,7 +366,6 @@ const AIRoadmap = () => {
     measureSvg.remove();
   };
 
-  // Simple Sidebar component
   const Sidebar = ({ isOpen, onClose, name, description }) => {
     if (!isOpen) return null;
     return (
@@ -395,14 +383,12 @@ const AIRoadmap = () => {
   const downloadRoadmapPDF = () => {
     if (!data) return;
 
-    // Use document.querySelector instead of directly accessing the ref
     const container = document.querySelector(".d3-container");
     if (!container) {
       alert("Roadmap not found!");
       return;
     }
 
-    // Create a temporary div to hold our clone with background
     const tempDiv = document.createElement("div");
     tempDiv.style.position = "absolute";
     tempDiv.style.left = "-9999px";
@@ -411,12 +397,10 @@ const AIRoadmap = () => {
     tempDiv.style.height = container.scrollHeight + "px";
     tempDiv.style.padding = "20px";
 
-    // Clone the container to avoid modifying the original
     const containerClone = container.cloneNode(true);
     tempDiv.appendChild(containerClone);
     document.body.appendChild(tempDiv);
 
-    // Options to reduce file size and improve quality
     const html2canvasOptions = {
       scale: 1.5,
       height: tempDiv.scrollHeight,
@@ -429,10 +413,8 @@ const AIRoadmap = () => {
     };
 
     html2canvas(tempDiv, html2canvasOptions).then((canvas) => {
-      // Reduce image quality to save file size
       const imgData = canvas.toDataURL("image/jpeg", 0.9);
 
-      // Create a PDF document in landscape mode
       const pdf = new jsPDF({
         orientation: "landscape",
         unit: "mm",
@@ -440,20 +422,16 @@ const AIRoadmap = () => {
         compress: true,
       });
 
-      // Get PDF dimensions
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
 
-      // Calculate scaling to fit the entire tree on one page
       const widthRatio = pdfWidth / canvas.width;
       const heightRatio = pdfHeight / canvas.height;
-      const ratio = Math.min(widthRatio, heightRatio) * 0.95; // 95% of available space for margins
+      const ratio = Math.min(widthRatio, heightRatio) * 0.95;
 
-      // Calculate centered position
       const xPos = (pdfWidth - canvas.width * ratio) / 2;
       const yPos = (pdfHeight - canvas.height * ratio) / 2;
 
-      // Add image to PDF scaled to fit
       pdf.addImage(
         imgData,
         "JPEG",
@@ -463,21 +441,17 @@ const AIRoadmap = () => {
         canvas.height * ratio
       );
 
-      // Generate filename based on roadmap topic
       const filename = `${
         input.trim() ? input.replace(/\s+/g, "-").toLowerCase() : "ai-roadmap"
       }.pdf`;
       pdf.save(filename);
 
-      // Clean up
       document.body.removeChild(tempDiv);
     });
   };
-  // Effect to render roadmap when data changes
   useEffect(() => {
     if (data) {
       renderRoadmap();
-      // Add window resize listener
       window.addEventListener("resize", renderRoadmap);
       return () => window.removeEventListener("resize", renderRoadmap);
     }

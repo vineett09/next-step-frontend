@@ -1,4 +1,3 @@
-// src/components/Sidebar.js
 import React, { useState, useEffect } from "react";
 import Loader from "./Loader";
 

@@ -22,13 +22,12 @@ const AuthModal = ({ isOpen, onClose }) => {
       const timer = setTimeout(() => {
         setPasswordError("");
         setErrorMessage("");
-      }, 3000); // Hide the error after 3 seconds
+      }, 3000);
 
       return () => clearTimeout(timer);
     }
   }, [passwordError, error]);
 
-  // Clear errors when modal is opened or closed
   useEffect(() => {
     if (isOpen) {
       setPasswordError("");

@@ -1,4 +1,3 @@
-// src/data/techFieldsData.js
 export const techFields = [
   {
     id: 1,

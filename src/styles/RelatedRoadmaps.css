@@ -30,11 +30,11 @@
   
   .tech-grid-container {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping of cards */
+    flex-wrap: wrap; 
     gap: 16px;
     width: 100%;
-    max-width: 1200px; /* Limit the maximum width */
-    margin: 0 auto; /* Center the grid */
+    max-width: 1200px; 
+    margin: 0 auto;
   }
   
   .tech-card-container {
@@ -44,8 +44,8 @@
     padding: 16px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    width: calc(25% - 16px); /* Four cards per row on PC screens */
-    background-color: #2c3539; /* Default background color */
+    width: calc(25% - 16px); 
+    background-color: #2c3539; 
   }
   
   .tech-card-container:hover {
@@ -99,22 +99,21 @@
     text-align: left;
   }
   
-  /* Responsive adjustments */
   @media (max-width: 1200px) {
     .tech-card-container {
-      width: calc(33.333% - 16px); /* Three cards per row on smaller desktops */
+      width: calc(33.333% - 16px); 
     }
   }
   
   @media (max-width: 1024px) {
     .tech-card-container {
-      width: calc(50% - 16px); /* Two cards per row on tablets */
+      width: calc(50% - 16px); 
     }
   }
   
   @media (max-width: 768px) {
     .tech-card-container {
-      width: 100%; /* One card per row on mobile */
+      width: 100%; 
     }
   
     .tech-card-content {

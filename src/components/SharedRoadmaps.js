@@ -7,30 +7,24 @@ import Loader from "./Loader";
 import "../styles/SharedRoadmap.css";
 
 const StarRating = ({ value }) => {
-  // Round to nearest half
   const roundedValue = Math.round(value * 2) / 2;
 
   return (
     <div className="star-rating">
       {[1, 2, 3, 4, 5].map((star) => {
-        // Full star
         if (star <= roundedValue) {
           return (
             <span key={star} className="star full-star">
               ★
             </span>
           );
-        }
-        // Half star
-        else if (star - 0.5 === roundedValue) {
+        } else if (star - 0.5 === roundedValue) {
           return (
             <span key={star} className="star half-star">
               ☆
             </span>
           );
-        }
-        // Empty star
-        else {
+        } else {
           return (
             <span key={star} className="star empty-star">
               ☆
@@ -53,8 +47,6 @@ const SharedRoadmaps = () => {
 
   const fetchSharedRoadmaps = async () => {
     try {
-      // Simulate network delay with setTimeout
-
       const response = await axios.get("/api/roadmaps/shared-roadmaps");
 
       if (response.data.success) {
@@ -73,7 +65,6 @@ const SharedRoadmaps = () => {
     }
   };
 
-  // Show loader while loading
   if (loading) {
     return (
       <div className="shared-roadmaps-page">
@@ -84,7 +75,6 @@ const SharedRoadmaps = () => {
     );
   }
 
-  // Show error if there's an error
   if (error) {
     return (
       <div className="error">
@@ -95,7 +85,6 @@ const SharedRoadmaps = () => {
     );
   }
 
-  // Main content when loaded successfully
   return (
     <div className="public-roadmaps-page">
       <Navbar />

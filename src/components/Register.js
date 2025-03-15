@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../features/authslice";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Auth.css";
-import Loader from "./Loader"; // Import the Loader component
+import Loader from "./Loader";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -25,7 +25,7 @@ function Register() {
       const timer = setTimeout(() => {
         setPasswordError("");
         setErrorMessage("");
-      }, 3000); // Hide the error after 3 seconds
+      }, 3000);
 
       return () => clearTimeout(timer);
     }

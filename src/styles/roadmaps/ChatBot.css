@@ -1,4 +1,3 @@
-/* From Uiverse.io by JkHuger */ 
 .sparkle-button {
   --active: 0;
   --bg: radial-gradient(
@@ -167,10 +166,10 @@
 }
 
 .chatbot-icon {
-  position: fixed; /* Fix position to bottom-right */
+  position: fixed; 
   bottom: 20px;
   right: 20px;
-  z-index: 1000; /* Ensure it stays above other elements */
+  z-index: 1000;
   cursor: pointer;
 }
 
@@ -232,7 +231,7 @@
 }
 
 .chatbot-container {
-  position: fixed; /* Keep chatbot window fixed */
+  position: fixed; 
   bottom: 80px;
   right: 20px;
   width: 360px;
@@ -244,7 +243,7 @@
   flex-direction: column;
   overflow: hidden;
   font-family: "Arial", sans-serif;
-  z-index: 1000; /* Ensure it stays above other elements */
+  z-index: 1000;
 }
 
 .chatbot-actions {
@@ -271,12 +270,11 @@
 .message-roadmap-indicator {
   font-size: 0.75rem;
   color: #888;
-  margin-bottom: 4px; /* Keep some spacing between indicator and message */
+  margin-bottom: 4px; 
   font-style: italic;
-  width: 100%; /* Ensure it takes full width for consistency */
+  width: 100%; 
 }
 
-/* Chatbot Header */
 .chatbot-header {
   background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff7eb3);
   
@@ -296,8 +294,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: #666; /* Adjust color as needed */
-  font-size: 1.1em; /* Adjust size as needed */
+  color: #666; 
+  font-size: 1.1em; 
   background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff7eb3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -307,7 +305,6 @@
 }
 
 
-/* Close Icon */
 .close-icon {
   cursor: pointer;
   transition: transform 0.2s;
@@ -317,7 +314,6 @@
   transform: scale(1.2);
 }
 
-/* Messages Container */
 .chatbot-messages {
   flex: 1;
   overflow-y: auto;
@@ -325,10 +321,10 @@
   background: #f9f9f9;
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Adds spacing between messages */
+  gap: 10px; 
   scrollbar-width: thin;
   scrollbar-color: #d1d1d1 transparent;
-  position: relative; /* Add this to allow absolute positioning of welcome message */
+  position: relative;
 }
 
 .chatbot-messages::-webkit-scrollbar {
@@ -341,7 +337,6 @@
 }
 
 
-/* Message Styling */
 .chat-message {
   max-width: 80%;
   padding: 12px 15px;
@@ -352,8 +347,8 @@
   word-wrap: break-word;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column; /* Change to column to stack items vertically */
-  align-items: flex-start; /* Align items to the start (left for bot, right for user) */
+  flex-direction: column; 
+  align-items: flex-start; 
 }
 
 .chat-message.user {
@@ -417,7 +412,6 @@
   background: linear-gradient(135deg, #0056b3, #0041a3);
 }
 
-/* Formatted text styling */
 .chat-message p {
   margin: 0 0 10px;
   line-height: 1.5;
@@ -451,7 +445,6 @@
   margin-top: 5px;
 }
 
-/* Fix for bullet items */
 .chat-message li.bullet-item::before {
   content: "•";
   display: inline-block;
@@ -459,7 +452,6 @@
   margin-left: -1em;
 }
 
-/* Fix for numbered items */
 .chat-message li.numbered-item {
   list-style: decimal;
 }

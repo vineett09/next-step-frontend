@@ -36,12 +36,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      // Clear stored chat messages for the user
       if (state.user && state.user.id) {
         localStorage.removeItem(`chat_messages_${state.user.id}`);
       }
 
-      // Clear auth state
       state.user = null;
       state.token = null;
       localStorage.removeItem("user");

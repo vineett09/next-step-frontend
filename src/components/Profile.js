@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Loader from "./Loader"; // Add Loader import
+import Loader from "./Loader";
 import "../styles/Profile.css";
 import { techFields, techSkills } from "../data/TechFieldsData";
 
@@ -120,7 +120,6 @@ const Profile = () => {
     return field ? field.title : cleanId;
   };
 
-  // Show loader while loading
   if (loading) {
     return (
       <div className="profile-page">

@@ -1,17 +1,17 @@
 .skills-card {
-  width: auto; /* Full width */
-  background: #000; /* Dark background */
+  width: auto;
+  background: #000;
   box-shadow: 
     0 0 5px #e61dff, 
     0 0 10px #3cc7fa, 
     0 0 15px #857dfd, 
     0 0 20px #9d65fc;
  border-radius: 10px;
-    padding: 10px 20px; /* Adjust padding for navbar */
+    padding: 10px 20px; 
   text-align: center;
   display: flex;
-  flex-direction: column; /* Stack items vertically on small screens */
-  align-items: flex-start; /* Align items to the left */
+  flex-direction: column; 
+  align-items: flex-start; 
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -20,16 +20,16 @@
   font-size: 1rem;
   font-weight: bold;
   color: #fff;
-  margin: 0; /* Remove margin for navbar */
+  margin: 0; 
 }
 
 .skills-list {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping on small screens */
-  gap: 10px; /* Space between badges */
-  align-items: center; /* Center items vertically */
-  margin-left: 0; /* Remove left margin on small screens */
-  margin-top: 10px; /* Add space between title and badges */
+  flex-wrap: wrap; 
+  gap: 10px; 
+  align-items: center; 
+  margin-left: 0; 
+  margin-top: 10px; 
 }
 
 .skills-badge {
@@ -41,23 +41,22 @@
   font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
-  transition: background 0.3s ease; /* Smooth hover effect */
+  transition: background 0.3s ease; 
 }
 
 .skills-badge:hover {
-  background: #1f5a13; /* Darker shade on hover */
+  background: #1f5a13; 
 }
 
-/* Responsive adjustments */
 @media (min-width: 768px) {
   .skills-card {
-    flex-direction: row; /* Horizontal layout on larger screens */
-    align-items: center; /* Center items vertically */
+    flex-direction: row; 
+    align-items: center; 
   }
 
   .skills-list {
-    flex-wrap: nowrap; /* Prevent wrapping on larger screens */
-    margin-left: 40px; /* Restore left margin */
-    margin-top: 0; /* Remove top margin */
+    flex-wrap: nowrap; 
+    margin-left: 40px; 
+    margin-top: 0; 
   }
 }

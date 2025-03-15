@@ -28,10 +28,8 @@ const Header = ({
       return;
     }
 
-    // Clone the container to avoid modifying the original
     const containerClone = d3Container.cloneNode(true);
 
-    // Create a temporary div to hold our clone with background
     const tempDiv = document.createElement("div");
     tempDiv.style.position = "absolute";
     tempDiv.style.left = "-9999px";
@@ -40,32 +38,28 @@ const Header = ({
     tempDiv.style.height = d3Container.scrollHeight + "px";
     tempDiv.style.padding = "20px";
 
-    // Append clone to temp div
     tempDiv.appendChild(containerClone);
     document.body.appendChild(tempDiv);
 
-    // Options to reduce file size
     const html2canvasOptions = {
-      scale: 1.5, // Reduced from 2 to save memory
+      scale: 1.5,
       height: tempDiv.scrollHeight,
       width: tempDiv.scrollWidth,
-      backgroundColor: "#333333", // Set canvas background to grey
-      logging: false, // Disable logging to improve performance
-      imageTimeout: 0, // No timeout for image loading
-      useCORS: true, // Use CORS to handle cross-origin images
-      allowTaint: true, // Allow tainted canvas to improve performance
+      backgroundColor: "#333333",
+      logging: false,
+      imageTimeout: 0,
+      useCORS: true,
+      allowTaint: true,
     };
 
     html2canvas(tempDiv, html2canvasOptions).then((canvas) => {
-      // Reduce image quality to save file size
       const imgData = canvas.toDataURL("image/jpeg", 0.9);
 
-      // Create a PDF document in landscape mode
       const pdf = new jsPDF({
         orientation: "landscape",
         unit: "mm",
         format: "a4",
-        compress: true, // Enable compression
+        compress: true,
       });
 
       // Get PDF dimensions

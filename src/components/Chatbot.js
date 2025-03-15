@@ -33,14 +33,11 @@ const Chatbot = ({ roadmapTitle, data }) => {
     }
   }, [messages, isAuthenticated, user]);
 
-  // Format text with markdown-like syntax
   const formatText = (text) => {
     if (!text) return "";
 
-    // Sanitize the input to prevent XSS
     let sanitizedText = DOMPurify.sanitize(text);
 
-    // Handle numbered lists (lines starting with "1.", "2.", etc.)
     sanitizedText = sanitizedText.replace(
       /^(\d+\.\s.*)$/gm,
       "<li class='numbered-item'>$1</li>"
@@ -50,7 +47,6 @@ const Chatbot = ({ roadmapTitle, data }) => {
       "<ol>$&</ol>"
     );
 
-    // Handle bullet points (lines starting with "•", "-", or "*")
     sanitizedText = sanitizedText.replace(
       /^([\*\-\•]\s.*)$/gm,
       "<li class='bullet-item'>$1</li>"
@@ -60,22 +56,21 @@ const Chatbot = ({ roadmapTitle, data }) => {
       "<ul>$&</ul>"
     );
 
-    // Handle paragraphs (consecutive lines)
+    // Handle paragraphs
     sanitizedText = sanitizedText.replace(/\n\n/g, "</p><p>");
 
     // Handle single line breaks
     sanitizedText = sanitizedText.replace(/\n/g, "<br>");
 
-    // Handle bold text (text between ** or __)
+    // Handle bold text
     sanitizedText = sanitizedText.replace(
       /(\*\*|__)(.*?)\1/g,
       "<strong>$2</strong>"
     );
 
-    // Handle italic text (text between * or _)
+    // Handle italic text
     sanitizedText = sanitizedText.replace(/(\*|_)(.*?)\1/g, "<em>$2</em>");
 
-    // Wrap in paragraph tags if not already wrapped
     if (!sanitizedText.startsWith("<")) {
       sanitizedText = `<p>${sanitizedText}</p>`;
     }
@@ -137,7 +132,6 @@ const Chatbot = ({ roadmapTitle, data }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Function to clear chat history
   const clearChatHistory = () => {
     if (isAuthenticated && user) {
       localStorage.removeItem(`chat_messages_${user.id}`);

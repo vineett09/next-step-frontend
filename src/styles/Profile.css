@@ -1,4 +1,3 @@
-/* === Page Layout === */
 .profile-page {
   min-height: 100vh;
   display: flex;
@@ -16,27 +15,26 @@
 .profile-layout {
   display: flex;
   gap: 2rem;
-  height: calc(100vh - 4rem - 60px); /* Full viewport height minus padding and footer height */
+  height: calc(100vh - 4rem - 60px); 
 }
 
 .profile-main-content {
   flex: 1;
-  max-height: 100%; /* Restrict height to the layout container */
-  overflow-y: auto; /* Enable vertical scrolling when content exceeds height */
+  max-height: 100%; 
+  overflow-y: auto; 
 }
 
-/* === Sidebar === */
 .profile-sidebar {
   width: 250px;
-  height: 300px; /* Fixed height for the sidebar */
+  height: 300px; 
   border-radius: 10px;
   border: 1px solid #ccc;
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Align items at the top */
-  overflow-y: auto; /* Add scroll if content exceeds height */
+  justify-content: flex-start; 
+  overflow-y: auto; 
 }
 
 .sidebar-item {
@@ -64,7 +62,6 @@
   color: white;
 }
 
-/* === Loading State === */
 .profile-loading {
   display: flex;
   justify-content: center;
@@ -74,7 +71,6 @@
   color: #666;
 }
 
-/* === Profile Header === */
 .profile-header-section {
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -101,7 +97,6 @@
   color: #fff;
 }
 
-/* === Roadmaps Section === */
 .profile-roadmaps-section {
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -135,7 +130,6 @@
 }
 
 
-/* === List Containers for Roadmaps and Bookmarks === */
 .roadmaps-list-container,
 .bookmarks-list-container {
   display: flex;
@@ -144,7 +138,6 @@
   
 }
 
-/* === Roadmap List Items === */
 .roadmap-list-item {
   background-color: #31363F;
   border-radius: 8px;
@@ -205,7 +198,7 @@
   color: #28a745;
 }
 
-/* === Roadmap Actions Dropdown === */.roadmap-list-actions {
+.roadmap-list-actions {
   position: relative;
 }
 
@@ -255,7 +248,6 @@
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
 }
 
-/* Fix for dropdown positioning */
 .roadmap-list-item:last-child .dropdown-menu {
   right: 0;
   left: auto;
@@ -302,7 +294,6 @@
   background-color: #e9f0ff;
 }
 
-/* === Bookmark List Items === */
 .bookmark-list-item {
   background-color: #31363F;
   border-radius: 8px;
@@ -343,7 +334,6 @@
   background-color: #d5e3ff;
 }
 
-/* === Empty States === */
 .roadmaps-empty-state, .bookmarks-empty-state {
   text-align: center;
   padding: 3rem 0;
@@ -371,7 +361,6 @@
 
 
 
-/* === Bookmarks Section === */
 .profile-bookmarks-section {
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -386,18 +375,17 @@
   font-weight: 600;
 }
 
-/* === Responsive Adjustments === */
 @media (max-width: 768px) {
   .profile-layout {
     flex-direction: column;
-    height: auto; /* Allow natural height on mobile */
+    height: auto; 
   }
   
   .profile-sidebar {
     width: 100%;
-    height: 60px; /* Fixed height for mobile */
+    height: 60px; 
     display: flex;
-    flex-direction: row; /* Horizontal layout on mobile */
+    flex-direction: row; 
     justify-content: space-between;
     padding: 0.5rem;
   }
@@ -410,8 +398,8 @@
   }
   
   .profile-main-content {
-    max-height: none; /* Remove height restriction on mobile */
-    overflow-y: visible; /* Disable scrolling on mobile, let page scroll */
+    max-height: none; 
+    overflow-y: visible; 
   }
   
   .profile-header-section, 

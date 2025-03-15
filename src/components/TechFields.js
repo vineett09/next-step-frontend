@@ -1,8 +1,7 @@
-// src/components/TechFields.js
 import React from "react";
 import "../styles/TechFields.css";
 import { useNavigate } from "react-router-dom";
-import { techFields, techSkills } from "../data/TechFieldsData"; // Adjust path as needed
+import { techFields, techSkills } from "../data/TechFieldsData";
 
 const TechFields = () => {
   const navigate = useNavigate();
