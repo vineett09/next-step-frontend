@@ -36,10 +36,45 @@ const StarRating = ({ value }) => {
   );
 };
 
+// Pagination component
+const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0);
+  };
+
+  return (
+    <div className="pagination-container">
+      <button
+        className="pagination-button"
+        onClick={() => handlePageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        &lt;
+      </button>
+
+      <span className="pagination-info">
+        Page {currentPage} of {totalPages}
+      </span>
+
+      <button
+        className="pagination-button"
+        onClick={() => handlePageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        &gt;
+      </button>
+    </div>
+  );
+};
+
 const SharedRoadmaps = () => {
   const [sharedRoadmaps, setSharedRoadmaps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
 
   useEffect(() => {
     fetchSharedRoadmaps();
@@ -64,6 +99,11 @@ const SharedRoadmaps = () => {
       setLoading(false);
     }
   };
+
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const currentRoadmaps = sharedRoadmaps.slice(firstIndex, lastIndex);
+  const totalPages = Math.ceil(sharedRoadmaps.length / itemsPerPage);
 
   if (loading) {
     return (
@@ -100,52 +140,62 @@ const SharedRoadmaps = () => {
               <p>No roadmaps are shared yet.</p>
             </div>
           ) : (
-            <div className="roadmaps-grid">
-              {sharedRoadmaps.map((roadmap) => (
-                <div key={roadmap._id} className="roadmap-card">
-                  <div className="roadmap-card-header">
-                    <h3>{roadmap.title}</h3>
-                    <span className="creator">
-                      Created by: {roadmap.createdBy?.username || "Unknown"}
-                    </span>
-                  </div>
-                  <p className="roadmap-description">{roadmap.description}</p>
-                  <div className="roadmap-meta">
-                    <span>
-                      Last updated:{" "}
-                      {new Date(roadmap.lastUpdated).toLocaleDateString()}
-                    </span>
-                    <div className="rating-container">
-                      {roadmap.ratingStats?.ratingCount > 0 ? (
-                        <>
-                          <StarRating
-                            value={roadmap.ratingStats.averageRating}
-                          />
-                          <span className="rating-count">
-                            {roadmap.ratingStats.averageRating.toFixed(1)} (
-                            {roadmap.ratingStats.ratingCount}{" "}
-                            {roadmap.ratingStats.ratingCount === 1
-                              ? "rating"
-                              : "ratings"}
-                            )
-                          </span>
-                        </>
-                      ) : (
-                        <span className="no-ratings">No ratings yet</span>
-                      )}
+            <>
+              <div className="roadmaps-grid">
+                {currentRoadmaps.map((roadmap) => (
+                  <div key={roadmap._id} className="roadmap-card">
+                    <div className="roadmap-card-header">
+                      <h3>{roadmap.title}</h3>
+                      <span className="creator">
+                        Created by: {roadmap.createdBy?.username || "Unknown"}
+                      </span>
+                    </div>
+                    <p className="roadmap-description">{roadmap.description}</p>
+                    <div className="roadmap-meta">
+                      <span>
+                        Last updated:{" "}
+                        {new Date(roadmap.lastUpdated).toLocaleDateString()}
+                      </span>
+                      <div className="rating-container">
+                        {roadmap.ratingStats?.ratingCount > 0 ? (
+                          <>
+                            <StarRating
+                              value={roadmap.ratingStats.averageRating}
+                            />
+                            <span className="rating-count">
+                              {roadmap.ratingStats.averageRating.toFixed(1)} (
+                              {roadmap.ratingStats.ratingCount}{" "}
+                              {roadmap.ratingStats.ratingCount === 1
+                                ? "rating"
+                                : "ratings"}
+                              )
+                            </span>
+                          </>
+                        ) : (
+                          <span className="no-ratings">No ratings yet</span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="roadmap-actions">
+                      <Link
+                        to={`/public-roadmap/${roadmap._id}`}
+                        className="view-btn"
+                      >
+                        View
+                      </Link>
                     </div>
                   </div>
-                  <div className="roadmap-actions">
-                    <Link
-                      to={`/public-roadmap/${roadmap._id}`}
-                      className="view-btn"
-                    >
-                      View
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+
+              {totalPages > 1 && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  setCurrentPage={setCurrentPage}
+                />
+              )}
+            </>
           )}
         </div>
       </div>

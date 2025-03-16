@@ -44,14 +44,63 @@ const Profile = () => {
   const [bookmarkedRoadmaps, setBookmarkedRoadmaps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("profile");
-
+  const [roadmapsCurrentPage, setRoadmapsCurrentPage] = useState(1);
+  const [bookmarksCurrentPage, setBookmarksCurrentPage] = useState(1);
+  const itemsPerPage = 3;
   useEffect(() => {
     if (token && user) {
       fetchUserRoadmaps();
       fetchBookmarkedRoadmaps();
     }
   }, [token, user]);
+  const roadmapsLastIndex = roadmapsCurrentPage * itemsPerPage;
+  const roadmapsFirstIndex = roadmapsLastIndex - itemsPerPage;
+  const currentRoadmaps = userRoadmaps.slice(
+    roadmapsFirstIndex,
+    roadmapsLastIndex
+  );
+  const totalRoadmapsPages = Math.ceil(userRoadmaps.length / itemsPerPage);
 
+  const bookmarksLastIndex = bookmarksCurrentPage * itemsPerPage;
+  const bookmarksFirstIndex = bookmarksLastIndex - itemsPerPage;
+  const currentBookmarks = bookmarkedRoadmaps.slice(
+    bookmarksFirstIndex,
+    bookmarksLastIndex
+  );
+  const totalBookmarksPages = Math.ceil(
+    bookmarkedRoadmaps.length / itemsPerPage
+  );
+
+  const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
+    const handlePageChange = (pageNumber) => {
+      setCurrentPage(pageNumber);
+      window.scrollTo(0, 0);
+    };
+
+    return (
+      <div className="pagination-container">
+        <button
+          className="pagination-button"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          &lt;
+        </button>
+
+        <span className="pagination-info">
+          Page {currentPage} of {totalPages}
+        </span>
+
+        <button
+          className="pagination-button"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          &gt;
+        </button>
+      </div>
+    );
+  };
   const fetchUserRoadmaps = async () => {
     try {
       const response = await axios.get("/api/roadmaps/user", {
@@ -62,7 +111,6 @@ const Profile = () => {
       });
 
       if (response.data.success) {
-        // We need to fetch the rating details for each roadmap
         const roadmapsWithRatings = await Promise.all(
           response.data.roadmaps.map(async (roadmap) => {
             if (!roadmap.isPrivate) {
@@ -261,101 +309,113 @@ const Profile = () => {
                     </Link>
                   </div>
                 ) : (
-                  <div className="roadmaps-list-container">
-                    {userRoadmaps.map((roadmap) => (
-                      <div key={roadmap._id} className="roadmap-list-item">
-                        <div className="roadmap-list-content">
-                          <h3 className="roadmap-item-title">
-                            {roadmap.title}
-                          </h3>
-                          <p className="roadmap-item-description">
-                            {roadmap.description}
-                          </p>
-                          <div className="roadmap-item-metadata">
-                            <span className="roadmap-update-date">
-                              Last updated:{" "}
-                              {new Date(
-                                roadmap.lastUpdated
-                              ).toLocaleDateString()}
-                            </span>
-                            <span
-                              className={`visibility-status ${
-                                roadmap.isPrivate
-                                  ? "status-private"
-                                  : "status-public"
-                              }`}
-                            >
-                              {roadmap.isPrivate ? "Private" : "Public"}
-                            </span>
-                          </div>
+                  <>
+                    <div className="roadmaps-list-container">
+                      {currentRoadmaps.map((roadmap) => (
+                        <div key={roadmap._id} className="roadmap-list-item">
+                          <div className="roadmap-list-content">
+                            <h3 className="roadmap-item-title">
+                              {roadmap.title}
+                            </h3>
+                            <p className="roadmap-item-description">
+                              {roadmap.description}
+                            </p>
+                            <div className="roadmap-item-metadata">
+                              <span className="roadmap-update-date">
+                                Last updated:{" "}
+                                {new Date(
+                                  roadmap.lastUpdated
+                                ).toLocaleDateString()}
+                              </span>
+                              <span
+                                className={`visibility-status ${
+                                  roadmap.isPrivate
+                                    ? "status-private"
+                                    : "status-public"
+                                }`}
+                              >
+                                {roadmap.isPrivate ? "Private" : "Public"}
+                              </span>
+                            </div>
 
-                          {/* Add Rating Display */}
-                          {!roadmap.isPrivate && roadmap.ratingStats && (
-                            <div className="rating-container">
-                              {roadmap.ratingStats.ratingCount > 0 ? (
-                                <>
-                                  <StarRating
-                                    value={roadmap.ratingStats.averageRating}
-                                  />
-                                  <span className="rating-count">
-                                    {roadmap.ratingStats.averageRating.toFixed(
-                                      1
-                                    )}{" "}
-                                    ({roadmap.ratingStats.ratingCount}{" "}
-                                    {roadmap.ratingStats.ratingCount === 1
-                                      ? "rating"
-                                      : "ratings"}
-                                    )
+                            {/* Rating Display */}
+                            {!roadmap.isPrivate && roadmap.ratingStats && (
+                              <div className="rating-container">
+                                {roadmap.ratingStats.ratingCount > 0 ? (
+                                  <>
+                                    <StarRating
+                                      value={roadmap.ratingStats.averageRating}
+                                    />
+                                    <span className="rating-count">
+                                      {roadmap.ratingStats.averageRating.toFixed(
+                                        1
+                                      )}{" "}
+                                      ({roadmap.ratingStats.ratingCount}{" "}
+                                      {roadmap.ratingStats.ratingCount === 1
+                                        ? "rating"
+                                        : "ratings"}
+                                      )
+                                    </span>
+                                  </>
+                                ) : (
+                                  <span className="no-ratings">
+                                    No ratings yet
                                   </span>
-                                </>
-                              ) : (
-                                <span className="no-ratings">
-                                  No ratings yet
-                                </span>
-                              )}
-                            </div>
-                          )}
-                        </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
 
-                        <div className="roadmap-list-actions">
-                          <div className="dropdown">
-                            <button className="dropdown-toggle">⋮</button>
-                            <div className="dropdown-menu">
-                              <Link
-                                to={`/view-roadmap/${roadmap._id}`}
-                                className="dropdown-item"
-                              >
-                                View
-                              </Link>
-                              <Link
-                                to={`/roadmap/edit/${roadmap._id}`}
-                                className="dropdown-item"
-                              >
-                                Edit
-                              </Link>
-                              <button
-                                className="dropdown-item toggle-visibility"
-                                onClick={() =>
-                                  toggleRoadmapVisibility(
-                                    roadmap._id,
-                                    roadmap.isPrivate
-                                  )
-                                }
-                              >
-                                Make {roadmap.isPrivate ? "Public" : "Private"}
-                              </button>
-                              <button
-                                className="dropdown-item delete-option"
-                                onClick={() => deleteRoadmap(roadmap._id)}
-                              >
-                                Delete
-                              </button>
+                          <div className="roadmap-list-actions">
+                            <div className="dropdown">
+                              <button className="dropdown-toggle">⋮</button>
+                              <div className="dropdown-menu">
+                                <Link
+                                  to={`/view-roadmap/${roadmap._id}`}
+                                  className="dropdown-item"
+                                >
+                                  View
+                                </Link>
+                                <Link
+                                  to={`/roadmap/edit/${roadmap._id}`}
+                                  className="dropdown-item"
+                                >
+                                  Edit
+                                </Link>
+                                <button
+                                  className="dropdown-item toggle-visibility"
+                                  onClick={() =>
+                                    toggleRoadmapVisibility(
+                                      roadmap._id,
+                                      roadmap.isPrivate
+                                    )
+                                  }
+                                >
+                                  Make{" "}
+                                  {roadmap.isPrivate ? "Public" : "Private"}
+                                </button>
+                                <button
+                                  className="dropdown-item delete-option"
+                                  onClick={() => deleteRoadmap(roadmap._id)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+
+                    {/* Pagination for roadmaps */}
+                    {totalRoadmapsPages > 1 && (
+                      <Pagination
+                        currentPage={roadmapsCurrentPage}
+                        totalPages={totalRoadmapsPages}
+                        setCurrentPage={setRoadmapsCurrentPage}
+                      />
+                    )}
+                  </>
                 )}
               </div>
             )}
@@ -373,29 +433,40 @@ const Profile = () => {
                     </Link>
                   </div>
                 ) : (
-                  <div className="bookmarks-list-container">
-                    {bookmarkedRoadmaps.map((bookmark) => {
-                      const bookmarkId =
-                        typeof bookmark === "string" ? bookmark : bookmark.id;
-                      const title = findTechFieldTitle(bookmarkId);
+                  <>
+                    <div className="bookmarks-list-container">
+                      {currentBookmarks.map((bookmark) => {
+                        const bookmarkId =
+                          typeof bookmark === "string" ? bookmark : bookmark.id;
+                        const title = findTechFieldTitle(bookmarkId);
 
-                      return (
-                        <div key={bookmarkId} className="bookmark-list-item">
-                          <div className="bookmark-content">
-                            <h3 className="bookmark-item-title">{title}</h3>
-                            <a
-                              href={`/${bookmarkId}`}
-                              className="bookmark-view-link"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              View Roadmap
-                            </a>
+                        return (
+                          <div key={bookmarkId} className="bookmark-list-item">
+                            <div className="bookmark-content">
+                              <h3 className="bookmark-item-title">{title}</h3>
+                              <a
+                                href={`/${bookmarkId}`}
+                                className="bookmark-view-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                View Roadmap
+                              </a>
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Pagination for bookmarks */}
+                    {totalBookmarksPages > 1 && (
+                      <Pagination
+                        currentPage={bookmarksCurrentPage}
+                        totalPages={totalBookmarksPages}
+                        setCurrentPage={setBookmarksCurrentPage}
+                      />
+                    )}
+                  </>
                 )}
               </div>
             )}
