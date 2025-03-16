@@ -111,7 +111,7 @@ const CustomRoadmapViewer = () => {
               <MiniMap />
               <Background
                 variant={background.variant}
-                color={background.color}
+                color="transparent"
                 gap={background.gap}
                 size={background.size}
               />

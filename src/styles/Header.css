@@ -1,11 +1,10 @@
 .roadmap-header {
   position: relative;
-  color: #fff;
+  color: #000;
   text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid #000;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
 }
 
@@ -38,9 +37,8 @@
   color: #000;
   font-weight: bold;
   padding: 4px 8px;
-  border: 1px solid #fff;
+  border: 1px solid #000;
   border-radius: 4px;
-  color: #fff;
   background-color: transparent;
 }
 
@@ -55,10 +53,10 @@
   display: inline-block;
   font-size: 14px;
   font-weight: bold;
-  color: #fff;
+  color: #000;
   text-align: left;
   font-style: italic;
-  border: 1px solid #fff;
+  border: 1px solid #000;
   border-radius: 5px;
   padding: 5px 5px;
 }
@@ -66,7 +64,7 @@
 .back-button svg {
   width: 24px;
   height: 24px;
-  fill: #fff;
+  fill: #000;
 }
 
 .generate-roadmap {
@@ -134,7 +132,7 @@
 
 .bookmark-button {
   padding: 3px;
-  border: 1px solid #fff;
+  border: 1px solid #000;
   border-radius: 4px;
   background-color: transparent;
   cursor: pointer;
@@ -143,7 +141,7 @@
 
 .download-pdf {
   padding: 3px; 
-  border: 1px solid #fff;
+  border: 1px solid #000;
   border-radius: 4px;
   background-color: transparent;
   cursor: pointer;
@@ -154,32 +152,39 @@
   width: 24px;
   height: 24px;
   transition: fill 0.3s;
+  fill: #000;
+
 }
 
 .download-pdf:hover {
-  background-color: #fff;
+  background-color: #000;
 }
 
 .download-pdf:hover svg {
-  fill: #000; 
+  fill: #fff; 
 }
 
 .bookmark-button svg {
   width: 24px;
   height: 24px;
   transition: fill 0.3s;
-}
-
-.bookmark-button:hover {
-  background-color: #fff;
-}
-
-.bookmark-button:hover svg {
   fill: #000;
 }
 
+.bookmark-button:hover {
+  background-color: #000;
+}
+
+.bookmark-button:hover svg {
+  fill: #fff;
+}
+
 .bookmark-button.bookmarked {
-  background-color: #fff;
+  background-color: #000;
+}
+
+.bookmark-button.bookmarked svg {
+  fill: #fff;
 }
 
 @media (max-width: 768px) {

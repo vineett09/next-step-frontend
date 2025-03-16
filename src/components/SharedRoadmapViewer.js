@@ -265,8 +265,8 @@ const SharedRoadmapViewer = () => {
 
         <div className="viewer-body">
           <div
-            className="canvas-container"
-            style={{ height: 800, width: "100%" }}
+            className="canvas-box"
+            style={{ height: 800, width: "100%", overflow: "hidden" }}
           >
             <ReactFlow
               nodes={nodes}
@@ -285,7 +285,7 @@ const SharedRoadmapViewer = () => {
               <MiniMap />
               <Background
                 variant={background.variant}
-                color={background.color}
+                color="transparent"
                 gap={background.gap}
                 size={background.size}
               />

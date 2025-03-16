@@ -318,7 +318,7 @@ const CustomRoadmaps = () => {
   const [selectedElement, setSelectedElement] = useState(null);
   const [selectedElementType, setSelectedElementType] = useState(null);
 
-  const [backgroundSettings, setBackgroundSettings] = useState({
+  const [backgroundSettings] = useState({
     variant: "dots",
     color: "#aaaaaa",
     gap: 16,
@@ -796,13 +796,6 @@ const CustomRoadmaps = () => {
     }
   };
 
-  const handleBackgroundChange = (property, value) => {
-    setBackgroundSettings((prev) => ({
-      ...prev,
-      [property]: value,
-    }));
-  };
-
   const onElementClick = (event, element) => {
     setSelectedElement(element);
     setSelectedElementType(element.source ? "edge" : "node");
@@ -826,7 +819,6 @@ const CustomRoadmaps = () => {
         },
         settings: {
           palette,
-          background: backgroundSettings,
         },
       };
 
@@ -972,69 +964,6 @@ const CustomRoadmaps = () => {
                 </div>
 
                 <div className="tool-section">
-                  <h3>Background</h3>
-                  <div className="background-settings">
-                    <div className="property-group">
-                      <label>Pattern:</label>
-                      <select
-                        value={backgroundSettings.variant}
-                        onChange={(e) =>
-                          handleBackgroundChange("variant", e.target.value)
-                        }
-                        className="select-input"
-                      >
-                        <option value="dots">Dots</option>
-                        <option value="lines">Lines</option>
-                        <option value="cross">Cross</option>
-                      </select>
-                    </div>
-                    <div className="property-group">
-                      <label>Color:</label>
-                      <input
-                        type="color"
-                        value={backgroundSettings.color}
-                        onChange={(e) =>
-                          handleBackgroundChange("color", e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="property-group">
-                      <label>Gap Size:</label>
-                      <input
-                        type="range"
-                        min="8"
-                        max="50"
-                        value={backgroundSettings.gap}
-                        onChange={(e) =>
-                          handleBackgroundChange(
-                            "gap",
-                            parseInt(e.target.value)
-                          )
-                        }
-                      />
-                      <span>{backgroundSettings.gap}px</span>
-                    </div>
-                    <div className="property-group">
-                      <label>Pattern Size:</label>
-                      <input
-                        type="range"
-                        min="0.5"
-                        max="3"
-                        step="0.1"
-                        value={backgroundSettings.size}
-                        onChange={(e) =>
-                          handleBackgroundChange(
-                            "size",
-                            parseFloat(e.target.value)
-                          )
-                        }
-                      />
-                      <span>{backgroundSettings.size}x</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="tool-section">
                   <h3>Roadmap</h3>
                   <button
                     onClick={saveRoadmap}
@@ -1075,10 +1004,10 @@ const CustomRoadmaps = () => {
                   <Controls />
                   <MiniMap />
                   <Background
-                    variant={backgroundSettings.variant}
-                    color={backgroundSettings.color}
-                    gap={backgroundSettings.gap}
-                    size={backgroundSettings.size}
+                    variant="dots"
+                    color="#aaaaaa"
+                    gap={16}
+                    size={1}
                   />
                 </ReactFlow>
               </div>

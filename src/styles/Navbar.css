@@ -1,7 +1,7 @@
 :root {
   --primary-color: #fff;
   --hover-color: #007bff;
-  --background-color: #021526;
+  --background-color: #E7473C;
   --text-color: #fff;
   --shadow-color: rgba(0, 0, 0, 0.2);
 }
@@ -84,7 +84,7 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background: var(--background-color);
+  background: #2c3539;
   border-radius: 6px;
   box-shadow: 0 4px 6px var(--shadow-color);
   min-width: 150px;
@@ -266,7 +266,7 @@
     position: static;
     width: 100%;
     box-shadow: none;
-    background: rgba(255, 255, 255, 0.1);
+    background: #2c3539;
   }
 
   .nav-link,

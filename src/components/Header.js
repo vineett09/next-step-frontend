@@ -33,7 +33,7 @@ const Header = ({
     const tempDiv = document.createElement("div");
     tempDiv.style.position = "absolute";
     tempDiv.style.left = "-9999px";
-    tempDiv.style.backgroundColor = "#333333";
+    tempDiv.style.backgroundColor = "#ffffff";
     tempDiv.style.width = d3Container.scrollWidth + "px";
     tempDiv.style.height = d3Container.scrollHeight + "px";
     tempDiv.style.padding = "20px";
@@ -45,7 +45,7 @@ const Header = ({
       scale: 1.5,
       height: tempDiv.scrollHeight,
       width: tempDiv.scrollWidth,
-      backgroundColor: "#333333",
+      backgroundColor: "#ffffff",
       logging: false,
       imageTimeout: 0,
       useCORS: true,

@@ -116,7 +116,7 @@ const AIRoadmap = () => {
       .attr("y", -titleDimensions.height / 2)
       .attr("rx", 10)
       .attr("ry", 10)
-      .attr("fill", "#FFD93D")
+      .attr("fill", "#FFE700")
       .attr("stroke", "black")
       .attr("stroke-width", 2);
 
@@ -148,7 +148,7 @@ const AIRoadmap = () => {
       .attr("y1", lineStartY)
       .attr("x2", width / 2)
       .attr("y2", lineEndY)
-      .attr("stroke", "#FFD93D")
+      .attr("stroke", "#000")
       .attr("stroke-width", 3)
       .attr("opacity", 0.7)
       .attr("stroke-dasharray", "5,5");
@@ -200,7 +200,7 @@ const AIRoadmap = () => {
           .attr("y1", startY)
           .attr("x2", width / 2)
           .attr("y2", endY)
-          .attr("stroke", "#FFD93D")
+          .attr("stroke", "#000")
           .attr("stroke-width", 3)
           .attr("opacity", 0.7);
       }
@@ -266,7 +266,7 @@ const AIRoadmap = () => {
         parentGroup,
         parent,
         parent.dimensions,
-        "#FFD93D",
+        "#FFE700",
         "black"
       );
 
@@ -319,7 +319,7 @@ const AIRoadmap = () => {
               childGroup,
               child,
               child.dimensions,
-              "#FFE69A",
+              "#FEEE91",
               "black",
               isLeft
             );
@@ -347,7 +347,7 @@ const AIRoadmap = () => {
               .append("path")
               .attr("class", "child-link")
               .attr("d", path.toString())
-              .attr("stroke", "#FFD93D")
+              .attr("stroke", "#000")
               .attr("stroke-width", 2)
               .attr("fill", "none")
               .attr("opacity", 0.7)
@@ -392,7 +392,7 @@ const AIRoadmap = () => {
     const tempDiv = document.createElement("div");
     tempDiv.style.position = "absolute";
     tempDiv.style.left = "-9999px";
-    tempDiv.style.backgroundColor = "#333333";
+    tempDiv.style.backgroundColor = "#ffffff";
     tempDiv.style.width = container.scrollWidth + "px";
     tempDiv.style.height = container.scrollHeight + "px";
     tempDiv.style.padding = "20px";
@@ -405,7 +405,7 @@ const AIRoadmap = () => {
       scale: 1.5,
       height: tempDiv.scrollHeight,
       width: tempDiv.scrollWidth,
-      backgroundColor: "#333333",
+      backgroundColor: "#ffffff",
       logging: false,
       imageTimeout: 0,
       useCORS: true,

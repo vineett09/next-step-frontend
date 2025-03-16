@@ -17,7 +17,7 @@
     padding: 20px;
     border-radius: 12px;
     max-width: 900px;
-    border: 1px solid #ccc;
+    border: 1px solid #000;
     margin-left: auto;
     margin-right: auto;
 }
@@ -40,7 +40,7 @@
 
 .viewer-header h2 {
     font-size: 32px;
-    color: #fff;
+    color: #000;
     margin: 0 0 15px 0;
     font-weight: 600;
     line-height: 1.2;
@@ -49,7 +49,7 @@
 }
 
 .viewer-header .roadmap-description {
-    color: #fff;
+    color: #000;
     max-width: 700px;
     font-size: 16px;
     line-height: 1.5;
@@ -65,16 +65,16 @@
     text-decoration: none;
     font-weight: bold;
     padding: 4px 8px;
-    border: 1px solid #fff;
+    border: 1px solid #000;
     border-radius: 4px;
-    color: #fff;
+    color: #000;
     background-color: transparent;
     cursor: pointer;
   }
 .previous-button svg {
     width: 24px;
     height: 24px;
-    fill: #fff;
+    fill: #000;
   }
 .viewer-header .roadmap-rating-section {
     background-color: transparent; 
@@ -91,12 +91,12 @@
   }
   
   .viewer-header .rating-header h3 {
-    color: #fff; 
+    color: #000; 
     font-size: 1rem; 
   }
   
   .viewer-header .average-rating span {
-    color: #ddd; 
+    color: #000; 
   }
   
   .viewer-header .rating-login-prompt, 
@@ -105,21 +105,21 @@
   .viewer-header .rating-error, 
   .viewer-header .rating-success {
     background-color: rgba(255, 255, 255, 0.1); 
-    color: #fff; 
+    color: #000; 
   }
   
   .viewer-header .rating-error {
     background-color: rgba(211, 47, 47, 0.2); 
-    color: #ffcccb;
+    color: hsl(1, 89%, 25%);
   }
   
   .viewer-header .rating-success {
     background-color: rgba(46, 125, 50, 0.2); 
-    color: #b3ffb3; 
+    color: hsl(120, 64%, 33%); 
   }
   
   .viewer-header .user-rating-prompt {
-    color: #fff; 
+    color: #000; 
   }
   
   .viewer-header .star {
@@ -182,10 +182,8 @@
 }
 
 .canvas-container {
-    border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-    background-color: #f9f9f9;
 }
 
 .roadmap-viewer-loading,
