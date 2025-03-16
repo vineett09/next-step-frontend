@@ -207,6 +207,45 @@
   display: inline-block;
 }
 
+.rating-container {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.star-rating {
+  display: inline-flex;
+  margin-right: 8px;
+}
+
+.star {
+  font-size: 16px;
+  margin-right: 2px;
+}
+
+.full-star {
+  color: gold;
+}
+
+.half-star {
+  position: relative;
+  color: gold;
+}
+
+.empty-star {
+  color: #ccc;
+}
+
+.rating-count {
+  font-size: 14px;
+  color: #666;
+}
+
+.no-ratings {
+  font-size: 14px;
+  color: #888;
+  font-style: italic;
+}
 .dropdown-toggle {
   background: transparent;
   border: none;

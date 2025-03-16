@@ -10,6 +10,36 @@ import Loader from "./Loader";
 import "../styles/CustomRoadmapViewer.css";
 import { nodeTypes } from "./CustomRoadmaps";
 
+const StarRating = ({ value }) => {
+  const roundedValue = Math.round(value * 2) / 2;
+
+  return (
+    <div className="star-rating">
+      {[1, 2, 3, 4, 5].map((star) => {
+        if (star <= roundedValue) {
+          return (
+            <span key={star} className="star full-star">
+              ★
+            </span>
+          );
+        } else if (star - 0.5 === roundedValue) {
+          return (
+            <span key={star} className="star half-star">
+              ☆
+            </span>
+          );
+        } else {
+          return (
+            <span key={star} className="star empty-star">
+              ☆
+            </span>
+          );
+        }
+      })}
+    </div>
+  );
+};
+
 const CustomRoadmapViewer = () => {
   const { id } = useParams();
   const { token } = useSelector((state) => state.auth);
@@ -31,8 +61,8 @@ const CustomRoadmapViewer = () => {
 
         if (response.data) {
           console.log("Roadmap data:", response.data);
-          console.log("Nodes:", response.data.structure?.nodes);
-          console.log("Edges:", response.data.structure?.edges);
+          console.log("Nodes:", response.data.roadmap.structure?.nodes);
+          console.log("Edges:", response.data.roadmap.structure?.edges);
           setRoadmap(response.data.roadmap);
         } else {
           setError("Failed to load roadmap");
@@ -67,7 +97,13 @@ const CustomRoadmapViewer = () => {
     return <div className="roadmap-viewer__error">Roadmap not found</div>;
   }
 
-  const { title, description, structure = {}, settings = {} } = roadmap;
+  const {
+    title,
+    description,
+    structure = {},
+    settings = {},
+    ratingStats,
+  } = roadmap;
   const { nodes = [], edges = [] } = structure || {};
   const {
     background = { variant: "dots", color: "#aaaaaa", gap: 16, size: 1 },
@@ -87,6 +123,24 @@ const CustomRoadmapViewer = () => {
           </button>
           <h2 className="roadmap-viewer__title">{title}</h2>
           <p className="roadmap-viewer__description">{description}</p>
+
+          {/* Rating Display */}
+          {!roadmap.isPrivate && ratingStats && (
+            <div className="roadmap-viewer__rating">
+              {ratingStats.ratingCount > 0 ? (
+                <>
+                  <StarRating value={ratingStats.averageRating} />
+                  <span className="rating-count">
+                    {ratingStats.averageRating.toFixed(1)} (
+                    {ratingStats.ratingCount}{" "}
+                    {ratingStats.ratingCount === 1 ? "rating" : "ratings"})
+                  </span>
+                </>
+              ) : (
+                <span className="no-ratings">No ratings yet</span>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="roadmap-viewer__body">

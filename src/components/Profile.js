@@ -8,6 +8,36 @@ import Loader from "./Loader";
 import "../styles/Profile.css";
 import { techFields, techSkills } from "../data/TechFieldsData";
 
+const StarRating = ({ value }) => {
+  const roundedValue = Math.round(value * 2) / 2;
+
+  return (
+    <div className="star-rating">
+      {[1, 2, 3, 4, 5].map((star) => {
+        if (star <= roundedValue) {
+          return (
+            <span key={star} className="star full-star">
+              ★
+            </span>
+          );
+        } else if (star - 0.5 === roundedValue) {
+          return (
+            <span key={star} className="star half-star">
+              ☆
+            </span>
+          );
+        } else {
+          return (
+            <span key={star} className="star empty-star">
+              ☆
+            </span>
+          );
+        }
+      })}
+    </div>
+  );
+};
+
 const Profile = () => {
   const { user, token } = useSelector((state) => state.auth);
   const [userRoadmaps, setUserRoadmaps] = useState([]);
@@ -32,7 +62,38 @@ const Profile = () => {
       });
 
       if (response.data.success) {
-        setUserRoadmaps(response.data.roadmaps);
+        // We need to fetch the rating details for each roadmap
+        const roadmapsWithRatings = await Promise.all(
+          response.data.roadmaps.map(async (roadmap) => {
+            if (!roadmap.isPrivate) {
+              try {
+                const ratingResponse = await axios.get(
+                  `/api/roadmaps/${roadmap._id}/rating`,
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
+                );
+                return {
+                  ...roadmap,
+                  ratingStats: {
+                    averageRating: ratingResponse.data.averageRating,
+                    ratingCount: ratingResponse.data.ratingCount,
+                  },
+                };
+              } catch (error) {
+                console.error(
+                  `Error fetching ratings for roadmap ${roadmap._id}:`,
+                  error
+                );
+                return roadmap;
+              }
+            }
+            return roadmap;
+          })
+        );
+        setUserRoadmaps(roadmapsWithRatings);
       }
     } catch (error) {
       console.error("Error fetching user roadmaps:", error);
@@ -227,6 +288,33 @@ const Profile = () => {
                               {roadmap.isPrivate ? "Private" : "Public"}
                             </span>
                           </div>
+
+                          {/* Add Rating Display */}
+                          {!roadmap.isPrivate && roadmap.ratingStats && (
+                            <div className="rating-container">
+                              {roadmap.ratingStats.ratingCount > 0 ? (
+                                <>
+                                  <StarRating
+                                    value={roadmap.ratingStats.averageRating}
+                                  />
+                                  <span className="rating-count">
+                                    {roadmap.ratingStats.averageRating.toFixed(
+                                      1
+                                    )}{" "}
+                                    ({roadmap.ratingStats.ratingCount}{" "}
+                                    {roadmap.ratingStats.ratingCount === 1
+                                      ? "rating"
+                                      : "ratings"}
+                                    )
+                                  </span>
+                                </>
+                              ) : (
+                                <span className="no-ratings">
+                                  No ratings yet
+                                </span>
+                              )}
+                            </div>
+                          )}
                         </div>
 
                         <div className="roadmap-list-actions">
