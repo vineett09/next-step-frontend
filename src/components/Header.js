@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import AuthModal from "./AuthModal";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import ProjectsModal from "./projects/ProjectsModal"; // Import Projects Modal
 
 const Header = ({
   title,
@@ -13,10 +14,12 @@ const Header = ({
   isBookmarked,
   completedNodes = {},
   totalNodes = 0,
+  roadmapId,
 }) => {
   const navigate = useNavigate();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const user = useSelector((state) => state.auth.user);
+  const [isProjectsModalOpen, setIsProjectsModalOpen] = useState(false);
 
   const completedNodesCount = Object.keys(completedNodes).length;
   const progressPercentage =
@@ -117,6 +120,12 @@ const Header = ({
               {completedNodesCount} / {totalNodes} Completed (
               {progressPercentage}%)
             </span>
+            <button
+              className="projects-button"
+              onClick={() => setIsProjectsModalOpen(true)}
+            >
+              Projects
+            </button>
           </div>
 
           <button
@@ -163,6 +172,12 @@ const Header = ({
           </div>
         </div>
       </section>
+      {isProjectsModalOpen && (
+        <ProjectsModal
+          roadmapId={roadmapId}
+          onClose={() => setIsProjectsModalOpen(false)}
+        />
+      )}
       {!user && (
         <AuthModal
           isOpen={isAuthModalOpen}

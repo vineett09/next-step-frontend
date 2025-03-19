@@ -704,6 +704,7 @@ const Roadmap = ({ data }) => {
           isBookmarked={isBookmarked}
           completedNodes={completedNodes}
           totalNodes={totalNodes}
+          roadmapId={roadmapId} // Pass roadmapId
         />
 
         {isLoading ? (
