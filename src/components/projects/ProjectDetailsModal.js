@@ -26,10 +26,12 @@ const ProjectDetailsModal = ({ project, roadmapId, onClose }) => {
             stepsModule = await import(
               "../../data/projects/guides/AndroidProjectSteps.js"
             );
+            break;
           case "devops-engineer":
             stepsModule = await import(
               "../../data/projects/guides/DevopsProjectSteps.js"
             );
+            break;
           case "artificial-intelligence":
             stepsModule = await import(
               "../../data/projects/guides/AIEngineerProjectSteps.js"

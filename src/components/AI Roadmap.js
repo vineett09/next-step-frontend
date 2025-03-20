@@ -7,6 +7,8 @@ import Footer from "./Footer";
 import Loader from "./Loader";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useSelector } from "react-redux";
+
 const AIRoadmap = () => {
   const [input, setInput] = useState("");
   const [data, setData] = useState(null);
@@ -17,19 +19,66 @@ const AIRoadmap = () => {
     description: "",
   });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [usageInfo, setUsageInfo] = useState({
+    usageCount: 0,
+    remainingCount: 10,
+  });
   const d3Container = useRef(null);
+  const { token } = useSelector((state) => state.auth);
+
+  // Fetch usage info when component mounts
+  useEffect(() => {
+    if (token) {
+      fetchUsageInfo();
+    }
+  }, [token]);
+
+  const fetchUsageInfo = async () => {
+    try {
+      const response = await axios.get("/api/ai/usage", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUsageInfo(response.data);
+    } catch (err) {
+      console.error("Failed to fetch usage info:", err);
+    }
+  };
 
   const handleSubmit = async () => {
     if (!input.trim()) return;
+    if (usageInfo.usageCount >= 10) {
+      setError("You've reached your daily limit of 10 roadmaps");
+      return;
+    }
 
     setLoading(true);
     setError(null);
 
     try {
-      const response = await axios.post("/api/ai/generate", { input });
-      setData(response.data);
+      const response = await axios.post(
+        "/api/ai/generate",
+        { input },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setData(response.data.roadmap);
+      setUsageInfo(response.data.usageInfo);
     } catch (err) {
-      setError("Failed to generate roadmap. Please try again.");
+      if (err.response?.data?.error === "Daily limit reached") {
+        setError("You've reached your daily limit of 10 roadmaps");
+        setUsageInfo({
+          usageCount: 10,
+          remainingCount: 0,
+        });
+      } else {
+        setError("Failed to generate roadmap. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -472,9 +521,9 @@ const AIRoadmap = () => {
                 className="h-5 w-5 alert-svg"
               >
                 <path
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 ></path>
               </svg>
             </div>
@@ -497,11 +546,11 @@ const AIRoadmap = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Enter roadmap topic "
-              disabled={loading}
+              disabled={loading || usageInfo.usageCount >= 10}
             />
             <button
               onClick={handleSubmit}
-              disabled={loading}
+              disabled={loading || usageInfo.usageCount >= 10}
               className="generate-btn"
             >
               Generate✨
@@ -522,6 +571,15 @@ const AIRoadmap = () => {
                 <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
               </svg>
             </button>
+          </div>
+          <div className="usage-info">
+            <p>Daily usage: {usageInfo.usageCount}/10 roadmaps</p>
+            <div className="usage-bar">
+              <div
+                className="usage-fill"
+                style={{ width: `${(usageInfo.usageCount / 10) * 100}%` }}
+              ></div>
+            </div>
           </div>
           {error && <p className="error-message">{error}</p>}
         </div>

@@ -369,3 +369,40 @@ background: linear-gradient(
   margin-top: 15px;
   font-weight: 500;
 }
+
+.usage-info {
+  margin-top: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.usage-info p {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.usage-bar {
+  height: 6px;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.usage-fill {
+  height: 100%;
+  background-color: #4CAF50;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* When approaching limit */
+.usage-fill.warning {
+  background-color: #FFC107;
+}
+
+/* When at limit */
+.usage-fill.danger {
+  background-color: #F44336;
+}
