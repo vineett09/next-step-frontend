@@ -62,7 +62,6 @@
   
   
   .roadmap-card-header {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
@@ -71,6 +70,7 @@
   .roadmap-card-header h3 {
     margin: 0;
     font-size: 1.25rem;
+    margin-top: 5px;
     color: #fff;
   }
   

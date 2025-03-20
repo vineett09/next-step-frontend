@@ -145,10 +145,10 @@ const SharedRoadmaps = () => {
                 {currentRoadmaps.map((roadmap) => (
                   <div key={roadmap._id} className="roadmap-card">
                     <div className="roadmap-card-header">
-                      <h3>{roadmap.title}</h3>
                       <span className="creator">
                         Created by: {roadmap.createdBy?.username || "Unknown"}
                       </span>
+                      <h3>{roadmap.title}</h3>
                     </div>
                     <p className="roadmap-description">{roadmap.description}</p>
                     <div className="roadmap-meta">

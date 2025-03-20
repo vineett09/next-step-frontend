@@ -12,6 +12,8 @@ const Chatbot = ({ roadmapTitle, data }) => {
   const messagesEndRef = useRef(null);
   const { user, token } = useSelector((state) => state.auth);
   const isAuthenticated = user && token;
+  const [usageCount, setUsageCount] = useState(0);
+  const [remainingCount, setRemainingCount] = useState(10);
 
   // Load messages from localStorage when component mounts
   useEffect(() => {
@@ -21,6 +23,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
         setMessages(JSON.parse(storedMessages));
       }
     }
+    fetchChatbotUsage(); // ✅ Fetch chatbot usage count when page loads
   }, [isAuthenticated, user]);
 
   // Save messages to localStorage whenever they change
@@ -32,6 +35,20 @@ const Chatbot = ({ roadmapTitle, data }) => {
       );
     }
   }, [messages, isAuthenticated, user]);
+  const fetchChatbotUsage = async () => {
+    if (!isAuthenticated || !user) return;
+
+    try {
+      const response = await axios.get("/api/chatbot/usage", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setUsageCount(response.data.usageCount);
+      setRemainingCount(response.data.remainingCount);
+    } catch (error) {
+      console.error("Error fetching chatbot usage:", error);
+    }
+  };
 
   const formatText = (text) => {
     if (!text) return "";
@@ -112,6 +129,8 @@ const Chatbot = ({ roadmapTitle, data }) => {
       };
 
       setMessages([...updatedMessages, botMessage]);
+      setUsageCount(response.data.usageCount);
+      setRemainingCount(response.data.remainingCount);
     } catch (error) {
       console.error("Chatbot error:", error);
       setMessages([
@@ -466,6 +485,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
         <div className="chatbot-container">
           <div className="chatbot-header">
             Chat
+            <div className="chatbot-usage">Prompts: {usageCount}/10 Today</div>
             <div className="chatbot-actions">
               {isAuthenticated && messages.length > 0 && (
                 <button
@@ -514,17 +534,28 @@ const Chatbot = ({ roadmapTitle, data }) => {
           </div>
 
           <div className="chatbot-input">
-            <input
-              type="text"
-              placeholder="Ask about this roadmap..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSend()}
-              disabled={!isAuthenticated}
-            />
-            <button onClick={handleSend} disabled={!isAuthenticated}>
-              <IoSend size={20} />
-            </button>
+            {usageCount >= 10 ? (
+              <p className="limit-message">
+                🚫 Daily limit reached. Try again tomorrow.
+              </p>
+            ) : (
+              <>
+                <input
+                  type="text"
+                  placeholder="Ask about this roadmap..."
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={(e) => e.key === "Enter" && handleSend()}
+                  disabled={!isAuthenticated || usageCount >= 10} // ✅ Disable if limit reached
+                />
+                <button
+                  onClick={handleSend}
+                  disabled={!isAuthenticated || usageCount >= 10}
+                >
+                  <IoSend size={20} />
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}
