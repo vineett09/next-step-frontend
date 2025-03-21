@@ -42,10 +42,12 @@ const Profile = () => {
   const { user, token } = useSelector((state) => state.auth);
   const [userRoadmaps, setUserRoadmaps] = useState([]);
   const [bookmarkedRoadmaps, setBookmarkedRoadmaps] = useState([]);
+  const [followedRoadmaps, setFollowedRoadmaps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("profile");
   const [roadmapsCurrentPage, setRoadmapsCurrentPage] = useState(1);
   const [bookmarksCurrentPage, setBookmarksCurrentPage] = useState(1);
+  const [followedCurrentPage, setFollowedCurrentPage] = useState(1);
   const [followersCount, setFollowersCount] = useState({});
   const itemsPerPage = 3;
 
@@ -53,6 +55,7 @@ const Profile = () => {
     if (token && user) {
       fetchUserRoadmaps();
       fetchBookmarkedRoadmaps();
+      fetchFollowedRoadmaps();
     }
   }, [token, user]);
 
@@ -73,6 +76,14 @@ const Profile = () => {
   const totalBookmarksPages = Math.ceil(
     bookmarkedRoadmaps.length / itemsPerPage
   );
+
+  const followedLastIndex = followedCurrentPage * itemsPerPage;
+  const followedFirstIndex = followedLastIndex - itemsPerPage;
+  const currentFollowed = followedRoadmaps.slice(
+    followedFirstIndex,
+    followedLastIndex
+  );
+  const totalFollowedPages = Math.ceil(followedRoadmaps.length / itemsPerPage);
 
   const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
     const handlePageChange = (pageNumber) => {
@@ -191,6 +202,73 @@ const Profile = () => {
     }
   };
 
+  const fetchFollowedRoadmaps = async () => {
+    try {
+      const response = await axios.get("/api/roadmaps/user/followed-roadmaps", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.data.success) {
+        // Fetch detailed information for each followed roadmap
+        const followedRoadmapsDetails = await Promise.all(
+          response.data.followedRoadmaps.map(async (roadmapId) => {
+            try {
+              const roadmapResponse = await axios.get(
+                `/api/roadmaps/public/${roadmapId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+
+              if (roadmapResponse.data.success) {
+                return roadmapResponse.data.roadmap;
+              }
+              return null;
+            } catch (error) {
+              console.error(`Error fetching roadmap ${roadmapId}:`, error);
+              return null;
+            }
+          })
+        );
+
+        // Filter out any null values (roadmaps that couldn't be fetched)
+        const validRoadmaps = followedRoadmapsDetails.filter(
+          (roadmap) => roadmap !== null
+        );
+        setFollowedRoadmaps(validRoadmaps);
+      }
+    } catch (error) {
+      console.error("Error fetching followed roadmaps:", error);
+    }
+  };
+
+  const unfollowRoadmap = async (roadmapId) => {
+    try {
+      const response = await axios.post(
+        `/api/roadmaps/${roadmapId}/follow`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.success && !response.data.following) {
+        // If successfully unfollowed, remove from the followed roadmaps list
+        setFollowedRoadmaps(
+          followedRoadmaps.filter((roadmap) => roadmap._id !== roadmapId)
+        );
+      }
+    } catch (error) {
+      console.error("Error unfollowing roadmap:", error);
+    }
+  };
+
   const deleteRoadmap = async (roadmapId) => {
     if (window.confirm("Are you sure you want to delete this roadmap?")) {
       try {
@@ -291,6 +369,14 @@ const Profile = () => {
               onClick={() => setActiveSection("bookmarked")}
             >
               Bookmarked
+            </button>
+            <button
+              className={`sidebar-item ${
+                activeSection === "followed" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("followed")}
+            >
+              Followed Roadmaps
             </button>
           </div>
 
@@ -507,6 +593,105 @@ const Profile = () => {
                         currentPage={bookmarksCurrentPage}
                         totalPages={totalBookmarksPages}
                         setCurrentPage={setBookmarksCurrentPage}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* New Followed Roadmaps Section */}
+            {activeSection === "followed" && (
+              <div className="profile-followed-section">
+                <h2 className="followed-title">Followed Roadmaps</h2>
+                {followedRoadmaps.length === 0 ? (
+                  <div className="followed-empty-state">
+                    <p className="empty-state-message">
+                      You haven't followed any roadmaps yet.
+                    </p>
+                    <Link to="/explore" className="empty-state-explore-btn">
+                      Explore Roadmaps
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    <div className="followed-list-container">
+                      {currentFollowed.map((roadmap) => (
+                        <div key={roadmap._id} className="followed-list-item">
+                          <div className="followed-list-content">
+                            <h3 className="followed-item-title">
+                              {roadmap.title}
+                            </h3>
+                            <p className="followed-item-description">
+                              {roadmap.description}
+                            </p>
+                            <div className="followed-item-metadata">
+                              <span className="followed-author">
+                                Created by:{" "}
+                                {roadmap.createdBy?.username || "Unknown"}
+                              </span>
+                              <span className="followed-update-date">
+                                Last updated:{" "}
+                                {new Date(
+                                  roadmap.lastUpdated
+                                ).toLocaleDateString()}
+                              </span>
+                            </div>
+
+                            {/* Rating Display for followed roadmaps */}
+                            {roadmap.ratingStats && (
+                              <div className="rating-container">
+                                {roadmap.ratingStats.ratingCount > 0 ? (
+                                  <>
+                                    <StarRating
+                                      value={roadmap.ratingStats.averageRating}
+                                    />
+                                    <span className="rating-count">
+                                      {roadmap.ratingStats.averageRating.toFixed(
+                                        1
+                                      )}{" "}
+                                      ({roadmap.ratingStats.ratingCount}{" "}
+                                      {roadmap.ratingStats.ratingCount === 1
+                                        ? "rating"
+                                        : "ratings"}
+                                      )
+                                    </span>
+                                  </>
+                                ) : (
+                                  <span className="no-ratings">
+                                    No ratings yet
+                                  </span>
+                                )}
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="followed-list-actions">
+                            <div className="followed-action-buttons">
+                              <Link
+                                to={`/public-roadmap/${roadmap._id}`}
+                                className="view-followed-btn"
+                              >
+                                View
+                              </Link>
+                              <button
+                                className="unfollow-btn"
+                                onClick={() => unfollowRoadmap(roadmap._id)}
+                              >
+                                Unfollow
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Pagination for followed roadmaps */}
+                    {totalFollowedPages > 1 && (
+                      <Pagination
+                        currentPage={followedCurrentPage}
+                        totalPages={totalFollowedPages}
+                        setCurrentPage={setFollowedCurrentPage}
                       />
                     )}
                   </>

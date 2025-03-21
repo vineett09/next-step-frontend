@@ -519,6 +519,131 @@
   color: #666;
 }
 
+.profile-followed-section {
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #000;
+}
+
+.followed-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.followed-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 8px;
+  background-color: #31363F;
+}
+
+.followed-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.followed-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #000;
+  transition: all 0.2s ease;
+  background-color: #31363F;
+}
+
+.followed-list-item:hover {
+  border-color: #d1d5da;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.followed-list-content {
+  flex: 1;
+}
+
+.followed-item-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.followed-item-description {
+  color: #fff;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.followed-item-metadata {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.followed-author {
+  display: inline-flex;
+  align-items: center;
+}
+
+.followed-update-date {
+  display: inline-flex;
+  align-items: center;
+}
+
+.followed-list-actions {
+  display: flex;
+  align-items: center;
+}
+
+.followed-action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.view-followed-btn, 
+.unfollow-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-followed-btn {
+  background-color: #f1f8ff;
+  color: #0366d6;
+  border: 1px solid #0366d6;
+}
+
+.view-followed-btn:hover {
+  background-color: #e6f1ff;
+}
+
+.unfollow-btn {
+  background-color: #ffffff;
+  color: #d73a49;
+  border: 1px solid #d73a49;
+}
+
+.unfollow-btn:hover {
+  background-color: #ffeef0;
+}
 /* Responsive styles */
 @media (max-width: 768px) {
   .profile-layout {
