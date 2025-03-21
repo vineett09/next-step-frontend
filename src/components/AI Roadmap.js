@@ -573,7 +573,7 @@ const AIRoadmap = () => {
             </button>
           </div>
           <div className="usage-info">
-            <p>Daily usage: {usageInfo.usageCount}/10 roadmaps</p>
+            <p>Daily usage: {usageInfo.usageCount}/10 roadmaps generated</p>
             <div className="usage-bar">
               <div
                 className="usage-fill"

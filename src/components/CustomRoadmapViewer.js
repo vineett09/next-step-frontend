@@ -60,9 +60,6 @@ const CustomRoadmapViewer = () => {
         });
 
         if (response.data) {
-          console.log("Roadmap data:", response.data);
-          console.log("Nodes:", response.data.roadmap.structure?.nodes);
-          console.log("Edges:", response.data.roadmap.structure?.edges);
           setRoadmap(response.data.roadmap);
         } else {
           setError("Failed to load roadmap");

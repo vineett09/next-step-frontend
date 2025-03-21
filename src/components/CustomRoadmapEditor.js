@@ -571,7 +571,7 @@ const CustomRoadmapEditor = () => {
       <Navbar />
       <div className="builder-container">
         <div className="builder-header">
-          <h2>Edit Your Custom Roadmap</h2>
+          <h2>Edit Your Roadmap</h2>
           <div className="roadmap-meta">
             <input
               type="text"

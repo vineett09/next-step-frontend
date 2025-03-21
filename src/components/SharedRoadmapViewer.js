@@ -9,6 +9,8 @@ import Footer from "./Footer";
 import "../styles/SharedRoadmapViewer.css";
 import { nodeTypes } from "./CustomRoadmaps";
 import Loader from "./Loader";
+import FollowButton from "./FollowButton"; // Import the new component
+
 const StarRating = ({
   value,
   onChange,
@@ -256,9 +258,15 @@ const SharedRoadmapViewer = () => {
             </button>
             <h2>{title}</h2>
             <p className="roadmap-description">{description}</p>
-            <h1>Created by {roadmap.createdBy?.username || "Unknown"}</h1>
 
-            {/* Move the RatingSection component here */}
+            <div className="roadmap-creator-info">
+              <h1>Created by {roadmap.createdBy?.username || "Unknown"}</h1>
+
+              {/* Add the Follow Button component here */}
+              <FollowButton roadmapId={id} creatorId={roadmap.createdBy?._id} />
+            </div>
+
+            {/* Rating Section */}
             <RatingSection roadmapId={id} creatorId={roadmap.createdBy?._id} />
           </div>
         </div>
