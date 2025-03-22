@@ -52,6 +52,9 @@ const Navbar = () => {
                 <button className="create-button" onClick={handleCreateClick}>
                   Create Roadmap
                 </button>
+                <button onClick={() => navigate("/generate-roadmap")}>
+                  AI Roadmaps
+                </button>
                 <button onClick={handleLogout}>Logout</button>
               </div>
             )}

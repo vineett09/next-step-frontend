@@ -16,7 +16,7 @@
 
 .roadmap-viewer__loading p {
   margin: 0;
-  color: #666;
+  color: #fff;
   font-size: 1rem;
 }
 
@@ -49,16 +49,16 @@
   text-decoration: none;
   font-weight: bold;
   padding: 4px 8px;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   border-radius: 4px;
-  color: #000;
+  color: #fff;
   background-color: transparent;
   cursor: pointer;
 }
 .goBack-button svg {
   width: 24px;
   height: 24px;
-  fill: #000;
+  fill: #fff;
 }
 
 .roadmap-viewer__rating {
@@ -103,7 +103,7 @@
   margin-bottom: 30px;
   padding: 20px;
   border-radius: 8px;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   width: 50%; 
   text-align: center;
 }
@@ -114,13 +114,13 @@
   font-weight: bold;
   padding-top: 10px;
   margin-bottom: 15px;
-  color: #000;
+  color: #fff;
 }
 
 .roadmap-viewer__description {
   text-align: left;
 
-  color: #000;
+  color: #fff;
   max-width: 700px;
   font-size: 16px;
   line-height: 1.6;
@@ -136,4 +136,5 @@
 .roadmap-viewer__canvas {
   border-radius: 8px;
   overflow: hidden;
+  border: 1px solid #fff;
 }

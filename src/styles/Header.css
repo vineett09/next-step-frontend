@@ -1,8 +1,8 @@
 .roadmap-header {
   position: relative;
-  color: #000;
+  color: #fff;
   text-align: center;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -34,10 +34,10 @@
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  color: #000;
+  color: #fff;
   font-weight: bold;
   padding: 4px 8px;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   border-radius: 4px;
   background-color: transparent;
 }
@@ -54,22 +54,22 @@
   display: inline-block;
   font-size: 14px;
   font-weight: bold;
-  color: #000;
+  color: #fff;
   text-align: left;
   font-style: italic;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   border-radius: 5px;
   padding: 5px 5px;
 }
 .projects-button {
   padding: 5px; 
-  border: 1px solid #000;
+  border: 1px solid #fff;
   border-radius: 4px;
   background-color: transparent;
   cursor: pointer;
   text-align: center;
   font-size: 12px;
-  color: #000;
+  color: #fff;
   text-decoration: none;
   font-weight: bold;
  
@@ -78,7 +78,7 @@
 .back-button svg {
   width: 24px;
   height: 24px;
-  fill: #000;
+  fill: #fff;
 }
 
 .generate-roadmap {
@@ -146,7 +146,7 @@
 
 .bookmark-button {
   padding: 3px;
-  border: 1px solid #000;
+  border: 1px solid #fff;
   border-radius: 4px;
   background-color: transparent;
   cursor: pointer;
@@ -155,7 +155,7 @@
 
 .download-pdf {
   padding: 3px; 
-  border: 1px solid #000;
+  border: 1px solid #fff;
   border-radius: 4px;
   background-color: transparent;
   cursor: pointer;
@@ -166,40 +166,40 @@
   width: 24px;
   height: 24px;
   transition: fill 0.3s;
-  fill: #000;
+  fill: #fff;
 
 }
 
 
 .download-pdf:hover {
-  background-color: #000;
+  background-color: #fff;
 }
 
 .download-pdf:hover svg {
-  fill: #fff; 
+  fill: #000; 
 }
 
 .bookmark-button svg {
   width: 24px;
   height: 24px;
   transition: fill 0.3s;
-  fill: #000;
+  fill: #fff;
 }
 
 .bookmark-button:hover {
-  background-color: #000;
+  background-color: #fff;
 }
 
 .bookmark-button:hover svg {
-  fill: #fff;
+  fill: #000;
 }
 
 .bookmark-button.bookmarked {
-  background-color: #000;
+  background-color: #fff;
 }
 
 .bookmark-button.bookmarked svg {
-  fill: #fff;
+  fill: #000;
 }
 
 @media (max-width: 768px) {

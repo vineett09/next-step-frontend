@@ -309,7 +309,7 @@ const Roadmap = ({ data }) => {
         .attr("y1", lineStartY)
         .attr("x2", width / 2)
         .attr("y2", lineEndY)
-        .attr("stroke", "#000")
+        .attr("stroke", "#fff")
         .attr("stroke-width", 3)
         .attr("opacity", 0.7)
         .attr("stroke-dasharray", "5,5");
@@ -364,7 +364,7 @@ const Roadmap = ({ data }) => {
               .attr("y1", startY)
               .attr("x2", width / 2)
               .attr("y2", prevPosition.dividerY - DIVIDER_PADDING)
-              .attr("stroke", "#000")
+              .attr("stroke", "#fff")
               .attr("stroke-width", 3)
               .attr("opacity", 0.7);
 
@@ -376,7 +376,7 @@ const Roadmap = ({ data }) => {
               .attr("dominant-baseline", "middle")
               .attr("font-size", "14px")
               .attr("font-family", "Arial, sans-serif")
-              .attr("fill", "#000")
+              .attr("fill", "#fff")
               .text(prevPosition.node.dividerText);
 
             svg
@@ -386,7 +386,7 @@ const Roadmap = ({ data }) => {
               .attr("y1", prevPosition.dividerY + DIVIDER_PADDING)
               .attr("x2", width / 2)
               .attr("y2", endY)
-              .attr("stroke", "#000")
+              .attr("stroke", "#fff")
               .attr("stroke-width", 3)
               .attr("opacity", 0.7);
           } else {
@@ -397,7 +397,7 @@ const Roadmap = ({ data }) => {
               .attr("y1", startY)
               .attr("x2", width / 2)
               .attr("y2", endY)
-              .attr("stroke", "#000")
+              .attr("stroke", "#fff")
               .attr("stroke-width", 3)
               .attr("opacity", 0.7);
           }
@@ -551,7 +551,7 @@ const Roadmap = ({ data }) => {
                 .append("path")
                 .attr("class", "child-link")
                 .attr("d", path.toString())
-                .attr("stroke", "#000")
+                .attr("stroke", "#fff")
                 .attr("stroke-width", 2)
                 .attr("fill", "none")
                 .attr("opacity", 0.7)
@@ -648,7 +648,7 @@ const Roadmap = ({ data }) => {
                       .append("path")
                       .attr("class", "nested-link")
                       .attr("d", nestedPath.toString())
-                      .attr("stroke", "#000")
+                      .attr("stroke", "#fff")
                       .attr("stroke-width", 2)
                       .attr("fill", "none")
                       .attr("opacity", 0.7)

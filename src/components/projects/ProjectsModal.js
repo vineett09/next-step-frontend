@@ -54,7 +54,7 @@ const ProjectsModal = ({ roadmapId, onClose }) => {
     <>
       <div className="modal-overlay-view">
         <div className="modal-content-view">
-          <button className="close-button" onClick={onClose}>
+          <button className="close-btn" onClick={onClose}>
             ✖
           </button>
           <h2>

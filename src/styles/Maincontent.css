@@ -24,7 +24,7 @@
 
 .hero p {
   font-size: 1.25rem;
-  color: #000;
+  color: #fff;
   margin: 1.5rem 0;
   line-height: 1.6;
 }
@@ -52,7 +52,7 @@
   padding: 6rem 2rem;
   text-align: center;
  
-  color: #000;
+  color: #fff;
 }
 
 .cta h2 {
@@ -63,6 +63,6 @@
 .cta p {
   font-size: 1.25rem;
   margin-bottom: 2rem;
-  color: #000;
+  color: #fff;
 }
 

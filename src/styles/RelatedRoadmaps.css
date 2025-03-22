@@ -7,7 +7,7 @@
   .related-roadmaps h2 {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    color: #000;
+    color: #fff;
     text-align: center;
     display: flex;
     align-items: center;
@@ -18,7 +18,7 @@
   .line {
     flex-grow: 1;
     height: 1px;
-    background-color: #000;
+    background-color: #fff;
     max-width: 100%;
   }
   

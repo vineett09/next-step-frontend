@@ -197,7 +197,7 @@ const AIRoadmap = () => {
       .attr("y1", lineStartY)
       .attr("x2", width / 2)
       .attr("y2", lineEndY)
-      .attr("stroke", "#000")
+      .attr("stroke", "#fff")
       .attr("stroke-width", 3)
       .attr("opacity", 0.7)
       .attr("stroke-dasharray", "5,5");
@@ -249,7 +249,7 @@ const AIRoadmap = () => {
           .attr("y1", startY)
           .attr("x2", width / 2)
           .attr("y2", endY)
-          .attr("stroke", "#000")
+          .attr("stroke", "#fff")
           .attr("stroke-width", 3)
           .attr("opacity", 0.7);
       }
@@ -396,7 +396,7 @@ const AIRoadmap = () => {
               .append("path")
               .attr("class", "child-link")
               .attr("d", path.toString())
-              .attr("stroke", "#000")
+              .attr("stroke", "#fff")
               .attr("stroke-width", 2)
               .attr("fill", "none")
               .attr("opacity", 0.7)
@@ -441,7 +441,7 @@ const AIRoadmap = () => {
     const tempDiv = document.createElement("div");
     tempDiv.style.position = "absolute";
     tempDiv.style.left = "-9999px";
-    tempDiv.style.backgroundColor = "#ffffff";
+    tempDiv.style.backgroundColor = "#0d1117";
     tempDiv.style.width = container.scrollWidth + "px";
     tempDiv.style.height = container.scrollHeight + "px";
     tempDiv.style.padding = "20px";
@@ -454,7 +454,7 @@ const AIRoadmap = () => {
       scale: 1.5,
       height: tempDiv.scrollHeight,
       width: tempDiv.scrollWidth,
-      backgroundColor: "#ffffff",
+      backgroundColor: "#0d1117",
       logging: false,
       imageTimeout: 0,
       useCORS: true,

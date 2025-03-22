@@ -82,10 +82,30 @@ const RatingSection = ({ roadmapId, creatorId }) => {
   const isCreator = user && user.id === creatorId;
 
   useEffect(() => {
+    // Fetch ratings data for everyone - logged in, not logged in, or creator
+    fetchRatingsData();
+
+    // If user is logged in and not the creator, also fetch their personal rating
     if (isLoggedIn && !isCreator) {
       fetchUserRating();
     }
   }, [roadmapId, isLoggedIn, isCreator]);
+
+  const fetchRatingsData = async () => {
+    try {
+      // Public endpoint to get average rating and count (no auth required)
+      const response = await axios.get(
+        `/api/roadmaps/${roadmapId}/public-rating`
+      );
+
+      if (response.data.success) {
+        setAverageRating(response.data.averageRating);
+        setRatingCount(response.data.ratingCount);
+      }
+    } catch (err) {
+      console.error("Error fetching public rating data:", err);
+    }
+  };
 
   const fetchUserRating = async () => {
     try {
@@ -99,11 +119,9 @@ const RatingSection = ({ roadmapId, creatorId }) => {
 
       if (response.data.success) {
         setUserRating(response.data.userRating || 0);
-        setAverageRating(response.data.averageRating);
-        setRatingCount(response.data.ratingCount);
       }
     } catch (err) {
-      console.error("Error fetching rating:", err);
+      console.error("Error fetching user rating:", err);
     }
   };
 
@@ -165,11 +183,21 @@ const RatingSection = ({ roadmapId, creatorId }) => {
 
       {!isLoggedIn ? (
         <div className="rating-login-prompt">
-          Please log in to rate this roadmap
+          <p>Please log in to rate this roadmap</p>
         </div>
       ) : isCreator ? (
-        <div className="rating-creator-note">
-          You cannot rate your own roadmap
+        <div className="rating-creator-view">
+          <p>You cannot rate your own roadmap</p>
+          {averageRating > 0 ? (
+            <div className="rating-details">
+              <p>
+                Your roadmap has been rated by {ratingCount}{" "}
+                {ratingCount === 1 ? "user" : "users"}
+              </p>
+            </div>
+          ) : (
+            <p>Your roadmap has not been rated yet</p>
+          )}
         </div>
       ) : (
         <div className="user-rating-container">
@@ -260,7 +288,7 @@ const SharedRoadmapViewer = () => {
             <p className="roadmap-description">{description}</p>
 
             <div className="roadmap-creator-info">
-              <h1>Created by {roadmap.createdBy?.username || "Unknown"}</h1>
+              <h1>Created by: {roadmap.createdBy?.username || "Unknown"}</h1>
 
               {/* Add the Follow Button component here */}
               <FollowButton roadmapId={id} creatorId={roadmap.createdBy?._id} />
