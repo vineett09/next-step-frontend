@@ -55,6 +55,9 @@ const Navbar = () => {
                 <button onClick={() => navigate("/generate-roadmap")}>
                   AI Roadmaps
                 </button>
+                <button onClick={() => navigate("/ai-suggestion")}>
+                  AI Suggestions
+                </button>
                 <button onClick={handleLogout}>Logout</button>
               </div>
             )}

@@ -1,0 +1,351 @@
+/* src/components/AISuggestions.css */
+.questionnaire-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.questionnaire-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+.questionnaire-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+.questionnaire-progress-bar {
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.questionnaire-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4285F4, #34A853);
+    transition: width 0.4s ease;
+}
+
+.questionnaire-step-indicator {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 1rem;
+    text-align: right;
+}
+
+h2 {
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.questionnaire-options-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.questionnaire-option {
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    color: #000;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.questionnaire-option:hover {
+    border-color: #4285F4;
+    background-color: #f8f9ff;
+}
+
+.questionnaire-option.questionnaire-selected {
+    border-color: #4285F4;
+    background-color: #f0f7ff;
+}
+
+.questionnaire-multi-option {
+    display: flex;
+    align-items: center;
+}
+
+.questionnaire-check-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    border: 2px solid #4285F4;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.questionnaire-multi-option.questionnaire-selected .questionnaire-check-indicator {
+    background-color: #4285F4;
+}
+
+.questionnaire-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.questionnaire-primary-btn, .questionnaire-secondary-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.questionnaire-primary-btn {
+    background-color: #4285F4;
+    color: white;
+}
+
+.questionnaire-primary-btn:hover {
+    background-color: #3b78e7;
+}
+
+.questionnaire-primary-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.questionnaire-secondary-btn {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.questionnaire-secondary-btn:hover {
+    background-color: #f5f5f5;
+}
+
+/* Loader styling */
+.questionnaire-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    color: #000;
+}
+
+.questionnaire-loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #4285F4;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error display */
+.questionnaire-error {
+    text-align: center;
+    padding: 3rem;
+}
+
+.questionnaire-error h2 {
+    color: #ea4335;
+}
+
+/* Roadmap display */
+.questionnaire-roadmap-content {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    color: #333;
+    line-height: 1.7;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    font-size: 16px;
+}
+
+.questionnaire-roadmap-content h2 {
+    font-size: 1.8rem;
+    color: #1a73e8;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e0e9fc;
+}
+
+.questionnaire-roadmap-content h3 {
+    font-size: 1.4rem;
+    color: #185abc;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-left: 4px solid #4285F4;
+}
+
+.questionnaire-roadmap-content p {
+    margin-bottom: 1.2rem;
+}
+
+.questionnaire-roadmap-content ul, 
+.questionnaire-roadmap-content ol {
+    margin: 1rem 0 1.5rem 1.8rem;
+}
+
+.questionnaire-roadmap-content li {
+    margin-bottom: 0.8rem;
+    position: relative;
+}
+
+.questionnaire-roadmap-content ul li::before {
+    content: "•";
+    color: #4285F4;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    font-size: 1.2em;
+}
+
+.questionnaire-roadmap-content ol {
+    counter-reset: item;
+}
+
+.questionnaire-roadmap-content ol li {
+    counter-increment: item;
+}
+
+.questionnaire-roadmap-content ol li::before {
+    content: counter(item) ".";
+    color: #4285F4;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.roadmap-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.roadmap-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.resource-card {
+    background-color: #f8f9ff;
+    border-left: 4px solid #34A853;
+    padding: 1rem 1.5rem;
+    margin: 1.2rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.resource-card h4 {
+    margin: 0.5rem 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.resource-card p {
+    margin: 0.5rem 0;
+    color: #666;
+}
+
+.project-idea {
+    background-color: #f0f7ff;
+    border-left: 4px solid #4285F4;
+    padding: 1rem 1.5rem;
+    margin: 1.2rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.timeline-item::before {
+    content: "";
+    margin: 2px;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #4285F4;
+}
+
+.timeline-item::after {
+    content: "";
+    position: absolute;
+    margin: 2px;
+
+    left: 5px;
+    top: 17px;
+    bottom: -17px;
+    width: 2px;
+    background-color: #e0e9fc;
+}
+
+.timeline-item:last-child::after {
+    display: none;
+}
+
+.timeline-item h4 {
+    margin: 0 0 0.5rem 0;
+    color: #1a73e8;
+    padding-left: 20px;
+}
+.timeline-item p {
+    padding-left: 20px;
+
+}
+
+.skill-tag {
+    display: inline-block;
+    background-color: #e8f0fe;
+    color: #185abc;
+    padding: 0.3rem 0.8rem;
+    border-radius: 16px;
+    margin: 0.3rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+
+@media (max-width: 768px) {
+    .questionnaire-roadmap-content {
+        padding: 1.5rem;
+    }
+    
+    .questionnaire-roadmap-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .questionnaire-roadmap-content h3 {
+        font-size: 1.25rem;
+    }
+}

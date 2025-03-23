@@ -16,6 +16,7 @@ import AuthModal from "./AuthModal";
 import RelatedRoadmaps from "./RelatedRoadmaps";
 import { techFields, techSkills } from "../data/TechFieldsData";
 import Loader from "./Loader";
+import AISuggestionContainer from "./AISuggestionContainer";
 
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
@@ -697,6 +698,7 @@ const Roadmap = ({ data }) => {
       <div className="roadmap-container">
         <TechRoles />
         <TechSkills />
+        <AISuggestionContainer />
 
         <Header
           title={roadmapTitle}

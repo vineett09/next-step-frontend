@@ -58,7 +58,7 @@ import CustomRoadmapEditor from "./components/CustomRoadmapEditor";
 import SharedRoadmaps from "./components/SharedRoadmaps";
 import CustomRoadmapViewer from "./components/CustomRoadmapViewer";
 import SharedRoadmapViewer from "./components/SharedRoadmapViewer";
-
+import AISuggestions from "./components/AISuggestions";
 function App() {
   return (
     <Router>
@@ -75,6 +75,7 @@ function App() {
           <Route path="/shared-roadmaps" element={<SharedRoadmaps />} />
           <Route path="view-roadmap/:id" element={<CustomRoadmapViewer />} />
           <Route path="public-roadmap/:id" element={<SharedRoadmapViewer />} />
+          <Route path="/ai-suggestion" element={<AISuggestions />} />
           {/* Tech Fields */}
           <Route
             path="/full-stack-developer"
