@@ -106,6 +106,13 @@ h2 {
     margin-top: 1rem;
 }
 
+.questionnaire-action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
 .questionnaire-primary-btn, .questionnaire-secondary-btn {
     padding: 0.75rem 1.5rem;
     border-radius: 6px;
@@ -118,6 +125,10 @@ h2 {
 .questionnaire-primary-btn {
     background-color: #4285F4;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 .questionnaire-primary-btn:hover {
@@ -137,6 +148,20 @@ h2 {
 
 .questionnaire-secondary-btn:hover {
     background-color: #f5f5f5;
+}
+
+/* PDF button loading state */
+.questionnaire-loading-btn {
+    opacity: 0.8;
+}
+
+.questionnaire-btn-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
 
 /* Loader styling */
@@ -218,7 +243,6 @@ h2 {
 }
 
 .questionnaire-roadmap-content ul li::before {
-    content: "•";
     color: #4285F4;
     font-weight: bold;
     display: inline-block;
@@ -336,6 +360,7 @@ h2 {
 }
 
 
+
 @media (max-width: 768px) {
     .questionnaire-roadmap-content {
         padding: 1.5rem;
@@ -347,5 +372,15 @@ h2 {
     
     .questionnaire-roadmap-content h3 {
         font-size: 1.25rem;
+    }
+    
+    .questionnaire-action-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .questionnaire-primary-btn, 
+    .questionnaire-secondary-btn {
+        width: 100%;
     }
 }

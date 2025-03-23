@@ -10,6 +10,7 @@ const AISuggestions = () => {
   const [loading, setLoading] = useState(false);
   const [roadmap, setRoadmap] = useState(null);
   const [error, setError] = useState(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
 
   const questions = [
     {
@@ -153,6 +154,35 @@ const AISuggestions = () => {
     setError(null);
   };
 
+  const handleDownloadPDF = async () => {
+    setPdfLoading(true);
+    try {
+      const html2pdf = (await import("html2pdf.js")).default;
+
+      // Get the roadmap content container
+      const element = document.querySelector(".questionnaire-roadmap-content");
+
+      // Configure PDF options
+      const opt = {
+        margin: [10, 10, 10, 10],
+        filename: `Learning-Roadmap-${new Date()
+          .toLocaleDateString()
+          .replace(/\//g, "-")}.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      };
+
+      // Generate and download PDF
+      await html2pdf().set(opt).from(element).save();
+    } catch (err) {
+      console.error("Error generating PDF:", err);
+      alert("There was an error generating your PDF. Please try again.");
+    } finally {
+      setPdfLoading(false);
+    }
+  };
+
   const currentQuestion = questions[currentStep];
   const isQuestionAnswered = () => {
     if (!currentQuestion) return false;
@@ -198,9 +228,30 @@ const AISuggestions = () => {
               className="questionnaire-roadmap-content"
               dangerouslySetInnerHTML={{ __html: roadmap }}
             ></div>
-            <button className="questionnaire-primary-btn" onClick={resetForm}>
-              Start Again
-            </button>
+            <div className="questionnaire-action-buttons">
+              <button
+                className={`questionnaire-primary-btn ${
+                  pdfLoading ? "questionnaire-loading-btn" : ""
+                }`}
+                onClick={handleDownloadPDF}
+                disabled={pdfLoading}
+              >
+                {pdfLoading ? (
+                  <>
+                    <span className="questionnaire-btn-spinner"></span>
+                    Generating PDF...
+                  </>
+                ) : (
+                  "Download as PDF"
+                )}
+              </button>
+              <button
+                className="questionnaire-secondary-btn"
+                onClick={resetForm}
+              >
+                Start Again
+              </button>
+            </div>
           </div>
         </div>
       );

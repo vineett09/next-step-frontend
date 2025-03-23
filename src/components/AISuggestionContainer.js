@@ -1,13 +1,25 @@
 // src/components/AISuggestionContainer.jsx
-import React from "react";
+import React, { useState } from "react";
 import "../styles/AISuggestionContainer.css";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import AuthModal from "./AuthModal"; // Make sure the path is correct
 
 const AISuggestionContainer = () => {
   const navigate = useNavigate();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth);
 
   const handleAISuggestionButton = () => {
-    navigate("/ai-suggestion");
+    if (user) {
+      navigate("/ai-suggestion");
+    } else {
+      setIsAuthModalOpen(true);
+    }
+  };
+
+  const handleCloseAuthModal = () => {
+    setIsAuthModalOpen(false);
   };
 
   return (
@@ -19,6 +31,8 @@ const AISuggestionContainer = () => {
       >
         Get Suggestions ✨
       </button>
+
+      <AuthModal isOpen={isAuthModalOpen} onClose={handleCloseAuthModal} />
     </div>
   );
 };
