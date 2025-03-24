@@ -1,9 +1,9 @@
 // src/components/Questionnaire.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/AISuggestions.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-
+import AIRelatedRoadmaps from "./AI RelatedRoadmaps";
 const AISuggestions = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -11,6 +11,38 @@ const AISuggestions = () => {
   const [roadmap, setRoadmap] = useState(null);
   const [error, setError] = useState(null);
   const [pdfLoading, setPdfLoading] = useState(false);
+  const [usageInfo, setUsageInfo] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Check authentication status when component mounts
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsAuthenticated(!!token);
+
+    // Optionally fetch current usage info for the user when component loads
+    if (token) {
+      fetchUsageInfo();
+    }
+  }, []);
+
+  // Function to fetch current usage info
+  const fetchUsageInfo = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("/api/suggestions/ai-suggestions-usage", {
+        headers: {
+          "x-auth-token": token,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUsageInfo(data);
+      }
+    } catch (err) {
+      console.error("Error fetching usage info:", err);
+    }
+  };
 
   const questions = [
     {
@@ -125,21 +157,36 @@ const AISuggestions = () => {
 
   const handleSubmit = async () => {
     setLoading(true);
+    setError(null);
+
     try {
+      // Check if user is authenticated
+      if (!isAuthenticated) {
+        throw new Error("You must be logged in to use this feature");
+      }
+
+      const token = localStorage.getItem("token");
       const response = await fetch("/api/suggestions/suggest", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-auth-token": token,
         },
         body: JSON.stringify({ answers }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to generate roadmap");
+        throw new Error(
+          data.message || data.error || "Failed to generate roadmap"
+        );
       }
 
-      const data = await response.json();
       setRoadmap(data.roadmap);
+      if (data.usageInfo) {
+        setUsageInfo(data.usageInfo);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -196,7 +243,59 @@ const AISuggestions = () => {
     return !!answers[currentQuestion.id];
   };
 
+  const renderUsageInfo = () => {
+    if (!isAuthenticated) {
+      return (
+        <div className="questionnaire-usage-info">
+          <p>Please log in to use the AI suggestion feature.</p>
+        </div>
+      );
+    }
+
+    if (!usageInfo) return null;
+
+    return (
+      <div className="questionnaire-usage-info">
+        <p>
+          Daily usage: {usageInfo.usageCount}/3
+          {usageInfo.remainingCount === 0 && (
+            <span className="questionnaire-usage-limit-reached">
+              {" "}
+              (Daily limit reached)
+            </span>
+          )}
+        </p>
+      </div>
+    );
+  };
+
   const renderContent = () => {
+    // Show login message if not authenticated
+    if (!isAuthenticated) {
+      return (
+        <div className="questionnaire-container questionnaire-auth-required">
+          <h2>Authentication Required</h2>
+          <p>You need to log in to use the AI Suggestion feature.</p>
+        </div>
+      );
+    }
+
+    // Show usage limit reached message
+    if (usageInfo && usageInfo.remainingCount === 0 && !roadmap) {
+      return (
+        <div className="questionnaire-container questionnaire-limit-reached">
+          <h2>Daily Limit Reached</h2>
+          <p>
+            You have used all 3 of your daily AI suggestions. Please come back
+            tomorrow for more!
+          </p>
+          <p className="questionnaire-limit-reset-info">
+            The limit resets at midnight.
+          </p>
+        </div>
+      );
+    }
+
     if (loading) {
       return (
         <div className="questionnaire-container">
@@ -224,6 +323,7 @@ const AISuggestions = () => {
       return (
         <div className="questionnaire-roadmap-wrapper">
           <div className="questionnaire-container questionnaire-roadmap">
+            {renderUsageInfo()}
             <div
               className="questionnaire-roadmap-content"
               dangerouslySetInnerHTML={{ __html: roadmap }}
@@ -252,6 +352,9 @@ const AISuggestions = () => {
                 Start Again
               </button>
             </div>
+
+            {/* Add the AIRelatedRoadmaps component here */}
+            <AIRelatedRoadmaps userAnswers={answers} />
           </div>
         </div>
       );
@@ -259,6 +362,7 @@ const AISuggestions = () => {
 
     return (
       <div className="questionnaire-container">
+        {renderUsageInfo()}
         <div className="questionnaire-progress-bar">
           <div
             className="questionnaire-progress-fill"
@@ -320,7 +424,10 @@ const AISuggestions = () => {
           <button
             className="questionnaire-primary-btn"
             onClick={handleNext}
-            disabled={!isQuestionAnswered()}
+            disabled={
+              !isQuestionAnswered() ||
+              (usageInfo && usageInfo.remainingCount === 0)
+            }
           >
             {currentStep < questions.length - 1 ? "Next" : "Submit"}
           </button>

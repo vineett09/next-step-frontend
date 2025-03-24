@@ -647,6 +647,34 @@
 .unfollow-btn:hover {
   background-color: #ffeef0;
 }
+.profile-auth-required {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #121212;
+  border: 1px solid #FFE700;
+  border-radius: 12px;
+  padding: 40px;
+  max-width: 500px;
+  margin: 100px auto;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(255, 231, 0, 0.15);
+}
+
+.profile-auth-required h2 {
+  color: #FFE700;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.profile-auth-required p {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
 /* Responsive styles */
 @media (max-width: 768px) {
   .profile-layout {

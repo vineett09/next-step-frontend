@@ -25,14 +25,15 @@ const AIRoadmap = () => {
   });
   const d3Container = useRef(null);
   const { token } = useSelector((state) => state.auth);
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   // Fetch usage info when component mounts
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsAuthenticated(!!token);
     if (token) {
       fetchUsageInfo();
     }
   }, [token]);
-
   const fetchUsageInfo = async () => {
     try {
       const response = await axios.get("/api/ai/usage", {
@@ -505,7 +506,19 @@ const AIRoadmap = () => {
       return () => window.removeEventListener("resize", renderRoadmap);
     }
   }, [data]);
-
+  // Show login message if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="roadmap">
+        <Navbar />
+        <div className="auth-required">
+          <h2>Authentication Required</h2>
+          <p>You need to log in to generate an AI roadmap.</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
   return (
     <div className="roadmap">
       <Navbar />

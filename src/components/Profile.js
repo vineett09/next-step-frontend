@@ -49,6 +49,7 @@ const Profile = () => {
   const [bookmarksCurrentPage, setBookmarksCurrentPage] = useState(1);
   const [followedCurrentPage, setFollowedCurrentPage] = useState(1);
   const [followersCount, setFollowersCount] = useState({});
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const itemsPerPage = 3;
 
   useEffect(() => {
@@ -58,7 +59,11 @@ const Profile = () => {
       fetchFollowedRoadmaps();
     }
   }, [token, user]);
-
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setLoading(false);
+    setIsAuthenticated(!!token);
+  }, [token]);
   const roadmapsLastIndex = roadmapsCurrentPage * itemsPerPage;
   const roadmapsFirstIndex = roadmapsLastIndex - itemsPerPage;
   const currentRoadmaps = userRoadmaps.slice(
@@ -338,7 +343,19 @@ const Profile = () => {
       </div>
     );
   }
+  if (!isAuthenticated) {
+    return (
+      <div className="profile-page">
+        <Navbar />
 
+        <div className="profile-auth-required">
+          <h2>Authentication Required</h2>
+          <p>You need to log in to view your profile.</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
   return (
     <div className="profile-page">
       <Navbar />

@@ -317,6 +317,7 @@ const CustomRoadmaps = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [selectedElement, setSelectedElement] = useState(null);
   const [selectedElementType, setSelectedElementType] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const [backgroundSettings] = useState({
     variant: "dots",
@@ -333,6 +334,8 @@ const CustomRoadmaps = () => {
   });
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsAuthenticated(!!token);
     if (!token && !user) {
       setShowAuthModal(true);
     }
@@ -845,7 +848,18 @@ const CustomRoadmaps = () => {
       setIsLoading(false);
     }
   };
-
+  if (!isAuthenticated) {
+    return (
+      <div className="roadmap-builder">
+        <Navbar />
+        <div className="custom-roadmap-auth-required">
+          <h2>Authentication Required</h2>
+          <p>You need to log in create a roadmap.</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
   return (
     <div className="roadmap-builder">
       <Navbar />
