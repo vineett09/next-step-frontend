@@ -647,6 +647,304 @@
 .unfollow-btn:hover {
   background-color: #ffeef0;
 }
+/* AI Suggestions Section Styles */
+.profile-suggestions-section {
+  border-radius: 10px;
+  border: 1px solid #fff;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.suggestions-title {
+  margin: 0;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.create-suggestion-btn {
+  display: inline-block;
+  background-color: #fff;
+  color: #000;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.create-suggestion-btn:hover {
+  background-color: #22281c;
+  color: #fff;
+}
+
+.suggestions-empty-state {
+  text-align: center;
+  padding: 3.5rem 2rem;
+  background-color: #31363F;
+  border-radius: 12px;
+  border: 1px dashed #4a5568;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.suggestion-list-item {
+  background-color: #31363F;
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  border: 1px solid #3a404a;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.suggestion-list-item:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  border-color: #4a5568;
+}
+
+.suggestion-list-content {
+  flex: 1;
+}
+
+.suggestion-item-title {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.35rem;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.suggestion-item-details {
+  color: #cbd5e0;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.suggestion-item-metadata {
+  color: #a0aec0;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.suggestion-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.suggestion-date::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23a0aec0' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z'/%3E%3Cpath d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.suggestion-list-actions {
+  display: flex;
+  align-items: center;
+}
+
+.view-suggestion-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-suggestion-btn:hover {
+  background-color: #22281c;
+  color: #fff;
+}
+
+/* Suggestion View Styles */
+.suggestion-view {
+  background-color: #31363F;
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid #3a404a;
+}
+
+.suggestion-view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.back-to-suggestions-btn {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-to-suggestions-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.download-suggestion-btn {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.download-suggestion-btn:hover {
+  background-color: #22281c;
+  color: #fff;
+}
+
+.suggestion-content {
+  background-color: #222831;
+  padding: 2rem;
+  border-radius: 8px;
+  color: #fff;
+  line-height: 1.6;
+  max-height: 70vh;
+  overflow-y: auto;
+  border: 1px solid #4a5568;
+}
+
+.suggestion-content h1,
+.suggestion-content h2,
+.suggestion-content h3 {
+  color: #fff;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.suggestion-content p {
+  margin-bottom: 1rem;
+}
+
+.suggestion-content ul,
+.suggestion-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.suggestion-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive styles for AI suggestions */
+@media (max-width: 768px) {
+  .suggestions-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .suggestion-view-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .back-to-suggestions-btn,
+  .download-suggestion-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .suggestion-content {
+    padding: 1.5rem;
+    max-height: 60vh;
+  }
+  
+  .suggestion-list-item {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .suggestion-list-actions {
+    width: 100%;
+  }
+  
+  .view-suggestion-btn {
+    width: 100%;
+  }
+}
+
+/* Questionnaire roadmap content styles for PDF download */
+.questionnaire-roadmap-content {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.questionnaire-roadmap-content h1 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #000;
+}
+
+.questionnaire-roadmap-content h2 {
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+.questionnaire-roadmap-content h3 {
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.questionnaire-roadmap-content p {
+  margin-bottom: 16px;
+}
+
+.questionnaire-roadmap-content ul,
+.questionnaire-roadmap-content ol {
+  margin-left: 20px;
+  margin-bottom: 16px;
+}
+
+.questionnaire-roadmap-content li {
+  margin-bottom: 8px;
+}
+
 .profile-auth-required {
   display: flex;
   flex-direction: column;

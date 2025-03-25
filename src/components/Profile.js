@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -50,20 +50,27 @@ const Profile = () => {
   const [followedCurrentPage, setFollowedCurrentPage] = useState(1);
   const [followersCount, setFollowersCount] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [savedSuggestions, setSavedSuggestions] = useState([]);
+  const [suggestionsCurrentPage, setSuggestionsCurrentPage] = useState(1);
+  const [selectedSuggestion, setSelectedSuggestion] = useState(null);
   const itemsPerPage = 3;
+  const navigate = useNavigate(); // Add this line near your other hooks
 
   useEffect(() => {
     if (token && user) {
       fetchUserRoadmaps();
       fetchBookmarkedRoadmaps();
       fetchFollowedRoadmaps();
+      fetchSavedSuggestions();
     }
   }, [token, user]);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     setLoading(false);
     setIsAuthenticated(!!token);
   }, [token]);
+
   const roadmapsLastIndex = roadmapsCurrentPage * itemsPerPage;
   const roadmapsFirstIndex = roadmapsLastIndex - itemsPerPage;
   const currentRoadmaps = userRoadmaps.slice(
@@ -89,6 +96,16 @@ const Profile = () => {
     followedLastIndex
   );
   const totalFollowedPages = Math.ceil(followedRoadmaps.length / itemsPerPage);
+
+  const suggestionsLastIndex = suggestionsCurrentPage * itemsPerPage;
+  const suggestionsFirstIndex = suggestionsLastIndex - itemsPerPage;
+  const currentSuggestions = savedSuggestions.slice(
+    suggestionsFirstIndex,
+    suggestionsLastIndex
+  );
+  const totalSuggestionsPages = Math.ceil(
+    savedSuggestions.length / itemsPerPage
+  );
 
   const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
     const handlePageChange = (pageNumber) => {
@@ -322,6 +339,64 @@ const Profile = () => {
       console.error("Error toggling roadmap visibility:", error);
     }
   };
+  const fetchSavedSuggestions = async () => {
+    try {
+      const response = await axios.get("/api/suggestions/saved-suggestions", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.data && response.data.savedSuggestions) {
+        setSavedSuggestions(response.data.savedSuggestions);
+      }
+    } catch (error) {
+      console.error("Error fetching saved AI suggestions:", error);
+    }
+  };
+
+  // Function to view a saved suggestion
+  const viewSavedSuggestion = (suggestion) => {
+    setSelectedSuggestion(suggestion);
+  };
+
+  // Function to go back to suggestions list
+  const backToSuggestions = () => {
+    setSelectedSuggestion(null);
+  };
+
+  // Function to download a saved suggestion as PDF
+  const downloadSuggestionAsPDF = async (roadmapHtml) => {
+    try {
+      const html2pdf = (await import("html2pdf.js")).default;
+
+      // Create a temporary div to hold the roadmap HTML
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = roadmapHtml;
+      tempDiv.className = "questionnaire-roadmap-content";
+      document.body.appendChild(tempDiv);
+
+      // Configure PDF options
+      const opt = {
+        margin: [10, 10, 10, 10],
+        filename: `Learning-Roadmap-${new Date()
+          .toLocaleDateString()
+          .replace(/\//g, "-")}.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      };
+
+      // Generate and download PDF
+      await html2pdf().set(opt).from(tempDiv).save();
+
+      // Remove the temporary div
+      document.body.removeChild(tempDiv);
+    } catch (err) {
+      console.error("Error generating PDF:", err);
+      alert("There was an error generating your PDF. Please try again.");
+    }
+  };
 
   const findTechFieldTitle = (id) => {
     const cleanId = id.startsWith("/") ? id.substring(1) : id;
@@ -394,6 +469,17 @@ const Profile = () => {
               onClick={() => setActiveSection("followed")}
             >
               Followed Roadmaps
+            </button>
+            <button
+              className={`sidebar-item ${
+                activeSection === "aisuggestions" ? "active" : ""
+              }`}
+              onClick={() => {
+                setActiveSection("aisuggestions");
+                setSelectedSuggestion(null);
+              }}
+            >
+              AI Suggestions
             </button>
           </div>
 
@@ -709,6 +795,77 @@ const Profile = () => {
                         currentPage={followedCurrentPage}
                         totalPages={totalFollowedPages}
                         setCurrentPage={setFollowedCurrentPage}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+            {activeSection === "aisuggestions" && (
+              <div className="profile-suggestions-section">
+                <div className="suggestions-header">
+                  <h2 className="suggestions-title">Saved AI Suggestions</h2>
+                  <Link to="/ai-suggestions" className="create-suggestion-btn">
+                    Get New Suggestion
+                  </Link>
+                </div>
+
+                {savedSuggestions.length === 0 ? (
+                  <div className="suggestions-empty-state">
+                    <p className="empty-state-message">
+                      You haven't generated any AI suggestions yet.
+                    </p>
+                    <Link
+                      to="/ai-suggestion"
+                      className="empty-state-action-btn"
+                    >
+                      Generate Your First Suggestion
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    <div className="suggestions-list-container">
+                      {currentSuggestions.map((suggestion, index) => (
+                        <div key={index} className="suggestion-list-item">
+                          <div className="suggestion-list-content">
+                            <h3 className="suggestion-item-title">
+                              Career Goal: {suggestion.answers.careerGoals}
+                            </h3>
+                            <p className="suggestion-item-details">
+                              Experience: {suggestion.answers.experience}
+                            </p>
+                            <p className="suggestion-item-details">
+                              Preference: {suggestion.answers.preference}
+                            </p>
+                            <div className="suggestion-item-metadata">
+                              <span className="suggestion-date">
+                                Generated on:{" "}
+                                {new Date(
+                                  suggestion.createdAt
+                                ).toLocaleDateString()}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="suggestion-list-actions">
+                            <button
+                              className="view-suggestion-btn"
+                              onClick={() =>
+                                navigate(`/suggestion/${suggestion._id}`)
+                              }
+                            >
+                              View
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Pagination for suggestions */}
+                    {totalSuggestionsPages > 1 && (
+                      <Pagination
+                        currentPage={suggestionsCurrentPage}
+                        totalPages={totalSuggestionsPages}
+                        setCurrentPage={setSuggestionsCurrentPage}
                       />
                     )}
                   </>
