@@ -242,7 +242,6 @@ body {
 }
 
 .auth-form button:hover {
-  transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3), 0 4px 6px -2px rgba(99, 102, 241, 0.15);
 }
 
@@ -371,7 +370,106 @@ body {
   color: var(--color-primary);
   font-weight: 600;
 }
+/* Divider Styles */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--space-6) 0;
+  position: relative;
+}
 
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--color-gray-200);
+}
+
+.auth-divider span {
+  padding: 0 var(--space-4);
+  color: var(--color-gray-500);
+  background-color: var(--color-light);
+  position: relative;
+  z-index: 1;
+  font-size: var(--font-size-sm);
+  text-transform: lowercase;
+}
+
+.google-signin-container {
+  margin-top: var(--space-5);
+  text-align: center;
+}
+
+.google-signin-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-gray-700);
+  background-color: var(--color-light);
+  border: 2px solid var(--color-gray-200);
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
+  gap: var(--space-3);
+}
+
+.google-signin-button svg {
+  margin-right: var(--space-3);
+}
+
+.google-signin-button:hover {
+  background-color: var(--color-gray-100);
+  border-color: var(--color-gray-300);
+  box-shadow: var(--shadow-lg);
+}
+
+.google-signin-button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.google-signin-button:disabled {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-500);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .auth-divider::before,
+  .auth-divider::after {
+    background-color: var(--color-gray-600);
+  }
+
+  .auth-divider span {
+    background-color: var(--color-light);
+    color: var(--color-gray-400);
+  }
+
+  .google-signin-button {
+    background-color: var(--color-gray-50);
+    border-color: var(--color-gray-200);
+    color: var(--color-gray-900);
+  }
+
+  .google-signin-button:hover {
+    background-color: var(--color-gray-100);
+    border-color: var(--color-gray-300);
+  }
+
+  .google-signin-button:disabled {
+    background-color: var(--color-gray-300);
+    color: var(--color-gray-600);
+  }
+}
 
 
 @media (max-width: 640px) {

@@ -5,10 +5,17 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/auth/login", userData);
+      // Determine endpoint based on login method
+      const endpoint = userData.googleId
+        ? "/api/auth/google-login"
+        : "/api/auth/login";
+
+      const response = await axios.post(endpoint, userData);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data.msg);
+      // Log the full error for debugging
+      console.error("Login Error:", error.response?.data || error);
+      return rejectWithValue(error.response?.data?.msg || "Login failed");
     }
   }
 );
