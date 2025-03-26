@@ -61,19 +61,6 @@
   border-radius: 5px;
   padding: 5px 5px;
 }
-.projects-button {
-  padding: 5px; 
-  border: 1px solid #fff;
-  border-radius: 4px;
-  background-color: transparent;
-  cursor: pointer;
-  text-align: center;
-  font-size: 12px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
- 
-}
 
 .back-button svg {
   width: 24px;

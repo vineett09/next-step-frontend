@@ -804,8 +804,10 @@ const Profile = () => {
             {activeSection === "aisuggestions" && (
               <div className="profile-suggestions-section">
                 <div className="suggestions-header">
-                  <h2 className="suggestions-title">Saved AI Suggestions</h2>
-                  <Link to="/ai-suggestions" className="create-suggestion-btn">
+                  <h2 className="suggestions-title">
+                    Generated AI Suggestions
+                  </h2>
+                  <Link to="/ai-suggestion" className="create-suggestion-btn">
                     Get New Suggestion
                   </Link>
                 </div>
@@ -829,7 +831,7 @@ const Profile = () => {
                         <div key={index} className="suggestion-list-item">
                           <div className="suggestion-list-content">
                             <h3 className="suggestion-item-title">
-                              Career Goal: {suggestion.answers.careerGoals}
+                              {suggestion.answers.careerGoals}
                             </h3>
                             <p className="suggestion-item-details">
                               Experience: {suggestion.answers.experience}
@@ -839,7 +841,7 @@ const Profile = () => {
                             </p>
                             <div className="suggestion-item-metadata">
                               <span className="suggestion-date">
-                                Generated on:{" "}
+                                Created:{" "}
                                 {new Date(
                                   suggestion.createdAt
                                 ).toLocaleDateString()}

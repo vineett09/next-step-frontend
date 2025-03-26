@@ -13,7 +13,11 @@ const SuggestionView = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const token = localStorage.getItem("token");
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsAuthenticated(!!token);
+  }, []);
   useEffect(() => {
     const fetchSuggestion = async () => {
       if (!token) return;
@@ -59,7 +63,18 @@ const SuggestionView = () => {
       alert("There was an error generating your PDF. Please try again.");
     }
   };
-
+  if (!isAuthenticated) {
+    return (
+      <div className="suggestion-display-page">
+        <Navbar />
+        <div className="suggestion-auth-required">
+          <h2>Authentication Required</h2>
+          <p>You need to log in to view the AI Suggestion page.</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
   if (loading) {
     return (
       <div className="suggestion-display-page">
