@@ -54,7 +54,6 @@ const CustomRoadmapViewer = () => {
         setLoading(true);
         const response = await axios.get(`/api/roadmaps/${id}`, {
           headers: {
-            "x-auth-token": token,
             Authorization: `Bearer ${token}`,
           },
         });

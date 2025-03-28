@@ -1,7 +1,6 @@
 // src/services/googleAuth.js
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "./firebaseconfig";
-import axios from "axios";
 
 export const signInWithGoogle = async () => {
   try {
@@ -11,19 +10,23 @@ export const signInWithGoogle = async () => {
     // Get user credentials
     const user = result.user;
 
-    // Get ID token
-    const googleId = await user.getIdToken();
+    // Get the full ID token with extensive logging
+    const googleId = await user.getIdToken(true);
 
-    // Prepare user data for backend
-    const googleUser = {
-      username: user.displayName || user.email.split("@")[0],
+    // Return all necessary data
+    return {
+      uid: user.uid,
       email: user.email,
       googleId: googleId,
+      displayName: user.displayName,
     };
-
-    return googleUser;
   } catch (error) {
-    console.error("Google Sign-In Error:", error);
+    console.error("Comprehensive Google Sign-In Error:", {
+      name: error.name,
+      code: error.code,
+      message: error.message,
+      fullError: error,
+    });
     throw error;
   }
 };

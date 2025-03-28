@@ -256,7 +256,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  font-family: "Arial", sans-serif;
   z-index: 1000;
 }
 

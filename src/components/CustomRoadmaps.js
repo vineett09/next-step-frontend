@@ -830,7 +830,6 @@ const CustomRoadmaps = () => {
         roadmapData,
         {
           headers: {
-            "x-auth-token": token,
             Authorization: `Bearer ${token}`,
           },
         }

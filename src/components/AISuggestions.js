@@ -31,7 +31,7 @@ const AISuggestions = () => {
       const token = localStorage.getItem("token");
       const response = await fetch("/api/suggestions/ai-suggestions-usage", {
         headers: {
-          "x-auth-token": token,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -196,7 +196,7 @@ const AISuggestions = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-auth-token": token,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ answers }),
       });

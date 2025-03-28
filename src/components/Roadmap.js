@@ -90,7 +90,6 @@ const Roadmap = ({ data }) => {
     try {
       const response = await axios.get(`/api/progress/${roadmapId}`, {
         headers: {
-          "x-auth-token": token,
           Authorization: `Bearer ${token}`,
         },
       });
@@ -113,7 +112,6 @@ const Roadmap = ({ data }) => {
     try {
       const response = await axios.get("/api/bookmark/bookmarks", {
         headers: {
-          "x-auth-token": token,
           Authorization: `Bearer ${token}`,
         },
       });
@@ -135,7 +133,6 @@ const Roadmap = ({ data }) => {
         { roadmapId, nodeId },
         {
           headers: {
-            "x-auth-token": token,
             Authorization: `Bearer ${token}`,
           },
         }
@@ -171,7 +168,6 @@ const Roadmap = ({ data }) => {
         { roadmapId },
         {
           headers: {
-            "x-auth-token": token,
             Authorization: `Bearer ${token}`,
           },
         }

@@ -142,7 +142,6 @@ const Profile = () => {
     try {
       const response = await axios.get("/api/roadmaps/user", {
         headers: {
-          "x-auth-token": token,
           Authorization: `Bearer ${token}`,
         },
       });
@@ -212,7 +211,6 @@ const Profile = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Bookmarked roadmaps:", response.data);
 
       const bookmarks = Array.isArray(response.data)
         ? response.data.map((id) => ({ id }))
@@ -296,7 +294,6 @@ const Profile = () => {
       try {
         const response = await axios.delete(`/api/roadmaps/${roadmapId}`, {
           headers: {
-            "x-auth-token": token,
             Authorization: `Bearer ${token}`,
           },
         });
@@ -319,7 +316,6 @@ const Profile = () => {
         {},
         {
           headers: {
-            "x-auth-token": token,
             Authorization: `Bearer ${token}`,
           },
         }

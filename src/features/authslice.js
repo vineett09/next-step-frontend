@@ -13,9 +13,16 @@ export const loginUser = createAsyncThunk(
       const response = await axios.post(endpoint, userData);
       return response.data;
     } catch (error) {
-      // Log the full error for debugging
-      console.error("Login Error:", error.response?.data || error);
-      return rejectWithValue(error.response?.data?.msg || "Login failed");
+      // Enhanced error handling
+      const errorData = error.response?.data || {};
+      console.error("Login Error:", errorData);
+
+      return rejectWithValue({
+        message: errorData.msg || "Login failed",
+        code: errorData.code || "UNKNOWN_ERROR",
+        details: errorData.details,
+        suggestedUsername: errorData.suggestedUsername,
+      });
     }
   }
 );
@@ -27,10 +34,17 @@ export const registerUser = createAsyncThunk(
       const response = await axios.post("/api/auth/register", userData);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data.msg);
+      const errorData = error.response?.data || {};
+      return rejectWithValue({
+        message: errorData.msg || "Registration failed",
+        code: errorData.code || "UNKNOWN_ERROR",
+        details: errorData.details,
+        suggestedUsername: errorData.suggestedUsername,
+      });
     }
   }
 );
+
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
   token: localStorage.getItem("token") || null,
@@ -52,10 +66,18 @@ const authSlice = createSlice({
       localStorage.removeItem("user");
       localStorage.removeItem("token");
     },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(loginUser.fulfilled, (state, action) => {
+        state.loading = false;
         state.token = action.payload.token;
         state.user = action.payload.user;
         state.error = null;
@@ -63,9 +85,20 @@ const authSlice = createSlice({
         localStorage.setItem("token", action.payload.token);
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.error = action.payload;
+        state.loading = false;
+        state.error = {
+          message: action.payload?.message || "Login failed",
+          code: action.payload?.code,
+          details: action.payload?.details,
+          suggestedUsername: action.payload?.suggestedUsername,
+        };
+      })
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
+        state.loading = false;
         state.token = action.payload.token;
         state.user = action.payload.user;
         state.error = null;
@@ -73,10 +106,16 @@ const authSlice = createSlice({
         localStorage.setItem("token", action.payload.token);
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.error = action.payload;
+        state.loading = false;
+        state.error = {
+          message: action.payload?.message || "Registration failed",
+          code: action.payload?.code,
+          details: action.payload?.details,
+          suggestedUsername: action.payload?.suggestedUsername,
+        };
       });
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, clearError } = authSlice.actions;
 export default authSlice.reducer;

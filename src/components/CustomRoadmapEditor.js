@@ -83,7 +83,6 @@ const CustomRoadmapEditor = () => {
     try {
       const response = await axios.get(`/api/roadmaps/${id}`, {
         headers: {
-          "x-auth-token": token,
           Authorization: `Bearer ${token}`,
         },
       });
@@ -536,7 +535,6 @@ const CustomRoadmapEditor = () => {
 
       const response = await axios.put(`/api/roadmaps/${id}`, updatedRoadmap, {
         headers: {
-          "x-auth-token": token,
           Authorization: `Bearer ${token}`,
         },
       });
