@@ -86,31 +86,6 @@ const reactDeveloperRoadmap = {
             },
           ],
         },
-        {
-          name: "Tools Setup",
-          description:
-            "Set up your environment, taught with a calculator app in VS Code.",
-          children: [
-            {
-              name: "Node.js & npm",
-              description: "Install Node.js/npm, taught with version checks.",
-            },
-            {
-              name: "Code Editor",
-              description: "Configure VS Code, taught with extension setup.",
-            },
-            {
-              name: "Terminal Basics",
-              description:
-                "Learn commands, taught with a project folder setup.",
-            },
-            {
-              name: "Practice Project",
-              description:
-                "Build a calculator, taught with npm live-server steps.",
-            },
-          ],
-        },
       ],
       dividerText: "Step 1 complete—proceed to React introduction.",
     },

@@ -195,7 +195,7 @@ const Roadmap = ({ data }) => {
       d3.select(d3Container.current).selectAll("*").remove();
 
       const width = 1200;
-      const margin = { top: 50, right: 200, bottom: 50, left: 200 };
+      const margin = { top: 100, right: 200, bottom: 50, left: 200 };
       const FIXED_LINE_LENGTH = 100;
       const BASE_BOX_WIDTH = 120;
       const DIVIDER_PADDING = 30;
@@ -207,7 +207,7 @@ const Roadmap = ({ data }) => {
         .attr("height", 1000)
         .attr("class", "roadmap-svg")
         .attr("preserveAspectRatio", "xMidYMid meet")
-        .attr("viewBox", `0 0 ${width + margin.left + margin.right} 1000`);
+        .attr("viewBox", `0 -50 ${width + margin.left + margin.right} 1000`);
 
       const measureSvg = svgElement.append("g").style("visibility", "hidden");
 
@@ -250,7 +250,7 @@ const Roadmap = ({ data }) => {
       };
 
       const minParentSpacing = 100;
-      const childVerticalGap = 120;
+      const childVerticalGap = 20;
       const childrenSpaceFactor = 0.5;
       const minNestedGroupGap = 0;
 
@@ -260,7 +260,7 @@ const Roadmap = ({ data }) => {
 
       const titleText = roadmapTitle;
       const titleDimensions = calculateNodeDimensions(titleText);
-      const titleY = 0;
+      const titleY = 50;
 
       const titleGroup = svg
         .append("g")
@@ -296,9 +296,78 @@ const Roadmap = ({ data }) => {
         setIsSidebarOpen(true);
       });
 
-      const TITLE_LINE_LENGTH = 150;
       const lineStartY = titleY + titleDimensions.height / 2;
-      const lineEndY = lineStartY + TITLE_LINE_LENGTH;
+
+      // Calculate space needed for a parent and all its descendants
+      const calculateParentSpan = (parent) => {
+        const children = parent.children || [];
+        if (children.length === 0) {
+          return {
+            min_y: -parent.dimensions.height / 2,
+            max_y: parent.dimensions.height / 2,
+          };
+        }
+
+        // Calculate space needed for each child including its nested children
+        const childSpans = children.map((child) => {
+          // Start with the child's own dimensions
+          let minY = -child.dimensions.height / 2;
+          let maxY = child.dimensions.height / 2;
+
+          // If this child has nested children, calculate their required space
+          if (child.children && child.children.length > 0) {
+            const nestedTotalHeight =
+              child.children.reduce(
+                (sum, nested) => sum + nested.dimensions.height,
+                0
+              ) +
+              (child.children.length - 1) * minNestedGroupGap;
+
+            // The nested children group should be centered around the child
+            minY = Math.min(minY, -nestedTotalHeight / 2);
+            maxY = Math.max(maxY, nestedTotalHeight / 2);
+          }
+
+          return { minY, maxY, height: maxY - minY };
+        });
+
+        // Now calculate the total span needed for all children with proper spacing
+        let totalSpan = 0;
+        childSpans.forEach((span, idx) => {
+          totalSpan += span.height;
+          if (idx < childSpans.length - 1) {
+            totalSpan += childVerticalGap;
+          }
+        });
+
+        let min_y = Math.min(-parent.dimensions.height / 2, -totalSpan / 2);
+        let max_y = Math.max(parent.dimensions.height / 2, totalSpan / 2);
+
+        return { min_y, max_y };
+      };
+
+      let currentY = lineStartY;
+      const parentPositions = nodeMetrics.parents.map((parent) => {
+        const span = calculateParentSpan(parent);
+        const spanHeight = span.max_y - span.min_y;
+        const blockHeight = spanHeight + 50;
+        const dividerSpace = parent.dividerText ? DIVIDER_PADDING * 2 : 0;
+        const position = currentY + blockHeight / 2;
+        currentY += blockHeight + dividerSpace;
+        const dividerY = parent.dividerText
+          ? currentY - dividerSpace / 2
+          : null;
+
+        return {
+          node: parent,
+          y: position,
+          blockHeight,
+          dividerY,
+        };
+      });
+
+      const lineEndY =
+        parentPositions[0].y - parentPositions[0].node.dimensions.height / 2;
 
       svg
         .append("line")
@@ -311,39 +380,11 @@ const Roadmap = ({ data }) => {
         .attr("opacity", 0.7)
         .attr("stroke-dasharray", "5,5");
 
-      let currentY = lineEndY;
-      const parentPositions = nodeMetrics.parents.map((parent, index) => {
-        let childSpace = 0;
-        if (parent.children?.length > 0) {
-          childSpace = parent.children.reduce(
-            (total, child) =>
-              total + child.dimensions.height + childVerticalGap,
-            0
-          );
-        }
-
-        const blockHeight = Math.max(
-          minParentSpacing,
-          parent.dimensions.height + childrenSpaceFactor * childSpace
-        );
-
-        const dividerSpace = parent.dividerText ? DIVIDER_PADDING * 2 : 0;
-        const position = currentY + blockHeight / 2;
-        currentY += blockHeight + dividerSpace;
-
-        return {
-          node: parent,
-          y: position,
-          blockHeight,
-          dividerY: currentY - dividerSpace / 2,
-        };
-      });
-
       const totalHeight = currentY + margin.top + margin.bottom;
       svgElement.attr("height", totalHeight);
       svgElement.attr(
         "viewBox",
-        `0 0 ${width + margin.left + margin.right} ${totalHeight}`
+        `0 -50 ${width + margin.left + margin.right} ${totalHeight + 50}`
       );
 
       parentPositions.forEach((position, index) => {
@@ -443,7 +484,7 @@ const Roadmap = ({ data }) => {
         return { boxWidth, xOffset };
       };
 
-      parentPositions.forEach(({ node: parent, y }) => {
+      parentPositions.forEach(({ node: parent, y }, parentIndex) => {
         const parentX = width / 2;
 
         const parentGroup = svg
@@ -471,26 +512,47 @@ const Roadmap = ({ data }) => {
         );
 
         if (parent.children?.length > 0) {
-          const mid = Math.ceil(parent.children.length / 2);
-          const leftChildren = parent.children.slice(0, mid);
-          const rightChildren = parent.children.slice(mid);
+          const isLeft = parentIndex % 2 === 0;
 
-          const getChildrenTotalHeight = (children, gap = childVerticalGap) =>
-            children.reduce(
-              (total, child) => total + child.dimensions.height + gap,
-              0
-            ) - gap;
+          const drawChildren = (children, isLeftSide) => {
+            // First, calculate required spacing for each child based on its nested children
+            const childSpacings = children.map((child) => {
+              // Base height is the child's own height
+              let requiredSpace = child.dimensions.height;
 
-          const drawChildren = (children, isLeft) => {
-            const totalHeight = getChildrenTotalHeight(children);
+              // If this child has nested children, calculate their total space requirements
+              if (child.children?.length > 0) {
+                const nestedChildrenHeight =
+                  child.children.reduce(
+                    (total, nestedChild) =>
+                      total + nestedChild.dimensions.height + minNestedGroupGap,
+                    0
+                  ) - minNestedGroupGap;
+
+                // Use the larger of the two: either the child's height or its nested children's total height
+                // Add extra padding to ensure enough space
+                requiredSpace =
+                  Math.max(requiredSpace, nestedChildrenHeight) + 20;
+              }
+
+              return requiredSpace;
+            });
+
+            // Calculate total height needed with proper spacing
+            const totalHeight =
+              childSpacings.reduce(
+                (total, space) => total + space + childVerticalGap,
+                0
+              ) - childVerticalGap;
+
             let currentChildY = y - totalHeight / 2;
 
-            children.forEach((child) => {
-              const childXOffset = isLeft
+            children.forEach((child, childIndex) => {
+              const childXOffset = isLeftSide
                 ? -Math.max(0, (child.dimensions.width - BASE_BOX_WIDTH) / 2)
                 : Math.max(0, (child.dimensions.width - BASE_BOX_WIDTH) / 2);
 
-              const baseChildX = isLeft
+              const baseChildX = isLeftSide
                 ? parentX -
                   parentBox.boxWidth / 2 -
                   FIXED_LINE_LENGTH -
@@ -523,13 +585,13 @@ const Roadmap = ({ data }) => {
                 child.dimensions,
                 "#FEEE91",
                 "black",
-                isLeft
+                isLeftSide
               );
 
               const parentConnectX =
                 parentX +
-                (isLeft ? -parentBox.boxWidth / 2 : parentBox.boxWidth / 2);
-              const childConnectX = isLeft
+                (isLeftSide ? -parentBox.boxWidth / 2 : parentBox.boxWidth / 2);
+              const childConnectX = isLeftSide
                 ? baseChildX + child.dimensions.width / 2 + childXOffset
                 : baseChildX - child.dimensions.width / 2 + childXOffset;
 
@@ -555,18 +617,21 @@ const Roadmap = ({ data }) => {
                 .attr("stroke-dasharray", "5,5");
 
               if (child.children?.length > 0) {
-                const nestedMid = Math.ceil(child.children.length / 2);
-                const nestedLeftChildren = child.children.slice(0, nestedMid);
-                const nestedRightChildren = child.children.slice(nestedMid);
+                const drawNestedChildren = (nestedChildren, parentChildY) => {
+                  const nestedTotalHeight =
+                    nestedChildren.reduce(
+                      (total, nestedChild) =>
+                        total +
+                        nestedChild.dimensions.height +
+                        minNestedGroupGap,
+                      0
+                    ) - minNestedGroupGap;
 
-                const drawNestedChildren = (nestedChildren, isNestedLeft) => {
-                  const nestedTotalHeight = getChildrenTotalHeight(
-                    nestedChildren,
-                    minNestedGroupGap
-                  );
-                  let currentNestedY = currentChildY - nestedTotalHeight / 2;
+                  // Center the nested children group around the parent child's Y position
+                  let currentNestedY = parentChildY - nestedTotalHeight / 2;
+
                   nestedChildren.forEach((nestedChild) => {
-                    const nestedXOffset = isNestedLeft
+                    const nestedXOffset = isLeftSide
                       ? -Math.max(
                           0,
                           (nestedChild.dimensions.width - BASE_BOX_WIDTH) / 2
@@ -576,7 +641,7 @@ const Roadmap = ({ data }) => {
                           (nestedChild.dimensions.width - BASE_BOX_WIDTH) / 2
                         );
 
-                    const nestedX = isNestedLeft
+                    const nestedX = isLeftSide
                       ? baseChildX -
                         child.dimensions.width / 2 -
                         FIXED_LINE_LENGTH -
@@ -614,15 +679,15 @@ const Roadmap = ({ data }) => {
                       nestedChild.dimensions,
                       "#FFFFDD",
                       "black",
-                      isNestedLeft
+                      isLeftSide
                     );
 
                     const childConnectX =
                       baseChildX +
-                      (isNestedLeft
+                      (isLeftSide
                         ? -child.dimensions.width / 2 + childXOffset
                         : child.dimensions.width / 2 + childXOffset);
-                    const nestedConnectX = isNestedLeft
+                    const nestedConnectX = isLeftSide
                       ? nestedX +
                         nestedChild.dimensions.width / 2 +
                         nestedXOffset
@@ -636,9 +701,9 @@ const Roadmap = ({ data }) => {
                       (nestedConnectX + childConnectX) / 2,
                       currentNestedY,
                       (nestedConnectX + childConnectX) / 2,
-                      currentChildY,
+                      parentChildY,
                       childConnectX,
-                      currentChildY
+                      parentChildY
                     );
 
                     svg
@@ -656,20 +721,16 @@ const Roadmap = ({ data }) => {
                   });
                 };
 
-                if (isLeft) {
-                  drawNestedChildren(child.children, true);
-                } else {
-                  drawNestedChildren(child.children, false);
-                }
-                currentChildY += minNestedGroupGap;
+                // Pass the current child's Y position to properly center the nested children
+                drawNestedChildren(child.children, currentChildY);
               }
 
-              currentChildY += child.dimensions.height + childVerticalGap;
+              // Advance by the required space for this child rather than just its height
+              currentChildY += childSpacings[childIndex] + childVerticalGap;
             });
           };
 
-          drawChildren(leftChildren, true);
-          drawChildren(rightChildren, false);
+          drawChildren(parent.children, isLeft);
         }
       });
 
@@ -702,7 +763,7 @@ const Roadmap = ({ data }) => {
           isBookmarked={isBookmarked}
           completedNodes={completedNodes}
           totalNodes={totalNodes}
-          roadmapId={roadmapId} // Pass roadmapId
+          roadmapId={roadmapId}
         />
 
         {isLoading ? (

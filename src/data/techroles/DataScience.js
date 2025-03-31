@@ -36,7 +36,7 @@ const dataScienceRoadmap = {
           ],
         },
         {
-          name: "Programming Skills",
+          name: "Programming ",
           description:
             "Develop proficiency in data science programming with Python, R, and SQL, taught with examples like Pandas dataframes, R visualizations, or SQL queries. A 2025 cornerstone skill, this section enables you to process, analyze, and manage data efficiently, adapting to modern tools and workflows seamlessly.",
           children: [
@@ -47,15 +47,17 @@ const dataScienceRoadmap = {
                 "Master Python with Pandas and Scikit-learn, taught with data analysis projects. Preferred in 2025 for its versatility and ecosystem (Stack Overflow, 2023).",
             },
             {
+              name: "SQL",
+              preferred: true,
+              description:
+                "Query with SQL in MySQL or PostgreSQL, taught with JOIN examples. A 2025 skill for data retrieval.",
+            },
+            {
               name: "R",
               description:
                 "Use R with ggplot2 and dplyr for stats and visuals, taught with EDA examples. Key in 2025 for statistical research.",
             },
-            {
-              name: "SQL",
-              description:
-                "Query with SQL in MySQL or PostgreSQL, taught with JOIN examples. A 2025 skill for data retrieval.",
-            },
+
             {
               name: "Julia",
               description:
@@ -64,7 +66,7 @@ const dataScienceRoadmap = {
           ],
         },
         {
-          name: "Data Manipulation and Analysis",
+          name: "Data Science Libraries",
           description:
             "Manipulate and analyze data with Python tools like Pandas and NumPy, taught with examples cleaning datasets or computing stats. A 2025 skill to transform raw data into insights, this section ensures data quality and readiness for modeling and visualization workflows efficiently.",
           children: [
@@ -79,20 +81,131 @@ const dataScienceRoadmap = {
               description:
                 "Perform array operations with NumPy, taught with linear algebra examples. A 2025 skill for numerical computations.",
             },
+          ],
+        },
+      ],
+      dividerText: "Foundations built—learn data structures and algorithms.",
+    },
+    {
+      name: "Data Structures and Algorithms",
+      description:
+        "Data structures and algorithms are essential for efficient data manipulation and analysis, taught with Python examples like sorting algorithms or tree structures. A 2025 skill for optimizing performance, this section ensures you can handle complex data challenges in real-time applications across industries.",
+      children: [
+        {
+          name: "Data Structures",
+          description:
+            "Master Python data structures, taught with a to-do list manager in VS Code. This step prepares for complex data in 2025.",
+          children: [
             {
-              name: "Data Cleaning",
+              name: "Arrays",
               description:
-                "Clean data with OpenRefine or Pandas, taught with examples fixing missing values. Essential in 2025 for quality insights.",
+                "Learn about arrays in Python, taught with examples like sorting or searching. A 2025 skill for data organization.",
             },
             {
-              name: "Data Wrangling",
+              name: "Linked Lists",
               description:
-                "Wrangle data with Python’s tidyr or dplyr, taught with reshaping examples. Key in 2025 for preprocessing.",
+                "Understand linked lists in Python, taught with examples like insertion or deletion. Key in 2025 for dynamic data structures.",
+            },
+            {
+              name: "Stacks and Queues",
+              description:
+                "Study stacks and queues in Python, taught with examples like push or pop. A 2025 skill for efficient data organization.",
+            },
+            {
+              name: "Trees and Graphs",
+              description:
+                "Learn about trees and graphs in Python, taught with examples like binary trees or Dijkstra's algorithm. A 2025 skill for complex data structures.",
+            },
+          ],
+        },
+        {
+          name: "Algorithms",
+          description:
+            "Learn about algorithms in Python, taught with examples like sorting or searching. A 2025 skill for optimizing performance.",
+          children: [
+            {
+              name: "Sorting",
+              description:
+                "Understand sorting algorithms in Python, taught with examples like bubble or merge sort. A 2025 skill for data organization.",
+            },
+            {
+              name: "Searching",
+              description:
+                "Study searching algorithms in Python, taught with examples like binary or linear search. Key in 2025 for optimizing performance.",
+            },
+            {
+              name: "Recursion",
+              description:
+                "Learn recursion in Python, taught with examples like factorial or Fibonacci. A 2025 skill for problem-solving.",
+            },
+            {
+              name: "Dynamic Programming",
+              description:
+                "Understand dynamic programming in Python, taught with examples like Fibonacci or knapsack. A 2025 skill for optimizing algorithms.",
             },
           ],
         },
       ],
-      dividerText: "Foundation built—dive into machine learning and modeling.",
+      dividerText:
+        "Data structures and algorithms mastered—explore data collection and visualization.",
+    },
+    {
+      name: "Data Collection and Visualization",
+      description:
+        "Master data collection and visualization, taught with Python examples like web scraping or data visualization in Plotly. A 2025 skill for data management and presentation.",
+      children: [
+        {
+          name: "Data Collection",
+          description:
+            "Learn how to collect data with Python, taught with examples like web scraping or API requests. A 2025 skill for data retrieval.",
+          children: [
+            {
+              name: "Data Cleaning",
+              description:
+                "Clean data with Python, taught with examples like removing duplicates or handling missing values. A 2025 skill for data quality.",
+            },
+            {
+              name: "Data Integration",
+              description:
+                "Integrate data with Python, taught with examples like merging or joining datasets. A 2025 skill for data integration.",
+            },
+            {
+              name: "Web Scraping",
+              description:
+                "Scrape data from websites with Python, taught with examples like extracting product details. A 2025 skill for data extraction.",
+            },
+            {
+              name: "Data Transformation",
+              description:
+                "Transform data with Python, taught with examples like normalization or scaling. A 2025 skill for data preparation.",
+            },
+          ],
+        },
+        {
+          name: "Data Visualization",
+          description:
+            "Visualize data with Python, taught with examples like creating charts or dashboards. A 2025 skill for data presentation.",
+          children: [
+            {
+              name: "Matplotlib",
+              description:
+                "Use Matplotlib for data visualization, taught with examples like creating charts or subplots. A 2025 skill for data presentation.",
+            },
+            {
+              name: "Seaborn",
+              description:
+                "Use Seaborn for data visualization, taught with examples like creating charts or subplots. A 2025 skill for data presentation.",
+            },
+            {
+              name: "Plotly",
+              description:
+                "Use Plotly for data visualization, taught with examples like creating charts or subplots. A 2025 skill for data presentation.",
+            },
+          ],
+        },
+      ],
+      dividerText:
+        "Data collection and visualization mastered—explore machine learning and modeling.",
     },
     {
       name: "Machine Learning and Modeling",
@@ -143,38 +256,7 @@ const dataScienceRoadmap = {
             },
           ],
         },
-        {
-          name: "Deep Learning",
-          description:
-            "Leverage neural networks with TensorFlow and PyTorch, taught with examples like image recognition or text prediction. A 2025 skill for complex tasks, this section drives AI innovations in autonomous systems, NLP, and more with advanced architectures.",
-          children: [
-            {
-              name: "Neural Networks",
-              description:
-                "Build neural nets with TensorFlow, taught with classification examples. A 2025 skill for nonlinear modeling.",
-            },
-            {
-              name: "Convolutional Neural Networks (CNNs)",
-              description:
-                "Process images with CNNs in PyTorch, taught with detection examples. Key in 2025 for vision tasks.",
-            },
-            {
-              name: "Recurrent Neural Networks (RNNs)",
-              description:
-                "Analyze sequences with RNNs in TensorFlow, taught with time-series examples. A 2025 skill for temporal data.",
-            },
-            {
-              name: "Transformers",
-              description:
-                "Use transformers with Hugging Face, taught with NLP examples. A 2025 skill for advanced language tasks.",
-            },
-            {
-              name: "Generative Models",
-              description:
-                "Create data with GANs in PyTorch, taught with image generation examples. A 2025 skill for creativity.",
-            },
-          ],
-        },
+
         {
           name: "Model Evaluation and Validation",
           description:
@@ -204,7 +286,72 @@ const dataScienceRoadmap = {
         },
       ],
       dividerText:
-        "Modeling mastered—scale up with data engineering and big data.",
+        "Modeling mastered—explore Deep Learning and advanced techniques.",
+    },
+    {
+      name: "Deep Learning",
+      description:
+        "Leverage neural networks with TensorFlow and PyTorch, taught with examples like image recognition or text prediction. A 2025 skill for complex tasks, this section drives AI innovations in autonomous systems, NLP, and more with advanced architectures.",
+      children: [
+        {
+          name: "Neural Networks",
+          description:
+            "Build neural nets with TensorFlow, taught with classification examples. A 2025 skill for nonlinear modeling.",
+          children: [
+            {
+              name: "Basic Neural Networks",
+              description:
+                "Understand feedforward networks with TensorFlow, taught with examples. A 2025 skill for basic modeling.",
+            },
+            {
+              name: "Activation Functions",
+              description:
+                "Use activation functions with TensorFlow, taught with examples. A 2025 skill for nonlinear modeling.",
+            },
+            {
+              name: "Forward and Backward Propagation",
+              description:
+                "Implement forward and backward propagation with TensorFlow, taught with examples. A 2025 skill for training networks.",
+            },
+          ],
+        },
+        {
+          name: "Advanced Neural Networks",
+          description:
+            "Build advanced neural nets with PyTorch, taught with classification examples. A 2025 skill for advanced modeling.",
+          children: [
+            {
+              name: "Convolutional Neural Networks (CNNs)",
+              description:
+                "Process images with CNNs in TensorFlow, taught with examples. Key in 2025 for visual analytics.",
+            },
+            {
+              name: "Recurrent Neural Networks (RNNs)",
+              description:
+                "Analyze sequences with RNNs, taught with time-series examples. A 2025 skill for temporal data.",
+            },
+          ],
+        },
+        {
+          name: "Deep Learning Frameworks",
+          description:
+            "Use frameworks like TensorFlow or PyTorch, taught with examples. A 2025 skill for deep learning.",
+          children: [
+            {
+              name: "TensorFlow",
+              description:
+                "Code with TensorFlow, taught with examples. A 2025 skill for deep learning.",
+            },
+            {
+              name: "PyTorch",
+              description:
+                "Code with PyTorch, taught with examples. A 2025 skill for deep learning.",
+            },
+          ],
+        },
+      ],
+      dividerText:
+        "Deep learning mastered—explore data engineering and big data.",
     },
     {
       name: "Data Engineering and Big Data",
@@ -239,16 +386,17 @@ const dataScienceRoadmap = {
             "Process massive datasets with Hadoop and Kafka, taught with examples analyzing logs or streaming IoT data in PySpark. A 2025 skill for scalability, this section tackles big data challenges in real-time applications like fraud detection or social media analytics.",
           children: [
             {
-              name: "Apache Hadoop",
-              description:
-                "Use Hadoop HDFS and MapReduce, taught with cluster examples. A 2025 skill for distributed data.",
-            },
-            {
               name: "Apache Spark",
               preferred: true,
               description:
                 "Process with Spark and PySpark, taught with log examples. Preferred in 2025 for its speed (Databricks, 2023).",
             },
+            {
+              name: "Apache Hadoop",
+              description:
+                "Use Hadoop HDFS and MapReduce, taught with cluster examples. A 2025 skill for distributed data.",
+            },
+
             {
               name: "Kafka",
               description:
@@ -314,7 +462,6 @@ const dataScienceRoadmap = {
             },
             {
               name: "Transformers and BERT",
-              preferred: true,
               description:
                 "Fine-tune BERT with Hugging Face, taught with NLP examples. Preferred in 2025 for top performance.",
             },
@@ -331,16 +478,17 @@ const dataScienceRoadmap = {
             "Make AI transparent with XAI tools like SHAP, taught with examples explaining model predictions. A 2025 skill for trust and compliance, this section ensures stakeholders understand AI decisions in regulated fields like healthcare and finance.",
           children: [
             {
-              name: "Model Interpretability",
-              description:
-                "Reveal predictions with feature importance, taught with examples in Python. A 2025 skill for clarity.",
-            },
-            {
               name: "LIME and SHAP",
               preferred: true,
               description:
                 "Explain with SHAP in Python, taught with examples. Preferred in 2025 for robust XAI (arXiv, 2023).",
             },
+            {
+              name: "Model Interpretability",
+              description:
+                "Reveal predictions with feature importance, taught with examples in Python. A 2025 skill for clarity.",
+            },
+
             {
               name: "Feature Contribution",
               description:
@@ -365,7 +513,6 @@ const dataScienceRoadmap = {
             },
             {
               name: "MLOps Practices",
-              preferred: true,
               description:
                 "Deploy with MLflow, taught with CI/CD examples. Preferred in 2025 for production ML.",
             },
@@ -373,34 +520,6 @@ const dataScienceRoadmap = {
               name: "Model Monitoring",
               description:
                 "Monitor with Prometheus, taught with examples. A 2025 skill for ML maintenance.",
-            },
-          ],
-        },
-        {
-          name: "Data Visualization",
-          description:
-            "Create impactful visuals with Tableau and Seaborn, taught with examples like sales dashboards or heatmaps. A 2025 skill to communicate insights, this section blends art and science to make data accessible and actionable for stakeholders across industries.",
-          children: [
-            {
-              name: "Data Visualization Tools",
-              preferred: true,
-              description:
-                "Use Tableau and Seaborn, taught with dashboard examples. Preferred in 2025 for versatility.",
-            },
-            {
-              name: "Dashboard Development",
-              description:
-                "Build dashboards in Power BI, taught with real-time examples. A 2025 skill for monitoring.",
-            },
-            {
-              name: "Storytelling with Data",
-              description:
-                "Craft narratives with Plotly, taught with examples. A 2025 skill for impactful insights.",
-            },
-            {
-              name: "Interactive Visuals",
-              description:
-                "Create with Dash, taught with Python examples. A 2025 skill for dynamic displays.",
             },
           ],
         },

@@ -60,6 +60,7 @@ import CustomRoadmapViewer from "./components/CustomRoadmapViewer";
 import SharedRoadmapViewer from "./components/SharedRoadmapViewer";
 import AISuggestions from "./components/AISuggestions";
 import SuggestionView from "./components/AISuggestionsView";
+import swiftRoadmap from "./data/techskills/Swift";
 function App() {
   return (
     <Router>
@@ -212,6 +213,7 @@ function App() {
             element={<Roadmap data={springbootRoadmap} />}
           />
           <Route path="/graphql" element={<Roadmap data={grapgqlRoadmap} />} />
+          <Route path="/swift" element={<Roadmap data={swiftRoadmap} />} />
         </Routes>
       </div>
     </Router>

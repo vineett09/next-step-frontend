@@ -30,32 +30,6 @@ const javascriptDeveloperRoadmap = {
             },
           ],
         },
-        {
-          name: "Tools Setup",
-          description:
-            "Set up your development environment, taught with a console.log test in Node.js and VS Code.",
-          children: [
-            {
-              name: "Node.js & npm",
-              description:
-                "Install Node.js/npm, taught with version checks in terminal.",
-            },
-            {
-              name: "VS Code",
-              description:
-                "Configure VS Code with extensions (Live Server), taught with setup steps.",
-            },
-            {
-              name: "Browser DevTools",
-              description: "Use console, taught with a log message in Chrome.",
-            },
-            {
-              name: "Practice Project",
-              description:
-                "Build a webpage with JS alert, taught with npm live-server.",
-            },
-          ],
-        },
       ],
       dividerText: "start with JavaScript basics.",
     },

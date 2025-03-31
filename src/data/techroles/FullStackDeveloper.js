@@ -53,11 +53,6 @@ const fullStackDeveloperRoadmap = {
             "JavaScript breathes life into static web pages by adding interactivity and dynamic behavior. This section introduces programming fundamentals tailored for the web, guiding learners to manipulate content, respond to user actions, and fetch data. It’s the gateway to creating engaging user experiences, equipping developers with skills to build everything from simple animations to complex applications.",
           children: [
             {
-              name: "Basics",
-              description:
-                "This foundational JavaScript module covers variables, functions, loops, and conditionals, focusing on practical web use cases. Learners explore Document Object Model (DOM) manipulation to dynamically update page content, like changing text or colors. It’s an essential starting point, building confidence in writing clean, functional code to enhance websites with interactivity.",
-            },
-            {
               name: "Events",
               description:
                 "Events in JavaScript handle user interactions like clicks, key presses, or form submissions. This section teaches learners to attach event listeners and craft responsive behaviors, such as showing pop-ups or validating inputs in real-time. It’s a critical skill for creating intuitive, engaging web experiences that react seamlessly to user actions.",
@@ -108,12 +103,6 @@ const fullStackDeveloperRoadmap = {
               name: "Bootstrap",
               description:
                 "Bootstrap is a popular CSS framework offering a grid system, components, and utilities for rapid development. This section teaches learners to build responsive layouts, modals, and navigation bars quickly. It’s perfect for prototyping or delivering production-ready designs, making it a go-to skill for developers needing efficiency without sacrificing quality in 2025.",
-            },
-
-            {
-              name: "Sass",
-              description:
-                "Sass (Syntactically Awesome Style Sheets) enhances CSS with variables, nesting, and mixins for reusable, maintainable code. This section guides learners to streamline stylesheets, reducing repetition and improving scalability. It’s a powerful skill for managing large projects, ensuring clean, organized styling that adapts easily to evolving design needs in professional web development.",
             },
           ],
         },
@@ -354,11 +343,6 @@ const fullStackDeveloperRoadmap = {
               name: "Content Security Policy",
               description:
                 "Content Security Policy (CSP) mitigates XSS by restricting resource sources. This section teaches learners to define policies via HTTP headers, blocking unauthorized scripts. It’s an advanced skill in 2025, enhancing security for dynamic sites, ensuring only trusted content executes in users’ browsers.",
-            },
-            {
-              name: "OWASP Top 10",
-              description:
-                "OWASP Top 10 outlines the most critical web security risks, like injection and misconfiguration. This section familiarizes learners with these threats, teaching mitigation strategies. It’s a vital skill in 2025, aligning development with industry standards to proactively secure applications against prevalent, evolving vulnerabilities.",
             },
           ],
         },

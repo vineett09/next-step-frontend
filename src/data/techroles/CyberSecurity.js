@@ -1,445 +1,953 @@
 const cybersecurityITRoadmap = {
   name: "Cybersecurity & IT Skills Roadmap 2025",
   description:
-    "This comprehensive roadmap equips learners with essential IT fundamentals, networking, cybersecurity, and cloud skills for 2025, progressing from beginner to advanced levels with hands-on examples and cutting-edge tools. It covers system administration, threat detection, cloud security, and certifications, ensuring practical mastery to secure systems, mitigate vulnerabilities, and excel in the dynamic cybersecurity landscape with expertise and confidence.",
+    "This detailed roadmap guides learners through a step-by-step journey to master cybersecurity and IT skills by 2025, from foundational IT concepts to advanced cloud security, emerging threats, and continuous learning. With hands-on tools like Kali Linux, Wireshark, and AWS, it emphasizes practical skills, certifications, and staying ahead of threats—equipping you to secure systems and excel in the evolving cybersecurity landscape.",
   children: [
     {
-      name: "Fundamentals of IT Skills",
+      name: "IT Fundamentals",
       description:
-        "Kick off your cybersecurity journey by building a solid foundation in IT skills, taught with hands-on examples like setting up a Raspberry Pi or scripting with Bash. This step covers hardware, software, file systems, and virtualization basics—crucial in 2025 for understanding and securing digital environments, preparing you for advanced cybersecurity concepts with a strong technical base.",
+        "Start your cybersecurity journey with core IT skills, taught with practical examples like configuring a Raspberry Pi or troubleshooting with Task Manager. A 2025 essential for understanding system mechanics, this step lays the groundwork for securing digital environments.",
       children: [
         {
-          name: "Hardware & Software Basics",
+          name: "Hardware Basics",
           description:
-            "Dive into the essentials of computer hardware and software interactions, taught with practical examples like assembling a PC or installing Ubuntu. This section explores CPUs, RAM, storage, OS layers, and drivers—key 2025 skills for grasping system architecture, troubleshooting issues, and laying the groundwork for securing IT systems effectively.",
+            "Learn computer components like CPU, RAM, and storage, taught with examples assembling a PC. Key in 2025 for system performance and security.",
           children: [
             {
-              name: "Computer Components",
+              name: "Component Identification",
               description:
-                "Learn core components—CPU, GPU, RAM—taught with examples like upgrading a desktop. A 2025 skill to understand system performance and security dependencies.",
+                "Identify CPU, GPU, and SSDs, taught with hardware upgrade examples. A 2025 skill for system understanding.",
             },
+            {
+              name: "Troubleshooting",
+              description:
+                "Diagnose issues with HWMonitor, taught with overheating examples. Essential in 2025 for system integrity.",
+            },
+            {
+              name: "BIOS/UEFI Configuration", // New
+              description:
+                "Configure BIOS/UEFI settings, taught with secure boot examples. A 2025 skill for hardware-level security.",
+            },
+          ],
+        },
+        {
+          name: "Software & OS Basics",
+          description:
+            "Understand OS layers and software, taught with examples installing Ubuntu or exploring Windows drivers. A 2025 skill for system interaction.",
+          children: [
             {
               name: "Operating System Layers",
               description:
-                "Explore OS layers—kernel, drivers—taught with Windows Task Manager or Linux `lsmod`. A 2025 skill for system interaction and security basics.",
+                "Explore kernel and drivers with `lsmod`, taught with Linux examples. Key in 2025 for OS security.",
             },
             {
-              name: "Troubleshooting Hardware",
+              name: "Software Installation",
               description:
-                "Master diagnosing hardware issues with tools like HWMonitor, taught with examples. Key in 2025 for maintaining secure system integrity.",
-            },
-          ],
-        },
-        {
-          name: "Command Line & Shell Scripting",
-          description:
-            "Master command-line interfaces and scripting for Linux (Bash) and Windows (PowerShell), taught with examples like automating backups or network scans using `cron` or `Task Scheduler`. A 2025 must-have skill, it empowers cybersecurity tasks—log analysis, system automation—enhancing efficiency and control in securing IT environments.",
-          children: [
-            {
-              name: "Linux CLI",
-              description:
-                "Use Bash commands like `ls`, `grep`, taught with terminal examples for file searches. A 2025 skill for system management and log parsing.",
+                "Install apps with `apt` or MSI files, taught with examples. A 2025 skill for setup and maintenance.",
             },
             {
-              name: "Windows PowerShell",
+              name: "Patch Management", // New
               description:
-                "Learn PowerShell cmdlets like `Get-Process`, taught with examples for system checks. Key in 2025 for Windows administration and automation.",
-            },
-            {
-              name: "Scripting Basics",
-              description:
-                "Write basic scripts with Bash or PowerShell, taught with automation examples like user creation. A 2025 skill for repetitive task efficiency.",
+                "Apply updates with `apt-get` or Windows Update, taught with examples. A 2025 skill for vulnerability mitigation.",
             },
           ],
         },
         {
-          name: "File Systems & Permissions",
+          name: "Virtualization Basics",
           description:
-            "Understand file system structures and access controls, taught with Linux `chmod` and Windows NTFS examples for securing data. This section builds 2025 skills to manage permissions, protect sensitive files, and audit access—foundational for cybersecurity professionals to enforce system security and prevent unauthorized breaches.",
+            "Set up VMs with VirtualBox, taught with Ubuntu VM examples. A 2025 skill for testing and isolating environments.",
           children: [
             {
-              name: "Linux File Systems",
+              name: "VirtualBox Setup",
+
               description:
-                "Explore ext4 and permissions with `ls -l`, taught with examples setting read/write access. A 2025 skill for Linux security.",
+                "Create VMs with VirtualBox, taught with examples. Preferred in 2025 for ease of use.",
             },
             {
-              name: "Windows NTFS",
+              name: "VMware Intro",
               description:
-                "Manage NTFS permissions with `icacls`, taught with examples securing folders. Key in 2025 for Windows file protection.",
+                "Use VMware Workstation, taught with Windows VM examples. A 2025 skill for enterprise tools.",
             },
             {
-              name: "Access Control Lists (ACLs)",
+              name: "Hyper-V Basics", // New
               description:
-                "Learn ACLs with `setfacl`, taught with examples for granular access. A 2025 skill for advanced permission management.",
-            },
-          ],
-        },
-        {
-          name: "Virtualization & Cloud Basics",
-          description:
-            "Get hands-on with virtualization and cloud concepts, taught with VirtualBox VM setups and AWS Free Tier examples for basic cloud access. A 2025 skill bridging traditional IT to modern cloud security, this section prepares you to understand scalable environments and their cybersecurity implications with practical tools.",
-          children: [
-            {
-              name: "VirtualBox",
-              description:
-                "Set up VMs with VirtualBox, taught with Ubuntu VM examples. A 2025 skill for local virtualization and testing.",
-            },
-            {
-              name: "VMware Workstation",
-              description:
-                "Use VMware Workstation for VMs, taught with Windows VM setups. Key in 2025 for enterprise virtualization basics.",
-            },
-            {
-              name: "Cloud Intro (AWS Free Tier)",
-              description:
-                "Explore AWS Free Tier for cloud basics, taught with EC2 instance examples. A 2025 skill for cloud entry.",
+                "Set up Hyper-V on Windows, taught with examples. A 2025 skill for Microsoft environments.",
             },
           ],
         },
       ],
-      dividerText:
-        "IT basics down—explore operating systems and networking next.",
+      dividerText: "IT fundamentals mastered—move to command-line skills.",
     },
     {
-      name: "Operating Systems & Networking",
+      name: "Command Line & Scripting",
       description:
-        "Build expertise in OS administration and networking fundamentals, taught with Linux `systemctl` and Cisco packet tracer examples for real-world scenarios. This step equips you with 2025 skills to configure systems, secure networks, and troubleshoot connectivity—critical for cybersecurity professionals to protect IT infrastructure and understand network interactions effectively.",
+        "Gain proficiency in command-line tools and scripting, taught with Bash and PowerShell examples like automating tasks or parsing logs. A 2025 must-have for system management and automation in cybersecurity workflows.",
       children: [
         {
-          name: "Operating System Administration",
+          name: "Linux Command Line",
           description:
-            "Learn to configure and secure Windows, Linux, and macOS, taught with practical tasks like user management (`useradd`) and registry edits via PowerShell. A 2025 skill for system hardening and administration, this section ensures you can protect diverse OS environments against threats with hands-on expertise.",
+            "Master Bash with `grep` and `find`, taught with file search examples. Key in 2025 for Linux administration.",
           children: [
             {
-              name: "Linux",
-              preferred: true,
+              name: "File Operations",
               description:
-                "Master Linux administration—file structures, `chmod`, `apt`—taught with Ubuntu examples for securing systems. Preferred in 2025 for its open-source dominance and cybersecurity relevance.",
+                "Use `ls`, `cp`, taught with examples moving files. A 2025 skill for data handling.",
             },
             {
-              name: "Windows",
+              name: "System Monitoring",
               description:
-                "Administer Windows—Registry, Active Directory—taught with PowerShell examples like `Set-ItemProperty` for security tweaks. A 2025 skill for securing enterprise systems prevalent in corporate IT.",
+                "Monitor with `top`, taught with process examples. Essential in 2025 for system checks.",
             },
             {
-              name: "macOS",
+              name: "Network Commands", // New
               description:
-                "Secure macOS with Unix commands like `chmod`, taught with Terminal examples for file protection. A 2025 skill for managing Apple systems in mixed IT environments.",
+                "Use `netstat` and `ss`, taught with examples. A 2025 skill for network troubleshooting.",
             },
           ],
         },
         {
-          name: "Networking Fundamentals",
+          name: "Windows PowerShell",
           description:
-            "Understand networking—IP addressing, subnetting—taught with Cisco Packet Tracer and Wireshark examples for real-world setups and analysis. A 2025 skill to design and troubleshoot secure networks, this section lays the groundwork for cybersecurity by mastering how data flows and connects across IT systems.",
+            "Learn PowerShell with `Get-Process`, taught with system check examples. A 2025 skill for Windows automation.",
           children: [
             {
-              name: "OSI & TCP/IP Model",
+              name: "Cmdlets Basics",
               description:
-                "Learn OSI and TCP/IP layers—application to physical—taught with examples tracing packets in Wireshark. A 2025 skill for understanding network protocols and securing traffic.",
+                "Run `Get-Service`, taught with examples. Key in 2025 for Windows tasks.",
             },
             {
-              name: "Subnetting & VLANs",
+              name: "Scripting",
               description:
-                "Master subnetting and VLANs, taught with Packet Tracer examples creating subnets and VLANs with `vlan` commands. A 2025 skill for isolating and securing network segments.",
+                "Write scripts with PowerShell, taught with automation examples. A 2025 skill for efficiency.",
             },
             {
-              name: "Routing & Switching",
+              name: "Event Log Analysis", // New
               description:
-                "Configure routing and switching with Cisco IOS, taught with RIP/OSPF examples in Packet Tracer and GNS3. A 2025 skill for secure data flow and troubleshooting.",
+                "Query logs with `Get-EventLog`, taught with examples. A 2025 skill for security auditing.",
             },
           ],
         },
         {
-          name: "Network Security Basics",
+          name: "Scripting Fundamentals",
           description:
-            "Protect networks from attacks with tools like pfSense and Wireshark, taught with examples setting firewalls and monitoring traffic. A 2025 skill for securing perimeters and detecting threats, this section builds foundational network defense capabilities critical for cybersecurity professionals.",
+            "Automate with Bash and PowerShell scripts, taught with backup examples using `cron`. A 2025 skill for repetitive tasks.",
           children: [
             {
-              name: "Firewalls",
+              name: "Bash Scripting",
+
               description:
-                "Set up firewalls with pfSense, taught with rules blocking traffic. A 2025 skill for network perimeter security.",
+                "Script with Bash, taught with cron examples. Preferred in 2025 for Linux automation.",
             },
             {
-              name: "IDS/IPS",
+              name: "PowerShell Scripting",
               description:
-                "Deploy IDS/IPS with Snort, taught with examples detecting intrusions. A 2025 skill for monitoring and blocking threats.",
+                "Script with PowerShell, taught with Task Scheduler examples. A 2025 skill for Windows automation.",
             },
             {
-              name: "NAT & VPNs",
+              name: "Python Scripting for Security", // New
               description:
-                "Secure connections with NAT and VPNs like OpenVPN, taught with examples masking IPs and encrypting tunnels. A 2025 skill for safe remote access.",
-            },
-            {
-              name: "Wireless Security",
-              description:
-                "Secure Wi-Fi with WPA3 and tools like Aircrack-ng, taught with examples preventing breaches. A 2025 skill for wireless network protection.",
+                "Write Python scripts for tasks like log parsing, taught with examples. A 2025 skill for versatile automation.",
             },
           ],
         },
       ],
-      dividerText:
-        "Systems and networks secured—build core cybersecurity skills.",
+      dividerText: "Command line conquered—learn operating systems.",
     },
     {
-      name: "Security Skills & Knowledge",
+      name: "Operating System Administration",
       description:
-        "Develop essential cybersecurity skills with tools like Kali Linux and Wireshark, taught through penetration testing labs and threat analysis examples. This step equips you for 2025 to protect systems, detect threats, and respond to incidents—critical competencies for safeguarding IT environments against evolving risks with practical, hands-on expertise.",
+        "Administer and secure OSes like Linux and Windows, taught with examples using `useradd` or Active Directory. A 2025 skill for system hardening and management across diverse IT environments.",
       children: [
         {
-          name: "Cryptography & Encryption",
+          name: "Linux Administration",
+
           description:
-            "Secure data and communications with cryptography, taught with OpenSSL and GPG examples like encrypting files or emails. A 2025 skill for confidentiality and integrity, this section covers encryption techniques and PKI—vital for protecting sensitive information and thwarting cyber threats across networks and systems.",
+            "Secure Linux with `chmod` and `iptables`, taught with Ubuntu examples. Preferred in 2025 for its cybersecurity relevance.",
           children: [
             {
-              name: "Symmetric Encryption",
+              name: "User Management",
               description:
-                "Learn AES encryption with OpenSSL, taught with examples encrypting files. A 2025 skill for fast, secure data protection.",
+                "Add users with `useradd`, taught with examples. A 2025 skill for access control.",
             },
             {
-              name: "Asymmetric Encryption",
+              name: "Service Management",
               description:
-                "Master RSA with GPG, taught with key pair examples for secure exchanges. A 2025 skill for key distribution and signatures.",
+                "Control with `systemctl`, taught with service examples. Key in 2025 for system uptime.",
             },
+            {
+              name: "Log Analysis", // New
+              description:
+                "Analyze logs with `journalctl`, taught with examples. A 2025 skill for auditing and troubleshooting.",
+            },
+          ],
+        },
+        {
+          name: "Windows Administration",
+          description:
+            "Manage Windows with Registry edits and PowerShell, taught with examples securing systems. A 2025 skill for enterprise IT.",
+          children: [
+            {
+              name: "Active Directory",
+              description:
+                "Set up AD with PowerShell, taught with user examples. A 2025 skill for domain management.",
+            },
+            {
+              name: "Group Policy",
+              description:
+                "Apply GPOs, taught with security examples. Key in 2025 for policy enforcement.",
+            },
+            {
+              name: "Windows Defender Configuration", // New
+              description:
+                "Configure Defender with PowerShell, taught with examples. A 2025 skill for endpoint security.",
+            },
+          ],
+        },
+        {
+          name: "macOS Basics",
+          description:
+            "Secure macOS with `chmod`, taught with Terminal examples. A 2025 skill for mixed environments.",
+          children: [
+            {
+              name: "File Permissions",
+              description:
+                "Set permissions with `chmod`, taught with examples. A 2025 skill for macOS security.",
+            },
+            {
+              name: "System Preferences",
+              description:
+                "Secure via GUI and CLI, taught with examples. Key in 2025 for macOS hardening.",
+            },
+            {
+              name: "Gatekeeper & XProtect", // New
+              description:
+                "Configure macOS security tools, taught with examples. A 2025 skill for built-in protection.",
+            },
+          ],
+        },
+      ],
+      dividerText: "OS administration secured—dive into networking.",
+    },
+    {
+      name: "Networking Fundamentals",
+      description:
+        "Master networking concepts like IP addressing and routing, taught with Packet Tracer and Wireshark examples. A 2025 skill for designing and securing network infrastructure.",
+      children: [
+        {
+          name: "Network Models",
+          description:
+            "Learn OSI and TCP/IP, taught with Wireshark packet examples. Key in 2025 for protocol understanding.",
+          children: [
+            {
+              name: "OSI Layers",
+              description:
+                "Study layers with examples, taught with Wireshark. A 2025 skill for network theory.",
+            },
+            {
+              name: "TCP/IP Basics",
+              description:
+                "Understand TCP/IP with examples, taught with `ping`. Key in 2025 for connectivity.",
+            },
+            {
+              name: "Protocol Analysis", // New
+              description:
+                "Analyze HTTP/HTTPS with Wireshark, taught with examples. A 2025 skill for traffic understanding.",
+            },
+          ],
+        },
+        {
+          name: "Subnetting & VLANs",
+          description:
+            "Configure subnets and VLANs with Packet Tracer, taught with examples. A 2025 skill for network segmentation.",
+          children: [
+            {
+              name: "Subnet Calculations",
+              description:
+                "Calculate subnets, taught with examples. A 2025 skill for IP planning.",
+            },
+            {
+              name: "VLAN Setup",
+              description:
+                "Set VLANs with `vlan`, taught with examples. Key in 2025 for isolation.",
+            },
+            {
+              name: "Inter-VLAN Routing", // New
+              description:
+                "Configure routing between VLANs, taught with examples. A 2025 skill for network design.",
+            },
+          ],
+        },
+        {
+          name: "Routing & Switching",
+          description:
+            "Set up routing with Cisco IOS, taught with OSPF examples in GNS3. A 2025 skill for network flow.",
+          children: [
+            {
+              name: "Static Routing",
+              description:
+                "Configure static routes, taught with examples. A 2025 skill for basic routing.",
+            },
+            {
+              name: "Dynamic Routing",
+
+              description:
+                "Use OSPF, taught with GNS3 examples. Preferred in 2025 for scalability.",
+            },
+            {
+              name: "Switch Security", // New
+              description:
+                "Secure switches with port security, taught with examples. A 2025 skill for layer 2 protection.",
+            },
+          ],
+        },
+      ],
+      dividerText: "Networking fundamentals down—secure the network.",
+    },
+    {
+      name: "Network Security",
+      description:
+        "Secure networks with firewalls and VPNs, taught with pfSense and OpenVPN examples. A 2025 skill for protecting data in transit and perimeters.",
+      children: [
+        {
+          name: "Firewalls & Filtering",
+          description:
+            "Set up firewalls with pfSense, taught with traffic blocking examples. Key in 2025 for perimeter defense.",
+          children: [
+            {
+              name: "Rule Creation",
+              description:
+                "Create rules in pfSense, taught with examples. A 2025 skill for access control.",
+            },
+            {
+              name: "Traffic Monitoring",
+              description:
+                "Monitor with Wireshark, taught with examples. Key in 2025 for visibility.",
+            },
+            {
+              name: "Intrusion Detection Systems (IDS)", // New
+              description:
+                "Set up Snort, taught with examples. A 2025 skill for threat detection.",
+            },
+          ],
+        },
+        {
+          name: "VPNs & Encryption",
+          description:
+            "Secure with OpenVPN, taught with tunnel examples. A 2025 skill for remote access.",
+          children: [
+            {
+              name: "OpenVPN Setup",
+
+              description:
+                "Configure OpenVPN, taught with examples. Preferred in 2025 for ease and security.",
+            },
+            {
+              name: "IPSec Basics",
+              description:
+                "Set up IPSec, taught with examples. A 2025 skill for advanced VPNs.",
+            },
+            {
+              name: "WireGuard Intro", // New
+              description:
+                "Configure WireGuard, taught with examples. A 2025 skill for modern, lightweight VPNs.",
+            },
+          ],
+        },
+        {
+          name: "Wireless Security",
+          description:
+            "Secure Wi-Fi with WPA3, taught with Aircrack-ng examples. A 2025 skill for wireless protection.",
+          children: [
+            {
+              name: "WPA3 Configuration",
+              description:
+                "Set WPA3, taught with examples. A 2025 skill for modern Wi-Fi security.",
+            },
+            {
+              name: "Cracking Prevention",
+              description:
+                "Test with Aircrack-ng, taught with examples. Key in 2025 for defense.",
+            },
+            {
+              name: "Wireless Intrusion Prevention", // New
+              description:
+                "Set up WIPS with tools like Kismet, taught with examples. A 2025 skill for Wi-Fi monitoring.",
+            },
+          ],
+        },
+      ],
+      dividerText: "Network secured—learn cryptography.",
+    },
+    {
+      name: "Cryptography & Encryption",
+      description:
+        "Protect data with encryption, taught with OpenSSL and GPG examples like encrypting files. A 2025 skill for ensuring confidentiality and integrity.",
+      children: [
+        {
+          name: "Symmetric Encryption",
+          description:
+            "Use AES with OpenSSL, taught with file encryption examples. Key in 2025 for fast protection.",
+          children: [
+            {
+              name: "AES Basics",
+              description:
+                "Encrypt with AES, taught with examples. A 2025 skill for data security.",
+            },
+            {
+              name: "Key Management",
+              description:
+                "Manage keys, taught with examples. Key in 2025 for encryption safety.",
+            },
+            {
+              name: "Stream Ciphers", // New
+              description:
+                "Use ChaCha with OpenSSL, taught with examples. A 2025 skill for lightweight encryption.",
+            },
+          ],
+        },
+        {
+          name: "Asymmetric Encryption",
+          description:
+            "Master RSA with GPG, taught with key pair examples. A 2025 skill for secure exchanges.",
+          children: [
+            {
+              name: "RSA Setup",
+              description:
+                "Generate RSA keys, taught with GPG examples. A 2025 skill for key distribution.",
+            },
+            {
+              name: "Digital Signatures",
+              description:
+                "Sign with RSA, taught with examples. Key in 2025 for authenticity.",
+            },
+            {
+              name: "Elliptic Curve Cryptography (ECC)", // New
+              description:
+                "Use ECC with OpenSSL, taught with examples. A 2025 skill for efficient security.",
+            },
+          ],
+        },
+        {
+          name: "Hashing & PKI",
+          description:
+            "Ensure integrity with SHA-256 and PKI, taught with OpenSSL cert examples. A 2025 skill for verification.",
+          children: [
             {
               name: "Hashing Algorithms",
+
               description:
-                "Ensure integrity with SHA-256 and bcrypt, taught with hash examples in Python or OpenSSL. A 2025 skill for verifying data authenticity.",
+                "Use SHA-256, taught with examples. Preferred in 2025 for strength.",
             },
             {
-              name: "PKI & Certificates",
+              name: "Certificates",
               description:
-                "Manage PKI with OpenSSL and Let’s Encrypt, taught with SSL/TLS cert examples for web security. A 2025 skill for authentication and encryption.",
-            },
-          ],
-        },
-        {
-          name: "Cyber Threats & Attacks",
-          description:
-            "Identify and mitigate cyber threats like malware and phishing, taught with examples analyzing WannaCry or crafting phishing emails in a lab. A 2025 skill to defend against diverse attacks, this section equips you to proactively protect systems with tools like VirusTotal and knowledge of attack vectors.",
-          children: [
-            {
-              name: "Malware Analysis",
-              description:
-                "Analyze malware with sandboxes and IDA Pro, taught with examples dissecting ransomware like WannaCry. A 2025 skill for neutralizing threats using dynamic and static analysis techniques.",
+                "Issue certs with OpenSSL, taught with examples. Key in 2025 for TLS.",
             },
             {
-              name: "Phishing & Social Engineering",
+              name: "Certificate Revocation", // New
               description:
-                "Counter phishing with SET examples, taught with mock campaigns and defenses like email filters. A 2025 skill to protect users from human-targeted attacks using tools like Gophish.",
-            },
-            {
-              name: "Denial of Service (DoS/DDoS)",
-              description:
-                "Mitigate DoS/DDoS with Cloudflare, taught with examples countering attacks like SYN floods. A 2025 skill for maintaining system availability using tools like hping3 for testing.",
-            },
-            {
-              name: "SQL Injection",
-              description:
-                "Prevent SQL injection with Burp Suite, taught with examples exploiting and fixing vulnerabilities. A 2025 skill for securing web apps against database attacks.",
-            },
-          ],
-        },
-        {
-          name: "Security Tools & Techniques",
-          description:
-            "Use tools like Kali Linux and Nessus, taught with labs penetrating networks and analyzing logs via Splunk. A 2025 skill for defending and testing systems, this section provides hands-on expertise for threat hunting, vuln assessment, and incident response in cybersecurity operations.",
-          children: [
-            {
-              name: "Penetration Testing",
-              description:
-                "Conduct pen tests with Metasploit and Nmap, taught with labs exploiting vulnerabilities like SMB or SQLi. A 2025 skill for proactively securing systems by simulating real-world attacks.",
-            },
-            {
-              name: "SIEM & Log Analysis",
-              description:
-                "Analyze logs with Splunk and ELK Stack, taught with setups detecting brute-force attacks or anomalies. A 2025 skill for real-time threat monitoring and forensic analysis in cybersecurity.",
-            },
-            {
-              name: "Incident Response",
-              description:
-                "Respond to incidents with TheHive and GRR, taught with examples containing breaches like ransomware. A 2025 skill for managing and recovering from cybersecurity incidents effectively.",
-            },
-            {
-              name: "Vulnerability Scanning",
-              description:
-                "Scan with Nessus and OpenVAS, taught with examples finding CVEs like Heartbleed. A 2025 skill for assessing system weaknesses proactively.",
+                "Manage CRLs with OpenSSL, taught with examples. A 2025 skill for PKI maintenance.",
             },
           ],
         },
       ],
-      dividerText:
-        "Core security skills honed—secure cloud and advanced environments.",
+      dividerText: "Cryptography mastered—study cyber threats.",
     },
     {
-      name: "Cloud Security & Advanced Topics",
+      name: "Cyber Threats & Attacks",
       description:
-        "Master cloud security and cutting-edge topics like zero trust and AI, taught with AWS Security Hub and Darktrace examples for protecting modern IT systems. A 2025 skill set to secure cloud platforms, implement advanced defenses, and leverage AI for threat detection—preparing you for the evolving cybersecurity landscape with expertise.",
+        "Understand and counter threats like malware and phishing, taught with VirusTotal and SET examples. A 2025 skill for proactive defense.",
       children: [
         {
-          name: "Cloud Computing & Security",
+          name: "Malware Analysis",
           description:
-            "Secure cloud platforms like AWS and Azure, taught with examples configuring IAM and Sentinel for protection against cloud-specific threats. A 2025 skill aligning with the shift to cloud-centric IT, this section ensures you can safeguard virtual environments with tools like GCP Security Command Center.",
+            "Analyze malware with IDA Pro, taught with ransomware examples. Key in 2025 for threat neutralization.",
           children: [
             {
-              name: "AWS Security",
-              preferred: true,
+              name: "Static Analysis",
               description:
-                "Secure AWS with IAM, VPC, and Security Hub, taught with examples like locking down S3 buckets. Preferred in 2025 for AWS’s dominance and comprehensive security tools.",
+                "Dissect with IDA, taught with examples. A 2025 skill for code review.",
             },
             {
-              name: "Azure Security",
+              name: "Dynamic Analysis",
               description:
-                "Protect Azure with Sentinel and Azure AD, taught with examples detecting threats via logs. A 2025 skill for Microsoft cloud security.",
+                "Run in sandboxes, taught with examples. Key in 2025 for behavior study.",
             },
             {
-              name: "Google Cloud Security",
+              name: "Reverse Engineering", // New
               description:
-                "Secure GCP with Security Command Center, taught with examples like proxy setups. A 2025 skill for Google Cloud protection.",
+                "Reverse malware with Ghidra, taught with examples. A 2025 skill for deep analysis.",
             },
           ],
         },
+        {
+          name: "Phishing & Social Engineering",
+          description:
+            "Counter phishing with SET, taught with mock campaign examples. A 2025 skill for user protection.",
+          children: [
+            {
+              name: "Phishing Campaigns",
+              description:
+                "Craft with SET, taught with examples. A 2025 skill for testing defenses.",
+            },
+            {
+              name: "Email Filtering",
+              description:
+                "Set filters, taught with examples. Key in 2025 for prevention.",
+            },
+            {
+              name: "Spear Phishing Defense", // New
+              description:
+                "Detect with Barracuda, taught with examples. A 2025 skill for targeted attack prevention.",
+            },
+          ],
+        },
+        {
+          name: "Web-Based Attacks",
+          description:
+            "Prevent SQLi with Burp Suite, taught with exploit examples. A 2025 skill for web security.",
+          children: [
+            {
+              name: "SQL Injection",
+
+              description:
+                "Exploit and fix SQLi, taught with Burp examples. Preferred in 2025 for prevalence.",
+            },
+            {
+              name: "XSS Prevention",
+              description:
+                "Secure against XSS, taught with examples. Key in 2025 for web safety.",
+            },
+            {
+              name: "CSRF Mitigation", // New
+              description:
+                "Prevent CSRF with tokens, taught with examples. A 2025 skill for session security.",
+            },
+          ],
+        },
+        {
+          name: "DDoS Attacks", // New Parent
+          description:
+            "Understand and mitigate DDoS, taught with Cloudflare examples. A 2025 skill for availability protection.",
+          children: [
+            {
+              name: "DDoS Basics",
+              description:
+                "Learn attack types, taught with examples. A 2025 skill for threat awareness.",
+            },
+            {
+              name: "Mitigation Techniques",
+              description:
+                "Use Cloudflare rate limiting, taught with examples. Key in 2025 for defense.",
+            },
+          ],
+        },
+      ],
+      dividerText: "Threats understood—use security tools.",
+    },
+    {
+      name: "Security Tools & Techniques",
+      description:
+        "Leverage tools like Kali Linux and Nessus, taught with pen testing and log analysis examples. A 2025 skill for threat hunting and defense.",
+      children: [
+        {
+          name: "Penetration Testing",
+          description:
+            "Test with Metasploit, taught with exploit labs. Key in 2025 for proactive security.",
+          children: [
+            {
+              name: "Nmap Scanning",
+              description:
+                "Scan with Nmap, taught with examples. A 2025 skill for recon.",
+            },
+            {
+              name: "Metasploit Exploits",
+
+              description:
+                "Exploit with Metasploit, taught with SMB examples. Preferred in 2025 for versatility.",
+            },
+            {
+              name: "Privilege Escalation", // New
+              description:
+                "Escalate with Metasploit, taught with examples. A 2025 skill for attack simulation.",
+            },
+          ],
+        },
+        {
+          name: "SIEM & Monitoring",
+          description:
+            "Monitor with Splunk, taught with brute-force detection examples. A 2025 skill for real-time defense.",
+          children: [
+            {
+              name: "Splunk Setup",
+
+              description:
+                "Configure Splunk, taught with log examples. Preferred in 2025 for power.",
+            },
+            {
+              name: "ELK Stack",
+              description:
+                "Use ELK, taught with examples. A 2025 skill for open-source monitoring.",
+            },
+            {
+              name: "Alert Configuration", // New
+              description:
+                "Set alerts in Splunk, taught with examples. A 2025 skill for proactive response.",
+            },
+          ],
+        },
+        {
+          name: "Vulnerability Management",
+          description:
+            "Scan with Nessus, taught with CVE examples. A 2025 skill for risk assessment.",
+          children: [
+            {
+              name: "Nessus Scans",
+              description:
+                "Run Nessus, taught with examples. A 2025 skill for vuln detection.",
+            },
+            {
+              name: "OpenVAS",
+              description:
+                "Scan with OpenVAS, taught with examples. Key in 2025 for free tools.",
+            },
+            {
+              name: "Patch Prioritization", // New
+              description:
+                "Prioritize fixes with Nessus reports, taught with examples. A 2025 skill for risk management.",
+            },
+          ],
+        },
+        {
+          name: "Forensic Tools", // New Parent
+          description:
+            "Investigate incidents with Autopsy, taught with disk image examples. A 2025 skill for post-breach analysis.",
+          children: [
+            {
+              name: "Autopsy Basics",
+              description:
+                "Analyze with Autopsy, taught with examples. A 2025 skill for digital forensics.",
+            },
+            {
+              name: "Memory Forensics",
+              description:
+                "Use Volatility, taught with examples. Key in 2025 for RAM analysis.",
+            },
+          ],
+        },
+      ],
+      dividerText: "Tools mastered—secure the cloud.",
+    },
+    {
+      name: "Cloud Security",
+      description:
+        "Secure cloud platforms like AWS, taught with IAM and Security Hub examples. A 2025 skill for protecting modern IT infrastructure.",
+      children: [
+        {
+          name: "AWS Security",
+
+          description:
+            "Secure AWS with IAM and VPC, taught with S3 lockdown examples. Preferred in 2025 for market dominance.",
+          children: [
+            {
+              name: "Identity Access Management (IAM)",
+              description:
+                "Configure IAM, taught with role examples. A 2025 skill for access control.",
+            },
+            {
+              name: "Virtual Private Cloud (VPC)",
+              description:
+                "Set up VPC, taught with subnet examples. Key in 2025 for network isolation.",
+            },
+            {
+              name: "AWS Security Hub", // New
+              description:
+                "Monitor with Security Hub, taught with examples. A 2025 skill for compliance.",
+            },
+          ],
+        },
+        {
+          name: "Azure Security",
+          description:
+            "Protect Azure with Sentinel, taught with log examples. A 2025 skill for Microsoft cloud.",
+          children: [
+            {
+              name: "Azure Sentinel",
+              description:
+                "Monitor with Sentinel, taught with examples. A 2025 skill for threat detection.",
+            },
+            {
+              name: "Azure AD",
+              description:
+                "Secure with Azure AD, taught with examples. Key in 2025 for identity.",
+            },
+            {
+              name: "Azure Key Vault", // New
+              description:
+                "Manage secrets with Key Vault, taught with examples. A 2025 skill for encryption.",
+            },
+          ],
+        },
+        {
+          name: "GCP Security",
+          description:
+            "Secure GCP with Security Command Center, taught with examples. A 2025 skill for Google Cloud.",
+          children: [
+            {
+              name: "Security Command Center",
+              description:
+                "Use SCC, taught with proxy examples. A 2025 skill for GCP protection.",
+            },
+            {
+              name: "Cloud Armor",
+              description:
+                "Protect with Cloud Armor, taught with examples. Key in 2025 for DDoS defense.",
+            },
+            {
+              name: "Cloud IAM", // New
+              description:
+                "Configure IAM in GCP, taught with examples. A 2025 skill for access control.",
+            },
+          ],
+        },
+        {
+          name: "Multi-Cloud Security", // New Parent
+          description:
+            "Secure hybrid clouds with Prisma, taught with examples. A 2025 skill for diverse environments.",
+          children: [
+            {
+              name: "Prisma Cloud",
+              description:
+                "Use Prisma, taught with examples. A 2025 skill for unified security.",
+            },
+            {
+              name: "Container Security",
+              description:
+                "Secure Docker with Twistlock, taught with examples. Key in 2025 for cloud-native apps.",
+            },
+          ],
+        },
+      ],
+      dividerText: "Cloud secured—explore advanced topics.",
+    },
+    {
+      name: "Advanced Cybersecurity Topics",
+      description:
+        "Learn zero trust, AI security, and more, taught with Zscaler and Darktrace examples. A 2025 skill for cutting-edge defense.",
+      children: [
         {
           name: "Zero Trust Security",
           description:
-            "Implement zero trust with tools like Zscaler, taught with examples enforcing ‘never trust, always verify’ across networks. A 2025 skill for robust cybersecurity, this section ensures all access is validated, protecting untrusted environments with advanced techniques and policies.",
+            "Implement zero trust with Zscaler, taught with verification examples. Key in 2025 for modern security.",
           children: [
             {
               name: "Microsegmentation",
               description:
-                "Restrict access with microsegmentation, taught with VMware NSX examples isolating workloads. A 2025 skill for zero trust granularity.",
+                "Isolate with NSX, taught with examples. A 2025 skill for granularity.",
             },
             {
-              name: "Identity and Access Management (IAM)",
+              name: "IAM in Zero Trust",
               description:
-                "Control access with Okta and BeyondCorp, taught with examples enforcing zero trust IAM. A 2025 skill for secure authentication.",
+                "Use Okta, taught with examples. Key in 2025 for access.",
             },
             {
-              name: "Device Trust",
+              name: "Zero Trust Network Access (ZTNA)", // New
               description:
-                "Verify devices with CrowdStrike, taught with examples checking endpoints. A 2025 skill for zero trust enforcement.",
+                "Implement ZTNA with Zscaler, taught with examples. A 2025 skill for secure access.",
             },
           ],
         },
         {
-          name: "Threat Intelligence & AI",
+          name: "AI in Cybersecurity",
           description:
-            "Enhance cybersecurity with threat intelligence and AI tools like Darktrace, taught with examples detecting anomalies or analyzing malware with ML. A 2025 skill for proactive defense, this section leverages data-driven insights and automation to stay ahead of threats in complex IT environments.",
+            "Detect threats with Darktrace, taught with anomaly examples. A 2025 skill for smart defense.",
           children: [
             {
-              name: "AI-Based Threat Detection",
+              name: "AI Threat Detection",
+
               description:
-                "Detect threats with Darktrace and TensorFlow, taught with examples spotting anomalies in logs. A 2025 skill for ML-driven cybersecurity.",
+                "Use Darktrace, taught with examples. Preferred in 2025 for innovation.",
             },
             {
-              name: "Malware Analysis with AI",
+              name: "ML Malware Analysis",
               description:
-                "Analyze malware with Cylance and AI, taught with examples using ML models for detection. A 2025 skill for advanced threat analysis.",
+                "Analyze with Cylance, taught with examples. Key in 2025 for automation.",
             },
             {
-              name: "Cyber Threat Intelligence",
+              name: "Adversarial AI Defense", // New
               description:
-                "Gather intelligence with ThreatConnect, taught with examples analyzing IOCs. A 2025 skill for informed cybersecurity strategies.",
+                "Counter AI attacks with TensorFlow, taught with examples. A 2025 skill for future threats.",
+            },
+          ],
+        },
+        {
+          name: "Threat Intelligence",
+          description:
+            "Gather intel with ThreatConnect, taught with IOC examples. A 2025 skill for strategy.",
+          children: [
+            {
+              name: "IOC Analysis",
+              description:
+                "Analyze IOCs, taught with examples. A 2025 skill for intel.",
+            },
+            {
+              name: "Threat Feeds",
+              description:
+                "Use feeds, taught with examples. Key in 2025 for updates.",
+            },
+            {
+              name: "Dark Web Monitoring", // New
+              description:
+                "Monitor with Flashpoint, taught with examples. A 2025 skill for hidden threats.",
+            },
+          ],
+        },
+        {
+          name: "IoT Security", // New Parent
+          description:
+            "Secure IoT devices with Armis, taught with examples. A 2025 skill for connected systems.",
+          children: [
+            {
+              name: "Device Discovery",
+              description:
+                "Identify IoT with Armis, taught with examples. A 2025 skill for visibility.",
+            },
+            {
+              name: "IoT Encryption",
+              description:
+                "Secure with MQTT TLS, taught with examples. Key in 2025 for data protection.",
             },
           ],
         },
       ],
-      dividerText:
-        "Cloud and advanced security in place—earn certifications next.",
+      dividerText: "Advanced topics learned—earn certifications.",
     },
     {
       name: "Cybersecurity Certifications",
       description:
-        "Validate your cybersecurity expertise with industry-recognized certifications like CISSP and CCSP, taught with preparation strategies using resources like Cybrary and ExamCompass. A 2025 skill to boost credibility and career prospects, this step ensures you’re equipped for roles in IT security with practical, certifiable knowledge and skills.",
+        "Validate skills with certs like CISSP, taught with Cybrary and ExamCompass prep. A 2025 skill for career growth.",
       children: [
         {
           name: "CompTIA Security+",
           description:
-            "Earn CompTIA Security+, an entry-level cert, taught with prep via Cybrary and practice tests on ExamCompass. This section covers cybersecurity basics—threats, cryptography—ideal for 2025 beginners starting IT security careers with a widely accepted credential.",
+            "Earn Security+, taught with Cybrary examples. Key in 2025 for beginners.",
         },
         {
           name: "Certified Ethical Hacker (CEH)",
           description:
-            "Master CEH for ethical hacking, taught with labs via EC-Council and Kali Linux examples like Metasploit exploits. A 2025 skill for penetration testing, it prepares you to identify vulnerabilities proactively with a respected cert in offensive security.",
+            "Master CEH with Kali labs, taught with exploit examples. A 2025 skill for pen testing.",
         },
         {
-          name: "Certified Information Systems Security Professional (CISSP)",
-          preferred: true,
+          name: "CISSP",
+
           description:
-            "Achieve CISSP, an advanced cert, taught with (ISC)² domains via Pluralsight and examples in risk management. Preferred in 2025 for its prestige and comprehensive coverage, it’s ideal for experienced pros aiming for leadership roles in cybersecurity.",
+            "Achieve CISSP with Pluralsight, taught with risk examples. Preferred in 2025 for prestige.",
         },
         {
-          name: "Certified Cloud Security Professional (CCSP)",
+          name: "OSCP", // New
           description:
-            "Gain CCSP for cloud security expertise, taught with prep via Pluralsight and AWS examples securing S3. A 2025 skill aligning with cloud trends, it certifies advanced knowledge for protecting cloud environments in a growing digital landscape.",
+            "Earn OSCP with PWK labs, taught with pen testing examples. A 2025 skill for hands-on expertise.",
+        },
+        {
+          name: "AWS Certified Security – Specialty", // New
+          description:
+            "Master AWS security with Udemy, taught with cloud examples. A 2025 skill for cloud careers.",
         },
       ],
+      dividerText: "Certified—stay current with continuous learning.",
     },
-
     {
-      name: "Step 7: Continuous Learning & Research",
+      name: "Continuous Learning & Research",
       description:
-        "Keep your cybersecurity skills cutting-edge with CTFs, bug bounties, and industry updates, taught with resources like Hack The Box and SANS blogs. A 2025 lifelong skill, this step ensures adaptability to new threats and technologies, keeping you competitive and informed in the fast-evolving cybersecurity field.",
+        "Keep skills sharp with CTFs and blogs, taught with Hack The Box and SANS examples. A 2025 skill for adaptability.",
       children: [
         {
-          name: "Capture The Flag (CTF) Challenges",
+          name: "CTF Challenges",
           description:
-            "Sharpen skills with CTFs on Hack The Box and TryHackMe, taught with challenges like privilege escalation or SQLi exploits. A 2025 skill for competitive, practical expertise, it hones your ability to tackle real-world vulnerabilities creatively and effectively.",
+            "Solve CTFs with Hack The Box, taught with pwn examples. Key in 2025 for practice.",
           children: [
             {
               name: "Hack The Box",
-              preferred: true,
+
               description:
-                "Solve HTB challenges, taught with examples like box pwns. Preferred in 2025 for depth.",
+                "Use HTB, taught with examples. Preferred in 2025 for depth.",
             },
             {
               name: "TryHackMe",
               description:
-                "Use TryHackMe, taught with beginner-friendly rooms. A 2025 skill for learning pace.",
+                "Learn with TryHackMe, taught with examples. A 2025 skill for pace.",
+            },
+            {
+              name: "OverTheWire", // New
+              description:
+                "Practice wargames with OverTheWire, taught with examples. A 2025 skill for fundamentals.",
             },
           ],
         },
         {
-          name: "Bug Bounty Programs",
+          name: "Bug Bounties",
           description:
-            "Participate in bug bounties on HackerOne and Bugcrowd, taught with examples reporting XSS or SSRF vulns. A 2025 skill for real-world security contributions, it enhances expertise and earns recognition while improving system defenses globally.",
+            "Hunt bugs with HackerOne, taught with XSS examples. A 2025 skill for real-world impact.",
           children: [
             {
               name: "HackerOne",
-              preferred: true,
+
               description:
-                "Report on HackerOne, taught with XSS examples. Preferred in 2025 for its reach.",
+                "Report on HackerOne, taught with examples. Preferred in 2025 for reach.",
             },
             {
               name: "Bugcrowd",
               description:
-                "Use Bugcrowd, taught with SSRF examples. A 2025 skill for bounty variety.",
+                "Use Bugcrowd, taught with examples. Key in 2025 for variety.",
+            },
+            {
+              name: "Synack", // New
+              description:
+                "Engage with Synack, taught with examples. A 2025 skill for elite hunting.",
             },
           ],
         },
         {
-          name: "Cybersecurity Blogs & Conferences",
+          name: "Industry Updates",
           description:
-            "Stay updated with blogs (SANS, Krebs) and cons (Black Hat), taught with examples tracking ransomware trends. A 2025 skill for industry knowledge, it keeps you informed via resources like DEF CON talks and Threatpost articles.",
+            "Follow SANS and Black Hat, taught with trend examples. A 2025 skill for knowledge.",
           children: [
             {
               name: "SANS Blogs",
               description:
-                "Read SANS, taught with threat examples. A 2025 skill for expert insights.",
+                "Read SANS, taught with examples. A 2025 skill for insights.",
             },
             {
               name: "Black Hat",
               description:
-                "Attend Black Hat, taught with session examples. Key in 2025 for cutting-edge updates.",
+                "Attend Black Hat, taught with examples. Key in 2025 for updates.",
             },
             {
-              name: "Threatpost",
+              name: "DEF CON", // New
               description:
-                "Follow Threatpost, taught with news examples. A 2025 skill for real-time info.",
+                "Explore DEF CON talks, taught with examples. A 2025 skill for cutting-edge trends.",
+            },
+          ],
+        },
+        {
+          name: "Open-Source Contributions", // New Parent
+          description:
+            "Contribute to tools like Metasploit, taught with GitHub examples. A 2025 skill for community impact.",
+          children: [
+            {
+              name: "GitHub Basics",
+              description:
+                "Use GitHub for projects, taught with examples. A 2025 skill for collaboration.",
+            },
+            {
+              name: "Tool Enhancement",
+              description:
+                "Improve tools like Nmap, taught with examples. Key in 2025 for skill growth.",
             },
           ],
         },
       ],
+      dividerText: "Learning ongoing—start your cybersecurity career!",
     },
   ],
 };

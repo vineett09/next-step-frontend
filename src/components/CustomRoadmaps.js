@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ReactFlow, {
+import {
+  ReactFlow,
   Controls,
   Background,
   useNodesState,
@@ -7,8 +8,8 @@ import ReactFlow, {
   addEdge,
   MiniMap,
   Handle,
-} from "reactflow";
-import "reactflow/dist/style.css";
+} from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
