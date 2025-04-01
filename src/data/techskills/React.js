@@ -87,7 +87,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 1 complete—proceed to React introduction.",
+      dividerText: "proceed to React introduction.",
     },
     {
       name: "Introduction to React",
@@ -135,7 +135,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 2 complete—move to React components and JSX.",
+      dividerText: "move to React components and JSX.",
     },
     {
       name: "Components and JSX",
@@ -180,7 +180,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 3 complete—advance to state and events.",
+      dividerText: "advance to state and events.",
     },
     {
       name: "Basic Hooks and Event Handling",
@@ -226,7 +226,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 4 complete—explore rendering techniques.",
+      dividerText: "explore rendering techniques.",
     },
     {
       name: " Rendering Techniques",
@@ -272,7 +272,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 5 complete—proceed to forms and side effects.",
+      dividerText: "proceed to forms and side effects.",
     },
     {
       name: "Forms and Side Effects",
@@ -316,7 +316,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 6 complete—add routing and composition.",
+      dividerText: "add routing and composition.",
     },
     {
       name: "Routing and Composition",
@@ -362,7 +362,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 7 complete—dive into advanced state management.",
+      dividerText: "dive into advanced state management.",
     },
     {
       name: "Advanced State Management",
@@ -407,7 +407,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 8 complete—optimize and integrate APIs.",
+      dividerText: "optimize and integrate APIs.",
     },
     {
       name: "Optimization and API Integration",
@@ -452,7 +452,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 9 complete—enhance with custom hooks and errors.",
+      dividerText: "enhance with custom hooks and errors.",
     },
     {
       name: "Custom Hooks and Error Handling",
@@ -496,7 +496,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 10 complete—adopt professional tools.",
+      dividerText: "adopt professional tools.",
     },
     {
       name: "Professional Development Tools",
@@ -541,7 +541,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 11 complete—style and enhance with libraries.",
+      dividerText: "style and enhance with libraries.",
     },
     {
       name: "Styling and Libraries",
@@ -585,7 +585,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 12 complete—explore frameworks and deployment.",
+      dividerText: "explore frameworks and deployment.",
     },
     {
       name: "Frameworks and Deployment",
@@ -629,7 +629,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 13 complete—master advanced patterns.",
+      dividerText: "master advanced patterns.",
     },
     {
       name: "Advanced Patterns and Rendering",
@@ -674,7 +674,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 14 complete—pursue mastery and specialization.",
+      dividerText: "pursue mastery and specialization.",
     },
     {
       name: "Mastery and Specialization",
@@ -755,7 +755,7 @@ const reactDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 15 complete—commit to continuous learning.",
+      dividerText: "commit to continuous learning.",
     },
     {
       name: "Continuous Learning",

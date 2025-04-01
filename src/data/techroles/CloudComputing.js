@@ -9,7 +9,7 @@ const CloudComputingRoadmap = {
         "Begin your cloud journey by mastering the basics of cloud computing, laying a strong groundwork for advanced skills. This section explores core principles, historical evolution, and enabling technologies like virtualization, taught with examples such as AWS VMs and VMware setups. It’s your essential starting point in 2025, providing the knowledge to understand and manage scalable, efficient cloud solutions that power modern digital infrastructure.",
       children: [
         {
-          name: "Introduction to Cloud Computing",
+          name: "Introduction to Cloud",
           description:
             "Dive into the essentials of cloud computing, understanding its definition, evolution, and transformative impact on IT and business operations, taught with historical examples like the rise of AWS and Azure. This section builds the foundational knowledge needed for 2025, equipping you to navigate cloud ecosystems, comprehend their role in modern infrastructure, and prepare for deeper technical exploration.",
           children: [
@@ -85,8 +85,7 @@ const CloudComputingRoadmap = {
             "Learn GCP, a 2025 innovator in AI and data analytics, taught with examples like Compute Engine and BigQuery. Suited for learners interested in cutting-edge tech like machine learning or cost-effective solutions, it’s growing fast in cloud-native and open-source communities.",
         },
       ],
-      dividerText:
-        "Platform chosen—explore core cloud services with focus next.",
+      dividerText: "Platform chosen—explore core cloud services.",
     },
     {
       name: "Core Cloud Services",
@@ -117,6 +116,28 @@ const CloudComputingRoadmap = {
           ],
         },
 
+        {
+          name: "Networking Services",
+          description:
+            "Explore cloud networking components—VPCs, load balancers, CDNs—taught with AWS VPC and Azure CDN examples for secure, efficient architectures. This section builds 2025 skills to design high-availability networks, ensuring performance and connectivity for global cloud apps using tools like Cloudflare and GCP networking.",
+          children: [
+            {
+              name: "Virtual Private Cloud (VPC)",
+              description:
+                "Master VPCs like AWS VPC for isolated network environments, taught with subnet design and routing examples using Azure VNet. A 2025 skill for securing cloud resources, it ensures controlled, private networks for sensitive workloads with robust configurations.",
+            },
+            {
+              name: "Load Balancing",
+              description:
+                "Learn load balancing with AWS ELB and Azure Load Balancer, taught with setup and traffic distribution examples for uptime. A 2025 skill for optimizing resource use and resilience, it supports high-traffic apps like e-commerce with scalable configurations.",
+            },
+            {
+              name: "Content Delivery Networks (CDN)",
+              description:
+                "Understand CDNs like Cloudflare for fast content delivery, taught with caching setups and examples reducing latency. A 2025 skill for enhancing user experience, it leverages tools like AWS CloudFront to optimize web and media apps globally.",
+            },
+          ],
+        },
         {
           name: "Object Storage",
           description:
@@ -150,28 +171,6 @@ const CloudComputingRoadmap = {
               name: "Google Cloud Storage",
               description:
                 "Explore Google Cloud Storage, taught with bucket setups. Key in 2025 for GCP-integrated storage.",
-            },
-          ],
-        },
-        {
-          name: "Networking Services",
-          description:
-            "Explore cloud networking components—VPCs, load balancers, CDNs—taught with AWS VPC and Azure CDN examples for secure, efficient architectures. This section builds 2025 skills to design high-availability networks, ensuring performance and connectivity for global cloud apps using tools like Cloudflare and GCP networking.",
-          children: [
-            {
-              name: "Virtual Private Cloud (VPC)",
-              description:
-                "Master VPCs like AWS VPC for isolated network environments, taught with subnet design and routing examples using Azure VNet. A 2025 skill for securing cloud resources, it ensures controlled, private networks for sensitive workloads with robust configurations.",
-            },
-            {
-              name: "Load Balancing",
-              description:
-                "Learn load balancing with AWS ELB and Azure Load Balancer, taught with setup and traffic distribution examples for uptime. A 2025 skill for optimizing resource use and resilience, it supports high-traffic apps like e-commerce with scalable configurations.",
-            },
-            {
-              name: "Content Delivery Networks (CDN)",
-              description:
-                "Understand CDNs like Cloudflare for fast content delivery, taught with caching setups and examples reducing latency. A 2025 skill for enhancing user experience, it leverages tools like AWS CloudFront to optimize web and media apps globally.",
             },
           ],
         },

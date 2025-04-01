@@ -102,8 +102,7 @@ const uiUxRoadmap = {
           ],
         },
       ],
-      dividerText:
-        "Foundational principles mastered—explore research methods next.",
+      dividerText: "Foundational principles mastered—explore research methods.",
     },
     {
       name: "Research Methods",

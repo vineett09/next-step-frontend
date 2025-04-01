@@ -156,7 +156,7 @@ const backendDeveloperRoadmap = {
         },
       ],
       dividerText:
-        "Master your chosen language—now, let's dive deeper into the back-end ecosystem.",
+        "Master your chosen language, let's dive into the back-end ecosystem.",
     },
     {
       name: "Exploring the Language Ecosystem",

@@ -28,6 +28,16 @@ const linuxDeveloperRoadmap = {
               description:
                 "Get familiar with basic tools to explore the OS. The `uname` command shows system information like the kernel version, while `whoami` tells you the username you're logged in as. Open a Terminal and type these commands to see the output.",
             },
+            {
+              name: "User Accounts",
+              description:
+                "Learn about user accounts and how to create and manage users. Use commands to create a new user and check their details.",
+            },
+            {
+              name: "File System",
+              description:
+                "Understand how files and directories are organized in the file system. Use commands to check the current directory and list files in it.",
+            },
           ],
         },
         {
@@ -56,11 +66,7 @@ const linuxDeveloperRoadmap = {
               description:
                 "Debian is a Linux distribution with a focus on stability and ease of use. Download the latest version from the official website, create a bootable USB drive, and install it on your computer or in a virtual machine. Follow the setup steps to create a user account and password.",
             },
-            {
-              name: "Arch Linux",
-              description:
-                "Arch Linux is a rolling distribution built from the latest sources, with a focus on stability and freedom. Download the latest version from the official website, create a bootable USB drive, and install it on your computer or in a virtual machine. Follow the setup steps to create a user account and password.",
-            },
+
             {
               name: "Fedora",
 
@@ -489,7 +495,7 @@ const linuxDeveloperRoadmap = {
       dividerText: "secure your system.",
     },
     {
-      name: " Advanced Topics - System Security",
+      name: " System Security",
       description:
         "Secure your Linux system by setting up basic protections. This step teaches you to configure a firewall, and you’ll practice by enabling `ufw`, allowing SSH access, and activating it to block unwanted traffic.",
       children: [
@@ -541,7 +547,7 @@ const linuxDeveloperRoadmap = {
       dividerText: "monitor and tune performance.",
     },
     {
-      name: " Advanced Topics - System Monitoring and Performance Tuning",
+      name: " System Monitoring and Performance Tuning",
       description:
         "Monitor and optimize your system’s performance. This step teaches you to check resource usage, and you’ll practice by using the `free` command to view memory stats, ensuring your system runs efficiently.",
       children: [
@@ -593,7 +599,7 @@ const linuxDeveloperRoadmap = {
       dividerText: "backup and recover data.",
     },
     {
-      name: " Advanced Topics - Backup and Recovery",
+      name: "Backup and Recovery",
       description:
         "Protect your data with backups and learn to restore it. This step guides you through creating a backup using `tar`, compressing files into an archive, and extracting them later to recover data.",
       children: [

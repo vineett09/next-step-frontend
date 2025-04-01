@@ -374,42 +374,26 @@ export const techSkills = [
     description:
       "GraphQL is a query language for APIs that allows clients to request exactly the data they need, improving efficiency over traditional REST. It’s backed by a strong type system. GraphQL developers design schemas and resolvers, enabling flexible, performant data fetching for front-end applications, reducing over-fetching and enhancing scalability in modern web development workflows.",
   },
+
   {
     id: 32,
-    title: "REST APIs",
-    icon: "🔌",
-    link: "/rest-apis",
+    title: "React Native",
+    icon: "📱",
+    link: "/react-native",
     description:
-      "REST APIs (Representational State Transfer) enable communication between systems over HTTP, using standard methods like GET and POST to access resources. They’re stateless and widely adopted. Developers build RESTful services with frameworks like Express or Django, creating scalable, interoperable back-ends that power web and mobile apps by delivering data in formats like JSON or XML.",
+      "React Native is a framework for building mobile applications using JavaScript and React, enabling cross-platform development for iOS and Android. It uses native components for performance. Developers create responsive, high-quality apps with a single codebase, leveraging React’s component model and ecosystem to streamline mobile development and enhance user experiences across devices.",
   },
+
   {
     id: 33,
-    title: "Selenium",
-    icon: "🔍",
-    link: "/selenium",
-    description:
-      "Selenium is an open-source tool for automating web browser interactions, primarily used for testing web applications across different platforms and browsers. It supports languages like Python and Java. QA engineers and developers use Selenium to write scripts that simulate user actions, ensuring functionality, performance, and reliability in web development through automated regression and cross-browser testing.",
-  },
-
-  {
-    id: 34,
-    title: "Ansible",
-    icon: "⚙️",
-    link: "/ansible",
-    description:
-      "Ansible is an open-source automation tool for configuration management, application deployment, and task orchestration. It uses a simple, human-readable YAML syntax. DevOps engineers leverage Ansible to automate IT infrastructure, manage servers, and streamline workflows, ensuring consistency and scalability across systems with agentless, SSH-based execution.",
-  },
-
-  {
-    id: 35,
-    title: "Hadoop",
+    title: "Apache Hadoop",
     icon: "🐘",
-    link: "/hadoop",
+    link: "/apache-hadoop",
     description:
       "Hadoop is an open-source framework for distributed storage and processing of big data using the MapReduce model and HDFS. It’s designed for scalability and fault tolerance. Data engineers use Hadoop to analyze massive datasets, powering applications in finance, healthcare, and research with its robust ecosystem of tools like Hive and Pig.",
   },
   {
-    id: 36,
+    id: 34,
     title: "Jenkins",
     icon: "🤖",
     link: "/jenkins",
@@ -418,7 +402,7 @@ export const techSkills = [
   },
 
   {
-    id: 37,
+    id: 35,
     title: "Pandas",
     icon: "🐼",
     link: "/pandas",
@@ -427,15 +411,15 @@ export const techSkills = [
   },
 
   {
-    id: 38,
-    title: "PyTorch",
-    icon: "🔥",
-    link: "/pytorch",
+    id: 36,
+    title: "C",
+    icon: " 🟩",
+    link: "/clang",
     description:
-      "PyTorch is an open-source machine learning framework favored for its dynamic computation graphs and ease of use in research and production. It supports GPU acceleration. Data scientists and AI engineers use PyTorch to build and train neural networks for tasks like NLP and computer vision, leveraging its flexibility and robust ecosystem.",
+      "C is a high-performance, general-purpose programming language known for its efficiency and low-level access to memory. It’s widely used in system programming, embedded systems, and game development. C developers write operating systems, compilers, and applications that require direct hardware manipulation, leveraging its speed and portability across platforms while maintaining control over system resources.",
   },
   {
-    id: 39,
+    id: 37,
     title: "Scala",
     icon: "🔴",
     link: "/scala",
@@ -443,7 +427,7 @@ export const techSkills = [
       "Scala is a high-level, functional programming language that runs on the JVM, blending object-oriented and functional paradigms for concise, scalable code. It powers big data tools like Apache Spark. Developers use Scala for distributed systems and data processing, leveraging its type safety and concurrency features for robust, modern applications.",
   },
   {
-    id: 40,
+    id: 38,
     title: "Swift",
     icon: "🐦",
     link: "/swift",

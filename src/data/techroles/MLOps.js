@@ -530,8 +530,6 @@ const mlOpsRoadmap = {
           ],
         },
       ],
-      dividerText:
-        "Security and compliance ensured—apply skills to practical projects next.",
     },
     {
       name: "Projects",
@@ -647,8 +645,6 @@ const mlOpsRoadmap = {
           ],
         },
       ],
-      dividerText:
-        "Projects completed—advance your MLOps career with professional development next.",
     },
     {
       name: "Professional Development",

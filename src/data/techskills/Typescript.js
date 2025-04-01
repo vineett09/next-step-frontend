@@ -216,11 +216,7 @@ const typescriptDeveloperRoadmap = {
               description:
                 "Define named constants with enum, like enum Status { Active = 1 }. Enums enhance readability and type safety for fixed values.",
             },
-            {
-              name: "Literal Types",
-              description:
-                "Specify exact values, like let direction: 'up' | 'down'. Literal types narrow possibilities, enforcing precise value constraints.",
-            },
+
             {
               name: "Type Assertions",
               description:

@@ -61,6 +61,12 @@ import SharedRoadmapViewer from "./components/SharedRoadmapViewer";
 import AISuggestions from "./components/AISuggestions";
 import SuggestionView from "./components/AISuggestionsView";
 import swiftRoadmap from "./data/techskills/Swift";
+import jenkinsRoadmap from "./data/techskills/Jenkins";
+import ScalaRoadmap from "./data/techskills/Scala";
+import apacheHadoopRoadmap from "./data/techskills/ApacheHadoop";
+import pandasRoadmap from "./data/techskills/Pandas";
+import CLangRoadmap from "./data/techskills/CLang";
+import ReactNativeRoadmap from "./data/techskills/ReactNative";
 function App() {
   return (
     <Router>
@@ -214,6 +220,19 @@ function App() {
           />
           <Route path="/graphql" element={<Roadmap data={grapgqlRoadmap} />} />
           <Route path="/swift" element={<Roadmap data={swiftRoadmap} />} />
+          <Route path="/jenkins" element={<Roadmap data={jenkinsRoadmap} />} />
+          <Route path="/scala" element={<Roadmap data={ScalaRoadmap} />} />
+          <Route
+            path="/apache-hadoop"
+            element={<Roadmap data={apacheHadoopRoadmap} />}
+          />
+          <Route path="/pandas" element={<Roadmap data={pandasRoadmap} />} />
+          <Route path="/clang" element={<Roadmap data={CLangRoadmap} />} />
+          <Route
+            path="/react-native"
+            element={<Roadmap data={ReactNativeRoadmap} />}
+          />
+          {/* Add more routes as needed */}
         </Routes>
       </div>
     </Router>

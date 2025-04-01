@@ -164,11 +164,7 @@ const redisDeveloperRoadmap = {
               description:
                 "Union with SUNION key1 key2, e.g., SUNION set1 set2. Combines multiple sets.",
             },
-            {
-              name: "SDIFF",
-              description:
-                "Difference with SDIFF key1 key2, e.g., SDIFF set1 set2. Finds items in set1 but not set2.",
-            },
+
             {
               name: "SINTER and more",
               description:

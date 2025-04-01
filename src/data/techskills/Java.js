@@ -36,7 +36,7 @@ const javaDeveloperRoadmap = {
           ],
         },
         {
-          name: "Object-Oriented Programming (OOP)",
+          name: "Object-Oriented Programming",
           description:
             "Master Java’s OOP model by applying its four pillars to design reusable code.",
           children: [
@@ -332,7 +332,7 @@ const javaDeveloperRoadmap = {
         "Ensure code quality and reliability with comprehensive testing practices.",
       children: [
         {
-          name: "Unit Testing with JUnit 5 and Mockito",
+          name: "Unit Testing with ",
           description: "Test individual components in isolation.",
           children: [
             {
@@ -359,6 +359,7 @@ const javaDeveloperRoadmap = {
             },
           ],
         },
+
         {
           name: "Test-Driven Development (TDD)",
           description: "Build reliable code with a test-first approach.",

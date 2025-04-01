@@ -4,7 +4,7 @@ const pythonDeveloperRoadmap = {
     "This detailed roadmap provides a step-by-step guide to mastering Python by 2025, from basic syntax to advanced programming techniques. Covering variables, functions, data structures, OOP, file handling, libraries, web development, data science, and more, it’s enriched with nested subtopics and practical examples—taught with tools like VS Code, pip, and Jupyter—for hands-on learners aiming to excel in the 2025 Python ecosystem.",
   children: [
     {
-      name: "Step 1: Prerequisites & Setup",
+      name: "Prerequisites & Setup",
       description:
         "Set up the foundation for Python development with essential tools and basic skills, taught with a simple script in VS Code. This step ensures readiness for coding in 2025.",
       children: [

@@ -73,7 +73,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 1 complete—set up your environment.",
+      dividerText: "set up your environment.",
     },
     {
       name: "Step 2: Environment Setup",
@@ -143,7 +143,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 2 complete—learn basic Git commands.",
+      dividerText: "learn basic Git commands.",
     },
     {
       name: "Step 3: Basic Git Commands",
@@ -189,7 +189,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 3 complete—manage changes locally.",
+      dividerText: "manage changes locally.",
     },
     {
       name: "Step 4: Managing Local Changes",
@@ -235,7 +235,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 4 complete—work with remote repositories.",
+      dividerText: "work with remote repositories.",
     },
     {
       name: "Step 5: Remote Repositories",
@@ -283,7 +283,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 5 complete—master branching.",
+      dividerText: "master branching.",
     },
     {
       name: "Step 6: Branching and Merging",
@@ -334,7 +334,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 6 complete—collaborate on GitHub.",
+      dividerText: "collaborate on GitHub.",
     },
     {
       name: "Step 7: Collaboration on GitHub",
@@ -380,7 +380,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 7 complete—explore advanced Git features.",
+      dividerText: "explore advanced Git features.",
     },
     {
       name: "Step 8: Advanced Git Features",
@@ -426,7 +426,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 8 complete—manage projects on GitHub.",
+      dividerText: "manage projects on GitHub.",
     },
     {
       name: "Step 9: GitHub Project Management",
@@ -470,7 +470,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 9 complete—secure your GitHub usage.",
+      dividerText: "secure your GitHub usage.",
     },
     {
       name: "Step 10: Security and Permissions",
@@ -517,7 +517,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 10 complete—deploy with GitHub.",
+      dividerText: "deploy with GitHub.",
     },
     {
       name: "Step 11: Deployment with GitHub",
@@ -564,7 +564,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 11 complete—integrate with tools.",
+      dividerText: "integrate with tools.",
     },
     {
       name: "Step 12: Tool Integration",
@@ -612,7 +612,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 12 complete—engage with the community.",
+      dividerText: "engage with the community.",
     },
     {
       name: "Step 13: Community Engagement",
@@ -660,7 +660,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 13 complete—master advanced workflows.",
+      dividerText: "master advanced workflows.",
     },
     {
       name: "Step 14: Advanced Git Workflows",
@@ -708,7 +708,7 @@ const gitAndGitHubDeveloperRoadmap = {
           ],
         },
       ],
-      dividerText: "Step 14 complete—stay updated and refine skills.",
+      dividerText: "stay updated and refine skills.",
     },
     {
       name: "Step 15: Continuous Improvement",

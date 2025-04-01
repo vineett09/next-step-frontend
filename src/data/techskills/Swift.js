@@ -612,7 +612,7 @@ const swiftRoadmap = {
         "Stay updated in 2025, taught with Swift.org and community examples.",
       children: [
         {
-          name: "Staying Updated with Swift Developments",
+          name: "Staying Updated",
           description: "Follow updates, taught with Swift evolution example.",
           children: [
             {
