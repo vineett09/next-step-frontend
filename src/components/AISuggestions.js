@@ -4,6 +4,7 @@ import "../styles/AISuggestions.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AIRelatedRoadmaps from "./AI RelatedRoadmaps";
+
 const AISuggestions = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -13,6 +14,7 @@ const AISuggestions = () => {
   const [pdfLoading, setPdfLoading] = useState(false);
   const [usageInfo, setUsageInfo] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // Check authentication status when component mounts
   useEffect(() => {
@@ -23,6 +25,18 @@ const AISuggestions = () => {
     if (token) {
       fetchUsageInfo();
     }
+
+    // Add resize event listener for responsive handling
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Clean up
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   // Function to fetch current usage info
@@ -248,6 +262,8 @@ const AISuggestions = () => {
   const handleNext = () => {
     if (currentStep < questions.length - 1) {
       setCurrentStep((prev) => prev + 1);
+      // Scroll to top when moving to next question for better UX on mobile
+      window.scrollTo(0, 0);
     } else {
       handleSubmit();
     }
@@ -256,6 +272,8 @@ const AISuggestions = () => {
   const handlePrevious = () => {
     if (currentStep > 0) {
       setCurrentStep((prev) => prev - 1);
+      // Scroll to top when moving to previous question
+      window.scrollTo(0, 0);
     }
   };
 
@@ -291,6 +309,9 @@ const AISuggestions = () => {
       if (data.usageInfo) {
         setUsageInfo(data.usageInfo);
       }
+
+      // Scroll to top to show the roadmap from the beginning
+      window.scrollTo(0, 0);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -303,6 +324,8 @@ const AISuggestions = () => {
     setAnswers({});
     setRoadmap(null);
     setError(null);
+    // Scroll to top when resetting
+    window.scrollTo(0, 0);
   };
 
   const handleDownloadPDF = async () => {

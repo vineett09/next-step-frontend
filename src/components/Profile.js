@@ -119,18 +119,22 @@ const Profile = () => {
           className="pagination-button"
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
+          aria-label="Previous page"
         >
           &lt;
         </button>
 
         <span className="pagination-info">
-          Page {currentPage} of {totalPages}
+          {totalPages > 0
+            ? `Page ${currentPage} of ${totalPages}`
+            : "No pages available"}
         </span>
 
         <button
           className="pagination-button"
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={currentPage === totalPages || totalPages === 0}
+          aria-label="Next page"
         >
           &gt;
         </button>

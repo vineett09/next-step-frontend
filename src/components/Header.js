@@ -22,6 +22,7 @@ const Header = ({
   const completedNodesCount = Object.keys(completedNodes).length;
   const progressPercentage =
     totalNodes > 0 ? Math.round((completedNodesCount / totalNodes) * 100) : 0;
+
   const handleDownloadPDF = () => {
     const d3Container = document.querySelector(".d3-container");
     if (!d3Container) {
@@ -91,6 +92,7 @@ const Header = ({
       document.body.removeChild(tempDiv);
     });
   };
+
   const handleGenerateRoadmapClick = () => {
     if (!user) {
       setIsAuthModalOpen(true);
@@ -102,39 +104,22 @@ const Header = ({
   return (
     <div>
       <section className="roadmap-header">
-        <div className="roadmap-content">
+        <div className="header-top-row">
           <Link to="/" className="back-button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
               <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
             </svg>
-            <span>Go Home</span>
+            <span className="back-text">Go Home</span>
           </Link>
-          <h1>
-            {`A comprehensive roadmap to achieve ${title} field in 2025.` ||
-              "Explore Your Path to Tech Excellence"}
-          </h1>
-          <div className="progress-wrapper">
-            <span className="progress-text">
-              {completedNodesCount} / {totalNodes} Completed (
-              {progressPercentage}%)
-            </span>
-          </div>
 
-          <button
-            className="generate-roadmap"
-            aria-label="Show information"
-            onClick={handleGenerateRoadmapClick}
-          >
-            Generate AI Roadmap ✨
-          </button>
-
-          <div className="button-group">
+          <div className="action-buttons">
             <button
               onClick={toggleBookmark}
               className={`bookmark-button ${isBookmarked ? "bookmarked" : ""}`}
               aria-label={
                 isBookmarked ? "Unbookmark roadmap" : "Bookmark roadmap"
               }
+              title={isBookmarked ? "Unbookmark roadmap" : "Bookmark roadmap"}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -145,11 +130,14 @@ const Header = ({
               >
                 <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z" />
               </svg>
+              <span className="button-text">Bookmark</span>
             </button>
+
             <button
               className="download-pdf"
               onClick={handleDownloadPDF}
               aria-label="Download roadmap as PDF"
+              title="Download roadmap as PDF"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +148,32 @@ const Header = ({
               >
                 <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
               </svg>
+              <span className="button-text">PDF</span>
             </button>
+
+            <button
+              className="generate-roadmap"
+              aria-label="Generate AI Roadmap"
+              onClick={handleGenerateRoadmapClick}
+              title="Generate AI Roadmap"
+            >
+              <span>Generate AI Roadmap</span>
+              <span className="sparkle">✨</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="roadmap-content">
+          <h1>
+            {`A comprehensive roadmap to achieve ${title} field in 2025.` ||
+              "Explore Your Path to Tech Excellence"}
+          </h1>
+
+          <div className="progress-wrapper">
+            <span className="progress-text">
+              {completedNodesCount} / {totalNodes} Completed (
+              {progressPercentage}%)
+            </span>
           </div>
         </div>
       </section>

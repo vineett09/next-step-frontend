@@ -837,7 +837,7 @@ const CustomRoadmaps = () => {
       );
 
       if (response.data.success) {
-        navigate(`/roadmap/${response.data.roadmapId}`, {
+        navigate(`/profile`, {
           state: { title: roadmapTitle, description: roadmapDescription },
         });
       }

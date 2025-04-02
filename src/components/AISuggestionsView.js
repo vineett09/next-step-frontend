@@ -4,7 +4,7 @@ import axios from "axios";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Loader from "./Loader";
-import "../styles/AISuggestionsView.css"; // New CSS file
+import "../styles/AISuggestionsView.css";
 
 const SuggestionView = () => {
   const { id } = useParams();
@@ -12,19 +12,41 @@ const SuggestionView = () => {
   const [suggestion, setSuggestion] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const token = localStorage.getItem("token");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Check authentication status
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsAuthenticated(!!token);
   }, []);
+
+  // Handle window resize for responsive design
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Fetch suggestion data
   useEffect(() => {
     const fetchSuggestion = async () => {
-      if (!token) return;
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const response = await axios.get(`/api/suggestions/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         if (response.data && response.data.suggestion) {
           setSuggestion(response.data.suggestion);
         } else {
@@ -32,30 +54,50 @@ const SuggestionView = () => {
         }
       } catch (error) {
         console.error("Error fetching suggestion:", error);
-        setError("Error loading suggestion. Please try again.");
+        setError(
+          error.response?.status === 401
+            ? "Authentication error. Please log in again."
+            : "Error loading suggestion. Please try again."
+        );
       } finally {
         setLoading(false);
       }
     };
+
     fetchSuggestion();
-  }, [id, token, navigate]);
+  }, [id, navigate]);
 
   const downloadSuggestionAsPDF = async (roadmapHtml) => {
     try {
       const html2pdf = (await import("html2pdf.js")).default;
+
+      // Create temp div with proper styling
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = roadmapHtml;
-      tempDiv.className = "suggestion-display-content"; // Matches new CSS
+      tempDiv.className = "suggestion-display-content";
+
+      // Apply additional styling for PDF generation
+      tempDiv.style.margin = "20px";
+      tempDiv.style.padding = "30px";
+      tempDiv.style.maxWidth = "none"; // Remove max-width constraint for PDF
+
       document.body.appendChild(tempDiv);
+
       const opt = {
-        margin: [10, 10, 10, 10],
-        filename: `Learning-Roadmap-${new Date()
-          .toLocaleDateString()
-          .replace(/\//g, "-")}.pdf`,
+        margin: [15, 15, 15, 15],
+        filename: `Learning-Roadmap-${
+          suggestion.answers.careerGoals
+        }-${new Date().toLocaleDateString().replace(/\//g, "-")}.pdf`,
         image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          width: Math.min(800, window.innerWidth - 40), // Responsive width
+        },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       };
+
       await html2pdf().set(opt).from(tempDiv).save();
       document.body.removeChild(tempDiv);
     } catch (err) {
@@ -63,6 +105,8 @@ const SuggestionView = () => {
       alert("There was an error generating your PDF. Please try again.");
     }
   };
+
+  // Authentication required view
   if (!isAuthenticated) {
     return (
       <div className="suggestion-display-page">
@@ -75,6 +119,8 @@ const SuggestionView = () => {
       </div>
     );
   }
+
+  // Loading view
   if (loading) {
     return (
       <div className="suggestion-display-page">
@@ -85,6 +131,7 @@ const SuggestionView = () => {
     );
   }
 
+  // Error view
   if (error) {
     return (
       <div className="suggestion-display-page">
@@ -106,36 +153,43 @@ const SuggestionView = () => {
     );
   }
 
+  // Format date nicely
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  // Main content view
   return (
     <div className="suggestion-display-page">
       <Navbar />
       <div className="suggestion-display-wrapper">
         <div className="suggestion-display-header">
-          <button
-            className="suggestion-back-btn"
-            onClick={() => navigate("/profile")}
-          >
-            ← Back to Profile
-          </button>
+          {/* Info section moved to top on mobile via CSS order property */}
           <div className="suggestion-info">
             <div className="suggestion-meta">
               <p>
                 <strong>Career Goal:</strong> {suggestion.answers.careerGoals}
               </p>
               <p>
-                <strong>Experience Level:</strong>{" "}
-                {suggestion.answers.experience}
+                <strong>Experience:</strong> {suggestion.answers.experience}
               </p>
               <p>
-                <strong>Learning Preference:</strong>{" "}
-                {suggestion.answers.preference}
+                <strong>Learning Style:</strong> {suggestion.answers.preference}
               </p>
               <p>
-                <strong>Created:</strong>{" "}
-                {new Date(suggestion.createdAt).toLocaleDateString()}
+                <strong>Created:</strong> {formatDate(suggestion.createdAt)}
               </p>
             </div>
           </div>
+
+          <button
+            className="suggestion-back-btn"
+            onClick={() => navigate("/profile")}
+          >
+            ← Back to Profile
+          </button>
+
           <button
             className="suggestion-download-btn"
             onClick={() => downloadSuggestionAsPDF(suggestion.roadmap)}
@@ -143,6 +197,7 @@ const SuggestionView = () => {
             Download as PDF
           </button>
         </div>
+
         <div className="suggestion-display-content-wrapper">
           <div
             className="suggestion-display-content"
