@@ -26,7 +26,7 @@
 
 .profile-sidebar {
   width: 250px;
-  height: 350px; 
+  height: 410px; 
   border-radius: 10px;
   border: 1px solid #fff;
   padding: 1rem;
@@ -944,6 +944,146 @@
 .questionnaire-roadmap-content li {
   margin-bottom: 8px;
 }
+/* AI Generated Roadmaps Section */
+.profile-airoadmaps-section {
+  border-radius: 10px;
+  border: 1px solid #fff;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.airoadmaps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.airoadmaps-title {
+  margin: 0;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.airoadmap-create-btn {
+  display: inline-block;
+  background-color: #fff;
+  color: #000;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.airoadmap-create-btn:hover {
+  background-color: #22281c;
+  color: #fff;
+}
+
+.airoadmaps-empty-state {
+  text-align: center;
+  padding: 3.5rem 2rem;
+  background-color: #31363F;
+  border-radius: 12px;
+  border: 1px dashed #4a5568;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.airoadmaps-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.airoadmap-list-item {
+  background-color: #31363F;
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  border: 1px solid #3a404a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.airoadmap-list-item:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  border-color: #4a5568;
+}
+
+.airoadmap-list-content {
+  flex: 1;
+}
+
+.airoadmap-item-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.35rem;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.airoadmap-item-metadata {
+  color: #a0aec0;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.airoadmap-date::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23a0aec0' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z'/%3E%3Cpath d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.airoadmap-list-actions {
+  display: flex;
+  align-items: center;
+}
+
+.view-airoadmap-btn {
+  padding: 0.6rem 1.2rem;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.view-airoadmap-btn:hover {
+  background-color: #22281c;
+  color: #fff;
+}
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease-in-out;
+}
+
+.delete-button:hover {
+  background-color: #cc0000;
+}
+
+.delete-button:active {
+  background-color: #a30000;
+}
 
 .profile-auth-required {
   display: flex;
@@ -1106,6 +1246,31 @@
   .pagination-button {
     padding: 6px 10px;
   }
+  .airoadmaps-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .airoadmap-create-btn {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .airoadmap-list-item {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .airoadmap-list-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .view-airoadmap-btn {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1178,6 +1343,22 @@
   .profile-auth-required {
     margin: 50px 1rem;
     padding: 20px;
+  }
+  .airoadmaps-title {
+    font-size: 1.2rem;
+  }
+  
+  .airoadmap-item-title {
+    font-size: 1.1rem;
+  }
+  
+  .airoadmap-item-metadata {
+    font-size: 0.8rem;
+  }
+  
+  .view-airoadmap-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
   }
 }
 

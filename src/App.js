@@ -67,6 +67,7 @@ import apacheHadoopRoadmap from "./data/techskills/ApacheHadoop";
 import pandasRoadmap from "./data/techskills/Pandas";
 import CLangRoadmap from "./data/techskills/CLang";
 import ReactNativeRoadmap from "./data/techskills/ReactNative";
+import ViewAIRoadmap from "./components/ViewAIRoadmap";
 function App() {
   return (
     <Router>
@@ -85,6 +86,7 @@ function App() {
           <Route path="public-roadmap/:id" element={<SharedRoadmapViewer />} />
           <Route path="/ai-suggestion" element={<AISuggestions />} />
           <Route path="/suggestion/:id" element={<SuggestionView />} />
+          <Route path="/ai-roadmap/view/:id" element={<ViewAIRoadmap />} />
 
           {/* Tech Fields */}
           <Route

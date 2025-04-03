@@ -53,6 +53,8 @@ const Profile = () => {
   const [savedSuggestions, setSavedSuggestions] = useState([]);
   const [suggestionsCurrentPage, setSuggestionsCurrentPage] = useState(1);
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
+  const [aiGeneratedRoadmaps, setAIGeneratedRoadmaps] = useState([]);
+  const [aiRoadmapsCurrentPage, setAIRoadmapsCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const navigate = useNavigate(); // Add this line near your other hooks
 
@@ -62,6 +64,7 @@ const Profile = () => {
       fetchBookmarkedRoadmaps();
       fetchFollowedRoadmaps();
       fetchSavedSuggestions();
+      fetchAIGeneratedRoadmaps();
     }
   }, [token, user]);
 
@@ -106,7 +109,15 @@ const Profile = () => {
   const totalSuggestionsPages = Math.ceil(
     savedSuggestions.length / itemsPerPage
   );
-
+  const aiRoadmapsLastIndex = aiRoadmapsCurrentPage * itemsPerPage;
+  const aiRoadmapsFirstIndex = aiRoadmapsLastIndex - itemsPerPage;
+  const currentAIRoadmaps = aiGeneratedRoadmaps.slice(
+    aiRoadmapsFirstIndex,
+    aiRoadmapsLastIndex
+  );
+  const totalAIRoadmapsPages = Math.ceil(
+    aiGeneratedRoadmaps.length / itemsPerPage
+  );
   const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
     const handlePageChange = (pageNumber) => {
       setCurrentPage(pageNumber);
@@ -354,50 +365,34 @@ const Profile = () => {
       console.error("Error fetching saved AI suggestions:", error);
     }
   };
-
-  // Function to view a saved suggestion
-  const viewSavedSuggestion = (suggestion) => {
-    setSelectedSuggestion(suggestion);
-  };
-
-  // Function to go back to suggestions list
-  const backToSuggestions = () => {
-    setSelectedSuggestion(null);
-  };
-
-  // Function to download a saved suggestion as PDF
-  const downloadSuggestionAsPDF = async (roadmapHtml) => {
+  const fetchAIGeneratedRoadmaps = async () => {
     try {
-      const html2pdf = (await import("html2pdf.js")).default;
-
-      // Create a temporary div to hold the roadmap HTML
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = roadmapHtml;
-      tempDiv.className = "questionnaire-roadmap-content";
-      document.body.appendChild(tempDiv);
-
-      // Configure PDF options
-      const opt = {
-        margin: [10, 10, 10, 10],
-        filename: `Learning-Roadmap-${new Date()
-          .toLocaleDateString()
-          .replace(/\//g, "-")}.pdf`,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      };
-
-      // Generate and download PDF
-      await html2pdf().set(opt).from(tempDiv).save();
-
-      // Remove the temporary div
-      document.body.removeChild(tempDiv);
-    } catch (err) {
-      console.error("Error generating PDF:", err);
-      alert("There was an error generating your PDF. Please try again.");
+      const response = await axios.get("/api/ai/generated-roadmaps", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setAIGeneratedRoadmaps(response.data.aiGeneratedRoadmaps);
+    } catch (error) {
+      console.error("Error fetching AI-generated roadmaps:", error);
     }
   };
+  const deleteAIGeneratedRoadmap = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this roadmap?"))
+      return;
 
+    try {
+      await axios.delete(`/api/ai/generated-roadmaps/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setAIGeneratedRoadmaps(
+        aiGeneratedRoadmaps.filter((roadmap) => roadmap._id !== id)
+      );
+    } catch (error) {
+      console.error("Error deleting roadmap:", error);
+    }
+  };
   const findTechFieldTitle = (id) => {
     const cleanId = id.startsWith("/") ? id.substring(1) : id;
     const field = [...techFields, ...techSkills].find(
@@ -480,6 +475,14 @@ const Profile = () => {
               }}
             >
               AI Suggestions
+            </button>
+            <button
+              className={`sidebar-item ${
+                activeSection === "airoadmaps" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("airoadmaps")}
+            >
+              AI Generated Roadmaps
             </button>
           </div>
 
@@ -712,8 +715,11 @@ const Profile = () => {
                     <p className="empty-state-message">
                       You haven't followed any roadmaps yet.
                     </p>
-                    <Link to="/explore" className="empty-state-explore-btn">
-                      Explore Roadmaps
+                    <Link
+                      to="/shared-roadmaps"
+                      className="empty-state-explore-btn"
+                    >
+                      Explore Shared Roadmaps
                     </Link>
                   </div>
                 ) : (
@@ -868,6 +874,75 @@ const Profile = () => {
                         currentPage={suggestionsCurrentPage}
                         totalPages={totalSuggestionsPages}
                         setCurrentPage={setSuggestionsCurrentPage}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+            {activeSection === "airoadmaps" && (
+              <div className="profile-airoadmaps-section">
+                <div className="airoadmaps-header">
+                  <h2 className="airoadmaps-title">AI Generated Roadmaps</h2>
+                  <Link to="/generate-roadmap" className="airoadmap-create-btn">
+                    Generate New Roadmap
+                  </Link>
+                </div>
+                {aiGeneratedRoadmaps.length === 0 ? (
+                  <div className="airoadmaps-empty-state">
+                    <p className="empty-state-message">
+                      You haven't generated any AI roadmaps yet.
+                    </p>
+                    <Link
+                      to="/generate-roadmap"
+                      className="empty-state-action-btn"
+                    >
+                      Generate Your First Roadmap
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    <div className="airoadmaps-list-container">
+                      {currentAIRoadmaps.map((roadmap) => (
+                        <div key={roadmap._id} className="airoadmap-list-item">
+                          <div className="airoadmap-list-content">
+                            <h3 className="airoadmap-item-title">
+                              {roadmap.title}
+                            </h3>
+                            <div className="airoadmap-item-metadata">
+                              <span className="airoadmap-date">
+                                Created:{" "}
+                                {new Date(
+                                  roadmap.createdAt
+                                ).toLocaleDateString()}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="airoadmap-list-actions">
+                            <Link
+                              to={`/ai-roadmap/view/${roadmap._id}`}
+                              className="view-airoadmap-btn"
+                            >
+                              View
+                            </Link>
+                            <button
+                              className="delete-button"
+                              onClick={() =>
+                                deleteAIGeneratedRoadmap(roadmap._id)
+                              }
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {totalAIRoadmapsPages > 1 && (
+                      <Pagination
+                        currentPage={aiRoadmapsCurrentPage}
+                        totalPages={totalAIRoadmapsPages}
+                        setCurrentPage={setAIRoadmapsCurrentPage}
                       />
                     )}
                   </>

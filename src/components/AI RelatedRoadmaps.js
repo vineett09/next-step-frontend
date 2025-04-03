@@ -1,12 +1,17 @@
 // src/components/AIRelatedRoadmaps.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { techFields, techSkills } from "../data/TechFieldsData";
 import "../styles/RelatedRoadmaps.css"; // Reuse the same styles
+import Loader from "./Loader";
 
 const AIRelatedRoadmaps = ({ userAnswers }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    setLoading(false);
+  }, []);
   const getRelatedRoadmaps = () => {
     if (!userAnswers || !userAnswers.careerGoals) return [];
 
@@ -118,7 +123,9 @@ const AIRelatedRoadmaps = ({ userAnswers }) => {
   };
 
   const relatedRoadmaps = getRelatedRoadmaps();
-
+  if (loading) {
+    return <Loader loading={true} />;
+  }
   if (relatedRoadmaps.length === 0) return null;
 
   return (

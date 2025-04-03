@@ -205,7 +205,7 @@ const dataScienceRoadmap = {
         },
       ],
       dividerText:
-        "Data collection and visualization mastered—explore machine learning and modeling.",
+        "Data collection and visualization mastered—explore machine learning.",
     },
     {
       name: "Machine Learning and Modeling",
@@ -285,8 +285,7 @@ const dataScienceRoadmap = {
           ],
         },
       ],
-      dividerText:
-        "Modeling mastered—explore Deep Learning and advanced techniques.",
+      dividerText: "Modeling mastered—explore Deep Learning now.",
     },
     {
       name: "Deep Learning",
