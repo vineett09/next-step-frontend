@@ -217,7 +217,7 @@ const SharedRoadmaps = () => {
                         )}
                       </div>
                     </div>
-                    <div className="roadmap-actions">
+                    <div className="roadmap-actions-btn">
                       <Link
                         to={`/public-roadmap/${roadmap._id}`}
                         className="view-btn"

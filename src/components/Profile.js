@@ -365,6 +365,25 @@ const Profile = () => {
       console.error("Error fetching saved AI suggestions:", error);
     }
   };
+  const deleteAISuggestion = async (suggestionId) => {
+    if (!window.confirm("Are you sure you want to delete this suggestion?"))
+      return;
+
+    try {
+      await axios.delete(`/api/suggestions/ai-suggestions/${suggestionId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Remove the deleted suggestion from state
+      setSavedSuggestions(
+        savedSuggestions.filter((suggestion) => suggestion._id !== suggestionId)
+      );
+    } catch (error) {
+      console.error("Error deleting AI suggestion:", error);
+    }
+  };
   const fetchAIGeneratedRoadmaps = async () => {
     try {
       const response = await axios.get("/api/ai/generated-roadmaps", {
@@ -862,6 +881,12 @@ const Profile = () => {
                               }
                             >
                               View
+                            </button>
+                            <button
+                              className="delete-button"
+                              onClick={() => deleteAISuggestion(suggestion._id)}
+                            >
+                              Delete
                             </button>
                           </div>
                         </div>

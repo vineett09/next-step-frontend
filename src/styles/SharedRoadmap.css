@@ -130,7 +130,7 @@
   fill: currentColor;
 }
 
-.roadmap-actions {
+.roadmap-actions-btn {
   display: flex;
   gap: 10px;
   margin-top: auto;
