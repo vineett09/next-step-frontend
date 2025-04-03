@@ -25,7 +25,22 @@ const Chatbot = ({ roadmapTitle, data }) => {
     }
     fetchChatbotUsage(); // ✅ Fetch chatbot usage count when page loads
   }, [isAuthenticated, user]);
+  // Add this useEffect hook to your component
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (isOpen && !e.target.closest(".chatbot-container")) {
+        setIsOpen(false);
+      }
+    };
 
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isOpen]);
   // Save messages to localStorage whenever they change
   useEffect(() => {
     if (isAuthenticated && user && messages.length > 0) {
@@ -35,6 +50,7 @@ const Chatbot = ({ roadmapTitle, data }) => {
       );
     }
   }, [messages, isAuthenticated, user]);
+
   const fetchChatbotUsage = async () => {
     if (!isAuthenticated || !user) return;
 
@@ -157,11 +173,19 @@ const Chatbot = ({ roadmapTitle, data }) => {
       setMessages([]);
     }
   };
-
+  const handleTouchStart = (e) => {
+    e.preventDefault();
+    setIsOpen(true);
+  };
   return (
     <>
       {!isOpen && (
-        <div className="chatbot-icon" onClick={() => setIsOpen(true)}>
+        <div
+          className="chatbot-icon"
+          onClick={() => setIsOpen(true)}
+          onTouchStart={handleTouchStart}
+        >
+          {" "}
           <button className="sparkle-button">
             <span className="spark"></span>
             <span className="backdrop"></span>
@@ -542,11 +566,12 @@ const Chatbot = ({ roadmapTitle, data }) => {
               <>
                 <input
                   type="text"
+                  inputMode="text"
                   placeholder="Ask about this roadmap..."
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && handleSend()}
-                  disabled={!isAuthenticated || usageCount >= 10} // ✅ Disable if limit reached
+                  disabled={!isAuthenticated || usageCount >= 10}
                 />
                 <button
                   onClick={handleSend}

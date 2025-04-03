@@ -4,18 +4,7 @@ import "../styles/Loader.css";
 const Loader = ({ loading }) => {
   return (
     <div className={`loader-container ${loading ? "loading" : ""}`}>
-      <div className="loader">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <div className="loader"></div>
     </div>
   );
 };

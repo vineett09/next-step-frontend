@@ -9,6 +9,8 @@ const TipBox = () => {
       className="tipbox-wrapper"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={() => setIsHovered(true)} // For mobile touch
+      onTouchEnd={() => setIsHovered(false)} // For mobile touch
     >
       <button className="tipbox-btn">TIP💡</button>
 

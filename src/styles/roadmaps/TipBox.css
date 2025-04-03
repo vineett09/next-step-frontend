@@ -1,87 +1,127 @@
 .tipbox-wrapper {
-    position: fixed;
-    left: 90px;
-    bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 1000;
+  position: fixed;
+  left: 5vw; /* Default for larger screens */
+  bottom: 2vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+}
+
+.tipbox-btn {
+  padding: 0.5rem 1rem;
+  font-size: clamp(14px, 4vw, 18px);
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  background-color: #2c3539;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tipbox-container {
+  position: absolute;
+  bottom: 3.5rem;
+  right: 50%;
+  transform: translateX(50%) translateY(10px);
+  visibility: hidden;
+  opacity: 0;
+  width: clamp(180px, 60vw, 240px);
+  background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  font-size: clamp(12px, 3vw, 14px);
+  border-radius: 15px;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  box-shadow: 0px 10px 20px rgba(0, 123, 255, 0.3);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+}
+
+.tipbox-container.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(50%) translateY(-10px);
+}
+
+.tipbox-arrow {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #007bff;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.color-box {
+  width: clamp(15px, 4vw, 20px);
+  height: clamp(15px, 4vw, 20px);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.tipbox-text {
+  font-size: clamp(12px, 3vw, 14px);
+  text-align: center;
+}
+
+.instruction-text {
+  font-style: italic;
+  font-size: clamp(12px, 3vw, 14px);
+  text-align: center;
+  margin-top: 0.3rem;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+  .tipbox-wrapper {
+    left: 50%; /* Center on smaller screens */
+    transform: translateX(-50%); /* Adjust to center */
+    bottom: 1vh;
   }
-  
+
   .tipbox-btn {
-    padding: 6px 15px;
-    font-size: 18px;
-    color: #ffffff;
-    border: 1px solid #ffffff;   
-    background-color: #2c3539; 
-    border-radius: 10px;
-
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    padding: 0.4rem 0.8rem;
   }
-  
 
-  
   .tipbox-container {
-    position: absolute;
-    bottom: 60px; 
-    right: 50%;
-    transform: translateX(50%) translateY(10px);
-    visibility: hidden;
-    opacity: 0;
-    width: 240px;
-    background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
-    color: #fff;
-    text-align: center;
-    padding: 15px;
-    font-size: 14px;
-    border-radius: 15px;
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-    box-shadow: 0px 10px 20px rgba(0, 123, 255, 0.3);
-    clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+    bottom: 2.5rem;
+    width: clamp(150px, 80vw, 200px);
+    right: unset; /* Remove right positioning */
+    left: 50%; /* Center the container */
+    transform: translateX(-50%) translateY(10px); /* Center and adjust Y */
   }
-  
+
   .tipbox-container.show {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(50%) translateY(-10px);
+    transform: translateX(-50%) translateY(-10px); /* Update for show state */
   }
-  
+
   .tipbox-arrow {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -10px;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #007bff;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #007bff;
+    margin-left: -8px;
   }
-  
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
+}
+
+@media (max-width: 480px) {
+  .tipbox-container {
+    clip-path: none;
+    border-radius: 10px;
+    width: clamp(120px, 90vw, 180px); /* Slightly narrower for very small screens */
   }
-  
-  .color-box {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+
+  .tipbox-arrow {
+    display: none;
   }
-  
-  .tipbox-text {
-    font-size: 14px;
-    text-align: center;
-  }
-  
-  .instruction-text {
-    font-style: italic;
-    font-size: 14px;
-    text-align: center;
-    margin-top: 5px;
-  }
-  
+}

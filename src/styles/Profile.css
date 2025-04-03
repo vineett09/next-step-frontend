@@ -60,7 +60,6 @@
 .sidebar-item.active {
   background-color: #181C14;
   color: white;
-  border: #0366d6 2px solid;
 }
 
 .profile-loading {
@@ -1030,6 +1029,12 @@
   color: #a0aec0;
   font-size: 0.9rem;
   display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.airoadmap-date {
+  display: inline-flex;
   align-items: center;
   gap: 0.4rem;
 }

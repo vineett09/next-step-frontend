@@ -468,3 +468,113 @@
 .chat-message li.numbered-item {
   list-style: decimal;
 }
+
+/* Add these media queries at the bottom of the file */
+
+@media (max-width: 768px) {
+  .chatbot-container {
+    width: 90vw;
+    height: 70vh;
+    bottom: 70px;
+    right: 5vw;
+    left: auto;
+  }
+
+  .chatbot-icon {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .sparkle-button {
+    padding: 0.8em;
+    font-size: 0.9rem;
+  }
+
+  .chatbot-messages {
+    padding: 10px;
+  }
+
+  .chat-message {
+    max-width: 90%;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .chatbot-input {
+    padding: 8px;
+  }
+
+  .chatbot-input input {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .chatbot-input button {
+    padding: 10px;
+  }
+
+  .chatbot-header {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .chatbot-usage {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .clear-chat-btn {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    margin-right: 5px;
+  }
+
+  .welcome-message {
+    font-size: 1em;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chatbot-container {
+    width: 95vw;
+    height: 80vh;
+    bottom: 60px;
+  }
+
+  .sparkle-button .text {
+    display: none;
+  }
+
+  .sparkle-button svg {
+    margin-right: 0;
+  }
+
+  .chat-message {
+    max-width: 95%;
+  }
+
+  .message-roadmap-indicator {
+    font-size: 0.65rem;
+  }
+}
+
+/* Add touch-friendly styles */
+.chatbot-input button,
+.sparkle-button,
+.close-icon,
+.clear-chat-btn {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent zooming on input focus on mobile */
+@media (max-width: 768px) {
+  .chatbot-input input {
+    font-size: 16px;
+  }
+}
+
+/* Improve scroll behavior on mobile */
+.chatbot-messages {
+  -webkit-overflow-scrolling: touch;
+}
