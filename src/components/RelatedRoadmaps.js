@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { techFields, techSkills } from "../data/TechFieldsData";
 import "../styles/RelatedRoadmaps.css";
@@ -9,198 +9,235 @@ const RelatedRoadmaps = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const [isLoading, setIsLoading] = useState(true);
+  const [relatedRoadmaps, setRelatedRoadmaps] = useState([]);
 
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
+  // Extract terms from description - memoized to avoid recalculation
+  const extractTerms = useMemo(
+    () => (description) => {
+      return description
+        .toLowerCase()
+        .replace(/[^\w\s]/g, "")
+        .split(/\s+/)
+        .filter(
+          (term) =>
+            term.length > 3 &&
+            ![
+              "with",
+              "that",
+              "this",
+              "from",
+              "they",
+              "have",
+              "their",
+              "using",
+            ].includes(term)
+        );
+    },
+    []
+  );
 
-  const findCurrentRoadmap = () => {
-    const allRoadmaps = [...techFields, ...techSkills];
-    return allRoadmaps.find((item) => item.link === currentPath);
-  };
+  // Calculate relevance score - memoized to avoid recalculation
+  const calculateRelevanceScore = useMemo(
+    () => (terms1, terms2) => {
+      const sharedTerms = terms1.filter((term) => terms2.includes(term));
+      const uniqueSharedTerms = [...new Set(sharedTerms)];
 
-  const getRelatedRoadmaps = () => {
-    const currentRoadmap = findCurrentRoadmap();
-    if (!currentRoadmap) return [];
-
-    const allRoadmaps = [...techFields, ...techSkills];
-
-    const scoredRoadmaps = allRoadmaps
-      .filter((roadmap) => roadmap.id !== currentRoadmap.id)
-      .map((roadmap) => {
-        const currentTerms = extractTerms(currentRoadmap.description);
-        const roadmapTerms = extractTerms(roadmap.description);
-
-        let score = calculateRelevanceScore(currentTerms, roadmapTerms);
-
-        if (areInSameDomain(currentRoadmap.title, roadmap.title)) {
-          score += 30;
-        }
-
-        if (areComplementaryTechnologies(currentRoadmap, roadmap)) {
-          score += 25;
-        }
-
-        return { roadmap, score };
-      });
-
-    return diversifyResults(scoredRoadmaps);
-  };
-
-  const extractTerms = (description) => {
-    return description
-      .toLowerCase()
-      .replace(/[^\w\s]/g, "")
-      .split(/\s+/)
-      .filter(
-        (term) =>
-          term.length > 3 &&
-          ![
-            "with",
-            "that",
-            "this",
-            "from",
-            "they",
-            "have",
-            "their",
-            "using",
-          ].includes(term)
+      const techTerms = uniqueSharedTerms.filter((term) =>
+        [
+          "data",
+          "web",
+          "cloud",
+          "mobile",
+          "development",
+          "design",
+          "security",
+          "machine",
+          "learning",
+          "api",
+          "backend",
+          "frontend",
+          "full",
+          "stack",
+          "javascript",
+          "python",
+          "java",
+          "react",
+          "node",
+          "angular",
+          "vue",
+        ].includes(term)
       );
-  };
 
-  const calculateRelevanceScore = (terms1, terms2) => {
-    const sharedTerms = terms1.filter((term) => terms2.includes(term));
-    const uniqueSharedTerms = [...new Set(sharedTerms)];
+      return uniqueSharedTerms.length * 5 + techTerms.length * 10;
+    },
+    []
+  );
 
-    const techTerms = uniqueSharedTerms.filter((term) =>
-      [
-        "data",
-        "web",
-        "cloud",
-        "mobile",
-        "development",
-        "design",
-        "security",
-        "machine",
-        "learning",
-        "api",
-        "backend",
-        "frontend",
-        "full",
-        "stack",
-        "javascript",
-        "python",
-        "java",
-        "react",
-        "node",
-        "angular",
-        "vue",
-      ].includes(term)
-    );
+  // Check if technologies are in the same domain - memoized
+  const areInSameDomain = useMemo(
+    () => (title1, title2) => {
+      const domains = [
+        ["Frontend", "React", "Angular", "Vue", "UI/UX"],
+        ["Backend", "Node.js", "Python", "Java", "PHP", "Ruby", "Spring"],
+        ["Mobile", "Android", "iOS", "Flutter", "Kotlin"],
+        [
+          "Data",
+          "Data Science",
+          "Data Analyst",
+          "Machine Learning",
+          "TensorFlow",
+        ],
+        ["DevOps", "Docker", "Kubernetes", "AWS", "Azure", "Cloud"],
+        ["Security", "Cybersecurity", "Blockchain"],
+        ["Game", "Unity", "Unreal"],
+        ["IoT", "Embedded", "Robotics"],
+      ];
 
-    return uniqueSharedTerms.length * 5 + techTerms.length * 10;
-  };
+      title1 = title1.toLowerCase();
+      title2 = title2.toLowerCase();
 
-  const areInSameDomain = (title1, title2) => {
-    const domains = [
-      ["Frontend", "React", "Angular", "Vue", "UI/UX"],
-      ["Backend", "Node.js", "Python", "Java", "PHP", "Ruby", "Spring"],
-      ["Mobile", "Android", "iOS", "Flutter", "Kotlin"],
-      [
-        "Data",
-        "Data Science",
-        "Data Analyst",
-        "Machine Learning",
-        "TensorFlow",
-      ],
-      ["DevOps", "Docker", "Kubernetes", "AWS", "Azure", "Cloud"],
-      ["Security", "Cybersecurity", "Blockchain"],
-      ["Game", "Unity", "Unreal"],
-      ["IoT", "Embedded", "Robotics"],
-    ];
+      return domains.some(
+        (domain) =>
+          domain.some((term) => title1.includes(term.toLowerCase())) &&
+          domain.some((term) => title2.includes(term.toLowerCase()))
+      );
+    },
+    []
+  );
 
-    title1 = title1.toLowerCase();
-    title2 = title2.toLowerCase();
+  // Check if technologies are complementary - memoized
+  const areComplementaryTechnologies = useMemo(
+    () => (tech1, tech2) => {
+      const complementaryPairs = [
+        ["React", "Node.js"],
+        ["Angular", "Spring Boot"],
+        ["Vue.js", "PHP"],
+        ["Android", "Kotlin"],
+        ["iOS", "Swift"],
+        ["Mobile", "Flutter"],
+        ["Python", "TensorFlow"],
+        ["Data Scientist", "SQL"],
+        ["Machine Learning", "Data Analyst"],
+        ["Docker", "Kubernetes"],
+        ["AWS", "Terraform"],
+        ["DevOps", "Git"],
+        ["Frontend", "Backend"],
+        ["JavaScript", "Node.js"],
+        ["Full Stack", "React"],
+        ["Cloud Computing", "AWS"],
+        ["Azure", "DevOps"],
+        ["Kubernetes", "Cloud"],
+        ["Cybersecurity", "Blockchain"],
+        ["Security", "Linux"],
+        ["IoT", "Embedded"],
+        ["Robotics", "C++"],
+        ["IoT", "Cloud"],
+      ];
 
-    return domains.some(
-      (domain) =>
-        domain.some((term) => title1.includes(term.toLowerCase())) &&
-        domain.some((term) => title2.includes(term.toLowerCase()))
-    );
-  };
+      const title1 = tech1.title.toLowerCase();
+      const title2 = tech2.title.toLowerCase();
 
-  const areComplementaryTechnologies = (tech1, tech2) => {
-    const complementaryPairs = [
-      ["React", "Node.js"],
-      ["Angular", "Spring Boot"],
-      ["Vue.js", "PHP"],
-      ["Android", "Kotlin"],
-      ["iOS", "Swift"],
-      ["Mobile", "Flutter"],
-      ["Python", "TensorFlow"],
-      ["Data Scientist", "SQL"],
-      ["Machine Learning", "Data Analyst"],
-      ["Docker", "Kubernetes"],
-      ["AWS", "Terraform"],
-      ["DevOps", "Git"],
-      ["Frontend", "Backend"],
-      ["JavaScript", "Node.js"],
-      ["Full Stack", "React"],
-      ["Cloud Computing", "AWS"],
-      ["Azure", "DevOps"],
-      ["Kubernetes", "Cloud"],
-      ["Cybersecurity", "Blockchain"],
-      ["Security", "Linux"],
-      ["IoT", "Embedded"],
-      ["Robotics", "C++"],
-      ["IoT", "Cloud"],
-    ];
+      return complementaryPairs.some(
+        ([a, b]) =>
+          (title1.includes(a.toLowerCase()) &&
+            title2.includes(b.toLowerCase())) ||
+          (title1.includes(b.toLowerCase()) && title2.includes(a.toLowerCase()))
+      );
+    },
+    []
+  );
 
-    const title1 = tech1.title.toLowerCase();
-    const title2 = tech2.title.toLowerCase();
+  // Diversify the results - memoized
+  const diversifyResults = useMemo(
+    () => (scoredRoadmaps) => {
+      const sortedRoadmaps = [...scoredRoadmaps].sort(
+        (a, b) => b.score - a.score
+      );
+      const topRoadmaps = sortedRoadmaps
+        .slice(0, 2)
+        .map((item) => item.roadmap);
+      const remainingRoadmaps = sortedRoadmaps.slice(2);
 
-    return complementaryPairs.some(
-      ([a, b]) =>
-        (title1.includes(a.toLowerCase()) &&
-          title2.includes(b.toLowerCase())) ||
-        (title1.includes(b.toLowerCase()) && title2.includes(a.toLowerCase()))
-    );
-  };
+      const totalRemaining = remainingRoadmaps.reduce(
+        (sum, item) => sum + item.score,
+        0
+      );
+      let selectedRoadmaps = [];
 
-  const diversifyResults = (scoredRoadmaps) => {
-    scoredRoadmaps.sort((a, b) => b.score - a.score);
-    const topRoadmaps = scoredRoadmaps.slice(0, 2).map((item) => item.roadmap);
-    const remainingRoadmaps = scoredRoadmaps.slice(2);
+      for (let i = 0; i < 2 && remainingRoadmaps.length > 0; i++) {
+        const randomValue = Math.random() * totalRemaining;
+        let accumulator = 0;
 
-    const totalRemaining = remainingRoadmaps.reduce(
-      (sum, item) => sum + item.score,
-      0
-    );
-    let selectedRoadmaps = [];
+        for (let j = 0; j < remainingRoadmaps.length; j++) {
+          accumulator += remainingRoadmaps[j].score;
 
-    for (let i = 0; i < 2 && remainingRoadmaps.length > 0; i++) {
-      const randomValue = Math.random() * totalRemaining;
-      let accumulator = 0;
-
-      for (let j = 0; j < remainingRoadmaps.length; j++) {
-        accumulator += remainingRoadmaps[j].score;
-
-        if (accumulator >= randomValue) {
-          selectedRoadmaps.push(remainingRoadmaps[j].roadmap);
-          remainingRoadmaps.splice(j, 1);
-          break;
+          if (accumulator >= randomValue) {
+            selectedRoadmaps.push(remainingRoadmaps[j].roadmap);
+            remainingRoadmaps.splice(j, 1);
+            break;
+          }
         }
       }
-    }
 
-    if (selectedRoadmaps.length < 2 && scoredRoadmaps.length > 2) {
-      selectedRoadmaps = scoredRoadmaps.slice(2, 4).map((item) => item.roadmap);
-    }
+      if (selectedRoadmaps.length < 2 && scoredRoadmaps.length > 2) {
+        selectedRoadmaps = scoredRoadmaps
+          .slice(2, 4)
+          .map((item) => item.roadmap);
+      }
 
-    return [...topRoadmaps, ...selectedRoadmaps];
-  };
+      return [...topRoadmaps, ...selectedRoadmaps];
+    },
+    []
+  );
 
-  const relatedRoadmaps = getRelatedRoadmaps();
+  // Find current roadmap - memoized based on the current path
+  const currentRoadmap = useMemo(() => {
+    const allRoadmaps = [...techFields, ...techSkills];
+    return allRoadmaps.find((item) => item.link === currentPath);
+  }, [currentPath]);
+
+  // Calculate related roadmaps - only when currentRoadmap changes
+  useEffect(() => {
+    const calculateRelatedRoadmaps = () => {
+      if (!currentRoadmap) {
+        setRelatedRoadmaps([]);
+        return;
+      }
+
+      const allRoadmaps = [...techFields, ...techSkills];
+
+      const scoredRoadmaps = allRoadmaps
+        .filter((roadmap) => roadmap.id !== currentRoadmap.id)
+        .map((roadmap) => {
+          const currentTerms = extractTerms(currentRoadmap.description);
+          const roadmapTerms = extractTerms(roadmap.description);
+
+          let score = calculateRelevanceScore(currentTerms, roadmapTerms);
+
+          if (areInSameDomain(currentRoadmap.title, roadmap.title)) {
+            score += 30;
+          }
+
+          if (areComplementaryTechnologies(currentRoadmap, roadmap)) {
+            score += 25;
+          }
+
+          return { roadmap, score };
+        });
+
+      setRelatedRoadmaps(diversifyResults(scoredRoadmaps));
+    };
+
+    calculateRelatedRoadmaps();
+    setIsLoading(false);
+  }, [
+    currentRoadmap,
+    extractTerms,
+    calculateRelevanceScore,
+    areInSameDomain,
+    areComplementaryTechnologies,
+    diversifyResults,
+  ]);
 
   const handleRoadmapClick = (roadmap) => {
     navigate(roadmap.link, {
@@ -244,4 +281,4 @@ const RelatedRoadmaps = () => {
   );
 };
 
-export default RelatedRoadmaps;
+export default React.memo(RelatedRoadmaps);

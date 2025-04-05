@@ -167,33 +167,6 @@ const devOpsRoadmap = {
         "Automate integration and deployment with CI/CD tools like Jenkins, taught with examples building pipelines for web apps. A 2025 skill for rapid, reliable releases, this section reduces errors and aligns DevOps teams for faster software delivery in agile environments.",
       children: [
         {
-          name: "CI/CD Concepts",
-          description:
-            "Understand CI/CD principles with examples like automated builds, taught with pytest or Maven. A 2025 skill for streamlined delivery, this section ensures code quality and deployment efficiency in DevOps, supporting iterative development cycles effectively.",
-          children: [
-            {
-              name: "Automated Testing",
-              description:
-                "Run tests with pytest, taught with unit test examples. A 2025 skill for quality assurance.",
-            },
-            {
-              name: "Build Automation",
-              description:
-                "Automate builds with Maven, taught with examples. Key in 2025 for consistency.",
-            },
-            {
-              name: "Deployment Pipelines",
-              description:
-                "Design pipelines with staging, taught with examples. A 2025 skill for seamless rollouts.",
-            },
-            {
-              name: "Code Review",
-              description:
-                "Review with PRs, taught with GitHub examples. A 2025 skill for collaboration.",
-            },
-          ],
-        },
-        {
           name: "CI/CD Tools",
           description:
             "Implement CI/CD with GitHub Actions and CircleCI, taught with pipeline examples for testing and deploying. A 2025 skill for automation, this section streamlines DevOps workflows with industry-standard tools for scalable, efficient software releases.",
@@ -221,6 +194,33 @@ const devOpsRoadmap = {
             },
           ],
         },
+        {
+          name: "CI/CD Concepts",
+          description:
+            "Understand CI/CD principles with examples like automated builds, taught with pytest or Maven. A 2025 skill for streamlined delivery, this section ensures code quality and deployment efficiency in DevOps, supporting iterative development cycles effectively.",
+          children: [
+            {
+              name: "Automated Testing",
+              description:
+                "Run tests with pytest, taught with unit test examples. A 2025 skill for quality assurance.",
+            },
+            {
+              name: "Build Automation",
+              description:
+                "Automate builds with Maven, taught with examples. Key in 2025 for consistency.",
+            },
+            {
+              name: "Deployment Pipelines",
+              description:
+                "Design pipelines with staging, taught with examples. A 2025 skill for seamless rollouts.",
+            },
+            {
+              name: "Code Review",
+              description:
+                "Review with PRs, taught with GitHub examples. A 2025 skill for collaboration.",
+            },
+          ],
+        },
       ],
       dividerText: "CI/CD streamlined—manage infrastructure as code.",
     },
@@ -229,28 +229,6 @@ const devOpsRoadmap = {
       description:
         "Manage infrastructure with code using Terraform and Ansible, taught with examples provisioning AWS EC2 or configuring servers. A 2025 skill for consistency and scalability, this section automates DevOps infrastructure, integrating with CI/CD for efficient, reproducible system deployments.",
       children: [
-        {
-          name: "IaC Concepts",
-          description:
-            "Learn IaC principles with examples like declarative Terraform configs, taught with versioning benefits. A 2025 skill for automation, this section ensures infrastructure reliability and repeatability in DevOps across cloud and on-premises environments.",
-          children: [
-            {
-              name: "Declarative vs. Imperative",
-              description:
-                "Compare Terraform vs. Ansible, taught with examples. A 2025 skill for tool choice.",
-            },
-            {
-              name: "Idempotency",
-              description:
-                "Ensure idempotency with Ansible, taught with examples. Key in 2025 for reliability.",
-            },
-            {
-              name: "State Management",
-              description:
-                "Manage state with Terraform, taught with examples. A 2025 skill for consistency.",
-            },
-          ],
-        },
         {
           name: "IaC Tools",
           description:
@@ -276,6 +254,28 @@ const devOpsRoadmap = {
               name: "CloudFormation",
               description:
                 "Deploy with CloudFormation on AWS, taught with YAML examples. A 2025 skill for AWS-specific IaC.",
+            },
+          ],
+        },
+        {
+          name: "IaC Concepts",
+          description:
+            "Learn IaC principles with examples like declarative Terraform configs, taught with versioning benefits. A 2025 skill for automation, this section ensures infrastructure reliability and repeatability in DevOps across cloud and on-premises environments.",
+          children: [
+            {
+              name: "Declarative vs. Imperative",
+              description:
+                "Compare Terraform vs. Ansible, taught with examples. A 2025 skill for tool choice.",
+            },
+            {
+              name: "Idempotency",
+              description:
+                "Ensure idempotency with Ansible, taught with examples. Key in 2025 for reliability.",
+            },
+            {
+              name: "State Management",
+              description:
+                "Manage state with Terraform, taught with examples. A 2025 skill for consistency.",
             },
           ],
         },

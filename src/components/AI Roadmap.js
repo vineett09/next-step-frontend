@@ -14,11 +14,7 @@ const AIRoadmap = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedNode, setSelectedNode] = useState({
-    name: "",
-    description: "",
-  });
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const [usageInfo, setUsageInfo] = useState({
     usageCount: 0,
     remainingCount: 10,
@@ -26,6 +22,7 @@ const AIRoadmap = () => {
   const d3Container = useRef(null);
   const { token } = useSelector((state) => state.auth);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   // Fetch usage info when component mounts
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -34,6 +31,7 @@ const AIRoadmap = () => {
       fetchUsageInfo();
     }
   }, [token]);
+
   const fetchUsageInfo = async () => {
     try {
       const response = await axios.get("/api/ai/usage", {
@@ -47,6 +45,13 @@ const AIRoadmap = () => {
     }
   };
 
+  // Clear the D3 container
+  const clearRoadmap = () => {
+    if (d3Container.current) {
+      d3.select(d3Container.current).selectAll("*").remove();
+    }
+  };
+
   const handleSubmit = async () => {
     if (!input.trim()) return;
     if (usageInfo.usageCount >= 10) {
@@ -56,6 +61,10 @@ const AIRoadmap = () => {
 
     setLoading(true);
     setError(null);
+
+    // Clear previous roadmap data AND clear the DOM
+    setData(null);
+    clearRoadmap();
 
     try {
       const response = await axios.post(
@@ -144,9 +153,7 @@ const AIRoadmap = () => {
         })),
       };
 
-      const minParentSpacing = 100;
       const childVerticalGap = 20;
-      const childrenSpaceFactor = 0.5;
       const minNestedGroupGap = 0;
 
       const svg = svgElement
@@ -170,7 +177,7 @@ const AIRoadmap = () => {
         .attr("y", -titleDimensions.height / 2)
         .attr("rx", 10)
         .attr("ry", 10)
-        .attr("fill", "#FFE700") // Use direct color instead of getNodeColor
+        .attr("fill", "#FFE700")
         .attr("stroke", "black")
         .attr("stroke-width", 2);
 
@@ -182,14 +189,6 @@ const AIRoadmap = () => {
         .attr("font-family", "Arial, sans-serif")
         .attr("fill", "black")
         .text(titleText);
-
-      titleGroup.on("click", () => {
-        setSelectedNode({
-          name: titleText,
-          description: data.description || "No description available",
-        });
-        setIsSidebarOpen(true);
-      });
 
       const lineStartY = titleY + titleDimensions.height / 2;
 
@@ -386,15 +385,7 @@ const AIRoadmap = () => {
         const parentGroup = svg
           .append("g")
           .attr("class", "node")
-          .attr("transform", `translate(${parentX},${y})`)
-          .on("click", () => {
-            setSelectedNode({
-              name: parent.name,
-              description: parent.description || "No description available",
-            });
-            setIsSidebarOpen(true);
-          });
-        // Removed the context menu event listener (toggleNodeCompletion)
+          .attr("transform", `translate(${parentX},${y})`);
 
         const parentBox = createNode(
           parentGroup,
@@ -459,16 +450,7 @@ const AIRoadmap = () => {
               const childGroup = svg
                 .append("g")
                 .attr("class", "node")
-                .attr("transform", `translate(${baseChildX},${currentChildY})`)
-                .on("click", () => {
-                  setSelectedNode({
-                    name: child.name,
-                    description:
-                      child.description || "No description available",
-                  });
-                  setIsSidebarOpen(true);
-                });
-              // Removed the context menu event listener (toggleNodeCompletion)
+                .attr("transform", `translate(${baseChildX},${currentChildY})`);
 
               createNode(
                 childGroup,
@@ -549,17 +531,7 @@ const AIRoadmap = () => {
                       .attr(
                         "transform",
                         `translate(${nestedX},${currentNestedY})`
-                      )
-                      .on("click", () => {
-                        setSelectedNode({
-                          name: nestedChild.name,
-                          description:
-                            nestedChild.description ||
-                            "No description available",
-                        });
-                        setIsSidebarOpen(true);
-                      });
-                    // Removed the context menu event listener (toggleNodeCompletion)
+                      );
 
                     createNode(
                       nestedGroup,
@@ -626,20 +598,6 @@ const AIRoadmap = () => {
     }
   };
 
-  const Sidebar = ({ isOpen, onClose, name, description }) => {
-    if (!isOpen) return null;
-    return (
-      <div className="sidebar">
-        <div className="sidebar-header">
-          <h3>{name}</h3>
-          <button onClick={onClose}>×</button>
-        </div>
-        <div className="sidebar-content">
-          <p>{description}</p>
-        </div>
-      </div>
-    );
-  };
   const downloadRoadmapPDF = () => {
     if (!data) return;
 
@@ -709,6 +667,7 @@ const AIRoadmap = () => {
       document.body.removeChild(tempDiv);
     });
   };
+
   useEffect(() => {
     if (data) {
       renderRoadmap();
@@ -716,6 +675,7 @@ const AIRoadmap = () => {
       return () => window.removeEventListener("resize", renderRoadmap);
     }
   }, [data]);
+
   // Show login message if not authenticated
   if (!isAuthenticated) {
     return (
@@ -729,6 +689,7 @@ const AIRoadmap = () => {
       </div>
     );
   }
+
   return (
     <div className="roadmap">
       <Navbar />
@@ -812,16 +773,10 @@ const AIRoadmap = () => {
             <div className="loader-wrapper">
               <Loader loading={true} />
             </div>
-          ) : (
+          ) : data ? (
             <div ref={d3Container} className="d3-container" />
-          )}
+          ) : null}
         </div>
-        <Sidebar
-          isOpen={isSidebarOpen}
-          onClose={() => setIsSidebarOpen(false)}
-          name={selectedNode.name}
-          description={selectedNode.description}
-        />
       </div>
       <Footer />
     </div>

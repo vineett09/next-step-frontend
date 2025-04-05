@@ -30,18 +30,17 @@ const TechRoles = () => {
   };
 
   return (
-    <div className="role-card">
+    <div className="tech-cards role-card">
       <h2 className="card-title">Trending Roles in 2025 🔥</h2>
       <div className="role-list">
         {roles.map((role, index) => (
-          <span
+          <button
             key={index}
             className="role-badge"
             onClick={() => handleRoleClick(role)}
-            style={{ cursor: "pointer" }}
           >
             {role}
-          </span>
+          </button>
         ))}
       </div>
     </div>

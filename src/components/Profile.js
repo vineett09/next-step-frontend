@@ -52,7 +52,6 @@ const Profile = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [savedSuggestions, setSavedSuggestions] = useState([]);
   const [suggestionsCurrentPage, setSuggestionsCurrentPage] = useState(1);
-  const [selectedSuggestion, setSelectedSuggestion] = useState(null);
   const [aiGeneratedRoadmaps, setAIGeneratedRoadmaps] = useState([]);
   const [aiRoadmapsCurrentPage, setAIRoadmapsCurrentPage] = useState(1);
   const itemsPerPage = 3;
@@ -490,7 +489,6 @@ const Profile = () => {
               }`}
               onClick={() => {
                 setActiveSection("aisuggestions");
-                setSelectedSuggestion(null);
               }}
             >
               AI Suggestions
