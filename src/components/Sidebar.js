@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Loader from "./Loader";
-
+import "../styles/roadmaps/Sidebar.css";
 const Sidebar = ({ isOpen, onClose, name, description }) => {
   const [isLoading, setIsLoading] = useState(false);
 
