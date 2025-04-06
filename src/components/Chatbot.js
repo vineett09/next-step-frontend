@@ -5,7 +5,7 @@ import "../styles/roadmaps/ChatBot.css";
 import { useSelector } from "react-redux";
 import DOMPurify from "dompurify";
 
-const Chatbot = ({ roadmapTitle, data }) => {
+const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -18,12 +18,16 @@ const Chatbot = ({ roadmapTitle, data }) => {
   // Load messages from localStorage when component mounts
   useEffect(() => {
     if (isAuthenticated && user) {
-      const storedMessages = localStorage.getItem(`chat_messages_${user.id}`);
-      if (storedMessages) {
-        setMessages(JSON.parse(storedMessages));
+      // We don't want to load messages that were just stored
+      // Only load if the current messages array is empty
+      if (messages.length === 0) {
+        const storedMessages = localStorage.getItem(`chat_messages_${user.id}`);
+        if (storedMessages) {
+          setMessages(JSON.parse(storedMessages));
+        }
       }
+      fetchChatbotUsage();
     }
-    fetchChatbotUsage(); // ✅ Fetch chatbot usage count when page loads
   }, [isAuthenticated, user]);
   // Add this useEffect hook to your component
   useEffect(() => {
@@ -50,7 +54,82 @@ const Chatbot = ({ roadmapTitle, data }) => {
       );
     }
   }, [messages, isAuthenticated, user]);
+  useEffect(() => {
+    if (ref) {
+      ref.current = {
+        openWithNodeQuery: (node) => {
+          handleNodeQuery(node);
+        },
+      };
+    }
+  }, [ref]);
 
+  const handleNodeQuery = (node) => {
+    if (!isAuthenticated) {
+      setIsOpen(true);
+      return;
+    }
+
+    setIsOpen(true);
+    const nodeQuery = `Tell me about "${node.name}" in the ${roadmapTitle} roadmap. `;
+
+    // Create user message
+    const userMessage = {
+      sender: "user",
+      text: nodeQuery,
+      timestamp: new Date().toISOString(),
+    };
+
+    // Update messages state with the user message FIRST using a function to ensure we have the latest state
+    setMessages((prevMessages) => {
+      const updatedMessages = [...prevMessages, userMessage];
+
+      // After updating the state, send to API
+      axios
+        .post(
+          "/api/chatbot",
+          {
+            message: nodeQuery,
+            roadmapTitle,
+            roadmapData: JSON.stringify(data),
+            nodeId: node.id || node.name,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          const botMessage = {
+            sender: "bot",
+            text: formatText(response.data.reply),
+            timestamp: new Date().toISOString(),
+            roadmap: roadmapTitle,
+          };
+
+          // Use a functional update to ensure we're working with the latest state
+          setMessages((currentMessages) => [...currentMessages, botMessage]);
+          setUsageCount(response.data.usageCount);
+          setRemainingCount(response.data.remainingCount);
+        })
+        .catch((error) => {
+          console.error("Chatbot error:", error);
+          // Again use functional update
+          setMessages((currentMessages) => [
+            ...currentMessages,
+            {
+              sender: "bot",
+              text: "<p>Sorry, I couldn't process that request.</p>",
+              timestamp: new Date().toISOString(),
+              roadmap: roadmapTitle,
+            },
+          ]);
+        });
+
+      return updatedMessages;
+    });
+  };
   const fetchChatbotUsage = async () => {
     if (!isAuthenticated || !user) return;
 
@@ -119,50 +198,58 @@ const Chatbot = ({ roadmapTitle, data }) => {
       text: input,
       timestamp: new Date().toISOString(),
     };
-    const updatedMessages = [...messages, userMessage];
-    setMessages(updatedMessages);
 
-    try {
-      const response = await axios.post(
-        "/api/chatbot",
-        {
-          message: input,
-          roadmapTitle,
-          roadmapData: JSON.stringify(data),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+    // Use functional update to ensure we always have the latest state
+    setMessages((prevMessages) => {
+      const updatedMessages = [...prevMessages, userMessage];
+
+      // Reset input field immediately
+      setInput("");
+
+      // Send message to API
+      axios
+        .post(
+          "/api/chatbot",
+          {
+            message: input,
+            roadmapTitle,
+            roadmapData: JSON.stringify(data),
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          const botMessage = {
+            sender: "bot",
+            text: formatText(response.data.reply),
+            timestamp: new Date().toISOString(),
+            roadmap: roadmapTitle,
+          };
 
-      const botMessage = {
-        sender: "bot",
-        text: formatText(response.data.reply),
-        timestamp: new Date().toISOString(),
-        roadmap: roadmapTitle, // Store which roadmap this message came from
-      };
+          // Use functional update again for the bot's response
+          setMessages((currentMessages) => [...currentMessages, botMessage]);
+          setUsageCount(response.data.usageCount);
+          setRemainingCount(response.data.remainingCount);
+        })
+        .catch((error) => {
+          console.error("Chatbot error:", error);
+          setMessages((currentMessages) => [
+            ...currentMessages,
+            {
+              sender: "bot",
+              text: "<p>Sorry, I couldn't process that request.</p>",
+              timestamp: new Date().toISOString(),
+              roadmap: roadmapTitle,
+            },
+          ]);
+        });
 
-      setMessages([...updatedMessages, botMessage]);
-      setUsageCount(response.data.usageCount);
-      setRemainingCount(response.data.remainingCount);
-    } catch (error) {
-      console.error("Chatbot error:", error);
-      setMessages([
-        ...updatedMessages,
-        {
-          sender: "bot",
-          text: "<p>Sorry, I couldn't process that request.</p>",
-          timestamp: new Date().toISOString(),
-          roadmap: roadmapTitle,
-        },
-      ]);
-    }
-
-    setInput("");
+      return updatedMessages;
+    });
   };
-
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -586,6 +673,6 @@ const Chatbot = ({ roadmapTitle, data }) => {
       )}
     </>
   );
-};
+});
 
 export default Chatbot;

@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 import { techFields, techSkills } from "../data/TechFieldsData";
 
 // Lazy load components that aren't immediately needed
-const Sidebar = React.lazy(() => import("./Sidebar"));
 const Header = React.lazy(() => import("./Header"));
 const TechSkills = React.lazy(() => import("./TechSkills"));
 const TechRoles = React.lazy(() => import("./TechRoles"));
@@ -42,11 +41,7 @@ const debounce = (fn, delay) => {
 const Roadmap = ({ data }) => {
   const d3Container = useRef(null);
   const svgRef = useRef(null);
-  const [selectedNode, setSelectedNode] = useState({
-    name: "",
-    description: "",
-  });
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const [completedNodes, setCompletedNodes] = useState({});
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { user, token } = useSelector((state) => state.auth);
@@ -59,7 +54,9 @@ const Roadmap = ({ data }) => {
     width: window.innerWidth,
     height: window.innerHeight,
   });
-
+  // Add this to your existing state declarations in Roadmap.js
+  const [selectedNode, setSelectedNode] = useState(null);
+  const chatbotRef = useRef(null);
   // Memoize expensive lookups
   const fieldOrSkill = useMemo(() => {
     const field = techFields.find((field) => field.link === `/${roadmapId}`);
@@ -76,12 +73,6 @@ const Roadmap = ({ data }) => {
       fieldOrSkill
         ? fieldOrSkill.title
         : "Explore Your Path to Tech Excellence",
-    [fieldOrSkill]
-  );
-
-  const roadmapDescription = useMemo(
-    () =>
-      fieldOrSkill ? fieldOrSkill.description : "Select a field to learn more.",
     [fieldOrSkill]
   );
 
@@ -280,7 +271,47 @@ const Roadmap = ({ data }) => {
     },
     [completedNodes]
   );
+  // Add this function to your Roadmap component
+  const showAskAIButtonAtPosition = (x, y, node) => {
+    // Remove any existing button first
+    d3.select(d3Container.current).select(".ask-ai-button").remove();
 
+    // Create a button element
+    const button = d3
+      .select(d3Container.current)
+      .append("div")
+      .attr("class", "ask-ai-button")
+      .style("position", "absolute")
+      .style("left", `${x}px`)
+      .style("top", `${y}px`)
+      .style("background-color", "#4285f4")
+      .style("color", "white")
+      .style("padding", "8px 16px")
+      .style("border-radius", "20px")
+      .style("font-size", "14px")
+      .style("cursor", "pointer")
+      .style("box-shadow", "0 2px 5px rgba(0,0,0,0.2)")
+      .style("z-index", "100")
+      .style("transform", "translate(-50%, 30px)")
+      .text("Ask AI")
+      .on("click", () => {
+        openChatbotWithNodeQuery(node);
+        // Remove the button after clicking
+        button.remove();
+      });
+
+    // Auto-hide the button after 5 seconds
+    setTimeout(() => {
+      button.remove();
+    }, 5000);
+  };
+
+  // Add this function to your Roadmap component
+  const openChatbotWithNodeQuery = (node) => {
+    if (chatbotRef.current) {
+      chatbotRef.current.openWithNodeQuery(node);
+    }
+  };
   // Handle resize with debounce
   useEffect(() => {
     const handleResize = debounce(() => {
@@ -362,14 +393,6 @@ const Roadmap = ({ data }) => {
       .attr("font-family", "Arial, sans-serif")
       .attr("fill", "black")
       .text(titleText);
-
-    titleGroup.on("click", () => {
-      setSelectedNode({
-        name: titleText,
-        description: roadmapDescription,
-      });
-      setIsSidebarOpen(true);
-    });
 
     const lineStartY = titleY + titleDimensions.height / 2;
 
@@ -553,10 +576,40 @@ const Roadmap = ({ data }) => {
         .attr("font-family", "Arial, sans-serif")
         .attr("x", xOffset)
         .text(node.name);
+      const boxGroup = group.append("g");
+
+      boxGroup
+        .append("rect")
+        .attr("width", boxWidth)
+        .attr("height", dimensions.height)
+        .attr("x", -boxWidth / 2 + xOffset)
+        .attr("y", -dimensions.height / 2)
+        .attr("rx", 10)
+        .attr("ry", 10)
+        .attr("fill", fillColor)
+        .attr("stroke", strokeColor)
+        .attr("stroke-width", 2)
+        .style("cursor", "pointer")
+        .on("click", (event) => {
+          event.stopPropagation();
+          setSelectedNode(node);
+          // Calculate position for the button
+          const coords = d3.pointer(event, d3Container.current);
+          showAskAIButtonAtPosition(coords[0], coords[1], node);
+        });
+
+      boxGroup
+        .append("text")
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "middle")
+        .attr("font-size", "15px")
+        .attr("font-family", "Arial, sans-serif")
+        .attr("x", xOffset)
+        .text(node.name)
+        .style("pointer-events", "none"); // Prevent text from capturing clicks
 
       return { boxWidth, xOffset };
     };
-
     parentPositions.forEach(({ node: parent, y }, parentIndex) => {
       const parentX = width / 2;
 
@@ -564,13 +617,7 @@ const Roadmap = ({ data }) => {
         .append("g")
         .attr("class", "node")
         .attr("transform", `translate(${parentX},${y})`)
-        .on("click", () => {
-          setSelectedNode({
-            name: parent.name,
-            description: parent.description,
-          });
-          setIsSidebarOpen(true);
-        })
+
         .on("contextmenu", (event) => {
           event.preventDefault();
           toggleNodeCompletion(parent.id || parent.name);
@@ -640,13 +687,7 @@ const Roadmap = ({ data }) => {
               .append("g")
               .attr("class", "node")
               .attr("transform", `translate(${baseChildX},${currentChildY})`)
-              .on("click", () => {
-                setSelectedNode({
-                  name: child.name,
-                  description: child.description,
-                });
-                setIsSidebarOpen(true);
-              })
+
               .on("contextmenu", (event) => {
                 event.preventDefault();
                 toggleNodeCompletion(child.id || child.name);
@@ -730,13 +771,7 @@ const Roadmap = ({ data }) => {
                       "transform",
                       `translate(${nestedX},${currentNestedY})`
                     )
-                    .on("click", () => {
-                      setSelectedNode({
-                        name: nestedChild.name,
-                        description: nestedChild.description,
-                      });
-                      setIsSidebarOpen(true);
-                    })
+
                     .on("contextmenu", (event) => {
                       event.preventDefault();
                       toggleNodeCompletion(nestedChild.id || nestedChild.name);
@@ -804,7 +839,6 @@ const Roadmap = ({ data }) => {
     data,
     isLoading,
     roadmapTitle,
-    roadmapDescription,
     calculateNodeDimensions,
     getNodeColor,
     processNodeMetrics,
@@ -816,11 +850,6 @@ const Roadmap = ({ data }) => {
       renderRoadmap();
     }
   }, [data, completedNodes, isLoading, windowSize, renderRoadmap]);
-
-  const closeDescription = () => {
-    setSelectedNode({ name: "", description: "" });
-    setIsSidebarOpen(false);
-  };
 
   return (
     <div className="roadmap">
@@ -854,7 +883,13 @@ const Roadmap = ({ data }) => {
           <div className="roadmap-wrapper">
             <div ref={d3Container} className="d3-container" />
             <React.Suspense fallback={<div>Loading chatbot...</div>}>
-              <Chatbot roadmapTitle={roadmapTitle} data={data} />
+              <React.Suspense fallback={<div>Loading chatbot...</div>}>
+                <Chatbot
+                  ref={chatbotRef}
+                  roadmapTitle={roadmapTitle}
+                  data={data}
+                />
+              </React.Suspense>{" "}
             </React.Suspense>
             <div className="cards-container"></div>
           </div>
@@ -862,14 +897,6 @@ const Roadmap = ({ data }) => {
 
         <React.Suspense fallback={<div>Loading tip box...</div>}>
           <TipBox />
-        </React.Suspense>
-        <React.Suspense fallback={<div>Loading sidebar...</div>}>
-          <Sidebar
-            isOpen={isSidebarOpen}
-            onClose={closeDescription}
-            name={selectedNode.name}
-            description={selectedNode.description}
-          />
         </React.Suspense>
       </div>
       <React.Suspense fallback={<div>Loading related roadmaps...</div>}>
