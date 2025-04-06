@@ -7,6 +7,7 @@ import Roadmap from "./components/Roadmap";
 import Profile from "./components/Profile";
 import fullStackDeveloperRoadmap from "./data/techroles/FullStackDeveloper";
 import Maincontent from "./components/Maincontent";
+import TechExplorer from "./components/TechExplorer";
 import dataScienceRoadmap from "./data/techroles/DataScience";
 import aiEngineerRoadmap from "./data/techroles/ArtificialIntelligence";
 import cybersecurityRoadmap from "./data/techroles/CyberSecurity";
@@ -87,6 +88,7 @@ function App() {
           <Route path="/ai-suggestion" element={<AISuggestions />} />
           <Route path="/suggestion/:id" element={<SuggestionView />} />
           <Route path="/ai-roadmap/view/:id" element={<ViewAIRoadmap />} />
+          <Route path="/explore" element={<TechExplorer />} />
 
           {/* Tech Fields */}
           <Route
