@@ -2,451 +2,258 @@ const androidDeveloperRoadmap = {
   name: "Android Developer Roadmap 2025",
   children: [
     {
-      name: "Core Programming Languages",
+      name: " Core Programming Languages",
       children: [
         {
           name: "Kotlin",
           preferred: true,
           children: [
-            {
-              name: "Basics",
-            },
-            {
-              name: "Kotlin Coroutines",
-            },
-            {
-              name: "Extension Functions",
-            },
+            { name: "Basics" },
+            { name: "Object-Oriented Programming" },
+            { name: "Extension Functions" },
+            { name: "Kotlin Coroutines" },
           ],
         },
         {
           name: "Java",
           children: [
-            {
-              name: "Object-Oriented Programming",
-            },
-            {
-              name: "Java Collections",
-            },
-            {
-              name: "Threads and Executors",
-            },
-            {
-              name: "Android-Specific APIs",
-            },
+            { name: "Basics" },
+            { name: "Object-Oriented Programming" },
+            { name: "Java Collections" },
+            { name: "Threads and Executors" },
           ],
         },
       ],
-      dividerText: "Languages mastered—dive into Android’s core toolkit.",
+      dividerText: "Languages mastered—start building Android apps.",
     },
     {
-      name: "Android Development Fundamentals",
+      name: " Android Development Basics",
       children: [
         {
           name: "Android SDK & Android Studio",
           children: [
-            {
-              name: "SDK Components",
-            },
-            {
-              name: "Build System (Gradle)",
-            },
-            {
-              name: "Emulators & Debugging",
-            },
-            {
-              name: "Jetpack Libraries",
-            },
+            { name: "Setup and Installation" },
+            { name: "Emulators & Debugging" },
+            { name: "Build System (Gradle)" },
+            { name: "SDK Components" },
           ],
         },
         {
-          name: "UI/UX Design Principles",
+          name: "UI Fundamentals",
           children: [
-            {
-              name: "Material Design",
-            },
-            {
-              name: "Responsive Design",
-            },
-            {
-              name: "Accessibility",
-            },
+            { name: "XML Layouts" },
+            { name: "Material Design" },
+            { name: "Responsive Design" },
+            { name: "Accessibility" },
           ],
         },
         {
-          name: "Navigation Components",
+          name: "App Components",
           children: [
-            {
-              name: "Navigation Graph",
-            },
-            {
-              name: "Fragments",
-            },
-            {
-              name: "Deep Linking",
-            },
-            {
-              name: "Safe Args",
-            },
+            { name: "Activities" },
+            { name: "Fragments" },
+            { name: "Intents" },
           ],
         },
       ],
-      dividerText: "Foundation set—level up with modern Android techniques.",
+      dividerText: "Basics down—enhance your app’s structure and navigation.",
     },
     {
-      name: "Advanced Android Development",
+      name: " Intermediate Android Development",
+      children: [
+        {
+          name: "Navigation",
+          children: [
+            { name: "Navigation Graph" },
+            { name: "Deep Linking" },
+            { name: "Safe Args" },
+          ],
+        },
+        {
+          name: "Data Management",
+          children: [
+            { name: "Room Database" },
+            { name: "LiveData" },
+            { name: "ViewModel" },
+          ],
+        },
+        {
+          name: "Networking",
+          children: [
+            { name: "RESTful APIs" },
+            { name: "Retrofit" },
+            { name: "JSON Parsing" },
+          ],
+        },
+      ],
+      dividerText: "Core app built—adopt modern tools and architecture.",
+    },
+    {
+      name: " Modern Android Development",
       children: [
         {
           name: "Jetpack Compose",
-          preferred: true,
           children: [
-            {
-              name: "Composables",
-            },
-            {
-              name: "State Management",
-            },
-            {
-              name: "Animations",
-            },
-            {
-              name: "Interoperability",
-            },
+            { name: "Composables" },
+            { name: "State Management" },
+            { name: "Animations" },
+            { name: "Interoperability with Views" },
           ],
         },
         {
           name: "Coroutines & Flow",
           children: [
-            {
-              name: "Coroutines Basics",
-            },
-            {
-              name: "Flow",
-            },
-            {
-              name: "LiveData Integration",
-            },
+            { name: "Coroutines Basics" },
+            { name: "Flow" },
+            { name: "Integration with Jetpack" },
           ],
         },
         {
-          name: "Dependency Injection (DI)",
+          name: "Dependency Injection",
           children: [
-            {
-              name: "Hilt",
-              preferred: true,
-            },
-            {
-              name: "Dagger",
-            },
-            {
-              name: "Manual DI",
-            },
-            {
-              name: "Scopes",
-            },
+            { name: "Hilt", preferred: true },
+            { name: "Dagger" },
+            { name: "Scopes" },
           ],
         },
         {
           name: "Architecture Patterns",
           children: [
-            {
-              name: "MVVM",
-              preferred: true,
-            },
-            {
-              name: "MVI",
-            },
-            {
-              name: "Clean Architecture",
-            },
+            { name: "MVVM" },
+            { name: "MVI" },
+            { name: "MVP" },
+            { name: "MVC" },
           ],
         },
       ],
-      dividerText: "Skills sharpened—reach beyond Android to iOS (optional).",
+      dividerText: "Modern skills acquired—optimize and test your apps.",
     },
     {
-      name: "Cross-Platform Development",
+      name: " Development Tools & Practices",
+      children: [
+        {
+          name: "Version Control",
+          children: [
+            { name: "Git" },
+            { name: "GitHub/GitLab" },
+            { name: "Pull Requests" },
+          ],
+        },
+        {
+          name: "Testing",
+          children: [
+            { name: "Unit Testing" },
+            { name: "UI Testing" },
+            { name: "Integration Testing" },
+          ],
+        },
+        {
+          name: "App Optimization",
+          children: [
+            { name: "Profiling Tools" },
+            { name: "APK Size Reduction" },
+            { name: "Startup Time" },
+          ],
+        },
+        {
+          name: "CI/CD",
+          children: [
+            { name: "GitHub Actions", preferred: true },
+            { name: "Fastlane" },
+            { name: "Jenkins" },
+          ],
+        },
+      ],
+      dividerText: "Workflow streamlined—secure and scale your apps.",
+    },
+    {
+      name: " Security & Backend Integration",
+      children: [
+        {
+          name: "Data Protection",
+          children: [
+            { name: "Encryption" },
+            { name: "Secure Storage" },
+            { name: "Keystore" },
+          ],
+        },
+        {
+          name: "Authentication",
+          children: [{ name: "OAuth2" }, { name: "Firebase Authentication" }],
+        },
+        {
+          name: "Advanced Networking",
+          children: [
+            { name: "GraphQL" },
+            { name: "Apollo Client" },
+            { name: "WebSockets" },
+            { name: "Firebase Realtime Database" },
+          ],
+        },
+      ],
+      dividerText: "Apps fortified—explore cross-platform and emerging tech.",
+    },
+    {
+      name: " Cross-Platform Development",
       children: [
         {
           name: "Kotlin Multiplatform Mobile",
           children: [
-            {
-              name: "Shared Modules",
-            },
-            {
-              name: "Native Integration",
-            },
-            {
-              name: "Tooling",
-            },
+            { name: "Shared Modules" },
+            { name: "Native Integration" },
+            { name: "Tooling" },
           ],
         },
         {
           name: "Flutter",
           preferred: true,
           children: [
-            {
-              name: "Dart Basics",
-            },
-            {
-              name: "Widgets",
-            },
-            {
-              name: "Platform Channels",
-            },
-            {
-              name: "Performance Optimization",
-            },
+            { name: "Dart Basics" },
+            { name: "Widgets" },
+            { name: "Platform Channels" },
           ],
         },
       ],
-      dividerText: "Platforms united—power your apps with backend services.",
+      dividerText: "Platforms expanded—push boundaries with new tech.",
     },
     {
-      name: "Backend Integration",
+      name: " Emerging Technologies",
       children: [
         {
-          name: "RESTful APIs",
+          name: "AI & Machine Learning",
           children: [
-            {
-              name: "Retrofit",
-              preferred: true,
-            },
-            {
-              name: "OkHttp",
-            },
-            {
-              name: "JSON Parsing",
-            },
-          ],
-        },
-        {
-          name: "GraphQL",
-          children: [
-            {
-              name: "Apollo Client",
-            },
-          ],
-        },
-        {
-          name: "Real-Time Data",
-          children: [
-            {
-              name: "WebSockets",
-            },
-            {
-              name: "Firebase Realtime Database",
-            },
-          ],
-        },
-      ],
-      dividerText: "streamline your Android workflow.",
-    },
-
-    {
-      name: "Development Tools & Practices",
-      children: [
-        {
-          name: "Version Control Systems (VCS)",
-          children: [
-            {
-              name: "Git",
-            },
-            {
-              name: "GitHub/GitLab",
-            },
-            {
-              name: "Pull Requests",
-            },
-          ],
-        },
-        {
-          name: "CI/CD",
-          children: [
-            {
-              name: "GitHub Actions",
-              preferred: true,
-            },
-            {
-              name: "Jenkins",
-            },
-            {
-              name: "Fastlane",
-            },
-          ],
-        },
-        {
-          name: "Testing",
-          children: [
-            {
-              name: "Unit Testing",
-            },
-            {
-              name: "UI Testing",
-            },
-            {
-              name: "Integration Testing",
-            },
-            {
-              name: "Performance Testing",
-            },
-          ],
-        },
-        {
-          name: "App Optimization",
-          children: [
-            {
-              name: "Profiling Tools",
-            },
-            {
-              name: "APK Size Reduction",
-            },
-            {
-              name: "Startup Time",
-            },
-          ],
-        },
-      ],
-      dividerText: "Process optimized—fortify your apps for safety.",
-    },
-    {
-      name: "Security & Privacy",
-      children: [
-        {
-          name: "Data Protection",
-          children: [
-            {
-              name: "Encryption",
-            },
-            {
-              name: "Secure Storage",
-            },
-            {
-              name: "Keystore",
-            },
-          ],
-        },
-        {
-          name: "Authentication & Authorization",
-          children: [
-            {
-              name: "OAuth2",
-            },
-            {
-              name: "Firebase Authentication",
-            },
-          ],
-        },
-        {
-          name: "App Hardening",
-          children: [
-            {
-              name: "ProGuard/R8",
-            },
-            {
-              name: "Runtime Checks",
-            },
-          ],
-        },
-      ],
-      dividerText: "Data connected—pioneer Android’s next-gen features.",
-    },
-    {
-      name: "Emerging Technologies",
-      children: [
-        {
-          name: "AI & ML",
-          children: [
-            {
-              name: "TensorFlow Lite",
-              preferred: true,
-            },
-            {
-              name: "ML Kit",
-            },
-            {
-              name: "Custom Models",
-            },
-            {
-              name: "Edge AI",
-            },
-          ],
-        },
-        {
-          name: "5G Technology",
-          children: [
-            {
-              name: "Network Optimization",
-            },
-            {
-              name: "Low-Latency Features",
-            },
-            {
-              name: "Adaptive Streaming",
-            },
+            { name: "TensorFlow Lite", preferred: true },
+            { name: "ML Kit" },
+            { name: "Edge AI" },
           ],
         },
         {
           name: "Augmented Reality (AR)",
-          children: [
-            {
-              name: "ARCore",
-            },
-            {
-              name: "Sceneform",
-            },
-            {
-              name: "Motion Tracking",
-            },
-          ],
+          children: [{ name: "ARCore" }, { name: "Motion Tracking" }],
         },
         {
-          name: "Wear OS & IoT Integration",
-          children: [
-            {
-              name: "Wear OS",
-            },
-            {
-              name: "IoT Connectivity",
-            },
-          ],
+          name: "Wear OS & IoT",
+          children: [{ name: "Wear OS" }, { name: "IoT Connectivity" }],
         },
       ],
+      dividerText: "Future-ready—polish your career skills.",
     },
     {
-      name: "Soft Skills & Career Development",
+      name: " Soft Skills & Career Growth",
       children: [
         {
           name: "Problem-Solving",
-          children: [
-            {
-              name: "Algorithm Practice",
-            },
-            {
-              name: "Debugging",
-            },
-          ],
+          children: [{ name: "Algorithm Practice" }, { name: "Debugging" }],
         },
         {
           name: "Collaboration",
-          children: [
-            {
-              name: "Agile Methodologies",
-            },
-            {
-              name: "Code Reviews",
-            },
-          ],
+          children: [{ name: "Agile Methodologies" }, { name: "Code Reviews" }],
         },
         {
           name: "Continuous Learning",
           children: [
-            {
-              name: "Google I/O Updates",
-            },
-            {
-              name: "Community Engagement",
-            },
+            { name: "Google I/O Updates" },
+            { name: "Community Engagement" },
           ],
         },
       ],

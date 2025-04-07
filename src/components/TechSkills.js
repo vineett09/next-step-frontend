@@ -11,6 +11,8 @@ const skills = [
   "Kotlin",
   "JavaScript",
   "SQL",
+  "C++",
+  "TypeScript",
 ];
 
 const TechSkills = () => {

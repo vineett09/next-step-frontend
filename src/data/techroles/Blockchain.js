@@ -2,491 +2,349 @@ const blockchainDeveloperRoadmap = {
   name: "Blockchain Developer Roadmap 2025",
   children: [
     {
-      name: "Grasp Blockchain Fundamentals",
+      name: "Blockchain Basics",
       children: [
         {
           name: "What is Blockchain?",
           children: [
-            {
-              name: "Core Definition",
-            },
-            {
-              name: "Comparison to Databases",
-            },
-            {
-              name: "Key Features",
-            },
+            { name: "Core Definition" },
+            { name: "Comparison to Databases" },
+            { name: "Key Features (Immutability, Transparency)" },
           ],
         },
         {
           name: "Decentralization",
           children: [
-            {
-              name: "Purpose and Benefits",
-            },
-            {
-              name: "Security Enhancements",
-            },
-            {
-              name: "Real-World Impact",
-            },
-          ],
-        },
-        {
-          name: "Operations",
-          children: [
-            {
-              name: "Transaction Creation",
-            },
-            {
-              name: "Validation Process",
-            },
-            {
-              name: "Block Addition",
-            },
-          ],
-        },
-        {
-          name: "Cryptocurrencies",
-          children: [
-            {
-              name: "Bitcoin Mechanics",
-            },
-            {
-              name: "Ethereum Tokens",
-            },
-            {
-              name: "Stablecoins",
-            },
+            { name: "Purpose and Benefits" },
+            { name: "Security Enhancements" },
           ],
         },
         {
           name: "Cryptography",
           children: [
-            {
-              name: "Hash Functions",
-            },
-            {
-              name: "Public-Key Cryptography",
-            },
-            {
-              name: "Digital Signatures",
-            },
+            { name: "Hash Functions" },
+            { name: "Public-Key Cryptography" },
+            { name: "Digital Signatures" },
+          ],
+        },
+      ],
+      dividerText: "Basics understood—explore how blockchain operates.",
+    },
+    {
+      name: "Blockchain Operations",
+      children: [
+        {
+          name: "Transactions",
+          children: [
+            { name: "Transaction Creation" },
+            { name: "Validation Process" },
+            { name: "Block Addition" },
+          ],
+        },
+        {
+          name: "Consensus Mechanisms",
+          children: [
+            { name: "Proof of Work (PoW)" },
+            { name: "Proof of Stake (PoS)" },
+            { name: "Delegated Proof of Stake (DPoS)" },
           ],
         },
         {
           name: "Wallets",
           children: [
-            {
-              name: "Hot Wallets",
-            },
-            {
-              name: "Cold Wallets",
-            },
-            {
-              name: "Wallet Operations",
-            },
+            { name: "Hot Wallets" },
+            { name: "Cold Wallets" },
+            { name: "Key Management" },
           ],
         },
       ],
-      dividerText: "Fundamentals in place—discover blockchain platforms next.",
+      dividerText: "Operations clear—learn about cryptocurrencies.",
     },
     {
-      name: "Discover Blockchain Platforms",
+      name: "Cryptocurrencies",
+      children: [
+        {
+          name: "Bitcoin",
+          children: [{ name: "Mechanics" }, { name: "UTXO Model" }],
+        },
+        {
+          name: "Ethereum",
+          children: [{ name: "Tokens (ERC-20)" }, { name: "Gas Fees" }],
+        },
+        {
+          name: "Other Coins",
+          children: [{ name: "Stablecoins" }, { name: "Altcoins" }],
+        },
+      ],
+      dividerText: "Crypto grasped—explore blockchain platforms.",
+    },
+    {
+      name: "Blockchain Platforms",
       children: [
         {
           name: "Ethereum",
           preferred: true,
           children: [
-            {
-              name: "Ethereum Virtual Machine (EVM)",
-            },
-            {
-              name: "Node Deployment",
-            },
-            {
-              name: "Ecosystem Tools",
-            },
+            { name: "Ethereum Virtual Machine (EVM)" },
+            { name: "Node Deployment" },
+            { name: "Ecosystem Tools (MetaMask, Infura)" },
           ],
         },
         {
           name: "Polkadot",
           children: [
-            {
-              name: "Relay Chain",
-            },
-            {
-              name: "Parachains",
-            },
-            {
-              name: "Polkadot Tools",
-            },
+            { name: "Relay Chain" },
+            { name: "Parachains" },
+            { name: "Substrate Framework" },
           ],
         },
         {
           name: "Binance Smart Chain (BSC)",
           children: [
-            {
-              name: "BSC Consensus",
-            },
-            {
-              name: "Node Setup",
-            },
-            {
-              name: "BSC Tools",
-            },
+            { name: "BSC Consensus" },
+            { name: "Node Setup" },
+            { name: "BSC Tools" },
           ],
         },
       ],
-      dividerText:
-        "Platforms discovered—equip yourself with development tools.",
+      dividerText: "Platforms known—set up your development tools.",
     },
     {
-      name: "Master Development Tools",
+      name: "Development Tools",
       children: [
+        {
+          name: "Hardhat",
+          preferred: true,
+          children: [
+            { name: "Setup" },
+            { name: "Hardhat Network" },
+            { name: "Debugging" },
+          ],
+        },
         {
           name: "Truffle",
           children: [
-            {
-              name: "Installation",
-            },
-            {
-              name: "Project Creation",
-            },
-            {
-              name: "Testing Setup",
-            },
-            {
-              name: "Deployment",
-            },
+            { name: "Installation" },
+            { name: "Project Creation" },
+            { name: "Deployment" },
           ],
         },
         {
           name: "Remix",
           children: [
-            {
-              name: "Interface Navigation",
-            },
-            {
-              name: "Coding Environment",
-            },
-            {
-              name: "Deployment Options",
-            },
-          ],
-        },
-        {
-          name: "Hardhat",
-          preferred: true,
-          children: [
-            {
-              name: "Setup",
-            },
-            {
-              name: "Hardhat Network",
-            },
-            {
-              name: "Debugging",
-            },
+            { name: "Interface Navigation" },
+            { name: "Coding Environment" },
+            { name: "Deployment Options" },
           ],
         },
         {
           name: "Ganache",
           children: [
-            {
-              name: "CLI Installation",
-            },
-            {
-              name: "GUI Configuration",
-            },
-            {
-              name: "Transaction Simulation",
-            },
-          ],
-        },
-        {
-          name: "Chainlink (Oracles)",
-          children: [
-            {
-              name: "Installation",
-            },
-            {
-              name: "Price Feeds",
-            },
-            {
-              name: "Custom API Calls",
-            },
+            { name: "CLI Installation" },
+            { name: "GUI Configuration" },
+            { name: "Transaction Simulation" },
           ],
         },
       ],
-      dividerText: "Tools mastered—begin coding smart contracts.",
+      dividerText: "Tools ready—start coding smart contracts.",
     },
     {
-      name: "Code Smart Contracts",
+      name: "Smart Contract Development",
       children: [
         {
-          name: "Programming Languages",
+          name: "Languages",
           children: [
-            {
-              name: "Solidity",
-              preferred: true,
-            },
-            {
-              name: "Rust",
-            },
-            {
-              name: "Vyper",
-            },
-            {
-              name: "Go",
-            },
+            { name: "Solidity", preferred: true },
+            { name: "Rust" },
+            { name: "Vyper" },
           ],
         },
         {
-          name: "Testing Contracts",
+          name: "Contract Basics",
           children: [
-            {
-              name: "Mocha and Chai",
-            },
-            {
-              name: "Foundry",
-            },
-            {
-              name: "Coverage",
-            },
+            { name: "Syntax and Structure" },
+            { name: "Events and Logs" },
+            { name: "Modifiers" },
           ],
         },
         {
-          name: "Deploying Contracts",
+          name: "Testing",
           children: [
-            {
-              name: "Local Testing",
-            },
-            {
-              name: "Testnet Deployment",
-            },
-            {
-              name: "Mainnet Deployment",
-            },
-            {
-              name: "Verification",
-            },
+            { name: "Mocha and Chai" },
+            { name: "Foundry" },
+            { name: "Coverage Tools" },
+          ],
+        },
+        {
+          name: "Deployment",
+          children: [
+            { name: "Local Testing" },
+            { name: "Testnet Deployment" },
+            { name: "Mainnet Deployment" },
+            { name: "Verification (Etherscan)" },
           ],
         },
       ],
-      dividerText: "Contracts coded—secure them with advanced practices.",
+      dividerText: "Contracts coded—integrate external data.",
     },
     {
-      name: "Secure Your Blockchain",
+      name: "Oracles & Data Integration",
       children: [
         {
-          name: "Security Practices",
+          name: "Chainlink",
+          preferred: true,
           children: [
-            {
-              name: "OpenZeppelin Libraries",
-            },
-            {
-              name: "Mythril Scans",
-            },
-            {
-              name: "Threat Prevention",
-            },
+            { name: "Installation" },
+            { name: "Price Feeds" },
+            { name: "Custom API Calls" },
+          ],
+        },
+        {
+          name: "Other Oracles",
+          children: [{ name: "Band Protocol" }, { name: "API3" }],
+        },
+      ],
+      dividerText: "Data connected—secure your contracts.",
+    },
+    {
+      name: "Blockchain Security",
+      children: [
+        {
+          name: "Best Practices",
+          children: [
+            { name: "OpenZeppelin Libraries" },
+            { name: "Reentrancy Prevention" },
+            { name: "Gas Optimization" },
           ],
         },
         {
           name: "Security Tools",
           children: [
-            {
-              name: "Slither",
-              preferred: true,
-            },
-            {
-              name: "Manticore",
-            },
-            {
-              name: "Oyente",
-            },
+            { name: "Slither", preferred: true },
+            { name: "Mythril" },
+            { name: "Manticore" },
           ],
         },
         {
-          name: "Version Control",
+          name: "Auditing",
           children: [
-            {
-              name: "Git Basics",
-            },
-            {
-              name: "GitHub Collaboration",
-            },
-            {
-              name: "GitLab CI/CD",
-            },
+            { name: "Common Vulnerabilities" },
+            { name: "Audit Process" },
           ],
         },
       ],
-      dividerText: "Security mastered—develop DApps next.",
+      dividerText: "Security locked—build decentralized apps.",
     },
     {
-      name: " Develop DApps",
+      name: "DApp Development",
       children: [
         {
-          name: "Supporting Languages",
+          name: "Frontend Integration",
           children: [
-            {
-              name: "JavaScript",
-              preferred: true,
-            },
-            {
-              name: "TypeScript",
-            },
-            {
-              name: "Python",
-            },
+            { name: "JavaScript", preferred: true },
+            { name: "TypeScript" },
+            { name: "React", preferred: true },
+            { name: "Vue" },
           ],
         },
         {
-          name: "Frontend Frameworks",
+          name: "Web3 Libraries",
           children: [
-            {
-              name: "React",
-              preferred: true,
-            },
-            {
-              name: "Angular",
-            },
-            {
-              name: "Vue",
-            },
-          ],
-        },
-        {
-          name: "Client Libraries",
-          children: [
-            {
-              name: "web3.js",
-            },
-            {
-              name: "ethers.js",
-              preferred: true,
-            },
-            {
-              name: "Web3.py",
-            },
+            { name: "ethers.js", preferred: true },
+            { name: "web3.js" },
+            { name: "Web3.py" },
           ],
         },
         {
           name: "Scaling Solutions",
           children: [
-            {
-              name: "Rollups",
-            },
-            {
-              name: "Sharding",
-            },
-            {
-              name: "Sidechains",
-            },
+            { name: "Layer 2 Rollups" },
+            { name: "Sidechains" },
+            { name: "Sharding Basics" },
           ],
         },
       ],
-      dividerText: "DApps developed—put your skills into practical projects.",
+      dividerText: "DApps created—deploy and manage them.",
     },
     {
-      name: "Build Practical Projects",
+      name: "Deployment & DevOps",
+      children: [
+        {
+          name: "Version Control",
+          children: [{ name: "Git Basics" }, { name: "GitHub Collaboration" }],
+        },
+        {
+          name: "CI/CD",
+          children: [{ name: "GitHub Actions" }, { name: "GitLab CI/CD" }],
+        },
+        {
+          name: "Infrastructure",
+          children: [{ name: "Docker" }, { name: "IPFS for Storage" }],
+        },
+      ],
+      dividerText: "Apps deployed—test with practical projects.",
+    },
+    {
+      name: "Practical Projects",
       children: [
         {
           name: "Token Contract",
           children: [
-            {
-              name: "Coding Token",
-            },
-            {
-              name: "Testing",
-            },
-            {
-              name: "Deploying",
-            },
+            { name: "ERC-20 Token" },
+            { name: "Testing" },
+            { name: "Deployment" },
           ],
         },
         {
           name: "NFT Marketplace",
           children: [
-            {
-              name: "NFT Contract",
-            },
-            {
-              name: "Frontend UI",
-            },
-            {
-              name: "IPFS Storage",
-            },
+            { name: "ERC-721 Contract" },
+            { name: "Frontend UI" },
+            { name: "IPFS Integration" },
           ],
         },
         {
-          name: "DeFi App",
+          name: "DeFi Application",
           children: [
-            {
-              name: "Lending Logic",
-            },
-            {
-              name: "Oracle Integration",
-            },
-            {
-              name: "Deployment",
-            },
+            { name: "Lending Protocol" },
+            { name: "Oracle Integration" },
+            { name: "Testing & Deployment" },
           ],
         },
       ],
-      dividerText: "Projects complete—launch your blockchain career.",
+      dividerText: "Projects built—launch your career.",
     },
     {
-      name: "Launch Your Blockchain Career",
+      name: "Career Development",
       children: [
         {
           name: "Career Paths",
           children: [
-            {
-              name: "Smart Contract Developer",
-            },
-            {
-              name: "Security Auditor",
-            },
-            {
-              name: "Blockchain Architect",
-            },
+            { name: "Smart Contract Developer" },
+            { name: "Security Auditor" },
+            { name: "Blockchain Architect" },
           ],
         },
         {
           name: "Certifications",
           children: [
-            {
-              name: "Ethereum Developer Cert",
-            },
-            {
-              name: "Chainlink Cert",
-            },
-            {
-              name: "Learning Platforms",
-            },
+            { name: "Certified Ethereum Developer" },
+            { name: "Chainlink Developer" },
           ],
         },
         {
-          name: "Networking and Updates",
+          name: "Networking",
           children: [
-            {
-              name: "Hackathons",
-            },
-            {
-              name: "Community Engagement",
-            },
-            {
-              name: "Trend Tracking",
-            },
+            { name: "Hackathons" },
+            { name: "Community Forums (e.g., Discord)" },
+            { name: "Conferences (e.g., Devcon)" },
           ],
         },
+        {
+          name: "Continuous Learning",
+          children: [{ name: "Emerging Chains" }, { name: "Web3 Trends" }],
+        },
       ],
-    },
-    {
-      name: "Continous Learning",
     },
   ],
 };

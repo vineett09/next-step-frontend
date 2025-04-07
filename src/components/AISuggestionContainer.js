@@ -31,7 +31,6 @@ const AISuggestionContainer = () => {
       >
         Get Suggestions ✨
       </button>
-
       <AuthModal isOpen={isAuthModalOpen} onClose={handleCloseAuthModal} />
     </div>
   );

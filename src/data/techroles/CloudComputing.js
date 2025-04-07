@@ -2,451 +2,322 @@ const CloudComputingRoadmap = {
   name: "Cloud Computing Roadmap 2025",
   children: [
     {
-      name: "Foundations of Cloud Computing",
+      name: " Cloud Computing Fundamentals",
       children: [
         {
           name: "Introduction to Cloud",
           children: [
-            {
-              name: "Definition and Characteristics",
-            },
-            {
-              name: "IaaS",
-              preferred: true,
-            },
-            {
-              name: "PaaS",
-            },
-            {
-              name: "SaaS",
-            },
-            {
-              name: "Deployment Models",
-            },
+            { name: "What is Cloud Computing?" },
+            { name: "History and Evolution of Cloud" },
+            { name: "Key Characteristics of Cloud" },
+            { name: "Benefits & Use Cases" },
+            { name: "Service Models: IaaS, PaaS, SaaS" },
+            { name: "Public, Private, Hybrid, Multi-Cloud" },
           ],
         },
         {
-          name: "Virtualization Basics",
+          name: " Virtualization Basics",
           children: [
-            {
-              name: "Hypervisors",
-            },
-            {
-              name: "Virtual Machines vs. Containers",
-            },
+            { name: "What is Virtualization?" },
+            { name: "Hypervisors: Type 1 vs Type 2" },
+            { name: "Virtual Machines vs Containers" },
+            { name: "Container Runtimes (Docker)" },
+          ],
+        },
+        {
+          name: " Cloud Economics",
+          children: [
+            { name: "Pay-as-you-go & Subscription Models" },
+            { name: "TCO and ROI in Cloud" },
+            { name: "Cost Optimization Strategies" },
           ],
         },
       ],
-      dividerText: "Cloud basics mastered—choose your cloud platform next.",
+      dividerText: "Fundamentals set—get hands-on with a cloud platform.",
     },
+
     {
-      name: "Choosing Your Cloud Platform",
+      name: " Hands-on with a Cloud Platform",
+      children: [
+        { name: "Amazon Web Services (AWS)", preferred: true },
+        { name: "Microsoft Azure" },
+        { name: "Google Cloud Platform (GCP)" },
+        { name: "Cloud Console and CLI Basics" },
+      ],
+      dividerText: "Platform ready—learn core cloud services.",
+    },
+
+    {
+      name: " Core Cloud Services",
       children: [
         {
-          name: "Amazon Web Services (AWS)",
-          preferred: true,
-        },
-        {
-          name: "Microsoft Azure",
-        },
-        {
-          name: "Google Cloud Platform (GCP)",
-        },
-      ],
-      dividerText: "Platform chosen—explore core cloud services.",
-    },
-    {
-      name: "Core Cloud Services",
-      children: [
-        {
-          name: "Virtual Machines",
+          name: " Compute",
           children: [
-            {
-              name: "AWS EC2",
-              preferred: true,
-            },
-            {
-              name: "Azure VMs",
-            },
-            {
-              name: "Google Cloud VMs",
-            },
+            { name: "AWS EC2", preferred: true },
+            { name: "Azure VMs" },
+            { name: "Google Compute Engine" },
+            { name: "Auto Scaling & Load Balancing" },
           ],
         },
         {
-          name: "Networking Services",
+          name: " Storage",
           children: [
-            {
-              name: "Virtual Private Cloud (VPC)",
-            },
-            {
-              name: "Load Balancing",
-            },
-            {
-              name: "Content Delivery Networks (CDN)",
-            },
+            { name: "Object Storage (S3, Blob, GCS)", preferred: true },
+
+            { name: "Block Storage (EBS, Azure Disks)" },
+            { name: "File Storage (EFS, Azure Files)" },
+            { name: "Storage Lifecycle & Cost Mgmt" },
           ],
         },
         {
-          name: "Object Storage",
+          name: " Networking",
           children: [
-            {
-              name: "AWS S3",
-              preferred: true,
-            },
-            {
-              name: "AWS EBS",
-              preferred: true,
-            },
-            {
-              name: "AWS EFS",
-              preferred: true,
-            },
-            {
-              name: "Azure Blob Storage",
-            },
-            {
-              name: "Google Cloud Storage",
-            },
+            { name: "Virtual Private Cloud (VPC)" },
+            { name: "Subnets, NAT, Security Groups" },
+            { name: "Load Balancing & CDN" },
+            { name: "DNS & Traffic Management" },
           ],
         },
         {
-          name: "Database Services",
+          name: "Databases",
           children: [
-            {
-              name: "Relational Databases",
-            },
-            {
-              name: "NoSQL Databases",
-            },
-            {
-              name: "Database Migration",
-            },
+            { name: "Relational (RDS, SQL)" },
+            { name: "NoSQL (DynamoDB, Cosmos DB)" },
+            { name: "Caching (Redis, Memcached)" },
+            { name: "Database Migration Services" },
           ],
         },
       ],
-      dividerText:
-        "Core services understood—secure your cloud environment next.",
+      dividerText: "Core services done—build secure cloud solutions.",
     },
+
     {
-      name: "Cloud Security and Compliance",
+      name: " Cloud Security & Compliance",
       children: [
         {
           name: "Identity and Access Management",
           children: [
-            {
-              name: "User Roles and Policies",
-            },
-            {
-              name: "Multi-Factor Authentication",
-            },
+            { name: "User Roles & Permissions" },
+            { name: "Policies & Groups" },
+            { name: "MFA & Identity Federation" },
           ],
         },
         {
-          name: "Data Protection",
+          name: " Data Protection",
           children: [
-            {
-              name: "Encryption",
-            },
-            {
-              name: "Data Loss Prevention (DLP)",
-            },
+            { name: "Encryption (At Rest/In Transit)" },
+            { name: "Key Management Services" },
+            { name: "Backup & Recovery" },
+            { name: "Data Loss Prevention (DLP)" },
           ],
         },
         {
-          name: "Compliance Standards",
+          name: " Compliance & Governance",
           children: [
-            {
-              name: "GDPR",
-            },
-            {
-              name: "HIPAA",
-            },
-            {
-              name: "ISO/IEC 27001",
-            },
+            { name: "GDPR, HIPAA, ISO 27001" },
+            { name: "Cloud Auditing Tools" },
+            { name: "Security Posture Management" },
           ],
         },
       ],
-      dividerText: "Security locked in—design robust cloud architectures next.",
+      dividerText: "Security strong—architect solutions next.",
     },
+
     {
-      name: "Cloud Architecture and Design",
+      name: " Cloud Architecture & Infrastructure Design",
       children: [
         {
-          name: "Architectural Best Practices",
+          name: " Design Principles",
           children: [
-            {
-              name: "Well-Architected Framework",
-            },
-            {
-              name: "Design for Scalability",
-            },
-            {
-              name: "Fault Tolerance and High Availability",
-            },
+            { name: "Well-Architected Framework" },
+            { name: "Scalability & Resilience" },
+            { name: "Cost Optimization" },
+            { name: "Disaster Recovery" },
           ],
         },
         {
-          name: "Infrastructure as Code",
+          name: " Infrastructure as Code (IaC)",
           children: [
-            {
-              name: "Terraform",
-              preferred: true,
-            },
-            {
-              name: "AWS CloudFormation",
-            },
-            {
-              name: "Azure Resource Manager Templates",
-            },
+            { name: "Terraform" },
+            { name: "AWS CloudFormation" },
+            { name: "ARM Templates" },
+            { name: "Pulumi & Crossplane" },
           ],
         },
         {
-          name: "Microservices and Containerization",
+          name: " Containerization & Orchestration",
           children: [
-            {
-              name: "Docker",
-            },
-            {
-              name: "Kubernetes",
-              preferred: true,
-            },
-            {
-              name: "Service Mesh",
-            },
+            { name: "Docker Basics" },
+            { name: "Kubernetes" },
+            { name: "Helm, Service Mesh" },
           ],
         },
       ],
-      dividerText: "Architecture designed—integrate AI and ML into the cloud.",
+      dividerText: "Infrastructure built—go serverless and cloud-native.",
     },
+
     {
-      name: "AI and Machine Learning in Cloud",
+      name: " Serverless & Cloud-Native Technologies",
       children: [
         {
-          name: "AI-Powered Cloud Services",
+          name: " Serverless",
           children: [
-            {
-              name: "AWS SageMaker",
-              preferred: true,
-            },
-            {
-              name: "Azure Machine Learning",
-            },
-            {
-              name: "Google Vertex AI",
-            },
-          ],
-        },
-        {
-          name: "Machine Learning Model Management",
-          children: [
-            {
-              name: "Model Monitoring",
-            },
-            {
-              name: "MLOps",
-            },
-            {
-              name: "Serverless AI",
-            },
-          ],
-        },
-      ],
-      dividerText: "AI integrated—explore edge computing and IoT next.",
-    },
-    {
-      name: " Edge Computing and IoT",
-      children: [
-        {
-          name: "Edge-to-Cloud Integration",
-          children: [
-            {
-              name: "AWS IoT Greengrass",
-              preferred: true,
-            },
-            {
-              name: "Azure IoT Edge",
-            },
-            {
-              name: "Google Cloud IoT Core",
-            },
-          ],
-        },
-        {
-          name: "5G and Edge Computing",
-          children: [
-            {
-              name: "Cloudflare Workers",
-            },
-            {
-              name: "AWS Wavelength",
-            },
-            {
-              name: "Google Anthos for Edge",
-            },
-          ],
-        },
-      ],
-      dividerText:
-        "Edge mastered—embrace serverless and cloud-native tech next.",
-    },
-    {
-      name: "Serverless and Cloud-Native Technologies",
-      children: [
-        {
-          name: "Serverless Computing",
-          children: [
-            {
-              name: "AWS Lambda",
-              preferred: true,
-            },
-            {
-              name: "Azure Functions",
-            },
-            {
-              name: "Google Cloud Functions",
-            },
+            { name: "AWS Lambda", preferred: true },
+            { name: "Azure Functions" },
+            { name: "GCP Cloud Functions" },
           ],
         },
         {
           name: "Cloud-Native Development",
           children: [
-            {
-              name: "Microservices Architecture",
-            },
-            {
-              name: "Service Mesh",
-            },
-            {
-              name: "Kubernetes Operators",
-            },
+            { name: "Microservices Design" },
+            { name: "API Gateway" },
+            { name: "Kubernetes Operators" },
+            { name: "CI/CD Pipelines" },
           ],
         },
       ],
-      dividerText:
-        "Serverless embraced—explore quantum computing in the cloud.",
+      dividerText: "Modern development unlocked—infuse AI & ML.",
     },
+
     {
-      name: "Quantum Computing in the Cloud",
+      name: " AI & Machine Learning in Cloud",
       children: [
         {
-          name: "Quantum Computing Services",
+          name: "Cloud AI Services",
           children: [
-            {
-              name: "AWS Braket",
-              preferred: true,
-            },
-            {
-              name: "IBM Quantum",
-            },
-            {
-              name: "Google Quantum AI",
-            },
+            { name: "AWS SageMaker", preferred: true },
+            { name: "Azure ML Studio" },
+            { name: "Google Vertex AI" },
           ],
         },
         {
-          name: "Quantum Programming Frameworks",
+          name: " MLOps & Lifecycle",
           children: [
-            {
-              name: "Qiskit",
-            },
-            {
-              name: "Cirq",
-            },
-            {
-              name: "PennyLane",
-            },
+            { name: "Model Training & Deployment" },
+            { name: "Monitoring & Retraining" },
+            { name: "Serverless AI & Automation" },
           ],
         },
       ],
-      dividerText: "Quantum explored—validate your skills with certifications.",
+      dividerText: "ML mastered—scale to edge and IoT.",
     },
+
     {
-      name: "Certification",
+      name: " Edge Computing & Internet of Things (IoT)",
+      children: [
+        {
+          name: " Edge-to-Cloud Platforms",
+          children: [
+            { name: "AWS IoT Greengrass", preferred: true },
+            { name: "Azure IoT Edge" },
+            { name: "Google IoT Core" },
+          ],
+        },
+        {
+          name: " Edge Innovations",
+          children: [
+            { name: "Cloudflare Workers" },
+            { name: "AWS Wavelength" },
+            { name: "5G & Edge Use Cases" },
+          ],
+        },
+      ],
+      dividerText: "Edge done—explore quantum computing next.",
+    },
+
+    {
+      name: " Quantum Computing in Cloud",
+      children: [
+        {
+          name: " Quantum Cloud Platforms",
+          children: [
+            { name: "AWS Braket", preferred: true },
+            { name: "Google Quantum AI" },
+            { name: "IBM Quantum" },
+          ],
+        },
+        {
+          name: "Quantum Development Tools",
+          children: [
+            { name: "Qiskit (IBM)" },
+            { name: "Cirq (Google)" },
+            { name: "PennyLane (Xanadu)" },
+          ],
+        },
+      ],
+      dividerText: "Quantum explored—prove your skills with certification.",
+    },
+
+    {
+      name: " Certification & Validation",
       children: [
         {
           name: "Cloud Provider Certifications",
           children: [
-            {
-              name: "AWS Certified Solutions Architect",
-              preferred: true,
-            },
-            {
-              name: "Azure Solutions Architect Expert",
-            },
-            {
-              name: "Google Professional Cloud Architect",
-            },
+            { name: "AWS Certified Solutions Architect", preferred: true },
+            { name: "Azure Solutions Architect Expert" },
+            { name: "Google Professional Cloud Architect" },
           ],
         },
         {
-          name: "Specialized Certifications",
+          name: "Specialty Certifications",
           children: [
-            {
-              name: "Certified Kubernetes Administrator (CKA)",
-            },
-            {
-              name: "Certified Cloud Security Professional (CCSP)",
-            },
-            {
-              name: "AWS Certified Machine Learning – Specialty",
-            },
+            { name: "Certified Kubernetes Administrator (CKA)" },
+            { name: "AWS Certified Machine Learning – Specialty" },
+            { name: "Certified Cloud Security Professional (CCSP)" },
           ],
         },
       ],
-      dividerText: "Certified skills in hand—map your cloud career path.",
+      dividerText: "Certified? Time to explore cloud career roles.",
     },
+
     {
-      name: "Career Pathways in Cloud Computing",
+      name: "Cloud Career Pathways",
       children: [
         {
           name: "Cloud Engineer",
           children: [
-            {
-              name: "Junior Cloud Engineer",
-            },
-            {
-              name: "Cloud Engineer",
-            },
-            {
-              name: "Senior Cloud Engineer",
-            },
+            { name: "Junior Cloud Engineer" },
+            { name: "Cloud Engineer" },
+            { name: "Senior Cloud Engineer" },
           ],
         },
         {
           name: "Cloud Architect",
           children: [
-            {
-              name: "Cloud Solutions Architect",
-            },
-            {
-              name: "Lead Cloud Architect",
-            },
-            {
-              name: "Chief Cloud Officer",
-            },
+            { name: "Solutions Architect" },
+            { name: "Lead Architect" },
+            { name: "Chief Cloud Officer" },
           ],
         },
         {
           name: "Cloud Security Specialist",
           children: [
-            {
-              name: "Cloud Security Analyst",
-            },
-            {
-              name: "Cloud Security Engineer",
-            },
-            {
-              name: "Cloud Security Architect",
-            },
+            { name: "Security Analyst" },
+            { name: "Security Engineer" },
+            { name: "Security Architect" },
+          ],
+        },
+        {
+          name: "DevOps / SRE Roles",
+          children: [
+            { name: "Cloud DevOps Engineer" },
+            { name: "Site Reliability Engineer (SRE)" },
           ],
         },
       ],
-      dividerText: "Career path set—commit to continuous learning.",
+      dividerText: "Career selected—stay curious and updated.",
     },
+
     {
       name: "Continuous Learning",
+      children: [
+        { name: "Follow Cloud Blogs (AWS, Azure, GCP)" },
+        { name: "GitHub Projects & Open Source" },
+        { name: "Attend Cloud Conferences (re:Invent, Ignite)" },
+        { name: "Stay Updated with Cloud Trends (FinOps, Green Cloud, etc.)" },
+      ],
     },
   ],
 };

@@ -4,6 +4,7 @@ import { techFields, techSkills } from "../data/TechFieldsData";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/TechExplorer.css";
+import AISuggestionContainer from "./AISuggestionContainer";
 
 const TechExplorer = () => {
   const navigate = useNavigate();
@@ -105,7 +106,9 @@ const TechExplorer = () => {
             </div>
           </section>
         )}
+        <AISuggestionContainer />
       </div>
+
       <Footer />
     </div>
   );

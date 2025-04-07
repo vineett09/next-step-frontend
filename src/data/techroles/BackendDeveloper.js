@@ -2,236 +2,125 @@ const backendDeveloperRoadmap = {
   name: "Backend Developer Roadmap 2025",
   children: [
     {
-      name: "Understanding the Fundamentals",
+      name: "Web Fundamentals",
       children: [
         {
           name: "How the Web Works",
           children: [
-            {
-              name: "DNS",
-            },
-            {
-              name: "HTTP/HTTPS",
-            },
-            {
-              name: "Client-Server Model",
-            },
-            {
-              name: "Web Servers",
-            },
-            {
-              name: "TCP/IP",
-            },
+            { name: "DNS" },
+            { name: "HTTP/HTTPS" },
+            { name: "Client-Server Model" },
+            { name: "TCP/IP" },
           ],
         },
         {
-          name: "Basic Terminal Usage",
-          children: [
-            {
-              name: "Commands",
-            },
-            {
-              name: "SSH",
-            },
-          ],
+          name: "Terminal Basics",
+          children: [{ name: "Commands" }, { name: "SSH" }],
         },
       ],
-      dividerText: "Web basics down—pick your backend language and dive in.",
+      dividerText: "Web basics mastered—choose your backend language.",
     },
     {
-      name: "Choosing and Mastering a Programming Language",
+      name: "Programming Languages",
       children: [
         {
           name: "Node.js (JavaScript)",
           preferred: true,
           children: [
-            {
-              name: "Basics",
-            },
-            {
-              name: "NPM",
-            },
-            {
-              name: "Modules",
-            },
+            { name: "Basics" },
+            { name: "NPM" },
+            { name: "Modules" },
+            { name: "Event Loop" },
           ],
         },
         {
           name: "Python",
           children: [
-            {
-              name: "Syntax",
-            },
-            {
-              name: "Pip",
-            },
-            {
-              name: "Virtual Environments",
-            },
+            { name: "Basics" },
+            { name: "Pip" },
+            { name: "Virtual Environments" },
           ],
         },
         {
           name: "Java",
-          children: [
-            {
-              name: "OOP",
-            },
-            {
-              name: "Maven",
-            },
-            {
-              name: "JVM",
-            },
-          ],
+          children: [{ name: "Basics" }, { name: "OOP" }, { name: "Maven" }],
         },
         {
           name: "C#",
           children: [
-            {
-              name: "Basics",
-            },
-            {
-              name: "NuGet",
-            },
-            {
-              name: ".NET Core",
-            },
+            { name: "Basics" },
+            { name: "NuGet" },
+            { name: ".NET Core" },
           ],
         },
       ],
-      dividerText:
-        "Master your chosen language, let's dive into the back-end ecosystem.",
+      dividerText: "Language chosen—explore its ecosystem.",
     },
     {
-      name: "Exploring the Language Ecosystem",
+      name: "Language Ecosystem",
       children: [
         {
           name: "Linters & Formatters",
           children: [
-            {
-              name: "ESLint",
-              preferred: true,
-            },
-            {
-              name: "Prettier",
-            },
-            {
-              name: "Pylint",
-            },
+            { name: "ESLint", preferred: true },
+            { name: "Prettier" },
+            { name: "Pylint" },
           ],
         },
         {
-          name: "Module Bundlers",
+          name: "Debugging Tools",
           children: [
-            {
-              name: "Webpack",
-              preferred: true,
-            },
-            {
-              name: "Vite",
-            },
-          ],
-        },
-        {
-          name: "Memory Management",
-          children: [
-            {
-              name: "Garbage Collection",
-            },
-            {
-              name: "Profiling",
-            },
-          ],
-        },
-        {
-          name: "Debugging",
-          children: [
-            {
-              name: "Breakpoints",
-            },
-            {
-              name: "Logs",
-            },
+            { name: "Breakpoints" },
+            { name: "Logs" },
+            { name: "Profiling" },
           ],
         },
         {
           name: "Configuration Management",
-          children: [
-            {
-              name: "dotenv",
-            },
-            {
-              name: "Secrets",
-            },
-          ],
+          children: [{ name: "dotenv" }, { name: "Secrets" }],
         },
       ],
-      dividerText:
-        "Tools and best practices in place—now, collaborate and control code with Git",
+      dividerText: "Tools in place—collaborate with version control.",
     },
     {
-      name: "Version Control and Collaboration",
+      name: "Version Control",
       children: [
         {
           name: "Git",
           children: [
-            {
-              name: "Basics",
-            },
-            {
-              name: "Branching",
-            },
-            {
-              name: "GitHub",
-            },
-            {
-              name: "Merge Conflicts",
-            },
+            { name: "Basics" },
+            { name: "Branching" },
+            { name: "GitHub" },
+            { name: "Merge Conflicts" },
           ],
         },
       ],
-      dividerText: "Code synced—store and manage data efficiently.",
+      dividerText: "Code managed—handle data with databases.",
     },
     {
-      name: "Database Management",
+      name: "Databases",
       children: [
         {
           name: "Relational Databases",
           children: [
-            {
-              name: "PostgreSQL",
-              preferred: true,
-            },
-            {
-              name: "MySQL",
-            },
+            { name: "PostgreSQL", preferred: true },
+            { name: "MySQL" },
+            { name: "SQL Basics" },
           ],
         },
         {
           name: "NoSQL Databases",
-          children: [
-            {
-              name: "MongoDB",
-            },
-            {
-              name: "Cassandra",
-            },
-          ],
+          children: [{ name: "MongoDB" }, { name: "Cassandra" }],
         },
         {
-          name: "ORMs",
+          name: "ORMS & Querying",
           children: [
-            {
-              name: "Sequelize",
-              preferred: true,
-            },
-            {
-              name: "SQLAlchemy",
-            },
+            { name: "Sequelize", preferred: true },
+            { name: "SQLAlchemy" },
           ],
         },
       ],
-      dividerText: "Data ready—build APIs to connect your backend.",
+      dividerText: "Data stored—connect it with APIs.",
     },
     {
       name: "API Development",
@@ -240,308 +129,163 @@ const backendDeveloperRoadmap = {
           name: "RESTful APIs",
           preferred: true,
           children: [
-            {
-              name: "Endpoints",
-              preferred: true,
-            },
-            {
-              name: "HTTP Status Codes",
-              preferred: true,
-            },
-            {
-              name: "Express.js",
-              preferred: true,
-            },
-            {
-              name: "Flask",
-            },
+            { name: "Endpoints" },
+            { name: "HTTP Status Codes" },
+            { name: "Express.js", preferred: true },
+            { name: "Flask" },
           ],
         },
         {
           name: "GraphQL",
           children: [
-            {
-              name: "Schema",
-            },
-            {
-              name: "Resolvers",
-            },
-            {
-              name: "Apollo Server",
-            },
+            { name: "Schema" },
+            { name: "Resolvers" },
+            { name: "Apollo Server" },
           ],
         },
       ],
-      dividerText: "APIs live—secure them with user access controls.",
+      dividerText: "APIs built—secure them with authentication.",
     },
     {
-      name: "Authentication and Authorization",
+      name: "Authentication & Authorization",
       children: [
         {
-          name: "Session-Based Authentication",
-          children: [
-            {
-              name: "Cookies",
-            },
-            {
-              name: "Express-Session",
-            },
-          ],
+          name: "Session-Based",
+          children: [{ name: "Cookies" }, { name: "Express-Session" }],
         },
         {
-          name: "Token-Based Authentication",
+          name: "Token-Based",
           children: [
-            {
-              name: "JWT",
-              preferred: true,
-            },
-            {
-              name: "Passport.js",
-            },
-            {
-              name: "OAuth",
-            },
+            { name: "JWT", preferred: true },
+            { name: "OAuth" },
+            { name: "Passport.js" },
           ],
         },
         {
           name: "Authorization",
-          children: [
-            {
-              name: "Roles",
-            },
-            {
-              name: "Permissions",
-            },
-          ],
+          children: [{ name: "Roles" }, { name: "Permissions" }],
         },
       ],
-      dividerText: "Access secured—enhance servers with middleware magic.",
+      dividerText: "Security added—enhance with servers and middleware.",
     },
     {
-      name: "Web Servers and Middleware",
+      name: "Web Servers & Middleware",
       children: [
         {
           name: "Web Servers",
-          children: [
-            {
-              name: "Nginx",
-              preferred: true,
-            },
-            {
-              name: "Apache",
-            },
-          ],
+          children: [{ name: "Nginx", preferred: true }, { name: "Apache" }],
         },
         {
           name: "Middleware",
           children: [
-            {
-              name: "Logging",
-            },
-            {
-              name: "CORS",
-            },
-            {
-              name: "Rate Limiting",
-            },
+            { name: "Logging" },
+            { name: "CORS" },
+            { name: "Rate Limiting" },
           ],
         },
       ],
-      dividerText: "Servers humming—test and debug for reliability..",
+      dividerText: "Servers running—test for reliability.",
     },
     {
-      name: "Testing and Debugging",
+      name: "Testing",
       children: [
         {
           name: "Unit Testing",
-          children: [
-            {
-              name: "Jest",
-              preferred: true,
-            },
-            {
-              name: "Pytest",
-            },
-          ],
+          children: [{ name: "Jest", preferred: true }, { name: "Pytest" }],
         },
         {
           name: "Integration Testing",
           children: [
-            {
-              name: "Supertest",
-              preferred: true,
-            },
-            {
-              name: "Postman",
-            },
-          ],
-        },
-        {
-          name: "Debugging",
-          children: [
-            {
-              name: "Logs",
-            },
-            {
-              name: "Profiling",
-            },
+            { name: "Supertest", preferred: true },
+            { name: "Postman" },
           ],
         },
       ],
-      dividerText: "Bugs squashed—optimize for speed and scale.",
+      dividerText: "Tests passed—optimize performance.",
     },
     {
       name: "Performance Optimization",
       children: [
         {
           name: "Caching",
-          children: [
-            {
-              name: "Redis",
-              preferred: true,
-            },
-            {
-              name: "ETag",
-            },
-          ],
+          children: [{ name: "Redis", preferred: true }, { name: "ETag" }],
         },
         {
           name: "Load Balancing",
-          children: [
-            {
-              name: "Nginx",
-              preferred: true,
-            },
-            {
-              name: "HAProxy",
-            },
-          ],
+          children: [{ name: "Nginx", preferred: true }, { name: "HAProxy" }],
         },
         {
           name: "Asynchronous Processing",
-          children: [
-            {
-              name: "Workers",
-            },
-            {
-              name: "Queues",
-            },
-          ],
+          children: [{ name: "Workers" }, { name: "Queues (e.g., RabbitMQ)" }],
         },
       ],
-      dividerText: "Performance tuned—deploy with DevOps precision.",
+      dividerText: "Speed achieved—deploy with DevOps.",
     },
     {
-      name: "Deployment and DevOps",
+      name: "Deployment & DevOps",
       children: [
         {
           name: "Containerization",
-          children: [
-            {
-              name: "Docker",
-            },
-          ],
+          children: [{ name: "Docker" }, { name: "Kubernetes Basics" }],
         },
         {
           name: "CI/CD",
           children: [
-            {
-              name: "GitHub Actions",
-              preferred: true,
-            },
-            {
-              name: "Jenkins",
-            },
+            { name: "GitHub Actions", preferred: true },
+            { name: "Jenkins" },
           ],
         },
         {
           name: "Cloud Services",
           children: [
-            {
-              name: "AWS",
-              preferred: true,
-            },
-            {
-              name: "Azure",
-            },
-            {
-              name: "Google Cloud",
-            },
+            { name: "AWS", preferred: true },
+            { name: "Azure" },
+            { name: "Google Cloud" },
           ],
         },
       ],
-      dividerText: "Apps deployed—lock them down with security.",
+      dividerText: "Deployment live—secure your backend.",
     },
     {
-      name: "Security Best Practices",
+      name: "Security",
       children: [
         {
           name: "Data Protection",
-          children: [
-            {
-              name: "Encryption",
-            },
-            {
-              name: "Secure Storage",
-            },
-          ],
-        },
-        {
-          name: "Vulnerability Management",
-          children: [
-            {
-              name: "Dependency Scanning",
-            },
-            {
-              name: "Patching",
-            },
-          ],
+          children: [{ name: "Encryption" }, { name: "Secure Storage" }],
         },
         {
           name: "Input Validation",
           children: [
-            {
-              name: "Sanitization",
-            },
-            {
-              name: "SQL Injection",
-            },
+            { name: "Sanitization" },
+            { name: "SQL Injection Prevention" },
           ],
         },
+        {
+          name: "Vulnerability Management",
+          children: [{ name: "Dependency Scanning" }, { name: "OWASP Top 10" }],
+        },
       ],
+      dividerText: "Backend secured—grow your career.",
     },
     {
-      name: "Career Readiness",
+      name: "Career Development",
       children: [
         {
-          name: "Portfolio Development",
+          name: "Portfolio",
+          children: [{ name: "Projects" }, { name: "Documentation" }],
+        },
+        {
+          name: "Community",
           children: [
-            {
-              name: "Projects",
-            },
-            {
-              name: "Documentation",
-            },
+            { name: "Open-Source Contributions" },
+            { name: "Tech Meetups" },
           ],
         },
         {
-          name: "Community Engagement",
-          children: [
-            {
-              name: "Open-Source",
-            },
-            {
-              name: "Meetups",
-            },
-            {
-              name: "Forums",
-            },
-          ],
+          name: "Continuous Learning",
+          children: [{ name: "New Frameworks" }, { name: "Industry Trends" }],
         },
       ],
-    },
-    {
-      name: "Continuous Learning",
     },
   ],
 };

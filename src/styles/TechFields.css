@@ -20,11 +20,11 @@
   }
   
   .tech-card {
-    background-color: #31363F;
+    background-color: #000;
+    
     padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
+      text-decoration: none;
     color: #fff;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
@@ -34,8 +34,11 @@
   }
   
   .tech-card:hover {
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  }
+    box-shadow: 
+    0 0 5px #e61dff, 
+    0 0 10px #3cc7fa, 
+    0 0 15px #857dfd, 
+    0 0 20px #9d65fc;   }
   
   .tech-icon {
     font-size: 1.5rem; 

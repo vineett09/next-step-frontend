@@ -2,442 +2,287 @@ const aiEngineerRoadmap = {
   name: "AI Engineer Roadmap 2025",
   children: [
     {
-      name: "Core Foundations",
+      name: " Core Foundations",
       children: [
         {
           name: "Mathematics and Statistics",
           children: [
-            {
-              name: "Linear Algebra",
-            },
-            {
-              name: "Calculus",
-            },
-            {
-              name: "Probability & Statistics",
-            },
+            { name: "Linear Algebra" },
+            { name: "Calculus" },
+            { name: "Probability & Statistics" },
           ],
         },
-      ],
-    },
-    {
-      name: "Programming Essentials",
-      children: [
         {
           name: "Programming Languages",
           children: [
-            {
-              name: "Python",
-              preferred: true,
-            },
-            {
-              name: "R",
-            },
-            {
-              name: "C++",
-            },
+            { name: "Python", preferred: true },
+            { name: "R" },
+            { name: "C++" },
           ],
         },
       ],
+      dividerText: "Foundations set—master data for AI.",
     },
     {
-      name: "Data Fundamentals",
+      name: " Data Fundamentals",
       children: [
         {
           name: "Data Handling",
           children: [
-            {
-              name: "Data Collection Techniques",
-            },
-            {
-              name: "Data Cleaning",
-            },
-            {
-              name: "Data Transformation",
-            },
+            { name: "Data Collection Techniques" },
+            { name: "Data Cleaning" },
+            { name: "Data Transformation" },
+            { name: "Exploratory Data Analysis" },
+          ],
+        },
+        {
+          name: "Data Tools",
+          children: [
+            { name: "Pandas" },
+            { name: "NumPy" },
+            { name: "SQL Basics" },
           ],
         },
       ],
-      dividerText:
-        "Basics mastered—unlock predictive power with machine learning.",
+      dividerText: "Data ready—build predictive models with machine learning.",
     },
     {
-      name: "Machine Learning Basics",
+      name: " Machine Learning Basics",
       children: [
         {
           name: "Supervised Learning",
           children: [
-            {
-              name: "Regression Analysis",
-            },
-            {
-              name: "Classification Techniques",
-            },
+            { name: "Regression Analysis" },
+            { name: "Classification Techniques" },
           ],
         },
         {
           name: "Unsupervised Learning",
           children: [
-            {
-              name: "Clustering Methods",
-            },
-            {
-              name: "Dimensionality Reduction",
-            },
+            { name: "Clustering Methods" },
+            { name: "Dimensionality Reduction" },
+          ],
+        },
+        {
+          name: "Model Evaluation",
+          children: [
+            { name: "Cross-Validation" },
+            { name: "Metrics (Accuracy, Precision, Recall)" },
           ],
         },
       ],
+      dividerText: "ML basics down—advance to complex algorithms.",
     },
     {
-      name: "Advanced Machine Learning",
+      name: " Advanced Machine Learning",
       children: [
         {
           name: "Reinforcement Learning",
           children: [
-            {
-              name: "Markov Decision Processes",
-            },
-            {
-              name: "Q-Learning",
-            },
-            {
-              name: "Policy Gradient Methods",
-            },
+            { name: "Markov Decision Processes" },
+            { name: "Q-Learning" },
+            { name: "Policy Gradient Methods" },
           ],
         },
         {
-          name: "Model Evaluation and Optimization",
+          name: "Ensemble Methods",
+          children: [{ name: "Random Forests" }, { name: "Gradient Boosting" }],
+        },
+        {
+          name: "Optimization Techniques",
           children: [
-            {
-              name: "Cross-Validation",
-            },
-            {
-              name: "Hyperparameter Tuning",
-            },
+            { name: "Hyperparameter Tuning" },
+            { name: "Gradient Descent Variants" },
           ],
         },
       ],
-      dividerText: "Models built—dive into neural networks for advanced AI.",
+      dividerText: "ML mastered—explore neural networks and deep learning.",
     },
     {
-      name: "Deep Learning Fundamentals",
+      name: " Deep Learning Fundamentals",
       children: [
         {
           name: "Neural Networks",
           children: [
-            {
-              name: "Perceptrons and Multilayer Perceptrons",
-            },
-            {
-              name: "Activation Functions",
-            },
-            {
-              name: "Backpropagation",
-            },
+            { name: "Perceptrons and Multilayer Perceptrons" },
+            { name: "Activation Functions" },
+            { name: "Backpropagation" },
+          ],
+        },
+        {
+          name: "Frameworks",
+          children: [
+            { name: "TensorFlow", preferred: true },
+            { name: "PyTorch" },
           ],
         },
       ],
+      dividerText: "Neural nets built—specialize in advanced architectures.",
     },
     {
-      name: "Specialized Deep Learning",
+      name: " Specialized Deep Learning",
       children: [
         {
           name: "Convolutional Neural Networks",
           children: [
-            {
-              name: "Convolution and Pooling Layers",
-            },
-            {
-              name: "Architectures",
-            },
-            {
-              name: "Applications",
-            },
+            { name: "Convolution and Pooling Layers" },
+            { name: "Architectures (e.g., ResNet)" },
+            { name: "Image Processing Applications" },
           ],
         },
         {
           name: "Recurrent Neural Networks",
           children: [
-            {
-              name: "LSTM and GRU Networks",
-            },
-            {
-              name: "Sequence-to-Sequence Models",
-            },
-            {
-              name: "Applications",
-            },
+            { name: "LSTM and GRU Networks" },
+            { name: "Sequence-to-Sequence Models" },
+            { name: "Time Series Applications" },
           ],
         },
         {
-          name: "Transformers and Attention",
+          name: "Transformers",
           children: [
-            {
-              name: "Self-Attention Mechanism",
-            },
-            {
-              name: "Transformer Architecture",
-            },
-            {
-              name: "Applications",
-            },
+            { name: "Self-Attention Mechanism" },
+            { name: "Transformer Architecture" },
+            { name: "NLP Applications" },
           ],
         },
       ],
+      dividerText: "Deep learning aced—create with generative AI.",
     },
     {
-      name: "Generative AI and Frameworks",
+      name: " Generative AI",
       children: [
         {
-          name: "Generative AI",
+          name: "Generative Models",
           children: [
-            {
-              name: "GANs (Generative Adversarial Networks)",
-            },
-            {
-              name: "Diffusion Models",
-            },
-            {
-              name: "Applications",
-            },
+            { name: "GANs (Generative Adversarial Networks)" },
+            { name: "Diffusion Models" },
+            { name: "VAEs (Variational Autoencoders)" },
           ],
         },
         {
-          name: "AI Frameworks",
+          name: "Applications",
           children: [
-            {
-              name: "TensorFlow",
-              preferred: true,
-            },
-            {
-              name: "PyTorch",
-            },
-            {
-              name: "Hugging Face",
-            },
+            { name: "Image Generation" },
+            { name: "Text Generation" },
+            { name: "Hugging Face Tools" },
           ],
         },
       ],
-      dividerText: "Deep learning conquered—scale with big data and cloud.",
+      dividerText: "Creativity unleashed—scale with big data and cloud.",
     },
     {
-      name: "Big Data Essentials",
+      name: " Big Data & Cloud Computing",
       children: [
         {
           name: "Big Data Technologies",
           children: [
-            {
-              name: "Apache Hadoop",
-            },
-            {
-              name: "Apache Spark",
-              preferred: true,
-            },
-            {
-              name: "Kafka",
-            },
+            { name: "Apache Spark", preferred: true },
+            { name: "Apache Hadoop" },
+            { name: "Kafka" },
           ],
         },
         {
-          name: "Data Warehousing",
+          name: "Cloud Platforms",
           children: [
-            {
-              name: "ETL Tools",
-              preferred: true,
-            },
-            {
-              name: "Data Lakes",
-            },
-            {
-              name: "Cloud Data Warehouses",
-            },
+            { name: "AWS AI Services", preferred: true },
+            { name: "Google Cloud AI" },
+            { name: "Azure AI" },
           ],
         },
       ],
+      dividerText: "Scale achieved—deploy AI in production.",
     },
     {
-      name: "Cloud and Edge Computing",
+      name: " MLOps",
       children: [
         {
-          name: "Cloud Computing",
+          name: "Model Deployment",
           children: [
-            {
-              name: "AWS AI Services",
-              preferred: true,
-            },
-            {
-              name: "Google Cloud AI",
-            },
-            {
-              name: "Azure AI",
-            },
-          ],
-        },
-        {
-          name: "AI for Edge Devices",
-          children: [
-            {
-              name: "Model Compression",
-            },
-            {
-              name: "Edge Frameworks",
-            },
-            {
-              name: "Use Cases",
-            },
-          ],
-        },
-      ],
-      dividerText: "Data harnessed—deploy AI seamlessly in production.",
-    },
-    {
-      name: "MLOps Fundamentals",
-      children: [
-        {
-          name: "Model Serving",
-          children: [
-            {
-              name: "RESTful APIs",
-            },
-            {
-              name: "gRPC",
-            },
-          ],
-        },
-        {
-          name: "CI/CD for AI",
-          children: [
-            {
-              name: "GitHub Actions",
-            },
-            {
-              name: "Jenkins",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: "MLOps Advanced",
-      children: [
-        {
-          name: "Monitoring and Retraining",
-          children: [
-            {
-              name: "Metrics Tracking",
-            },
-            {
-              name: "Automated Retraining",
-            },
+            { name: "RESTful APIs" },
+            { name: "gRPC" },
+            { name: "Model Serving" },
           ],
         },
         {
           name: "Containerization",
+          children: [{ name: "Docker" }, { name: "Kubernetes" }],
+        },
+        {
+          name: "CI/CD for AI",
+          children: [{ name: "GitHub Actions" }, { name: "Jenkins" }],
+        },
+        {
+          name: "Monitoring",
           children: [
-            {
-              name: "Docker Basics",
-            },
-            {
-              name: "Kubernetes Basics",
-            },
+            { name: "Metrics Tracking" },
+            { name: "Automated Retraining" },
           ],
         },
       ],
-      dividerText: "Systems live—ensure AI fairness and responsibility.",
+      dividerText: "Deployment live—focus on ethics and responsibility.",
     },
     {
-      name: "AI Ethics",
+      name: " AI Ethics & Responsibility",
       children: [
         {
-          name: "Bias Detection and Mitigation",
+          name: "Bias and Fairness",
+          children: [{ name: "Fairness Metrics" }, { name: "Bias Mitigation" }],
+        },
+        {
+          name: "Explainability",
           children: [
-            {
-              name: "Fairness Metrics",
-            },
-            {
-              name: "Bias Correction Techniques",
-            },
+            { name: "Interpretability Techniques" },
+            { name: "SHAP and LIME" },
           ],
         },
         {
-          name: "Explainability and Interpretability",
-          children: [
-            {
-              name: "Interpretability Techniques",
-            },
-            {
-              name: "Visualizations",
-            },
-          ],
-        },
-        {
-          name: "Data Privacy and Regulation",
-          children: [
-            {
-              name: "Data Privacy and Security",
-            },
-            {
-              name: "AI Regulation",
-            },
-          ],
+          name: "Privacy and Regulation",
+          children: [{ name: "Data Privacy" }, { name: "GDPR and AI Laws" }],
         },
       ],
-      dividerText: "Ethics secured—apply skills to real-world projects.",
+      dividerText: "Ethics ensured—apply skills to real-world projects.",
     },
     {
-      name: "Practical Projects",
+      name: " Practical Projects",
       children: [
         {
           name: "Beginner Projects",
           children: [
-            {
-              name: "Data Visualization Tool",
-            },
-            {
-              name: "Sentiment Analyzer",
-            },
+            { name: "Data Visualization Tool" },
+            { name: "Sentiment Analyzer" },
           ],
         },
         {
           name: "Intermediate Projects",
-          children: [
-            {
-              name: "Image Classifier",
-            },
-            {
-              name: "Chatbot",
-            },
-          ],
+          children: [{ name: "Image Classifier" }, { name: "Chatbot" }],
         },
         {
           name: "Advanced Projects",
           children: [
-            {
-              name: "Autonomous Agent",
-            },
-            {
-              name: "Synthetic Data Generator",
-            },
+            { name: "Autonomous Agent" },
+            { name: "Synthetic Data Generator" },
           ],
         },
       ],
-      dividerText: "Projects complete—launch your AI career with confidence.",
+      dividerText: "Projects polished—launch your AI career.",
     },
     {
-      name: "Career Growth",
+      name: " Career Growth",
       children: [
         {
-          name: "Professional Development",
+          name: "Professional Skills",
           children: [
-            {
-              name: "Portfolio Building",
-            },
-            {
-              name: "Interview Prep",
-            },
-            {
-              name: "Certifications",
-            },
+            { name: "Portfolio Building" },
+            { name: "Interview Prep" },
+            { name: "Certifications (e.g., AWS, TensorFlow)" },
+          ],
+        },
+        {
+          name: "Community Engagement",
+          children: [
+            { name: "Kaggle Competitions" },
+            { name: "Conferences (e.g., NeurIPS)" },
           ],
         },
       ],

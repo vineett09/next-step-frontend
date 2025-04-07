@@ -49,6 +49,7 @@ const Navbar = () => {
             {dropdownOpen && (
               <div className="dropdown-user-menu">
                 <button onClick={() => navigate("/profile")}>Profile</button>
+                <button onClick={() => navigate("/explore")}>Explore </button>
                 <button className="create-button" onClick={handleCreateClick}>
                   Create Roadmap
                 </button>
