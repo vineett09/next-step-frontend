@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Loader from "./Loader";
 import "../styles/SharedRoadmap.css";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const StarRating = ({ value }) => {
   const roundedValue = Math.round(value * 2) / 2;
@@ -83,7 +84,9 @@ const SharedRoadmaps = () => {
 
   const fetchSharedRoadmaps = async () => {
     try {
-      const response = await axios.get("/api/roadmaps/shared-roadmaps");
+      const response = await axios.get(
+        `${BACKEND_URL}/api/roadmaps/shared-roadmaps`
+      );
 
       if (response.data.success) {
         setSharedRoadmaps(response.data.roadmaps);
@@ -114,7 +117,7 @@ const SharedRoadmaps = () => {
       await Promise.all(
         roadmapIds.map(async (id) => {
           const response = await axios.get(
-            `/api/roadmaps/${id}/followers-count`
+            `${BACKEND_URL}/api/roadmaps/${id}/followers-count`
           );
 
           if (response.data.success) {

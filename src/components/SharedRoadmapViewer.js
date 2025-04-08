@@ -10,6 +10,7 @@ import "../styles/SharedRoadmapViewer.css";
 import { nodeTypes } from "./CustomRoadmaps";
 import Loader from "./Loader";
 import FollowButton from "./FollowButton"; // Import the new component
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const StarRating = ({
   value,
@@ -95,7 +96,7 @@ const RatingSection = ({ roadmapId, creatorId }) => {
     try {
       // Public endpoint to get average rating and count (no auth required)
       const response = await axios.get(
-        `/api/roadmaps/${roadmapId}/public-rating`
+        `${BACKEND_URL}/api/roadmaps/${roadmapId}/public-rating`
       );
 
       if (response.data.success) {
@@ -111,11 +112,14 @@ const RatingSection = ({ roadmapId, creatorId }) => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await axios.get(`/api/roadmaps/${roadmapId}/rating`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BACKEND_URL}/api/roadmaps/${roadmapId}/rating`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.data.success) {
         setUserRating(response.data.userRating || 0);
@@ -144,7 +148,7 @@ const RatingSection = ({ roadmapId, creatorId }) => {
       const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        `/api/roadmaps/${roadmapId}/rating`,
+        `${BACKEND_URL}/api/roadmaps/${roadmapId}/rating`,
         { rating: newRating },
         {
           headers: {
@@ -230,7 +234,9 @@ const SharedRoadmapViewer = () => {
     const fetchPublicRoadmap = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/api/roadmaps/public/${id}`);
+        const response = await axios.get(
+          `${BACKEND_URL}/api/roadmaps/public/${id}`
+        );
 
         if (response.data.success) {
           setRoadmap(response.data.roadmap);

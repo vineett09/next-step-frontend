@@ -26,6 +26,7 @@ import {
   TextLabelNode,
   ResourceNode,
 } from "./CustomRoadmaps";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const nodeTypes = {
   customNode: CustomNode,
@@ -82,7 +83,7 @@ const CustomRoadmapEditor = () => {
 
   const fetchRoadmap = async () => {
     try {
-      const response = await axios.get(`/api/roadmaps/${id}`, {
+      const response = await axios.get(`${BACKEND_URL}/api/roadmaps/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -534,11 +535,15 @@ const CustomRoadmapEditor = () => {
         settings: { palette },
       };
 
-      const response = await axios.put(`/api/roadmaps/${id}`, updatedRoadmap, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.put(
+        `${BACKEND_URL}/api/roadmaps/${id}`,
+        updatedRoadmap,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.data.success) {
         alert("Roadmap updated successfully!");

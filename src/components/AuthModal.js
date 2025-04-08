@@ -4,6 +4,7 @@ import { loginUser, registerUser } from "../features/authslice";
 import { signInWithGoogle } from "../services/googleAuth";
 import "../styles/roadmaps/AuthModal.css";
 import axios from "axios";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const AuthModal = ({ isOpen, onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -120,9 +121,12 @@ const AuthModal = ({ isOpen, onClose }) => {
       const googleUserData = await signInWithGoogle();
 
       // First check if user exists
-      const checkUserResponse = await axios.post("/api/auth/check-user", {
-        email: googleUserData.email,
-      });
+      const checkUserResponse = await axios.post(
+        `${BACKEND_URL}/api/auth/check-user`,
+        {
+          email: googleUserData.email,
+        }
+      );
 
       if (checkUserResponse.data.exists) {
         // Existing user - login directly

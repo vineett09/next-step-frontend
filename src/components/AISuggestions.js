@@ -4,6 +4,8 @@ import "../styles/AISuggestions.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AIRelatedRoadmaps from "./AI RelatedRoadmaps";
+import axios from "axios";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const AISuggestions = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -43,11 +45,14 @@ const AISuggestions = () => {
   const fetchUsageInfo = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/suggestions/ai-suggestions-usage", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BACKEND_URL}/api/suggestions/ai-suggestions-usage`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -288,14 +293,17 @@ const AISuggestions = () => {
       }
 
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/suggestions/suggest", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ answers }),
-      });
+      const response = await axios.post(
+        `${BACKEND_URL}/api/suggestions/suggest`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ answers }),
+        }
+      );
 
       const data = await response.json();
 

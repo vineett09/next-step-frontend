@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Loader from "./Loader";
 import "../styles/AISuggestionsView.css";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const SuggestionView = () => {
   const { id } = useParams();
@@ -43,9 +44,12 @@ const SuggestionView = () => {
       }
 
       try {
-        const response = await axios.get(`/api/suggestions/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          `${BACKEND_URL}/api/suggestions/${id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         if (response.data && response.data.suggestion) {
           setSuggestion(response.data.suggestion);

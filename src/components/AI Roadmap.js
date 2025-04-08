@@ -8,6 +8,7 @@ import Loader from "./Loader";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useSelector } from "react-redux";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const AIRoadmap = () => {
   const [input, setInput] = useState("");
@@ -34,7 +35,7 @@ const AIRoadmap = () => {
 
   const fetchUsageInfo = async () => {
     try {
-      const response = await axios.get("/api/ai/usage", {
+      const response = await axios.get(` ${BACKEND_URL}/api/ai/usage`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -68,7 +69,7 @@ const AIRoadmap = () => {
 
     try {
       const response = await axios.post(
-        "/api/ai/generate",
+        `${BACKEND_URL}/api/ai/generate`,
         { input },
         {
           headers: {

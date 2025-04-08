@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import Loader from "./Loader";
 import "../styles/Profile.css";
 import { techFields, techSkills } from "../data/TechFieldsData";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const StarRating = ({ value }) => {
   const roundedValue = Math.round(value * 2) / 2;
@@ -154,7 +155,7 @@ const Profile = () => {
 
   const fetchUserRoadmaps = async () => {
     try {
-      const response = await axios.get("/api/roadmaps/user", {
+      const response = await axios.get(`${BACKEND_URL}/api/roadmaps/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -169,7 +170,7 @@ const Profile = () => {
               try {
                 // Fetch ratings
                 const ratingResponse = await axios.get(
-                  `/api/roadmaps/${roadmap._id}/rating`,
+                  `${BACKEND_URL}/api/roadmaps/${roadmap._id}/rating`,
                   {
                     headers: {
                       Authorization: `Bearer ${token}`,
@@ -184,7 +185,7 @@ const Profile = () => {
 
                 // Fetch followers count
                 const followersResponse = await axios.get(
-                  `/api/roadmaps/${roadmap._id}/followers-count`,
+                  `${BACKEND_URL}/api/roadmaps/${roadmap._id}/followers-count`,
                   {
                     headers: {
                       Authorization: `Bearer ${token}`,
@@ -220,11 +221,14 @@ const Profile = () => {
 
   const fetchBookmarkedRoadmaps = async () => {
     try {
-      const response = await axios.get("/api/bookmark/bookmarks", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BACKEND_URL}/api/bookmark/bookmarks`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const bookmarks = Array.isArray(response.data)
         ? response.data.map((id) => ({ id }))
@@ -238,11 +242,14 @@ const Profile = () => {
 
   const fetchFollowedRoadmaps = async () => {
     try {
-      const response = await axios.get("/api/roadmaps/user/followed-roadmaps", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BACKEND_URL}/api/roadmaps/user/followed-roadmaps`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.data.success) {
         // Fetch detailed information for each followed roadmap
@@ -250,7 +257,7 @@ const Profile = () => {
           response.data.followedRoadmaps.map(async (roadmapId) => {
             try {
               const roadmapResponse = await axios.get(
-                `/api/roadmaps/public/${roadmapId}`,
+                `${BACKEND_URL}/api/roadmaps/public/${roadmapId}`,
                 {
                   headers: {
                     Authorization: `Bearer ${token}`,
@@ -283,7 +290,7 @@ const Profile = () => {
   const unfollowRoadmap = async (roadmapId) => {
     try {
       const response = await axios.post(
-        `/api/roadmaps/${roadmapId}/follow`,
+        `${BACKEND_URL}/api/roadmaps/${roadmapId}/follow`,
         {},
         {
           headers: {
@@ -306,11 +313,14 @@ const Profile = () => {
   const deleteRoadmap = async (roadmapId) => {
     if (window.confirm("Are you sure you want to delete this roadmap?")) {
       try {
-        const response = await axios.delete(`/api/roadmaps/${roadmapId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.delete(
+          `${BACKEND_URL}/api/roadmaps/${roadmapId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (response.data.success) {
           setUserRoadmaps(
@@ -326,7 +336,7 @@ const Profile = () => {
   const toggleRoadmapVisibility = async (roadmapId, currentVisibility) => {
     try {
       const response = await axios.put(
-        `/api/roadmaps/${roadmapId}/visibility`,
+        `${BACKEND_URL}/api/roadmaps/${roadmapId}/visibility`,
         {},
         {
           headers: {
@@ -351,11 +361,14 @@ const Profile = () => {
   };
   const fetchSavedSuggestions = async () => {
     try {
-      const response = await axios.get("/api/suggestions/saved-suggestions", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BACKEND_URL}/api/suggestions/saved-suggestions`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.data && response.data.savedSuggestions) {
         setSavedSuggestions(response.data.savedSuggestions);
@@ -369,11 +382,14 @@ const Profile = () => {
       return;
 
     try {
-      await axios.delete(`/api/suggestions/ai-suggestions/${suggestionId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        `${BACKEND_URL}/api/suggestions/ai-suggestions/${suggestionId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       // Remove the deleted suggestion from state
       setSavedSuggestions(
@@ -385,11 +401,14 @@ const Profile = () => {
   };
   const fetchAIGeneratedRoadmaps = async () => {
     try {
-      const response = await axios.get("/api/ai/generated-roadmaps", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BACKEND_URL}/api/ai/generated-roadmaps`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setAIGeneratedRoadmaps(response.data.aiGeneratedRoadmaps);
     } catch (error) {
       console.error("Error fetching AI-generated roadmaps:", error);
@@ -400,7 +419,7 @@ const Profile = () => {
       return;
 
     try {
-      await axios.delete(`/api/ai/generated-roadmaps/${id}`, {
+      await axios.delete(`${BACKEND_URL}/api/ai/generated-roadmaps/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

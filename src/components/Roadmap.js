@@ -11,6 +11,7 @@ import "../styles/roadmaps/Roadmap.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { techFields, techSkills } from "../data/TechFieldsData";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 // Lazy load components that aren't immediately needed
 const Header = React.lazy(() => import("./Header"));
@@ -167,11 +168,14 @@ const Roadmap = ({ data }) => {
 
   const fetchUserProgress = async () => {
     try {
-      const response = await axios.get(`/api/progress/${roadmapId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BACKEND_URL}/api/progress/${roadmapId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const progressMap = response.data.reduce((acc, item) => {
         acc[item.nodeId] = {
@@ -189,11 +193,14 @@ const Roadmap = ({ data }) => {
 
   const fetchBookmarkStatus = async () => {
     try {
-      const response = await axios.get("/api/bookmark/bookmarks", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${BACKEND_URL}/api/bookmark/bookmarks`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setIsBookmarked(response.data.includes(roadmapId));
     } catch (error) {
       console.error("Error fetching bookmark status:", error);
@@ -208,7 +215,7 @@ const Roadmap = ({ data }) => {
 
     try {
       const response = await axios.post(
-        "/api/progress/toggle",
+        `${BACKEND_URL}/api/progress/toggle`,
         { roadmapId, nodeId },
         {
           headers: {
@@ -243,7 +250,7 @@ const Roadmap = ({ data }) => {
     }
     try {
       const response = await axios.post(
-        "/api/bookmark/bookmark-toggle",
+        `${BACKEND_URL}/api/bookmark/bookmark-toggle`,
         { roadmapId },
         {
           headers: {

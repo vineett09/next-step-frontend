@@ -8,6 +8,7 @@ import "../styles/ViewAIRoadmap.css"; // Import your CSS file for styling
 import Navbar from "./Navbar";
 import Loader from "./Loader";
 import Footer from "./Footer";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const ViewAIRoadmap = () => {
   const { id } = useParams();
@@ -22,9 +23,12 @@ const ViewAIRoadmap = () => {
   useEffect(() => {
     const fetchRoadmap = async () => {
       try {
-        const response = await axios.get(`/api/ai/generated-roadmaps/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          `${BACKEND_URL}/api/ai/generated-roadmaps/${id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         if (response.data && response.data.roadmap) {
           setData(response.data.roadmap.roadmap);

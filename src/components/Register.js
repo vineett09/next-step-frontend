@@ -6,6 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "../styles/Auth.css";
 import Loader from "./Loader";
 import axios from "axios";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -59,9 +60,12 @@ function Register() {
       const googleUserData = await signInWithGoogle();
 
       // First check if user exists
-      const checkUserResponse = await axios.post("/api/auth/check-user", {
-        email: googleUserData.email,
-      });
+      const checkUserResponse = await axios.post(
+        `${BACKEND_URL}/api/auth/check-user`,
+        {
+          email: googleUserData.email,
+        }
+      );
 
       if (checkUserResponse.data.exists) {
         // Existing user - login directly

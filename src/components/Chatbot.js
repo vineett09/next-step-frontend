@@ -4,6 +4,7 @@ import { IoClose, IoSend } from "react-icons/io5";
 import "../styles/roadmaps/ChatBot.css";
 import { useSelector } from "react-redux";
 import DOMPurify from "dompurify";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
   const [messages, setMessages] = useState([]);
@@ -94,7 +95,7 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
       // After updating the state, send to API
       axios
         .post(
-          "/api/chatbot",
+          `${BACKEND_URL}/api/chatbot`,
           {
             message: nodeQuery,
             roadmapTitle,
@@ -148,7 +149,7 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
     if (!isAuthenticated || !user) return;
 
     try {
-      const response = await axios.get("/api/chatbot/usage", {
+      const response = await axios.get(`${BACKEND_URL}/api/chatbot/usage`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -322,7 +323,7 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
       // Send message to API
       axios
         .post(
-          "/api/chatbot",
+          `${BACKEND_URL}/api/chatbot`,
           {
             message: input,
             roadmapTitle,

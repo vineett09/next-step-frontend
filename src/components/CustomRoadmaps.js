@@ -18,6 +18,8 @@ import Footer from "./Footer";
 import AuthModal from "./AuthModal";
 import "../styles/CustomRoadmaps.css";
 import Loader from "./Loader";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 export const CustomNode = ({ data, isConnectable, selected }) => {
   return (
     <>
@@ -827,7 +829,7 @@ const CustomRoadmaps = () => {
       };
 
       const response = await axios.post(
-        "/api/roadmaps/custom-roadmap",
+        `${BACKEND_URL}/api/roadmaps/custom-roadmap`,
         roadmapData,
         {
           headers: {

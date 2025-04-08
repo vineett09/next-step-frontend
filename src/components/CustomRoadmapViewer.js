@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import Loader from "./Loader";
 import "../styles/CustomRoadmapViewer.css";
 import { nodeTypes } from "./CustomRoadmaps";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const StarRating = ({ value }) => {
   const roundedValue = Math.round(value * 2) / 2;
@@ -52,7 +53,7 @@ const CustomRoadmapViewer = () => {
     const fetchRoadmap = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/api/roadmaps/${id}`, {
+        const response = await axios.get(`${BACKEND_URL}/api/roadmaps/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

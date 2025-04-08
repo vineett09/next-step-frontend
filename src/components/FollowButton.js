@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const FollowButton = ({ roadmapId, creatorId }) => {
   const [following, setFollowing] = useState(false);
@@ -27,7 +28,7 @@ const FollowButton = ({ roadmapId, creatorId }) => {
   const fetchFollowersCount = async () => {
     try {
       const response = await axios.get(
-        `/api/roadmaps/${roadmapId}/followers-count`
+        `${BACKEND_URL}/api/roadmaps/${roadmapId}/followers-count`
       );
 
       if (response.data.success) {
@@ -45,7 +46,7 @@ const FollowButton = ({ roadmapId, creatorId }) => {
       const token = localStorage.getItem("token");
 
       const response = await axios.get(
-        `/api/roadmaps/${roadmapId}/follow-status`,
+        `${BACKEND_URL}/api/roadmaps/${roadmapId}/follow-status`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -84,7 +85,7 @@ const FollowButton = ({ roadmapId, creatorId }) => {
       const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        `/api/roadmaps/${roadmapId}/follow`,
+        `${BACKEND_URL}/api/roadmaps/${roadmapId}/follow`,
         {},
         {
           headers: {
