@@ -9,15 +9,12 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Definition",
-              name: "A JavaScript framework by Facebook for iOS and Android apps.",
             },
             {
               name: "History",
-              name: "Released in 2015, built on React for native performance.",
             },
             {
               name: "Key Features",
-              name: "Cross-platform, hot reloading, and native UI components.",
             },
           ],
         },
@@ -26,11 +23,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Use Cases",
-              name: "Apps like Instagram, Airbnb, and Walmart use React Native.",
             },
             {
               name: "Advantages",
-              name: "Single codebase, faster development, and large community.",
             },
           ],
         },
@@ -39,11 +34,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Environment Setup",
-              name: "Install Android Studio (Android) and Xcode (iOS).",
             },
             {
               name: "First App",
-              name: "Create and run a basic app.",
             },
           ],
         },
@@ -57,19 +50,15 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Selectors",
-              name: "Understand CSS selectors.",
             },
             {
               name: "Box Model",
-              name: "Use margin, padding, and border.",
             },
             {
               name: "Flexbox",
-              name: "Apply Flexbox for layout.",
             },
             {
               name: "Responsive Design",
-              name: "Design for different screen sizes.",
             },
           ],
         },
@@ -78,15 +67,12 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Variables",
-              name: "Understand var, let, and const.",
             },
             {
               name: "Functions",
-              name: "Learn function declarations and arrow functions.",
             },
             {
               name: "ES6 Features",
-              name: "Use destructuring, spread operator, and modules.",
             },
           ],
         },
@@ -95,15 +81,12 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Components",
-              name: "Create functional components with JSX.",
             },
             {
               name: "Props",
-              name: "Pass data to components.",
             },
             {
               name: "State",
-              name: "Manage component state with useState hook.",
             },
           ],
         },
@@ -115,30 +98,25 @@ const reactNativeDeveloperRoadmap = {
         {
           name: "Core Components",
           children: [
-            { name: "Text", name: "Display text with Text component." },
-            { name: "View", name: "Create layout with View component." },
+            { name: "Text"  },
+            { name: "View"  },
             {
               name: "Image",
-              name: "Display images with Image component.",
             },
             {
               name: "ScrollView",
-              name: "Enable scrolling with ScrollView.",
             },
 
             {
               name: "Button",
-              name: "Create buttons with Button component.",
             },
-            { name: "Modal", name: "Display modal dialogs." },
+            { name: "Modal" },
             {
               name: "ActivityIndicator",
-              name: "Show loading indicators.",
             },
-            { name: "Alert", name: "Display alerts and prompts." },
+            { name: "Alert" },
             {
               name: "StatusBar",
-              name: "Control the status bar appearance.",
             },
           ],
         },
@@ -147,11 +125,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "TextInput",
-              name: "Capture text input from users.",
             },
             {
               name: "Touchable Components",
-              name: "Handle taps with TouchableOpacity, TouchableHighlight.",
             },
           ],
         },
@@ -160,11 +136,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "FlatList",
-              name: "Render large lists efficiently with FlatList.",
             },
             {
               name: "SectionList",
-              name: "Display grouped data with sections.",
             },
           ],
         },
@@ -173,15 +147,12 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Stylesheet",
-              name: "Use StyleSheet for styling components.",
             },
             {
               name: "Flexbox",
-              name: "Apply Flexbox for layout.",
             },
             {
               name: "layout",
-              name: "Use layout properties for positioning.",
             },
           ],
         },
@@ -195,15 +166,12 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Installation",
-              name: "Add with `npm install @react-navigation/native`.",
             },
             {
               name: "Stack Navigator",
-              name: "Create a stack for screen transitions.",
             },
             {
               name: "Tab Navigator",
-              name: "Implement bottom or top tab navigation.",
             },
           ],
         },
@@ -212,11 +180,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Drawer",
-              name: "Add a side drawer for menu navigation.",
             },
             {
               name: "Passing Params",
-              name: "Pass data between screens.",
             },
           ],
         },
@@ -230,11 +196,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "useState",
-              name: "Manage state with useState hook.",
             },
             {
               name: "useEffect",
-              name: "Handle side effects like data fetching.",
             },
           ],
         },
@@ -243,11 +207,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Context API",
-              name: "Share state across components with Context.",
             },
             {
               name: "Redux",
-              name: "Use Redux for predictable state management.",
             },
           ],
         },
@@ -261,11 +223,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "fetch()",
-              name: "Use fetch API for HTTP requests.",
             },
             {
               name: "Axios",
-              name: "Simplify requests with Axios library.",
             },
           ],
         },
@@ -274,11 +234,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "JSON Parsing",
-              name: "Parse JSON responses into usable data.",
             },
             {
               name: "Error Handling",
-              name: "Manage network errors gracefully.",
             },
           ],
         },
@@ -292,11 +250,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Bridging",
-              name: "Create bridges for native functionality.",
             },
             {
               name: "Custom Modules",
-              name: "Write custom native code for specific needs.",
             },
           ],
         },
@@ -305,11 +261,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Animated API",
-              name: "Use Animated for basic animations.",
             },
             {
               name: "Gesture Handler",
-              name: "Implement gestures with react-native-gesture-handler.",
             },
           ],
         },
@@ -318,11 +272,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "AsyncStorage",
-              name: "Store data locally with AsyncStorage.",
             },
             {
               name: "Expo APIs",
-              name: "Use Expo for camera, location, and more.",
             },
           ],
         },
@@ -336,11 +288,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "React Native Debugger",
-              name: "Use built-in debugger and Chrome DevTools.",
             },
             {
               name: "Logs",
-              name: "Log messages with console.log().",
             },
           ],
         },
@@ -349,11 +299,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Jest",
-              name: "Unit test with Jest framework.",
             },
             {
               name: "React Native Testing Library",
-              name: "Test components with user-centric approach.",
             },
           ],
         },
@@ -367,11 +315,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "To-Do List",
-              name: "Build a basic task manager with local state.",
             },
             {
               name: "Weather App",
-              name: "Fetch and display weather data from an API.",
             },
           ],
         },
@@ -380,11 +326,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Note-Taking App",
-              name: "Use navigation and local storage.",
             },
             {
               name: "E-Commerce UI",
-              name: "Create product listings with FlatList.",
             },
           ],
         },
@@ -393,11 +337,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Chat App",
-              name: "Implement real-time messaging with APIs.",
             },
             {
               name: "Fitness Tracker",
-              name: "Use native modules for sensors and animations.",
             },
           ],
         },
@@ -411,11 +353,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Component Structure",
-              name: "Organize code into reusable components.",
             },
             {
               name: "ESLint",
-              name: "Enforce coding standards with ESLint.",
             },
           ],
         },
@@ -424,11 +364,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Memoization",
-              name: "Use useMemo and useCallback for performance.",
             },
             {
               name: "List Optimization",
-              name: "Optimize FlatList with keyExtractor.",
             },
           ],
         },
@@ -437,11 +375,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "App Store",
-              name: "Build and submit to iOS App Store.",
             },
             {
               name: "Google Play",
-              name: "Deploy to Google Play Store.",
             },
           ],
         },
@@ -455,15 +391,12 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Documentation",
-              name: "Official React Native docs at reactnative.dev.",
             },
             {
               name: "Courses",
-              name: "Udemy’s 'React Native - The Practical Guide'.",
             },
             {
               name: "Books",
-              name: "'Learning React Native' by Bonnie Eisenman.",
             },
           ],
         },
@@ -472,11 +405,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Forums",
-              name: "Ask questions on Stack Overflow (react-native tag).",
             },
             {
               name: "Social Media",
-              name: "Join r/reactnative on Reddit.",
             },
           ],
         },
@@ -485,11 +416,9 @@ const reactNativeDeveloperRoadmap = {
           children: [
             {
               name: "Releases",
-              name: "Follow updates (e.g., New Architecture in 0.70+).",
             },
             {
               name: "Conferences",
-              name: "Attend React Conf or Chain React.",
             },
           ],
         },
