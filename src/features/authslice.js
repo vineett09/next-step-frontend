@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
@@ -7,8 +8,8 @@ export const loginUser = createAsyncThunk(
     try {
       // Determine endpoint based on login method
       const endpoint = userData.googleId
-        ? "/api/auth/google-login"
-        : "/api/auth/login";
+        ? `${BACKEND_URL}/api/auth/google-login`
+        : `${BACKEND_URL}/api/auth/login`;
 
       const response = await axios.post(endpoint, userData);
       return response.data;
@@ -31,7 +32,10 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/auth/register", userData);
+      const response = await axios.post(
+        `${BACKEND_URL}/api/auth/register`,
+        userData
+      );
       return response.data;
     } catch (error) {
       const errorData = error.response?.data || {};
