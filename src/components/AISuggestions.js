@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AIRelatedRoadmaps from "./AI RelatedRoadmaps";
 import axios from "axios";
+import { useSelector } from "react-redux";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const AISuggestions = () => {
@@ -15,36 +16,32 @@ const AISuggestions = () => {
   const [error, setError] = useState(null);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [usageInfo, setUsageInfo] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // Check authentication status when component mounts
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
+  // Get token from Redux store
+  const { token } = useSelector((state) => state.auth);
+  const isAuthenticated = !!token;
 
-    // Optionally fetch current usage info for the user when component loads
+  // Check authentication status and fetch usage info when component mounts
+  useEffect(() => {
     if (token) {
       fetchUsageInfo();
     }
 
-    // Add resize event listener for responsive handling
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
 
     window.addEventListener("resize", handleResize);
 
-    // Clean up
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [token]);
 
-  // Function to fetch current usage info
+  // Function to fetch current usage info using Axios
   const fetchUsageInfo = async () => {
     try {
-      const token = localStorage.getItem("token");
       const response = await axios.get(
         `${BACKEND_URL}/api/suggestions/ai-suggestions-usage`,
         {
@@ -53,11 +50,7 @@ const AISuggestions = () => {
           },
         }
       );
-
-      if (response.ok) {
-        const data = await response.json();
-        setUsageInfo(data);
-      }
+      setUsageInfo(response.data);
     } catch (err) {
       console.error("Error fetching usage info:", err);
     }
@@ -245,7 +238,6 @@ const AISuggestions = () => {
   const handleMultiSelect = (questionId, option) => {
     setAnswers((prev) => {
       const currentSelections = prev[questionId] || [];
-
       if (currentSelections.includes(option)) {
         return {
           ...prev,
@@ -267,7 +259,6 @@ const AISuggestions = () => {
   const handleNext = () => {
     if (currentStep < questions.length - 1) {
       setCurrentStep((prev) => prev + 1);
-      // Scroll to top when moving to next question for better UX on mobile
       window.scrollTo(0, 0);
     } else {
       handleSubmit();
@@ -277,51 +268,42 @@ const AISuggestions = () => {
   const handlePrevious = () => {
     if (currentStep > 0) {
       setCurrentStep((prev) => prev - 1);
-      // Scroll to top when moving to previous question
       window.scrollTo(0, 0);
     }
   };
 
+  // Updated handleSubmit using Axios
   const handleSubmit = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      // Check if user is authenticated
       if (!isAuthenticated) {
         throw new Error("You must be logged in to use this feature");
       }
 
-      const token = localStorage.getItem("token");
       const response = await axios.post(
         `${BACKEND_URL}/api/suggestions/suggest`,
+        { answers },
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ answers }),
         }
       );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.message || data.error || "Failed to generate roadmap"
-        );
+      setRoadmap(response.data.roadmap);
+      if (response.data.usageInfo) {
+        setUsageInfo(response.data.usageInfo);
       }
-
-      setRoadmap(data.roadmap);
-      if (data.usageInfo) {
-        setUsageInfo(data.usageInfo);
-      }
-
-      // Scroll to top to show the roadmap from the beginning
       window.scrollTo(0, 0);
     } catch (err) {
-      setError(err.message);
+      setError(
+        err.response?.data?.message ||
+          err.message ||
+          "Failed to generate roadmap"
+      );
     } finally {
       setLoading(false);
     }
@@ -332,7 +314,6 @@ const AISuggestions = () => {
     setAnswers({});
     setRoadmap(null);
     setError(null);
-    // Scroll to top when resetting
     window.scrollTo(0, 0);
   };
 
@@ -340,11 +321,8 @@ const AISuggestions = () => {
     setPdfLoading(true);
     try {
       const html2pdf = (await import("html2pdf.js")).default;
-
-      // Get the roadmap content container
       const element = document.querySelector(".questionnaire-roadmap-content");
 
-      // Configure PDF options
       const opt = {
         margin: [10, 10, 10, 10],
         filename: `Learning-Roadmap-${new Date()
@@ -355,7 +333,6 @@ const AISuggestions = () => {
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       };
 
-      // Generate and download PDF
       await html2pdf().set(opt).from(element).save();
     } catch (err) {
       console.error("Error generating PDF:", err);
@@ -368,13 +345,11 @@ const AISuggestions = () => {
   const currentQuestion = questions[currentStep];
   const isQuestionAnswered = () => {
     if (!currentQuestion) return false;
-
     if (isMultiSelectQuestion(currentQuestion)) {
       return (
         answers[currentQuestion.id] && answers[currentQuestion.id].length > 0
       );
     }
-
     return !!answers[currentQuestion.id];
   };
 
@@ -404,8 +379,8 @@ const AISuggestions = () => {
     );
   };
 
+  // [renderContent and rest of the component remains structurally the same]
   const renderContent = () => {
-    // Show login message if not authenticated
     if (!isAuthenticated) {
       return (
         <div className="questionnaire-container questionnaire-auth-required">
@@ -415,7 +390,6 @@ const AISuggestions = () => {
       );
     }
 
-    // Show usage limit reached message
     if (usageInfo && usageInfo.remainingCount === 0 && !roadmap) {
       return (
         <div className="questionnaire-container questionnaire-limit-reached">
@@ -487,8 +461,6 @@ const AISuggestions = () => {
                 Start Again
               </button>
             </div>
-
-            {/* Add the AIRelatedRoadmaps component here */}
             <AIRelatedRoadmaps userAnswers={answers} />
           </div>
         </div>
