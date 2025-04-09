@@ -48,7 +48,41 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+export const requestPasswordReset = createAsyncThunk(
+  "auth/requestPasswordReset",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("/api/auth/forgot-password", userData);
+      return response.data;
+    } catch (error) {
+      const errorData = error.response?.data || {};
+      return rejectWithValue({
+        message: errorData.msg || "Failed to send reset link",
+        code: errorData.code || "RESET_REQUEST_FAILED",
+        details: errorData.details,
+      });
+    }
+  }
+);
 
+export const resetPassword = createAsyncThunk(
+  "auth/resetPassword",
+  async ({ token, password }, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`/api/auth/reset-password/${token}`, {
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      const errorData = error.response?.data || {};
+      return rejectWithValue({
+        message: errorData.msg || "Password reset failed",
+        code: errorData.code || "RESET_PASSWORD_FAILED",
+        details: errorData.details,
+      });
+    }
+  }
+);
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
   token: localStorage.getItem("token") || null,
@@ -109,6 +143,36 @@ const authSlice = createSlice({
         state.loading = false;
         // Store error as a string to avoid type issues in components
         state.error = action.payload?.message || "Registration failed";
+      })
+      .addCase(requestPasswordReset.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(requestPasswordReset.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(requestPasswordReset.rejected, (state, action) => {
+        state.loading = false;
+        state.error = {
+          message: action.payload?.message || "Failed to send reset link",
+          code: action.payload?.code,
+          details: action.payload?.details,
+        };
+      })
+      .addCase(resetPassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(resetPassword.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = {
+          message: action.payload?.message || "Password reset failed",
+          code: action.payload?.code,
+          details: action.payload?.details,
+        };
       });
   },
 });

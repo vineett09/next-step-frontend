@@ -7,6 +7,8 @@ import Roadmap from "./components/Roadmap";
 import Profile from "./components/Profile";
 import fullStackDeveloperRoadmap from "./data/techroles/FullStackDeveloper";
 import Maincontent from "./components/Maincontent";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 import TechExplorer from "./components/TechExplorer";
 import dataScienceRoadmap from "./data/techroles/DataScience";
 import aiEngineerRoadmap from "./data/techroles/ArtificialIntelligence";
@@ -89,6 +91,8 @@ function App() {
           <Route path="/suggestion/:id" element={<SuggestionView />} />
           <Route path="/ai-roadmap/view/:id" element={<ViewAIRoadmap />} />
           <Route path="/explore" element={<TechExplorer />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
 
           {/* Tech Fields */}
           <Route
