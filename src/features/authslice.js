@@ -52,7 +52,10 @@ export const requestPasswordReset = createAsyncThunk(
   "auth/requestPasswordReset",
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/api/auth/forgot-password", userData);
+      const response = await axios.post(
+        `${BACKEND_URL}/api/auth/forgot-password`,
+        userData
+      );
       return response.data;
     } catch (error) {
       const errorData = error.response?.data || {};
@@ -69,9 +72,12 @@ export const resetPassword = createAsyncThunk(
   "auth/resetPassword",
   async ({ token, password }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`/api/auth/reset-password/${token}`, {
-        password,
-      });
+      const response = await axios.post(
+        `${BACKEND_URL}/api/auth/reset-password/${token}`,
+        {
+          password,
+        }
+      );
       return response.data;
     } catch (error) {
       const errorData = error.response?.data || {};
