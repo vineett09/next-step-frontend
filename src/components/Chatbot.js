@@ -3,6 +3,8 @@ import axios from "axios";
 import { IoClose, IoSend } from "react-icons/io5";
 import "../styles/roadmaps/ChatBot.css";
 import { useSelector } from "react-redux";
+import { GiArtificialHive } from "react-icons/gi";
+
 import DOMPurify from "dompurify";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -395,7 +397,9 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
           onClick={() => setIsOpen(true)}
           onTouchStart={handleTouchStart}
         >
-          <button className="AI-button">Ask AI✨</button>
+          <button className="AI-button">
+            <GiArtificialHive size={28} />
+          </button>
         </div>
       )}
 

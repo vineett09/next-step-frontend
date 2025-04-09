@@ -24,9 +24,14 @@ function Register() {
   const navigate = useNavigate();
   const { error } = useSelector((state) => state.auth);
 
+  // Properly handle Redux errors
   useEffect(() => {
     if (error) {
-      const errorText = typeof error === "string" ? error : error.message;
+      // Always convert error to string format
+      const errorText =
+        typeof error === "string"
+          ? error
+          : error.message || "An unknown error occurred";
       setErrorMessage(errorText);
       const timer = setTimeout(() => {
         setErrorMessage("");
@@ -36,9 +41,13 @@ function Register() {
     }
   }, [error, dispatch]);
 
-  // Clear error when user starts typing new username
+  // Clear error when user starts typing new username - fixed to check string properly
   useEffect(() => {
-    if (errorMessage && errorMessage.includes("username")) {
+    if (
+      errorMessage &&
+      typeof errorMessage === "string" &&
+      errorMessage.includes("username")
+    ) {
       setErrorMessage("");
     }
   }, [username, errorMessage]);
@@ -91,8 +100,13 @@ function Register() {
       }
     } catch (error) {
       console.error("Google Sign-In Error:", error);
+
+      // Ensure error is a string
       setErrorMessage(
-        error.response?.data?.msg || error.message || "Google Sign-In failed"
+        error.response?.data?.msg ||
+          (typeof error.message === "string"
+            ? error.message
+            : "Google Sign-In failed")
       );
     } finally {
       setIsLoading(false);
@@ -139,10 +153,12 @@ function Register() {
     } catch (err) {
       console.error("Registration/Login error:", err);
 
-      // Handle specific error cases
+      // Handle specific error cases and ensure errorMessage is always a string
       if (err.code === "USERNAME_TAKEN") {
-        setErrorMessage("Username is taken. Try: " + err.suggestedUsername);
-        setSuggestedUsername(err.suggestedUsername);
+        setErrorMessage(
+          `Username is taken. Try: ${err.suggestedUsername || ""}`
+        );
+        setSuggestedUsername(err.suggestedUsername || "");
       } else if (err.code === "ACCOUNT_CONFLICT") {
         setErrorMessage("Account already exists with different login method");
       } else {
@@ -197,16 +213,7 @@ function Register() {
               suggestedUsername ? "with-suggestion" : ""
             }`}
           >
-            {typeof errorMessage === "string"
-              ? errorMessage
-              : errorMessage.message}
-            {suggestedUsername && (
-              <span>
-                {" "}
-                Try:{" "}
-                <span onClick={useSuggestedUsername}>{suggestedUsername}</span>
-              </span>
-            )}
+            {errorMessage}
           </div>
         )}
 
@@ -279,6 +286,7 @@ function Register() {
         </div>
 
         {passwordError && <div className="error-message">{passwordError}</div>}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
 
         <button type="submit" disabled={isLoading}>
           {isLoading ? "Signing Up..." : "Sign Up"}

@@ -90,12 +90,8 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = {
-          message: action.payload?.message || "Login failed",
-          code: action.payload?.code,
-          details: action.payload?.details,
-          suggestedUsername: action.payload?.suggestedUsername,
-        };
+        // Store error as a string to avoid type issues in components
+        state.error = action.payload?.message || "Login failed";
       })
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
@@ -111,12 +107,8 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = {
-          message: action.payload?.message || "Registration failed",
-          code: action.payload?.code,
-          details: action.payload?.details,
-          suggestedUsername: action.payload?.suggestedUsername,
-        };
+        // Store error as a string to avoid type issues in components
+        state.error = action.payload?.message || "Registration failed";
       });
   },
 });

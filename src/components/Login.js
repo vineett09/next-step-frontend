@@ -21,10 +21,15 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { error } = useSelector((state) => state.auth);
-  // In your Login.js, update the useEffect for error handling
+
+  // Properly handle Redux errors
   useEffect(() => {
     if (error) {
-      const errorText = typeof error === "string" ? error : error.message;
+      // Always convert error to string format
+      const errorText =
+        typeof error === "string"
+          ? error
+          : error.message || "An unknown error occurred";
       setErrorMessage(errorText);
       const timer = setTimeout(() => {
         setErrorMessage("");
@@ -33,19 +38,14 @@ function Login() {
       return () => clearTimeout(timer);
     }
   }, [error, dispatch]);
-  useEffect(() => {
-    if (error) {
-      // Handle both string errors and error objects
-      const errorText = typeof error === "string" ? error : error.message;
-      setErrorMessage(errorText);
-      const timer = setTimeout(() => setErrorMessage(""), 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [error]);
 
-  // Clear error when user starts typing new username
+  // Clear error when user starts typing new username - fixed to check string properly
   useEffect(() => {
-    if (errorMessage && errorMessage.includes("username")) {
+    if (
+      errorMessage &&
+      typeof errorMessage === "string" &&
+      errorMessage.includes("username")
+    ) {
       setErrorMessage("");
     }
   }, [username, errorMessage]);
@@ -84,10 +84,12 @@ function Login() {
     } catch (err) {
       console.error("Login Error:", err);
 
-      // Handle specific error cases
+      // Handle specific error cases and ensure errorMessage is always a string
       if (err.code === "USERNAME_TAKEN") {
-        setErrorMessage("Username is taken. Try: " + err.suggestedUsername);
-        setSuggestedUsername(err.suggestedUsername);
+        setErrorMessage(
+          `Username is taken. Try: ${err.suggestedUsername || ""}`
+        );
+        setSuggestedUsername(err.suggestedUsername || "");
       } else if (err.code === "ACCOUNT_CONFLICT") {
         setErrorMessage("Account already exists with different login method");
       } else {
@@ -137,8 +139,13 @@ function Login() {
       }
     } catch (error) {
       console.error("Google Sign-In Error:", error);
+
+      // Ensure error is a string
       setErrorMessage(
-        error.response?.data?.msg || error.message || "Google Sign-In failed"
+        error.response?.data?.msg ||
+          (typeof error.message === "string"
+            ? error.message
+            : "Google Sign-In failed")
       );
     } finally {
       setIsLoading(false);
@@ -189,19 +196,7 @@ function Login() {
                 suggestedUsername ? "with-suggestion" : ""
               }`}
             >
-              {/* Display just the message, not the entire error object */}
-              {typeof errorMessage === "string"
-                ? errorMessage
-                : errorMessage.message}
-              {suggestedUsername && (
-                <span>
-                  {" "}
-                  Try:{" "}
-                  <span onClick={useSuggestedUsername}>
-                    {suggestedUsername}
-                  </span>
-                </span>
-              )}
+              {errorMessage}
             </div>
           )}
           <button type="submit" disabled={isLoading || username.length < 3}>

@@ -1,27 +1,68 @@
-/* Base button styling */
 .AI-button {
-  background-color: #444141;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
   border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.2);
+  cursor: pointer;
+  transition: 
+    transform 0.25s ease-in-out,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+  animation: floatingGlow 4s ease-in-out infinite alternate;
+  font-size: 24px;
 }
- 
+
 .AI-button:hover {
-  background-image: linear-gradient(90deg, #53cbef 0%, #dcc66c 50%, #ffa3b6 75%, #53cbef 100%);
-  animation: slidernbw 5s linear infinite;
-  color: #000;
+  transform: scale(1.1);
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 10px rgba(0, 255, 255, 0.4);
 }
- 
-@keyframes slidernbw {
-  to {
-   background-position: 20vw;
+
+.AI-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+}
+
+@keyframes floatingGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3), inset 0 0 6px rgba(0, 255, 255, 0.2);
+    transform: translateY(0);
+  }
+  100% {
+    box-shadow: 0 0 24px rgba(0, 255, 255, 0.5), inset 0 0 10px rgba(0, 255, 255, 0.3);
+    transform: translateY(-4px);
   }
 }
+.AI-button::after {
+  content: "Talk to AI";
+  position: absolute;
+  bottom: 70px;
+  background: #222;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.AI-button:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 
 /* Container structure */
 .chatbot-container {
@@ -47,9 +88,10 @@
   cursor: pointer;
 }
 
-/* Header styles */
 .chatbot-header {
-  background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff7eb3);
+  background: linear-gradient(270deg, #00f0ff, #00b8ff, #00f0ff);
+  background-size: 600% 600%;
+  animation: headerFlow 8s ease infinite;
   color: white;
   padding: 12px;
   display: flex;
@@ -57,7 +99,22 @@
   align-items: center;
   font-size: 16px;
   font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+@keyframes headerFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 .chatbot-usage {
   font-size: 12px;
