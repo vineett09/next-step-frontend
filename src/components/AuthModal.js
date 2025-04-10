@@ -97,7 +97,6 @@ const AuthModal = ({ isOpen, onClose }) => {
     } catch (err) {
       console.error("Auth Error:", err);
 
-      // Handle specific error cases
       if (err.code === "USERNAME_TAKEN") {
         setErrorMessage("Username is taken. Try: " + err.suggestedUsername);
         setSuggestedUsername(err.suggestedUsername);
@@ -120,7 +119,6 @@ const AuthModal = ({ isOpen, onClose }) => {
     try {
       const googleUserData = await signInWithGoogle();
 
-      // First check if user exists
       const checkUserResponse = await axios.post(
         `${BACKEND_URL}/api/auth/check-user`,
         {
@@ -129,7 +127,6 @@ const AuthModal = ({ isOpen, onClose }) => {
       );
 
       if (checkUserResponse.data.exists) {
-        // Existing user - login directly
         const response = await dispatch(
           loginUser({
             email: googleUserData.email,
@@ -142,7 +139,6 @@ const AuthModal = ({ isOpen, onClose }) => {
           onClose();
         }
       } else {
-        // New user - show username form
         setGoogleUserData(googleUserData);
         setEmail(googleUserData.email);
         setUsername(

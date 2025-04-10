@@ -13,6 +13,23 @@ html, body, #root {
   background-color: #0d1117;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6dd5ed, #2193b0);
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2196f3, #1976d2);
+}
 
 
 

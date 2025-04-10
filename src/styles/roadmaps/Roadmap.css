@@ -336,12 +336,10 @@ background: linear-gradient(
   transition: width 0.3s ease;
 }
 
-/* When approaching limit */
 .usage-fill.warning {
   background-color: #FFC107;
 }
 
-/* When at limit */
 .usage-fill.danger {
   background-color: #F44336;
 }

@@ -2,210 +2,223 @@ const iotApplicationDeveloperRoadmap = {
   name: "IoT Application Developer Roadmap 2025",
   children: [
     {
-      name: "Foundational Knowledge",
+      name: "Programming Basics",
       children: [
         {
-          name: "Understanding IoT Ecosystem",
+          name: "Core Languages",
           children: [
-            {
-              name: "IoT Architecture",
-            },
-            {
-              name: "Industry Applications",
-            },
+            { name: "Python Syntax" },
+            { name: "JavaScript Fundamentals" },
+            { name: "C# Essentials" },
           ],
         },
         {
-          name: "Data Literacy for IoT",
+          name: "Development Principles",
           children: [
-            {
-              name: "Data Types",
-            },
-            {
-              name: "Data Pipelines",
-            },
+            { name: "Object-Oriented Programming" },
+            { name: "Basic Data Structures" },
+            { name: "Code Versioning with Git" },
           ],
         },
       ],
-      dividerText: "Foundations set—dive into programming skills next.",
+      dividerText: "Programming clear—learn web foundations.",
     },
     {
-      name: "Programming Skills",
+      name: "Web Foundations",
       children: [
         {
-          name: "Python",
-          preferred: true,
+          name: "Frontend Skills",
           children: [
-            {
-              name: "IoT Libraries",
-            },
-            {
-              name: "Web Frameworks",
-            },
-            {
-              name: "Data Analysis",
-            },
+            { name: "HTML Structure" },
+            { name: "CSS Styling" },
+            { name: "JavaScript Interactivity" },
           ],
         },
         {
-          name: "JavaScript (Node.js)",
+          name: "Backend Basics",
           children: [
-            {
-              name: "Node-RED",
-            },
-            {
-              name: "WebSockets",
-            },
-          ],
-        },
-        {
-          name: "Java",
-          children: [
-            {
-              name: "Spring Boot",
-            },
+            { name: "Node.js Setup" },
+            { name: "Express Framework" },
+            { name: "REST API Creation" },
           ],
         },
       ],
-      dividerText:
-        "Programming mastered—connect devices with networking protocols.",
+      dividerText: "Web skills set—understand IoT basics.",
     },
     {
-      name: "Networking and Communication Protocols",
+      name: "IoT Basics",
       children: [
         {
-          name: "IoT-Specific Protocols",
+          name: "IoT Concepts",
           children: [
-            {
-              name: "MQTT",
-              preferred: true,
-            },
-            {
-              name: "HTTP/REST",
-            },
-            {
-              name: "CoAP",
-            },
+            { name: "Device Types" },
+            { name: "IoT Architecture" },
+            { name: "Data Communication" },
           ],
         },
         {
-          name: "Cloud Connectivity",
+          name: "Hardware Overview",
           children: [
-            {
-              name: "APIs and SDKs",
-            },
-            {
-              name: "5G Integration",
-            },
+            { name: "Common Sensors" },
+            { name: "Microcontroller Intro" },
+            { name: "IoT Development Boards" },
           ],
         },
       ],
-      dividerText: "Networking secured—scale with cloud computing.",
+      dividerText: "IoT basics clear—connect devices.",
     },
     {
-      name: "Cloud Computing",
+      name: "Device Connectivity",
       children: [
         {
-          name: "IoT Cloud Platforms",
+          name: "Networking",
           children: [
-            {
-              name: "AWS IoT Core",
-              preferred: true,
-            },
-            {
-              name: "Azure IoT Hub",
-            },
+            { name: "TCP/IP Fundamentals" },
+            { name: "Wi-Fi Configuration" },
+            { name: "Bluetooth Pairing" },
           ],
         },
         {
-          name: "Serverless Computing",
+          name: "IoT Protocols",
           children: [
-            {
-              name: "AWS Lambda",
-            },
+            { name: "MQTT Messaging" },
+            { name: "HTTP Requests" },
+            { name: "WebSocket Streams" },
           ],
         },
       ],
-      dividerText: "Cloud mastered—turn data into insights with analytics.",
+      dividerText: "Connectivity ready—integrate with cloud.",
     },
     {
-      name: "Data Management and Analytics",
+      name: "Cloud Integration",
       children: [
         {
-          name: "Database Systems",
+          name: "Cloud Platforms",
           children: [
-            {
-              name: "Time-Series Databases",
-            },
-            {
-              name: "NoSQL Databases",
-            },
+            { name: "AWS IoT Setup" },
+            { name: "Azure IoT Hub" },
+            { name: "Google Cloud IoT" },
           ],
         },
         {
-          name: "IoT Analytics",
+          name: "Data Messaging",
           children: [
-            {
-              name: "Real-Time Analytics",
-            },
-            {
-              name: "Machine Learning",
-            },
+            { name: "Publish/Subscribe Model" },
+            { name: "Message Queuing" },
+            { name: "Real-Time Streaming" },
           ],
         },
       ],
-      dividerText: "Analytics ready—secure your IoT solutions.",
+      dividerText: "Cloud integrated—develop IoT apps.",
     },
     {
-      name: "Security",
+      name: "IoT App Development",
       children: [
         {
-          name: "Application-Level Security",
+          name: "Mobile Development",
           children: [
-            {
-              name: "Encryption",
-            },
-            {
-              name: "Authentication",
-            },
+            { name: "Flutter Basics" },
+            { name: "React Native Setup" },
+            { name: "Mobile IoT SDKs" },
+          ],
+        },
+        {
+          name: "Web Development",
+          children: [
+            { name: "React Components" },
+            { name: "Node.js Backend" },
+            { name: "Web IoT APIs" },
           ],
         },
       ],
-      dividerText: "Security locked—explore 2025 trends next.",
+      dividerText: "Apps built—design IoT interfaces.",
     },
     {
-      name: "Emerging Trends in 2025",
+      name: "IoT App Design",
       children: [
         {
-          name: "AIoT Integration",
+          name: "User Interface",
           children: [
-            {
-              name: "Federated Learning",
-            },
+            { name: "UI Layouts" },
+            { name: "Dashboard Design" },
+            { name: "Responsive Features" },
           ],
         },
         {
-          name: "5G Applications",
+          name: "Data Management",
           children: [
-            {
-              name: "Low-Latency Apps",
-            },
+            { name: "Real-Time Updates" },
+            { name: "Chart Visualization" },
+            { name: "Database Storage" },
           ],
         },
       ],
-      dividerText: "Trends embraced—boost your success with soft skills.",
+      dividerText: "Design clear—enhance app features.",
     },
     {
-      name: "Soft Skills",
+      name: "Advanced Features",
       children: [
         {
-          name: "Problem-Solving",
+          name: "Analytics",
+          children: [
+            { name: "Data Analysis" },
+            { name: "ML Models" },
+            { name: "Prediction Tools" },
+          ],
         },
         {
-          name: "Collaboration",
+          name: "Security",
+          children: [
+            { name: "Data Encryption" },
+            { name: "User Authentication" },
+            { name: "Privacy Controls" },
+          ],
         },
       ],
-      dividerText: "Skills complete—launch your IoT career with confidence.",
+      dividerText: "Features enhanced—deploy and test.",
+    },
+    {
+      name: "Deployment and Testing",
+      children: [
+        {
+          name: "App Deployment",
+          children: [
+            { name: "Mobile App Stores" },
+            { name: "Web Hosting" },
+            { name: "Cloud Deployment" },
+          ],
+        },
+        {
+          name: "Testing",
+          children: [
+            { name: "Unit Testing" },
+            { name: "Integration Testing" },
+            { name: "Usability Testing" },
+          ],
+        },
+      ],
+      dividerText: "Apps deployed—grow through projects.",
+    },
+    {
+      name: "Projects and Career",
+      children: [
+        {
+          name: "Project Building",
+          children: [
+            { name: "Smart Home Control" },
+            { name: "IoT Health Tracker" },
+            { name: "Environmental App" },
+          ],
+        },
+        {
+          name: "Career Prep",
+          children: [
+            { name: "Portfolio Creation" },
+            { name: "Industry Networking" },
+            { name: "IoT Certifications" },
+          ],
+        },
+      ],
     },
   ],
 };

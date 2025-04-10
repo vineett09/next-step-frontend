@@ -1,4 +1,3 @@
-// src/components/Questionnaire.jsx
 import React, { useState, useEffect } from "react";
 import "../styles/AISuggestions.css";
 import Navbar from "./Navbar";
@@ -18,11 +17,9 @@ const AISuggestions = () => {
   const [usageInfo, setUsageInfo] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // Get token from Redux store
   const { token } = useSelector((state) => state.auth);
   const isAuthenticated = !!token;
 
-  // Check authentication status and fetch usage info when component mounts
   useEffect(() => {
     if (token) {
       fetchUsageInfo();
@@ -39,7 +36,6 @@ const AISuggestions = () => {
     };
   }, [token]);
 
-  // Function to fetch current usage info using Axios
   const fetchUsageInfo = async () => {
     try {
       const response = await axios.get(
@@ -272,7 +268,6 @@ const AISuggestions = () => {
     }
   };
 
-  // Updated handleSubmit using Axios
   const handleSubmit = async () => {
     setLoading(true);
     setError(null);
@@ -379,7 +374,6 @@ const AISuggestions = () => {
     );
   };
 
-  // [renderContent and rest of the component remains structurally the same]
   const renderContent = () => {
     if (!isAuthenticated) {
       return (
@@ -544,7 +538,7 @@ const AISuggestions = () => {
   };
 
   return (
-    <div className="questionnaire-page">
+    <div className="questionnaire-page full-page-layout">
       <Navbar />
       <div className="questionnaire-content">{renderContent()}</div>
       <Footer />

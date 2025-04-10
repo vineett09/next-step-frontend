@@ -74,7 +74,7 @@ const CustomRoadmapEditor = () => {
 
     if (!token || !user) {
       setShowAuthModal(true);
-      setLoading(false); // Important: Set loading to false
+      setLoading(false);
       return;
     }
 

@@ -36,7 +36,6 @@ const FollowButton = ({ roadmapId, creatorId }) => {
       }
     } catch (err) {
       console.error("Error fetching followers count:", err);
-      // Don't set error here to avoid displaying error to non-logged-in users
     }
   };
 
@@ -56,7 +55,6 @@ const FollowButton = ({ roadmapId, creatorId }) => {
 
       if (response.data.success) {
         setFollowing(response.data.following);
-        // We can also update followers count from here for logged-in users
         setFollowersCount(response.data.followersCount);
       }
     } catch (err) {

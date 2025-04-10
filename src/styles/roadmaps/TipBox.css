@@ -86,7 +86,7 @@
 @media (max-width: 768px) {
   .tipbox-wrapper {
     left: 50%; /* Center on smaller screens */
-    transform: translateX(-50%); /* Adjust to center */
+    transform: translateX(-50%); 
     bottom: 1vh;
   }
 

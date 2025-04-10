@@ -12,7 +12,6 @@
   width: 100%;
 }
 
-/* Updated Header Styles */
 .viewer-header {
   margin-bottom: 30px;
   padding: 25px 30px;
@@ -62,7 +61,6 @@
   margin: 0;
 }
 
-/* Updated Back Button */
 .previous-button {
   display: inline-flex;
   align-items: center;
@@ -87,7 +85,6 @@
   fill: #fff;
 }
 
-/* Updated Creator Info and Follow Button Section */
 .roadmap-creator-info {
   display: flex;
   align-items: center;
@@ -106,7 +103,6 @@
   font-weight: 500;
 }
 
-/* Improved Follow Button Section */
 .roadmap-follow-section {
   display: flex;
   flex-direction: column;
@@ -182,7 +178,6 @@
   width: 100%;
 }
 
-/* Rating Section Styles */
 .viewer-header .roadmap-rating-section {
   background-color: transparent;
   padding: 0;
@@ -222,7 +217,6 @@
   font-size: 14px;
 }
 
-/* Star Rating Styles */
 .viewer-header .star-rating {
   display: flex;
   gap: 2px;
@@ -259,7 +253,6 @@
   font-size: 24px;
 }
 
-/* User Rating Container Styles */
 .viewer-header .user-rating-container {
   display: flex;
   flex-direction: column;

@@ -34,7 +34,6 @@ const SuggestionView = () => {
     };
   }, []);
 
-  // Fetch suggestion data
   useEffect(() => {
     const fetchSuggestion = async () => {
       const token = localStorage.getItem("token");
@@ -75,15 +74,13 @@ const SuggestionView = () => {
     try {
       const html2pdf = (await import("html2pdf.js")).default;
 
-      // Create temp div with proper styling
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = roadmapHtml;
       tempDiv.className = "suggestion-display-content";
 
-      // Apply additional styling for PDF generation
       tempDiv.style.margin = "20px";
       tempDiv.style.padding = "30px";
-      tempDiv.style.maxWidth = "none"; // Remove max-width constraint for PDF
+      tempDiv.style.maxWidth = "none";
 
       document.body.appendChild(tempDiv);
 
@@ -97,7 +94,7 @@ const SuggestionView = () => {
           scale: 2,
           useCORS: true,
           logging: false,
-          width: Math.min(800, window.innerWidth - 40), // Responsive width
+          width: Math.min(800, window.innerWidth - 40),
         },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       };
@@ -110,7 +107,6 @@ const SuggestionView = () => {
     }
   };
 
-  // Authentication required view
   if (!isAuthenticated) {
     return (
       <div className="suggestion-display-page">
@@ -163,13 +159,11 @@ const SuggestionView = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  // Main content view
   return (
     <div className="suggestion-display-page">
       <Navbar />
       <div className="suggestion-display-wrapper">
         <div className="suggestion-display-header">
-          {/* Info section moved to top on mobile via CSS order property */}
           <div className="suggestion-info">
             <div className="suggestion-meta">
               <p>

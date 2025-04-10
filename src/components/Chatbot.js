@@ -12,7 +12,7 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [isTyping, setIsTyping] = useState(false); // New state for typing indicator
+  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
   const { user, token } = useSelector((state) => state.auth);
   const isAuthenticated = user && token;
@@ -22,8 +22,6 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
   // Load messages from localStorage when component mounts
   useEffect(() => {
     if (isAuthenticated && user) {
-      // We don't want to load messages that were just stored
-      // Only load if the current messages array is empty
       if (messages.length === 0) {
         const storedMessages = localStorage.getItem(`chat_messages_${user.id}`);
         if (storedMessages) {
@@ -34,7 +32,6 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
     }
   }, [isAuthenticated, user]);
 
-  // Add this useEffect hook to your component
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (isOpen && !e.target.closest(".chatbot-container")) {
@@ -91,10 +88,8 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
     setMessages((prevMessages) => {
       const updatedMessages = [...prevMessages, userMessage];
 
-      // Show typing indicator
       setIsTyping(true);
 
-      // After updating the state, send to API
       axios
         .post(
           `${BACKEND_URL}/api/chatbot`,
@@ -111,7 +106,6 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
           }
         )
         .then((response) => {
-          // Hide typing indicator
           setIsTyping(false);
 
           const botMessage = {
@@ -127,11 +121,9 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
           setRemainingCount(response.data.remainingCount);
         })
         .catch((error) => {
-          // Hide typing indicator
           setIsTyping(false);
 
           console.error("Chatbot error:", error);
-          // Again use functional update
           setMessages((currentMessages) => [
             ...currentMessages,
             {
@@ -316,13 +308,10 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
     setMessages((prevMessages) => {
       const updatedMessages = [...prevMessages, userMessage];
 
-      // Reset input field immediately
       setInput("");
 
-      // Show typing indicator
       setIsTyping(true);
 
-      // Send message to API
       axios
         .post(
           `${BACKEND_URL}/api/chatbot`,
@@ -338,7 +327,6 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
           }
         )
         .then((response) => {
-          // Hide typing indicator
           setIsTyping(false);
 
           const botMessage = {
@@ -348,13 +336,11 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
             roadmap: roadmapTitle,
           };
 
-          // Use functional update again for the bot's response
           setMessages((currentMessages) => [...currentMessages, botMessage]);
           setUsageCount(response.data.usageCount);
           setRemainingCount(response.data.remainingCount);
         })
         .catch((error) => {
-          // Hide typing indicator
           setIsTyping(false);
 
           console.error("Chatbot error:", error);

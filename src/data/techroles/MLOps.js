@@ -1,479 +1,294 @@
-const mlOpsRoadmap = {
-  name: "MLOps Engineer Roadmap 2025",
+const mlopsRoadmap = {
+  name: "MLOps Roadmap 2025",
   children: [
     {
-      name: "Foundational Knowledge",
+      name: "Foundation Skills",
       children: [
         {
-          name: "Programming and Scripting",
+          name: "Python Programming",
           children: [
-            {
-              name: "Python",
-              preferred: true,
-            },
-            {
-              name: "Bash/Shell Scripting",
-            },
-            {
-              name: "SQL",
-            },
+            { name: "Syntax and Basics" },
+            { name: "Libraries for ML" },
+            { name: "Code Optimization" },
           ],
         },
         {
-          name: "Machine Learning Fundamentals",
+          name: "Mathematics for ML",
           children: [
-            {
-              name: "Supervised Learning",
-            },
-            {
-              name: "Unsupervised Learning",
-            },
-            {
-              name: "Feature Engineering",
-            },
-            {
-              name: "Model Evaluation",
-            },
-            {
-              name: "Deep Learning",
-            },
+            { name: "Linear Algebra Basics" },
+            { name: "Calculus for Optimization" },
+            { name: "Statistics and Probability" },
+          ],
+        },
+        {
+          name: "Software Engineering",
+          children: [
+            { name: "Code Structure" },
+            { name: "Modular Design" },
+            { name: "Testing Practices" },
+          ],
+        },
+        {
+          name: "ML Fundamentals",
+          children: [
+            { name: "Learning Types" },
+            { name: "Basic Algorithms" },
+            { name: "Data Preprocessing" },
           ],
         },
       ],
-      dividerText: "Foundations built—master MLOps principles next.",
+      dividerText: "Foundation strong—tackle data engineering.",
     },
     {
-      name: "MLOps Principles",
+      name: "Data Engineering",
       children: [
         {
-          name: "Reproducibility",
+          name: "Database Systems",
           children: [
-            {
-              name: "Version Control",
-            },
-            {
-              name: "Docker",
-              preferred: true,
-            },
-            {
-              name: "Seed Setting",
-            },
+            { name: "SQL Querying" },
+            { name: "NoSQL Structures" },
+            { name: "Data Modeling" },
           ],
         },
         {
-          name: "Model Versioning",
+          name: "Data Processing",
           children: [
-            {
-              name: "MLflow",
-              preferred: true,
-            },
-            {
-              name: "DVC",
-            },
-            {
-              name: "Git LFS",
-            },
+            { name: "Spark Setup" },
+            { name: "Spark Dataframes" },
+            { name: "Spark Streaming" },
           ],
         },
         {
-          name: "Scalability",
+          name: "ETL Pipelines",
           children: [
-            {
-              name: "Distributed Training",
-            },
-            {
-              name: "Load Balancing",
-            },
-            {
-              name: "Batch Processing",
-            },
+            { name: "Airflow Basics" },
+            { name: "Workflow Scheduling" },
+            { name: "DAG Creation" },
           ],
         },
         {
-          name: "Collaboration & Documentation",
+          name: "Data Versioning",
           children: [
-            {
-              name: "Jupyter Notebooks",
-            },
-            {
-              name: "Markdown",
-            },
-            {
-              name: "Confluence",
-            },
-            {
-              name: "Code Comments",
-            },
+            { name: "DVC Setup" },
+            { name: "Dataset Tracking" },
+            { name: "Pipeline Versioning" },
           ],
         },
       ],
-      dividerText:
-        "Principles mastered—leverage MLOps tools and technologies next.",
+      dividerText: "Data skills set—learn DevOps.",
     },
     {
-      name: "MLOps Tools and Technologies",
+      name: "DevOps Fundamentals",
       children: [
         {
-          name: "Experiment Tracking",
+          name: "Linux Basics",
           children: [
-            {
-              name: "MLflow",
-              preferred: true,
-            },
-            {
-              name: "Weights & Biases",
-            },
-            {
-              name: "Neptune.ai",
-            },
+            { name: "Command Line Tools" },
+            { name: "File Management" },
+            { name: "Shell Scripting" },
           ],
         },
         {
-          name: "Model Deployment",
+          name: "Version Control",
           children: [
-            {
-              name: "Docker",
-              preferred: true,
-            },
-            {
-              name: "Kubernetes",
-              preferred: true,
-            },
-            {
-              name: "TensorFlow Serving",
-            },
-            {
-              name: "TorchServe",
-            },
-            {
-              name: "FastAPI",
-            },
+            { name: "Git Commands" },
+            { name: "Branch Management" },
+            { name: "Collaboration Workflows" },
+          ],
+        },
+        {
+          name: "Containerization",
+          children: [
+            { name: "Docker Images" },
+            { name: "Docker Containers" },
+            { name: "Kubernetes Clusters" },
+          ],
+        },
+        {
+          name: "CI/CD",
+          children: [
+            { name: "Pipeline Creation" },
+            { name: "Automated Builds" },
+            { name: "Deployment Triggers" },
           ],
         },
       ],
-      dividerText: "Tools in hand—automate workflows with CI/CD for ML next.",
+      dividerText: "DevOps ready—focus on ML engineering.",
     },
     {
-      name: "CI/CD for ML",
+      name: "ML Engineering",
       children: [
         {
-          name: "Automated Testing",
+          name: "Deep Learning",
           children: [
-            {
-              name: "Pytest",
-              preferred: true,
-            },
-            {
-              name: "Great Expectations",
-            },
-            {
-              name: "Model Testing",
-            },
+            { name: "TensorFlow Models" },
+            { name: "PyTorch Models" },
+            { name: "Neural Networks" },
           ],
         },
         {
-          name: "Pipeline Orchestration",
+          name: "Model Practices",
           children: [
-            {
-              name: "Kubeflow",
-              preferred: true,
-            },
-            {
-              name: "Apache Airflow",
-            },
-            {
-              name: "Prefect",
-            },
+            { name: "Development Workflow" },
+            { name: "Hyperparameter Tuning" },
+            { name: "Code Documentation" },
           ],
         },
         {
-          name: "Infrastructure as Code (IaC)",
+          name: "Evaluation",
           children: [
-            {
-              name: "Terraform",
-              preferred: true,
-            },
-            {
-              name: "AWS CloudFormation",
-            },
-            {
-              name: "Ansible",
-            },
+            { name: "Performance Metrics" },
+            { name: "Cross-Validation" },
+            { name: "Bias Detection" },
+          ],
+        },
+        {
+          name: "Explainable AI",
+          children: [
+            { name: "Feature Importance" },
+            { name: "SHAP Values" },
+            { name: "Model Interpretation" },
           ],
         },
       ],
-      dividerText:
-        "CI/CD pipelines set—leverage cloud and infrastructure for MLOps next.",
+      dividerText: "ML engineering solid—explore MLOps core.",
     },
     {
-      name: "Cloud and Infrastructure",
+      name: "MLOps Core",
       children: [
         {
-          name: "Cloud Providers",
+          name: "System Design",
           children: [
-            {
-              name: "AWS SageMaker",
-              preferred: true,
-            },
-            {
-              name: "Google AI Platform",
-            },
-            {
-              name: "Azure ML",
-            },
+            { name: "Architecture Planning" },
+            { name: "Pipeline Integration" },
+            { name: "Scalability Basics" },
           ],
         },
         {
-          name: "Storage and Compute",
+          name: "Deployment",
           children: [
-            {
-              name: "S3/GCS/Azure Blob",
-            },
-            {
-              name: "GPUs",
-            },
-            {
-              name: "Serverless",
-            },
+            { name: "Online Serving" },
+            { name: "Batch Processing" },
+            { name: "Model Endpoints" },
+          ],
+        },
+        {
+          name: "Monitoring",
+          children: [
+            { name: "Drift Detection" },
+            { name: "Health Checks" },
+            { name: "Logging Setup" },
+          ],
+        },
+        {
+          name: "Feature Stores",
+          children: [
+            { name: "Feature Creation" },
+            { name: "Feature Retrieval" },
+            { name: "Store Management" },
           ],
         },
       ],
-      dividerText:
-        "Cloud infrastructure ready—monitor and ensure observability next.",
+      dividerText: "Core mastered—advance your MLOps.",
     },
     {
-      name: "Monitoring and Observability",
+      name: "Advanced MLOps",
       children: [
         {
-          name: "Prometheus",
+          name: "Scaling Systems",
           children: [
-            {
-              name: "Metrics",
-            },
-            {
-              name: "Alerts",
-            },
+            { name: "Horizontal Scaling" },
+            { name: "Vertical Scaling" },
+            { name: "Load Optimization" },
           ],
         },
         {
-          name: "Grafana",
+          name: "Automation",
           children: [
-            {
-              name: "Dashboards",
-            },
-            {
-              name: "Data Sources",
-            },
+            { name: "AutoML Tools" },
+            { name: "Pipeline Orchestration" },
+            { name: "Retraining Loops" },
           ],
         },
         {
-          name: "Evidently AI",
+          name: "Distributed Training",
           children: [
-            {
-              name: "Data Drift",
-            },
-            {
-              name: "Target Drift",
-            },
-            {
-              name: "Reports",
-            },
+            { name: "Cluster Setup" },
+            { name: "Data Parallelism" },
+            { name: "Model Parallelism" },
           ],
         },
         {
-          name: "Logging",
+          name: "Governance",
           children: [
-            {
-              name: "ELK Stack",
-            },
-            {
-              name: "Cloud Logging",
-            },
+            { name: "Regulatory Compliance" },
+            { name: "Ethical Guidelines" },
+            { name: "Audit Trails" },
           ],
         },
       ],
-      dividerText: "Observability secured—ensure security and compliance next.",
+      dividerText: "Advanced skills gained—use cloud tools.",
     },
     {
-      name: "Security and Compliance",
+      name: "Cloud and Infra",
       children: [
         {
-          name: "Data Privacy",
+          name: "Cloud Platforms",
           children: [
-            {
-              name: "GDPR",
-            },
-            {
-              name: "CCPA",
-            },
-            {
-              name: "HIPAA",
-            },
-            {
-              name: "Differential Privacy",
-            },
+            { name: "AWS ML Services" },
+            { name: "GCP ML Tools" },
+            { name: "Azure ML Offerings" },
           ],
         },
         {
-          name: "Model Security",
+          name: "Infra as Code",
           children: [
-            {
-              name: "Adversarial Attacks",
-            },
-            {
-              name: "Model Encryption",
-            },
-            {
-              name: "Access Control",
-            },
+            { name: "Terraform Scripts" },
+            { name: "Resource Provisioning" },
+            { name: "Infra Updates" },
           ],
         },
         {
-          name: "Explainability & Bias Detection",
+          name: "Serverless",
           children: [
-            {
-              name: "SHAP",
-            },
-            {
-              name: "LIME",
-            },
-            {
-              name: "Fairness Metrics",
-            },
-            {
-              name: "Bias Mitigation",
-            },
+            { name: "Lambda Functions" },
+            { name: "Serverless Deployment" },
+            { name: "Cost Efficiency" },
           ],
         },
       ],
+      dividerText: "Cloud ready—apply practically.",
     },
     {
-      name: "Projects",
+      name: "Practical Experience",
       children: [
         {
-          name: "ML Model CI/CD",
+          name: "Projects",
           children: [
-            {
-              name: "Data Prep",
-            },
-            {
-              name: "Training",
-            },
-            {
-              name: "Pipeline",
-            },
-            {
-              name: "Deployment",
-            },
+            { name: "Data Pipeline Build" },
+            { name: "Model Deployment" },
+            { name: "Monitoring System" },
           ],
         },
         {
-          name: "End-to-End ML Pipeline",
+          name: "Open Source",
           children: [
-            {
-              name: "Ingestion",
-            },
-            {
-              name: "Feature Store",
-            },
-            {
-              name: "Orchestration",
-            },
-            {
-              name: "Monitoring",
-            },
+            { name: "Project Contributions" },
+            { name: "Code Reviews" },
+            { name: "Community Engagement" },
           ],
         },
         {
-          name: "Scalable ML Deployment",
+          name: "Portfolio",
           children: [
-            {
-              name: "Model",
-            },
-            {
-              name: "Kubernetes",
-            },
-            {
-              name: "IaC",
-            },
-            {
-              name: "Load Testing",
-            },
-          ],
-        },
-        {
-          name: "ML Model Drift Detection",
-          children: [
-            {
-              name: "Baseline",
-            },
-            {
-              name: "Monitoring",
-            },
-            {
-              name: "Alerts",
-            },
-            {
-              name: "Retraining",
-            },
+            { name: "Project Documentation" },
+            { name: "Demo Creation" },
+            { name: "Skills Highlight" },
           ],
         },
       ],
-    },
-    {
-      name: "Professional Development",
-      children: [
-        {
-          name: "Portfolio Building",
-          children: [
-            {
-              name: "Projects",
-            },
-            {
-              name: "GitHub",
-            },
-            {
-              name: "Blogging",
-            },
-          ],
-        },
-        {
-          name: "Certifications",
-          children: [
-            {
-              name: "AWS ML Specialty",
-              preferred: true,
-            },
-            {
-              name: "Google Professional ML Engineer",
-            },
-            {
-              name: "Databricks MLOps",
-            },
-          ],
-        },
-        {
-          name: "Community Engagement",
-          children: [
-            {
-              name: "Conferences",
-            },
-            {
-              name: "Open-Source",
-            },
-            {
-              name: "Forums",
-            },
-          ],
-        },
-      ],
-      dividerText:
-        "Career ready—commit to continuous learning for long-term success.",
-    },
-    {
-      name: "Continuous Learning",
     },
   ],
 };
 
-export default mlOpsRoadmap;
+export default mlopsRoadmap;

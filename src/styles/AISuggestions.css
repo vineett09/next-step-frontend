@@ -4,7 +4,15 @@
   min-height: 100vh;
   color: #333;
 }
+.full-page-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
+.full-page-layout .questionnaire-content {
+  flex: 1;
+}
 .questionnaire-content {
   max-width: 1200px;
   margin: 2rem auto;
@@ -252,7 +260,6 @@
   font-weight: 500;
 }
 
-/* Roadmap Content Styling - Enhanced for responsiveness */
 .questionnaire-roadmap-wrapper {
   width: 100%;
 }

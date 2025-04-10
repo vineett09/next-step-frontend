@@ -434,4 +434,12 @@ export const techSkills = [
     description:
       "Swift is a powerful, open-source programming language by Apple for iOS, macOS, and watchOS apps, known for its safety and performance. It simplifies app development. Swift developers build native, high-quality mobile apps with Xcode, utilizing its modern syntax and features like optionals to create responsive, user-friendly experiences.",
   },
+  {
+    id: 39,
+    title: "Data Structures and Algorithms",
+    icon: "📚",
+    link: "/dsa",
+    description:
+      "Data Structures and Algorithms (DSA) are fundamental concepts in computer science that focus on organizing and manipulating data efficiently. Data structures like arrays, linked lists, trees, and graphs provide ways to store data, while algorithms define the steps to process that data. Mastering DSA is crucial for optimizing performance in software development, enabling developers to solve complex problems and improve application efficiency.",
+  },
 ];

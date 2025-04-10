@@ -344,7 +344,6 @@ const CustomRoadmaps = () => {
     }
   }, [token, user]);
 
-  // Handle connecting nodes
   const onConnect = (params) => {
     if (!params.source || !params.target) return;
 

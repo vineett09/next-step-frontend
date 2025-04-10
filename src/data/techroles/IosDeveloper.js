@@ -1,489 +1,399 @@
-const iosDeveloperRoadmap = {
+const iOSDeveloperRoadmap = {
   name: "iOS Developer Roadmap 2025",
   children: [
     {
-      name: "Core Programming Languages",
+      name: "Foundational Knowledge",
       children: [
         {
-          name: "Swift",
-          preferred: true,
+          name: "Programming Languages",
           children: [
-            {
-              name: "Basics",
-            },
-            {
-              name: "Closures",
-            },
-            {
-              name: "Generics",
-            },
-            {
-              name: "Swift Concurrency",
-            },
+            { name: "Swift", preferred: true },
+            { name: "Objective-C" },
           ],
         },
         {
-          name: "Objective-C",
+          name: "Basic Computer Science",
           children: [
-            {
-              name: "Syntax Basics",
-            },
-            {
-              name: "C Integration",
-            },
-            {
-              name: "Runtime",
-            },
-            {
-              name: "Interoperability",
-            },
+            { name: "Data Structures (Arrays, Dictionaries, Sets)" },
+            { name: "Algorithms (Sorting, Searching)" },
+            { name: "Memory Management" },
+            { name: "Object-Oriented Programming" },
+          ],
+        },
+        {
+          name: "Operating System Basics",
+          children: [{ name: "iOS Architecture" }, { name: "macOS Basics" }],
+        },
+        {
+          name: "Development Environment",
+          children: [
+            { name: "Xcode", preferred: true },
+            { name: "Playgrounds" },
+            { name: "Command Line Tools" },
           ],
         },
       ],
+      dividerText: "Foundations set—learn version control and collaboration.",
     },
     {
-      name: "iOS Development Fundamentals",
+      name: "Version Control and Collaboration",
       children: [
         {
-          name: "Xcode & Interface Builder",
+          name: "Version Control Systems",
           children: [
-            {
-              name: "Project Structure",
-            },
-            {
-              name: "Interface Builder",
-            },
-            {
-              name: "Debugging Tools",
-            },
-            {
-              name: "Simulator",
-            },
+            { name: "Git", preferred: true },
+            { name: "GitHub" },
+            { name: "GitLab" },
+            { name: "Bitbucket" },
           ],
         },
         {
-          name: "UIKit Framework",
+          name: "Team Collaboration Tools",
           children: [
-            {
-              name: "View Controllers",
-            },
-            {
-              name: "Auto Layout",
-            },
-            {
-              name: "Animations",
-            },
-            {
-              name: "Gestures",
-            },
+            { name: "Jira" },
+            { name: "Trello" },
+            { name: "Slack", preferred: true },
+            { name: "Notion" },
+          ],
+        },
+      ],
+      dividerText: "Collaboration in place—build core iOS skills.",
+    },
+    {
+      name: "Core iOS Development",
+      children: [
+        {
+          name: "Swift Fundamentals",
+          children: [
+            { name: "Syntax and Semantics" },
+            { name: "Optionals" },
+            { name: "Closures" },
+            { name: "Protocols and Extensions" },
+            { name: "Generics" },
+            { name: "Error Handling" },
+            { name: "Functional Programming Concepts" },
+            { name: "Swift Concurrency" },
+          ],
+        },
+        {
+          name: "UIKit",
+          children: [
+            { name: "View Controllers" },
+            { name: "Auto Layout" },
+            { name: "Storyboards" },
+            { name: "Table Views and Collection Views" },
+            { name: "User Interaction" },
+            { name: "Navigation Controllers" },
+            { name: "Gesture Recognizers" },
           ],
         },
         {
           name: "SwiftUI",
           children: [
-            {
-              name: "Views and Modifiers",
-            },
-            {
-              name: "State Management",
-            },
-            {
-              name: "Previews",
-            },
-            {
-              name: "Cross-Platform",
-            },
+            { name: "Declarative Syntax" },
+            { name: "Views and Modifiers" },
+            { name: "State Management" },
+            { name: "Animations" },
+            { name: "Bindings" },
+            { name: "Building Interfaces" },
+          ],
+        },
+        {
+          name: "App Lifecycle",
+          children: [
+            { name: "App Delegate" },
+            { name: "Scene Delegate" },
+            { name: "Background Modes" },
           ],
         },
       ],
+      dividerText: "Core skills mastered—explore essential frameworks.",
     },
     {
-      name: "Advanced iOS Development",
+      name: "Essential iOS Frameworks",
       children: [
         {
-          name: "Combine Framework",
+          name: "Networking",
           children: [
-            {
-              name: "Publishers and Subscribers",
-            },
-            {
-              name: "Operators",
-            },
-            {
-              name: "Networking",
-            },
-            {
-              name: "SwiftUI Integration",
-            },
+            { name: "URLSession" },
+            { name: "Alamofire" },
+            { name: "REST APIs" },
+            { name: "GraphQL" },
           ],
         },
         {
-          name: "Concurrency with Swift",
+          name: "Data Persistence",
           children: [
-            {
-              name: "Async/Await",
-            },
-            {
-              name: "Actors",
-            },
-            {
-              name: "Task Groups",
-            },
-            {
-              name: "MainActor",
-            },
+            { name: "Core Data" },
+            { name: "SwiftData" },
+            { name: "UserDefaults" },
+            { name: "FileManager" },
           ],
         },
         {
-          name: "Core Data",
+          name: "User Interface Enhancements",
           children: [
-            {
-              name: "Managed Object Model",
-            },
-            {
-              name: "Fetch Requests",
-            },
-            {
-              name: "CloudKit Sync",
-            },
-            {
-              name: "Performance Tuning",
-            },
+            { name: "Core Animation" },
+            { name: "Core Graphics" },
+            { name: "Lottie (Animations)" },
           ],
         },
         {
-          name: "Dependency Management",
-          children: [
-            {
-              name: "Swift Package Manager",
-            },
-            {
-              name: "CocoaPods",
-            },
-            {
-              name: "Carthage",
-            },
-          ],
+          name: "Location and Maps",
+          children: [{ name: "Core Location" }, { name: "MapKit" }],
         },
       ],
+      dividerText: "Frameworks learned—delve into testing and debugging.",
+    },
+    {
+      name: "Testing and Debugging",
+      children: [
+        {
+          name: "Unit Testing",
+          children: [
+            { name: "XCTest", preferred: true },
+            { name: "Quick/Nimble" },
+          ],
+        },
+        {
+          name: "UI Testing",
+          children: [{ name: "XCUITest", preferred: true }],
+        },
+        {
+          name: "Debugging Tools",
+          children: [
+            { name: "Xcode Debugger", preferred: true },
+            { name: "Instruments" },
+            { name: "LLDB" },
+          ],
+        },
+        {
+          name: "Mocking and Dependency Injection",
+          children: [{ name: "Mockingbird" }, { name: "Swinject" }],
+        },
+      ],
+      dividerText: "Testing solid—architect apps effectively.",
     },
     {
       name: "App Architecture",
       children: [
         {
-          name: "MVC",
+          name: "Design Patterns",
           children: [
-            {
-              name: "Model",
-            },
-            {
-              name: "View",
-            },
-            {
-              name: "Controller",
-            },
+            { name: "MVC" },
+            { name: "MVVM" },
+            { name: "VIPER" },
+            { name: "MVP" },
+            { name: "Coordinator Pattern" },
           ],
         },
         {
-          name: "MVVM",
+          name: "Dependency Management",
           children: [
-            {
-              name: "ViewModel",
-            },
-            {
-              name: "Bindings",
-            },
-            {
-              name: "Testability",
-            },
+            { name: "Swift Package Manager", preferred: true },
+            { name: "Cocoapods" },
+            { name: "Carthage" },
           ],
         },
         {
-          name: "VIPER",
+          name: "Modularization",
           children: [
-            {
-              name: "View",
-            },
-            {
-              name: "Interactor",
-            },
-            {
-              name: "Presenter",
-            },
-            {
-              name: "Entity",
-            },
-            {
-              name: "Router",
-            },
-          ],
-        },
-        {
-          name: "Clean Architecture",
-          children: [
-            {
-              name: "Data Layer",
-            },
-            {
-              name: "Domain Layer",
-            },
-            {
-              name: "Presentation Layer",
-            },
+            { name: "Modules and Frameworks" },
+            { name: "Dynamic Linking" },
           ],
         },
       ],
+      dividerText: "Architecture defined—explore reactive programming.",
     },
     {
-      name: "Backend Integration",
+      name: "Reactive Programming",
       children: [
         {
-          name: "RESTful APIs",
+          name: "Combine",
           children: [
-            {
-              name: "URLSession",
-            },
-            {
-              name: "Alamofire",
-            },
-            {
-              name: "Codable",
-            },
+            { name: "Publishers and Subscribers" },
+            { name: "Operators" },
+            { name: "Combine and MVVM" },
           ],
         },
         {
-          name: "GraphQL",
+          name: "RxSwift",
           children: [
-            {
-              name: "Apollo iOS",
-            },
-            {
-              name: "Schema Design",
-            },
-          ],
-        },
-        {
-          name: "Real-Time Data",
-          children: [
-            {
-              name: "WebSockets",
-            },
-            {
-              name: "CloudKit",
-            },
+            { name: "Observables" },
+            { name: "Subjects" },
+            { name: "Schedulers" },
+            { name: "Operators" },
+            { name: "RxSwift and MVVM" },
           ],
         },
       ],
+      dividerText: "Reactive skills acquired—integrate advanced features.",
     },
     {
-      name: "Emerging Technologies",
+      name: "Advanced iOS Features",
       children: [
         {
-          name: "AI & ML",
+          name: "Multithreading",
           children: [
-            {
-              name: "Core ML",
-            },
-            {
-              name: "Create ML",
-            },
-            {
-              name: "Vision",
-            },
-            {
-              name: "Natural Language",
-            },
+            { name: "Grand Central Dispatch (GCD)" },
+            { name: "Operation Queues" },
+            { name: "Async/Await" },
           ],
         },
         {
-          name: "Augmented Reality (AR)",
+          name: "Augmented Reality",
           children: [
-            {
-              name: "ARKit",
-            },
-            {
-              name: "RealityKit",
-            },
-            {
-              name: "Scene Understanding",
-            },
-            {
-              name: "LiDAR Integration",
-            },
+            { name: "ARKit", preferred: true },
+            { name: "RealityKit" },
           ],
         },
         {
-          name: "IoT Integration",
+          name: "Machine Learning",
           children: [
-            {
-              name: "HomeKit",
-            },
-            {
-              name: "Core Bluetooth",
-            },
-            {
-              name: "Matter Protocol",
-            },
+            { name: "Core ML", preferred: true },
+            { name: "Create ML" },
           ],
         },
         {
-          name: "Multi-Platform Development",
+          name: "Push Notifications",
           children: [
-            {
-              name: "watchOS",
-            },
-            {
-              name: "tvOS",
-            },
-            {
-              name: "macOS Catalyst",
-            },
+            { name: "APNs (Apple Push Notification Service)", preferred: true },
+            { name: "Firebase Cloud Messaging" },
           ],
         },
       ],
+      dividerText: "Advanced features added—deploy to the App Store.",
     },
     {
-      name: "Development Tools & Practices",
+      name: "App Store Deployment",
       children: [
         {
-          name: "Version Control Systems (VCS)",
+          name: "App Store Connect",
           children: [
-            {
-              name: "Git",
-            },
-            {
-              name: "GitHub/Bitbucket",
-            },
-            {
-              name: "Pull Requests",
-            },
+            { name: "App Submission" },
+            { name: "App Metadata" },
+            { name: "In-App Purchases" },
+            { name: "TestFlight" },
           ],
         },
         {
-          name: "CI/CD",
+          name: "Build and Release",
           children: [
-            {
-              name: "Xcode Cloud",
-            },
-            {
-              name: "GitHub Actions",
-            },
-            {
-              name: "Fastlane",
-            },
+            { name: "Code Signing" },
+            { name: "Provisioning Profiles" },
+            { name: "App Thinning" },
           ],
         },
         {
-          name: "Testing",
+          name: "App Analytics",
           children: [
-            {
-              name: "Unit Testing",
-            },
-            {
-              name: "UI Testing",
-            },
-            {
-              name: "Mocking",
-            },
-            {
-              name: "Performance Testing",
-            },
-          ],
-        },
-        {
-          name: "App Optimization",
-          children: [
-            {
-              name: "Memory Management",
-            },
-            {
-              name: "App Size",
-            },
-            {
-              name: "Launch Time",
-            },
+            { name: "App Store Analytics", preferred: true },
+            { name: "Firebase Analytics" },
           ],
         },
       ],
+      dividerText: "Deployment complete—monitor and optimize apps.",
     },
     {
-      name: "Security & Privacy",
+      name: "Monitoring and Optimization",
       children: [
         {
-          name: "Data Protection",
+          name: "Performance Optimization",
           children: [
-            {
-              name: "Encryption",
-            },
-            {
-              name: "Keychain",
-            },
-            {
-              name: "Data Protection API",
-            },
+            { name: "Instruments (Leaks, Time Profiler)", preferred: true },
+            { name: "Memory Management" },
+            { name: "Energy Efficiency" },
           ],
         },
         {
-          name: "Authentication & Authorization",
+          name: "Crash Reporting",
           children: [
-            {
-              name: "Sign in with Apple",
-            },
-            {
-              name: "OAuth2",
-            },
-            {
-              name: "Face ID/Touch ID",
-            },
+            { name: "Sentry" },
+            { name: "Firebase Crashlytics", preferred: true },
           ],
         },
         {
-          name: "Privacy Compliance",
+          name: "User Feedback",
+          children: [{ name: "App Store Reviews" }, { name: "In-App Surveys" }],
+        },
+      ],
+      dividerText: "Monitoring in place—enhance with cross-platform tools.",
+    },
+    {
+      name: "Cross-Platform Development",
+      children: [
+        {
+          name: "Cross-Platform Frameworks",
           children: [
-            {
-              name: "App Tracking Transparency",
-            },
-            {
-              name: "Privacy Manifests",
-            },
+            { name: "SwiftUI Multiplatform", preferred: true },
+            { name: "Flutter" },
+            { name: "React Native" },
+          ],
+        },
+        {
+          name: "Shared Logic",
+          children: [
+            { name: "Kotlin Multiplatform Mobile (KMM)" },
+            { name: "Shared Swift Packages" },
           ],
         },
       ],
+      dividerText: "Cross-platform explored—explore emerging trends.",
     },
     {
-      name: "Soft Skills & Career Development",
+      name: "Emerging Trends and Technologies",
       children: [
         {
-          name: "Problem-Solving",
+          name: "AI and ML Integration",
           children: [
-            {
-              name: "Algorithm Practice",
-            },
-            {
-              name: "Debugging Techniques",
-            },
+            { name: "Vision Framework", preferred: true },
+            { name: "Natural Language Processing (NLP)" },
+            { name: "SiriKit" },
           ],
         },
         {
-          name: "Collaboration",
+          name: "Wearables and IoT",
           children: [
-            {
-              name: "Agile Practices",
-            },
-            {
-              name: "Code Reviews",
-            },
+            { name: "WatchOS", preferred: true },
+            { name: "HomeKit" },
+            { name: "HealthKit" },
           ],
         },
         {
-          name: "Continuous Learning",
+          name: "Privacy and Security",
           children: [
-            {
-              name: "WWDC",
-            },
-            {
-              name: "Community Involvement",
-            },
+            { name: "App Tracking Transparency", preferred: true },
+            { name: "Secure Enclave" },
+            { name: "On-Device Processing" },
+          ],
+        },
+      ],
+      dividerText: "Trends adopted—apply skills in projects.",
+    },
+    {
+      name: "Projects",
+      children: [
+        {
+          name: "Portfolio Apps",
+          children: [
+            { name: "To-Do List App" },
+            { name: "Weather App" },
+            { name: "Social Media Client" },
+          ],
+        },
+        { name: "Open Source Contributions" },
+      ],
+    },
+    {
+      name: "Continuous Learning",
+      children: [
+        {
+          name: "Resources",
+          children: [
+            { name: "WWDC Sessions", preferred: true },
+            { name: "Swift.org" },
+            { name: "Online Courses (e.g., Udemy, Ray Wenderlich)" },
+            { name: "iOS Dev Communities (e.g., Reddit, Stack Overflow)" },
           ],
         },
       ],
@@ -491,4 +401,4 @@ const iosDeveloperRoadmap = {
   ],
 };
 
-export default iosDeveloperRoadmap;
+export default iOSDeveloperRoadmap;

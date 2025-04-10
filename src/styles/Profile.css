@@ -142,7 +142,6 @@
 
 }
 
-/* Updated roadmap list item styles */
 .roadmap-list-item {
   background-color: #31363F;
   border-radius: 12px;
@@ -226,7 +225,6 @@
   color: #86efac;
 }
 
-/* Improved roadmap stats container */
 .roadmap-stats-container {
   display: flex;
   align-items: center;
@@ -257,7 +255,6 @@
   font-weight: 600;
 }
 
-/* Updated rating styles */
 .rating-container {
   display: flex;
   align-items: center;
@@ -311,7 +308,6 @@
   display: inline-block;
 }
 
-/* Updated dropdown styles */
 .dropdown-toggle {
   background: transparent;
   border: none;
@@ -439,7 +435,6 @@
   background-color: #d5e3ff;
 }
 
-/* Updated empty states */
 .roadmaps-empty-state, .bookmarks-empty-state {
   text-align: center;
   padding: 3.5rem 2rem;
@@ -646,7 +641,6 @@
 .unfollow-btn:hover {
   background-color: #ffeef0;
 }
-/* AI Suggestions Section Styles */
 .profile-suggestions-section {
   border-radius: 10px;
   border: 1px solid #fff;

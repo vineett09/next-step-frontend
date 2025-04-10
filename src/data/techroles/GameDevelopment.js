@@ -2,357 +2,351 @@ const gameDevelopmentRoadmap = {
   name: "Game Development Roadmap 2025",
   children: [
     {
-      name: "Foundations of Game Development",
+      name: "Foundational Programming Skills",
       children: [
         {
-          name: "Programming Fundamentals",
+          name: "Core Languages",
           children: [
             {
-              name: "C#",
+              name: "C++",
               preferred: true,
+              children: [
+                { name: "Basics (Syntax, Pointers)" },
+                { name: "Object-Oriented Programming" },
+                { name: "Memory Management" },
+                { name: "STL (Standard Template Library)" },
+              ],
             },
             {
-              name: "C++",
+              name: "C#",
+              children: [
+                { name: "Basics (Syntax, Classes)" },
+                { name: "Object-Oriented Programming" },
+                { name: "LINQ" },
+                { name: "Delegates and Events" },
+              ],
             },
             {
               name: "Python",
-            },
-            {
-              name: "JavaScript",
-            },
-          ],
-        },
-        {
-          name: "Mathematics for Game Development",
-          children: [
-            {
-              name: "Linear Algebra",
-            },
-            {
-              name: "Trigonometry",
-            },
-            {
-              name: "Calculus",
-            },
-            {
-              name: "Geometry",
+              children: [
+                { name: "Basics (Syntax, Variables)" },
+                { name: "Data Structures" },
+                { name: "Scripting" },
+              ],
             },
           ],
         },
         {
-          name: "Game Design Principles",
+          name: "Mathematics for Games",
           children: [
-            {
-              name: "Game Loops",
-            },
-            {
-              name: "Player Psychology",
-            },
-            {
-              name: "Level Design",
-            },
-            {
-              name: "Game Balancing",
-            },
+            { name: "Linear Algebra (Vectors, Matrices)" },
+            { name: "Trigonometry" },
+            { name: "Physics Basics (Kinematics, Forces)" },
+            { name: "Probability and Randomness" },
+          ],
+        },
+        {
+          name: "Algorithms and Data Structures",
+          children: [
+            { name: "Arrays and Lists" },
+            { name: "Trees and Graphs" },
+            { name: "Pathfinding (A*, Dijkstra)" },
+            { name: "Optimization Techniques" },
           ],
         },
       ],
-      dividerText: "Foundations set—master game engines and tools.",
+      dividerText: "Foundations laid—dive into game engines and tools.",
     },
     {
-      name: "Game Engines & Tools",
+      name: "Game Engines and Development Tools",
       children: [
         {
-          name: "Unity",
+          name: "Client-Side Engines",
           children: [
             {
-              name: "Unity UI",
-            },
-            {
-              name: "Unity Physics",
-            },
-            {
-              name: "Unity Scripting",
-            },
-            {
-              name: "Unity Asset Store",
-            },
-          ],
-        },
-        {
-          name: "Unreal Engine",
-          preferred: true,
-          children: [
-            {
-              name: "Blueprints",
-            },
-            {
-              name: "Unreal C++",
-            },
-            {
-              name: "Nanite & Lumen",
-            },
-            {
-              name: "Unreal Sequencer",
-            },
-          ],
-        },
-        {
-          name: "Godot",
-          children: [
-            {
-              name: "GDScript",
-            },
-            {
-              name: "Visual Scripting",
-            },
-            {
-              name: "Godot Shaders",
-            },
-          ],
-        },
-        {
-          name: "Game Development Tools",
-          preferred: true,
-          children: [
-            {
-              name: "Blender",
-            },
-            {
-              name: "Substance Painter",
-            },
-            {
-              name: "FMOD/Wwise",
-            },
-            {
-              name: "Maya",
-            },
-          ],
-        },
-      ],
-      dividerText: "Engines mastered—enhance graphics and rendering.",
-    },
-    {
-      name: "Graphics & Rendering",
-      children: [
-        {
-          name: "Shaders & Materials",
-          children: [
-            {
-              name: "HLSL/GLSL",
-            },
-            {
-              name: "Shader Graph (Unity)",
+              name: "Unity",
               preferred: true,
+              children: [
+                { name: "Unity Editor Basics" },
+                { name: "C# Scripting" },
+                { name: "2D and 3D Scenes" },
+                { name: "Physics System" },
+              ],
             },
             {
-              name: "Material Editor (Unreal)",
+              name: "Unreal Engine",
+              children: [
+                { name: "Blueprint Visual Scripting" },
+                { name: "C++ Integration" },
+                { name: "Level Design" },
+                { name: "Material Editor" },
+              ],
             },
             {
-              name: "Shader Optimization",
+              name: "Godot",
+              children: [
+                { name: "GDScript" },
+                { name: "Node-Based Architecture" },
+                { name: "2D and 3D Workflows" },
+              ],
             },
           ],
         },
         {
-          name: "Lighting & Shadows",
+          name: "Development Tools",
           children: [
-            {
-              name: "Global Illumination",
-            },
-            {
-              name: "Real-Time Ray Tracing",
-            },
-            {
-              name: "Shadow Mapping",
-            },
-          ],
-        },
-        {
-          name: "Post-Processing",
-          children: [
-            {
-              name: "Unity Post-Processing Stack",
-            },
-            {
-              name: "Unreal Post-Process Volume",
-            },
-            {
-              name: "Bloom & Motion Blur",
-            },
+            { name: "Version Control (Git, GitHub)" },
+            { name: "IDE (Visual Studio, VS Code)" },
+            { name: "Debugging Tools" },
+            { name: "Profiling (Unity Profiler, Unreal Insights)" },
           ],
         },
       ],
-      dividerText: "Graphics enhanced—program engaging gameplay.",
+      dividerText: "Tools mastered—build core client-side skills.",
     },
     {
-      name: "Gameplay Programming",
+      name: "Client-Side Game Development",
       children: [
         {
-          name: "Physics & Collision",
+          name: "Graphics and Rendering",
           children: [
-            {
-              name: "Rigidbody Dynamics",
-            },
-            {
-              name: "Collision Detection",
-            },
-            {
-              name: "Character Controller",
-            },
-            {
-              name: "Projectile Systems",
-            },
+            { name: "2D Sprites and Animation" },
+            { name: "3D Models and Rigging" },
+            { name: "Shaders (HLSL, GLSL)" },
+            { name: "Lighting and Shadows" },
+            { name: "Particle Systems" },
           ],
         },
         {
-          name: "AI & Pathfinding",
+          name: "Gameplay Mechanics",
           children: [
-            {
-              name: "Finite State Machines",
-            },
-            {
-              name: "A* Algorithm",
-            },
-            {
-              name: "Behavior Trees",
-            },
-            {
-              name: "NavMesh",
-            },
+            { name: "Player Input (Keyboard, Controller)" },
+            { name: "Character Movement" },
+            { name: "Collision Detection" },
+            { name: "Game States (Menus, Levels)" },
+            { name: "AI Behaviors (Finite State Machines)" },
           ],
         },
         {
-          name: "Multiplayer & Networking",
+          name: "Audio",
           children: [
-            {
-              name: "Photon Unity Networking",
-            },
-            {
-              name: "Unreal Networking",
-            },
-            {
-              name: "WebSockets",
-            },
-            {
-              name: "Dedicated Servers",
-            },
+            { name: "Sound Effects" },
+            { name: "Background Music" },
+            { name: "Audio Mixers (Unity Audio, FMOD)" },
+          ],
+        },
+        {
+          name: "UI/UX for Games",
+          children: [
+            { name: "Heads-Up Display (HUD)" },
+            { name: "Menus and Navigation" },
+            { name: "Responsive Design" },
           ],
         },
       ],
-      dividerText: "Gameplay programmed—explore advanced topics.",
+      dividerText: "Client-side built—explore server-side fundamentals.",
     },
     {
-      name: "Advanced Topics",
+      name: "Server-Side Game Development",
       children: [
         {
-          name: "Virtual Reality (VR)",
+          name: "Networking Basics",
           children: [
-            {
-              name: "Unity XR",
-            },
-            {
-              name: "Unreal VR",
-            },
-            {
-              name: "VR Interaction",
-            },
+            { name: "TCP/UDP Protocols" },
+            { name: "Sockets" },
+            { name: "Client-Server Architecture" },
+            { name: "REST APIs" },
           ],
         },
         {
-          name: "Augmented Reality (AR)",
+          name: "Multiplayer Frameworks",
           children: [
-            {
-              name: "ARKit (iOS)",
-            },
-            {
-              name: "ARCore (Android)",
-            },
-            {
-              name: "AR Anchoring",
-            },
+            { name: "Photon (Unity)" },
+            { name: "Mirror (Unity)" },
+            { name: "Netcode for GameObjects (Unity)" },
+            { name: "Unreal Networking" },
           ],
         },
         {
-          name: "Procedural Generation",
+          name: "Server Technologies",
           children: [
-            {
-              name: "Perlin Noise",
-            },
-            {
-              name: "Wave Function Collapse",
-            },
-            {
-              name: "Procedural Textures",
-            },
-          ],
-        },
-        {
-          name: "Machine Learning in Games",
-          children: [
-            {
-              name: "Reinforcement Learning",
-            },
-            {
-              name: "Neural Networks",
-            },
-            {
-              name: "ML Tools",
-            },
+            { name: "Node.js" },
+            { name: "Python (Django, Flask)" },
+            { name: "C# (ASP.NET Core)" },
+            { name: "WebSockets" },
           ],
         },
       ],
-      dividerText: "Advanced skills explored—prepare for professional growth.",
+      dividerText: "Server-side ready—enhance with advanced techniques.",
     },
     {
-      name: "Professional Development",
+      name: "Advanced Game Development",
       children: [
         {
-          name: "Portfolio Development",
+          name: "Client-Side Advanced",
           children: [
-            {
-              name: "Game Jams",
-            },
-            {
-              name: "Open Source Contributions",
-            },
-            {
-              name: "Personal Projects",
-            },
+            { name: "Procedural Generation" },
+            { name: "Advanced Physics (Ragdoll, Soft Body)" },
+            { name: "VR/AR Development (Oculus, ARKit)" },
+            { name: "Optimization (LOD, Occlusion Culling)" },
           ],
         },
         {
-          name: "Soft Skills",
+          name: "Server-Side Advanced",
           children: [
-            {
-              name: "Communication",
-            },
-            {
-              name: "Time Management",
-            },
-            {
-              name: "Team Collaboration",
-            },
+            { name: "Lag Compensation" },
+            { name: "Authoritative Servers" },
+            { name: "Matchmaking Systems" },
+            { name: "Cloud Hosting (AWS, Google Cloud)" },
           ],
         },
         {
-          name: "Industry Trends",
+          name: "Cross-Platform Development",
           children: [
-            {
-              name: "Cloud Gaming",
-            },
-            {
-              name: "Blockchain Gaming",
-            },
-            {
-              name: "Metaverse Development",
-            },
+            { name: "Mobile (iOS, Android)" },
+            { name: "Console (PlayStation, Xbox)" },
+            { name: "PC Deployment" },
           ],
         },
       ],
-      dividerText: "Career ready—commit to continuous learning.",
+      dividerText: "Advanced skills acquired—test and optimize your games.",
     },
     {
-      name: "Continuous Learning",
+      name: "Testing and Optimization",
+      children: [
+        {
+          name: "Testing",
+          children: [
+            { name: "Unit Testing (NUnit, Unreal Test Framework)" },
+            { name: "Playtesting" },
+            { name: "Automated Testing" },
+          ],
+        },
+        {
+          name: "Performance Optimization",
+          children: [
+            { name: "Frame Rate Optimization" },
+            { name: "Memory Management" },
+            { name: "Asset Compression" },
+            { name: "Network Bandwidth Optimization" },
+          ],
+        },
+        {
+          name: "Debugging",
+          children: [
+            { name: "Log Systems" },
+            { name: "Crash Reporting (Sentry)" },
+            { name: "Profiling Tools" },
+          ],
+        },
+      ],
+      dividerText: "Games polished—deploy and distribute your work.",
+    },
+    {
+      name: "Game Deployment and Distribution",
+      children: [
+        {
+          name: "Platforms",
+          children: [
+            { name: "Steam" },
+            { name: "Google Play Store" },
+            { name: "Apple App Store" },
+            { name: "Itch.io" },
+            { name: "Console Stores (PSN, Xbox Live)" },
+          ],
+        },
+        {
+          name: "Build Process",
+          children: [
+            { name: "Code Signing" },
+            { name: "Build Automation" },
+            { name: "Cross-Platform Builds" },
+          ],
+        },
+        {
+          name: "Monetization",
+          children: [
+            { name: "In-App Purchases" },
+            { name: "Ads Integration" },
+            { name: "Subscription Models" },
+          ],
+        },
+        {
+          name: "Analytics",
+          children: [
+            { name: "Game Analytics (Unity Analytics)" },
+            { name: "Player Behavior Tracking" },
+          ],
+        },
+      ],
+      dividerText: "Games live—explore emerging trends and technologies.",
+    },
+    {
+      name: "Emerging Trends and Technologies",
+      children: [
+        {
+          name: "AI in Games",
+          children: [
+            { name: "Behavior Trees" },
+            { name: "Machine Learning (NPC Behavior)" },
+            { name: "Dynamic Difficulty Adjustment" },
+          ],
+        },
+        {
+          name: "Metaverse and Social Gaming",
+          children: [
+            { name: "Spatial Audio" },
+            { name: "Persistent Worlds" },
+            { name: "Social Integration" },
+          ],
+        },
+        {
+          name: "Blockchain and NFTs",
+          children: [
+            { name: "Crypto Transactions" },
+            { name: "NFT Ownership" },
+            { name: "Smart Contracts" },
+          ],
+        },
+        {
+          name: "Cloud Gaming",
+          children: [
+            { name: "Streaming (Google Stadia, Luna)" },
+            { name: "Server-Side Rendering" },
+          ],
+        },
+      ],
+      dividerText: "Trends mastered—build projects and grow your career.",
+    },
+    {
+      name: "Projects and Career Growth",
+      children: [
+        {
+          name: "Portfolio Projects",
+          children: [
+            { name: "Simple 2D Game (e.g., Platformer)" },
+            { name: "3D Game (e.g., FPS)" },
+            { name: "Multiplayer Game" },
+            { name: "Open Source Contributions" },
+          ],
+        },
+        {
+          name: "Collaboration and Soft Skills",
+          children: [
+            { name: "Game Jams" },
+            { name: "Teamwork (Agile, Scrum)" },
+            { name: "Communication with Artists/Designers" },
+          ],
+        },
+        {
+          name: "Continuous Learning",
+          children: [
+            { name: "GDC (Game Developers Conference)" },
+            { name: "Online Courses (Udemy, Coursera)" },
+            { name: "Game Dev Communities (Reddit, Discord)" },
+          ],
+        },
+      ],
     },
   ],
 };

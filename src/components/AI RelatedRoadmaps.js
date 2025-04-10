@@ -1,8 +1,7 @@
-// src/components/AIRelatedRoadmaps.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { techFields, techSkills } from "../data/TechFieldsData";
-import "../styles/RelatedRoadmaps.css"; // Reuse the same styles
+import "../styles/RelatedRoadmaps.css";
 import Loader from "./Loader";
 
 const AIRelatedRoadmaps = ({ userAnswers }) => {

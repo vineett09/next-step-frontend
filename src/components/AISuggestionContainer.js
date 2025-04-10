@@ -1,9 +1,8 @@
-// src/components/AISuggestionContainer.jsx
 import React, { useState } from "react";
 import "../styles/AISuggestionContainer.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import AuthModal from "./AuthModal"; // Make sure the path is correct
+import AuthModal from "./AuthModal";
 
 const AISuggestionContainer = () => {
   const navigate = useNavigate();

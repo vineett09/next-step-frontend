@@ -9,7 +9,7 @@ import Footer from "./Footer";
 import "../styles/SharedRoadmapViewer.css";
 import { nodeTypes } from "./CustomRoadmaps";
 import Loader from "./Loader";
-import FollowButton from "./FollowButton"; // Import the new component
+import FollowButton from "./FollowButton";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const StarRating = ({

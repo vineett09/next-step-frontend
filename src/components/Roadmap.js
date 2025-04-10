@@ -55,7 +55,6 @@ const Roadmap = ({ data }) => {
     width: window.innerWidth,
     height: window.innerHeight,
   });
-  // Add this to your existing state declarations in Roadmap.js
   const [selectedNode, setSelectedNode] = useState(null);
   const chatbotRef = useRef(null);
   // Memoize expensive lookups
@@ -278,7 +277,6 @@ const Roadmap = ({ data }) => {
     },
     [completedNodes]
   );
-  // Add this function to your Roadmap component
   const showAskAIButtonAtPosition = (x, y, node) => {
     // Remove any existing button first
     d3.select(d3Container.current).select(".ask-ai-button").remove();
@@ -313,7 +311,6 @@ const Roadmap = ({ data }) => {
     }, 5000);
   };
 
-  // Add this function to your Roadmap component
   const openChatbotWithNodeQuery = (node) => {
     if (chatbotRef.current) {
       chatbotRef.current.openWithNodeQuery(node);

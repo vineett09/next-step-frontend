@@ -22,7 +22,6 @@ function Login() {
   const navigate = useNavigate();
   const { error } = useSelector((state) => state.auth);
 
-  // Properly handle Redux errors
   useEffect(() => {
     if (error) {
       // Always convert error to string format
@@ -107,7 +106,6 @@ function Login() {
     try {
       const googleUserData = await signInWithGoogle();
 
-      // First check if user exists
       const checkUserResponse = await axios.post(
         `${BACKEND_URL}/api/auth/check-user`,
         {
@@ -116,7 +114,6 @@ function Login() {
       );
 
       if (checkUserResponse.data.exists) {
-        // Existing user - login directly
         const response = await dispatch(
           loginUser({
             email: googleUserData.email,

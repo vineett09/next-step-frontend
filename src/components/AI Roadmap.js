@@ -677,7 +677,6 @@ const AIRoadmap = () => {
     }
   }, [data]);
 
-  // Show login message if not authenticated
   if (!isAuthenticated) {
     return (
       <div className="roadmap">

@@ -24,7 +24,6 @@ function Register() {
   const navigate = useNavigate();
   const { error } = useSelector((state) => state.auth);
 
-  // Properly handle Redux errors
   useEffect(() => {
     if (error) {
       // Always convert error to string format

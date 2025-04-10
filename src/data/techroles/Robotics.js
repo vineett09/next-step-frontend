@@ -1,247 +1,241 @@
-const roboticsRoadmap = {
+const roboticsEngineerRoadmap = {
   name: "Robotics Engineer Roadmap 2025",
   children: [
     {
-      name: "Foundational Knowledge",
+      name: "Core Foundations",
       children: [
         {
-          name: "Programming Basics",
+          name: "Programming",
           children: [
-            {
-              name: "Python",
-              preferred: true,
-            },
-            {
-              name: "C++",
-            },
-            {
-              name: "MATLAB",
-            },
+            { name: "Python Basics" },
+            { name: "C++ Basics" },
+            { name: "ROS Scripting" },
           ],
         },
         {
-          name: "Electronics and Hardware",
+          name: "Mathematics",
           children: [
-            {
-              name: "Microcontrollers",
-            },
-            {
-              name: "Sensors and Actuators",
-            },
-            {
-              name: "Basic Circuits",
-            },
+            { name: "Linear Algebra" },
+            { name: "Calculus" },
+            { name: "Probability" },
           ],
         },
         {
-          name: "Introduction to Robotics",
+          name: "Physics",
           children: [
-            {
-              name: "History and Applications",
-            },
-            {
-              name: "Robot Kits",
-            },
+            { name: "Mechanics" },
+            { name: "Dynamics" },
+            { name: "Kinematics" },
           ],
         },
       ],
-      dividerText: "Foundations established—develop core robotics skills next.",
+      dividerText: "Foundations set—learn robotics hardware.",
     },
     {
-      name: "Core Robotics Skills",
+      name: "Hardware Basics",
       children: [
         {
-          name: "Robot Operating System (ROS)",
+          name: "Electronics",
           children: [
-            {
-              name: "ROS Basics",
-            },
-            {
-              name: "ROS 2",
-            },
+            { name: "Circuits" },
+            { name: "Sensors" },
+            { name: "Actuators" },
           ],
         },
+        {
+          name: "Microcontrollers",
+          children: [
+            { name: "Arduino" },
+            { name: "Raspberry Pi" },
+            { name: "ESP32" },
+          ],
+        },
+        {
+          name: "Mechanical Design",
+          children: [
+            { name: "CAD Tools" },
+            { name: "3D Printing" },
+            { name: "Materials" },
+          ],
+        },
+      ],
+      dividerText: "Hardware ready—master software tools.",
+    },
+    {
+      name: "Software Tools",
+      children: [
+        {
+          name: "ROS",
+          children: [
+            { name: "ROS Basics" },
+            { name: "Nodes and Topics" },
+            { name: "Simulation" },
+          ],
+        },
+        {
+          name: "Version Control",
+          children: [
+            { name: "Git Commands" },
+            { name: "GitHub Workflows" },
+            { name: "Branching" },
+          ],
+        },
+        {
+          name: "Dev Environment",
+          children: [
+            { name: "Linux Basics" },
+            { name: "IDEs" },
+            { name: "Debugging" },
+          ],
+        },
+      ],
+      dividerText: "Software down—explore robotics algorithms.",
+    },
+    {
+      name: "Robotics Algorithms",
+      children: [
         {
           name: "Control Systems",
           children: [
-            {
-              name: "PID Controllers",
-            },
-            {
-              name: "Kinematics",
-            },
+            { name: "PID Control" },
+            { name: "Feedback Loops" },
+            { name: "Stability" },
           ],
         },
         {
-          name: "Simulation Tools",
+          name: "Perception",
           children: [
-            {
-              name: "Gazebo",
-            },
-            {
-              name: "Webots",
-            },
-          ],
-        },
-      ],
-      dividerText:
-        "Core skills refined—integrate AI and machine learning next.",
-    },
-    {
-      name: "AI and Machine Learning",
-      children: [
-        {
-          name: "Machine Learning Basics",
-          children: [
-            {
-              name: "Supervised Learning",
-            },
-            {
-              name: "Unsupervised Learning",
-            },
+            { name: "Computer Vision" },
+            { name: "Sensor Fusion" },
+            { name: "SLAM" },
           ],
         },
         {
-          name: "Deep Learning",
+          name: "Motion Planning",
           children: [
-            {
-              name: "Neural Networks",
-            },
-            {
-              name: "Reinforcement Learning",
-            },
-          ],
-        },
-        {
-          name: "Frameworks",
-          children: [
-            {
-              name: "TensorFlow",
-              preferred: true,
-            },
-            {
-              name: "PyTorch",
-            },
+            { name: "Pathfinding" },
+            { name: "Trajectory Planning" },
+            { name: "Obstacle Avoidance" },
           ],
         },
       ],
-      dividerText:
-        "AI and ML integrated—master advanced robotics concepts next.",
+      dividerText: "Algorithms learned—integrate systems.",
     },
     {
-      name: "Advanced Robotics Concepts",
+      name: "Systems Integration",
       children: [
         {
-          name: "Humanoid Robotics",
+          name: "Robot Design",
           children: [
-            {
-              name: "Biomechanics",
-            },
-            {
-              name: "Human-Robot Interaction",
-            },
+            { name: "Architecture" },
+            { name: "Modularity" },
+            { name: "Power Systems" },
           ],
         },
         {
-          name: "Digital Twins",
+          name: "Communication",
           children: [
-            {
-              name: "Simulation Integration",
-            },
-            {
-              name: "Performance Optimization",
-            },
+            { name: "Protocols" },
+            { name: "Wireless" },
+            { name: "ROS Messages" },
           ],
         },
         {
-          name: "Sustainability in Robotics",
+          name: "Simulation",
           children: [
-            {
-              name: "Energy Efficiency",
-            },
-            {
-              name: "Renewable Applications",
-            },
+            { name: "Gazebo" },
+            { name: "Unity Robotics" },
+            { name: "Testing" },
           ],
         },
       ],
-      dividerText:
-        "Advanced concepts mastered—leverage tools and frameworks next.",
+      dividerText: "Systems integrated—advance your skills.",
     },
     {
-      name: "Tools and Frameworks",
+      name: "Advanced Robotics",
       children: [
         {
-          name: "Design Tools",
+          name: "AI in Robotics",
           children: [
-            {
-              name: "SolidWorks",
-            },
-            {
-              name: "Fusion 360",
-            },
+            { name: "Machine Learning" },
+            { name: "Reinforcement Learning" },
+            { name: "Deep Learning" },
           ],
         },
         {
-          name: "AR/VR Integration",
+          name: "Autonomy",
           children: [
-            {
-              name: "Unity",
-            },
-            {
-              name: "Unreal Engine",
-            },
+            { name: "Decision Making" },
+            { name: "Navigation" },
+            { name: "Localization" },
+          ],
+        },
+        {
+          name: "Specialized Robots",
+          children: [
+            { name: "Drones" },
+            { name: "Manipulators" },
+            { name: "Soft Robotics" },
           ],
         },
       ],
-      dividerText:
-        "Tools and frameworks mastered—apply skills to projects and applications next.",
+      dividerText: "Advanced skills gained—deploy robots.",
     },
     {
-      name: "Projects and Applications",
+      name: "Deployment and Testing",
       children: [
         {
-          name: "Project 1: Line-Following Robot",
-        },
-        {
-          name: "Project 2: Autonomous Navigation",
-        },
-        {
-          name: "Project 3: Robotic Arm",
-        },
-        {
-          name: "Project 4: AI-Powered Robot",
-        },
-      ],
-      dividerText:
-        "Projects completed—commit to continuous learning and trends next.",
-    },
-    {
-      name: "Continuous Learning",
-      children: [
-        {
-          name: "Resources",
+          name: "Real-World Deployment",
           children: [
-            {
-              name: "IEEE Transactions on Robotics",
-            },
-            {
-              name: "Coursera Robotics Courses",
-            },
-            {
-              name: "Conferences (ICRA, IROS)",
-            },
+            { name: "Field Testing" },
+            { name: "Safety Standards" },
+            { name: "Calibration" },
           ],
         },
         {
-          name: "Emerging Trends",
+          name: "Performance",
           children: [
-            {
-              name: "Collaborative Robots (Cobots)",
-            },
-            {
-              name: "Mobile Manipulation",
-            },
+            { name: "Optimization" },
+            { name: "Latency" },
+            { name: "Reliability" },
+          ],
+        },
+        {
+          name: "Maintenance",
+          children: [
+            { name: "Diagnostics" },
+            { name: "Updates" },
+            { name: "Failure Recovery" },
+          ],
+        },
+      ],
+      dividerText: "Deployment ready—build projects.",
+    },
+    {
+      name: "Projects and Career",
+      children: [
+        {
+          name: "Robotics Projects",
+          children: [
+            { name: "Line Follower" },
+            { name: "Obstacle Avoider" },
+            { name: "Arm Control" },
+          ],
+        },
+        {
+          name: "Collaboration",
+          children: [
+            { name: "Open Source" },
+            { name: "Team Projects" },
+            { name: "Competitions" },
+          ],
+        },
+        {
+          name: "Career Growth",
+          children: [
+            { name: "Portfolio" },
+            { name: "Networking" },
+            { name: "Certifications" },
           ],
         },
       ],
@@ -249,4 +243,4 @@ const roboticsRoadmap = {
   ],
 };
 
-export default roboticsRoadmap;
+export default roboticsEngineerRoadmap;

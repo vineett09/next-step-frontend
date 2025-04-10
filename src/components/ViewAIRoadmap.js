@@ -4,7 +4,7 @@ import axios from "axios";
 import * as d3 from "d3";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import "../styles/ViewAIRoadmap.css"; // Import your CSS file for styling
+import "../styles/ViewAIRoadmap.css";
 import Navbar from "./Navbar";
 import Loader from "./Loader";
 import Footer from "./Footer";

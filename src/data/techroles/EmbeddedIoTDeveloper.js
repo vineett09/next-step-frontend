@@ -1,283 +1,270 @@
-const embeddedIotDeveloperRoadmap = {
+const embeddedIoTDeveloperRoadmap = {
   name: "Embedded IoT Developer Roadmap 2025",
   children: [
     {
-      name: "Foundational Knowledge",
+      name: "Core Foundations",
       children: [
         {
-          name: "Understanding IoT Ecosystem",
+          name: "Programming",
           children: [
-            {
-              name: "IoT Device Architecture",
-            },
-            {
-              name: "Embedded Standards",
-            },
-            {
-              name: "IoT Connectivity Basics",
-            },
+            { name: "C Syntax" },
+            { name: "C++ OOP" },
+            { name: "Python Scripting" },
+            { name: "Rust Basics" },
           ],
         },
         {
-          name: "Electronics and Hardware Basics",
+          name: "Electronics",
           children: [
-            {
-              name: "Circuit Design",
-            },
-            {
-              name: "Power Management",
-            },
-            {
-              name: "Analog vs Digital Signals",
-            },
-            {
-              name: "PCB Design",
-            },
-            {
-              name: "Microcontroller Basics",
-            },
+            { name: "Analog Circuits" },
+            { name: "Digital Circuits" },
+            { name: "Power Management" },
+            { name: "PCB Design" },
+          ],
+        },
+        {
+          name: "Math and Physics",
+          children: [
+            { name: "Linear Algebra" },
+            { name: "Signal Processing" },
+            { name: "Thermodynamics" },
+            { name: "Statistics" },
           ],
         },
       ],
-      dividerText: "Foundation laid—develop programming skills.",
+      dividerText: "Foundations enhanced—dive into embedded systems.",
     },
     {
-      name: "Programming Skills",
+      name: "Embedded Systems",
       children: [
         {
-          name: "C/C++",
+          name: "Microcontrollers",
           children: [
-            {
-              name: "Embedded C",
-              preferred: true,
-            },
-            {
-              name: "Real-Time Operating Systems (RTOS)",
-            },
-            {
-              name: "Memory Management",
-            },
-            {
-              name: "Interrupt Handling",
-            },
-            {
-              name: "Bit Manipulation",
-            },
+            { name: "Arduino Setup" },
+            { name: "ESP32 Features" },
+            { name: "STM32 Config" },
+            { name: "Raspberry Pi GPIO" },
           ],
         },
         {
-          name: "Rust",
+          name: "Firmware Development",
           children: [
-            {
-              name: "Memory Safety",
-            },
-            {
-              name: "Embedded Rust",
-            },
-            {
-              name: "Rust Toolchain",
-            },
+            { name: "Bare Metal Coding" },
+            { name: "RTOS Scheduling" },
+            { name: "Driver Writing" },
+            { name: "Interrupt Handling" },
           ],
         },
         {
-          name: "Python (MicroPython)",
+          name: "Peripherals",
           children: [
-            {
-              name: "MicroPython",
-              preferred: true,
-            },
-            {
-              name: "Device Scripting",
-            },
-            {
-              name: "Libraries for IoT",
-            },
+            { name: "GPIO Control" },
+            { name: "I2C Communication" },
+            { name: "SPI Interface" },
+            { name: "UART Debugging" },
           ],
         },
       ],
-      dividerText: "Programming honed—explore hardware platforms.",
+      dividerText: "Embedded mastered—explore IoT connectivity.",
     },
     {
-      name: "Hardware Platforms",
+      name: "IoT Connectivity",
       children: [
         {
-          name: "Microcontrollers and Development Boards",
+          name: "Protocols",
           children: [
-            {
-              name: "Arduino",
-            },
-            {
-              name: "ESP8266/ESP32",
-              preferred: true,
-            },
-            {
-              name: "STM32",
-            },
-            {
-              name: "nRF52832",
-            },
-            {
-              name: "Raspberry Pi Pico",
-            },
+            { name: "MQTT Setup" },
+            { name: "HTTP Requests" },
+            { name: "CoAP Basics" },
+            { name: "Zigbee Intro" },
           ],
         },
         {
-          name: "Sensor and Actuator Integration",
+          name: "Wireless Tech",
           children: [
-            {
-              name: "Environmental Sensors",
-            },
-            {
-              name: "Motion Sensors",
-            },
-            {
-              name: "Actuators",
-            },
-            {
-              name: "ADC/DAC",
-            },
-            {
-              name: "GPIO Control",
-            },
+            { name: "Wi-Fi Config" },
+            { name: "Bluetooth LE" },
+            { name: "LoRa Range" },
+            { name: "NB-IoT" },
+          ],
+        },
+        {
+          name: "Networking",
+          children: [
+            { name: "TCP/IP Stack" },
+            { name: "Socket Programming" },
+            { name: "DNS Basics" },
+            { name: "Network Security" },
           ],
         },
       ],
-      dividerText: "Hardware mastered—connect with networking protocols.",
+      dividerText: "Connectivity strong—leverage tools and dev.",
     },
     {
-      name: "Networking and Communication Protocols",
+      name: "Development Tools",
       children: [
         {
-          name: "Wireless Communication",
+          name: "Software Tools",
           children: [
-            {
-              name: "Bluetooth 5.x",
-            },
-            {
-              name: "Zigbee",
-            },
-            {
-              name: "LoRaWAN",
-            },
-            {
-              name: "Wi-Fi (Low-Power)",
-              preferred: true,
-            },
-            {
-              name: "Thread",
-            },
+            { name: "IDE Config" },
+            { name: "Debugger Use" },
+            { name: "Firmware Flashing" },
+            { name: "Serial Monitors" },
           ],
         },
         {
-          name: "IoT-Specific Protocols",
+          name: "Version Control",
           children: [
-            {
-              name: "MQTT",
-              preferred: true,
-            },
-            {
-              name: "CoAP",
-            },
-            {
-              name: "UART/SPI/I2C",
-            },
-            {
-              name: "HTTP/REST",
-            },
+            { name: "Git Commands" },
+            { name: "GitHub Repos" },
+            { name: "Branch Strategies" },
+            { name: "Pull Requests" },
+          ],
+        },
+        {
+          name: "Hardware Tools",
+          children: [
+            { name: "Oscilloscope Reading" },
+            { name: "Multimeter Testing" },
+            { name: "Logic Analyzer" },
+            { name: "Soldering Skills" },
           ],
         },
       ],
-      dividerText: "Networking connected—process data at the edge.",
+      dividerText: "Tools enhanced—design IoT systems.",
     },
     {
-      name: "Edge Computing",
+      name: "IoT Systems Design",
       children: [
         {
-          name: "Local Data Processing",
+          name: "Sensors and Actuators",
           children: [
-            {
-              name: "Real-Time Processing",
-            },
-            {
-              name: "Edge Firmware",
-            },
-            {
-              name: "TinyML",
-              preferred: true,
-            },
-            {
-              name: "Data Filtering",
-            },
+            { name: "Temperature Sensors" },
+            { name: "Motion Detection" },
+            { name: "Light Sensors" },
+            { name: "Motor Control" },
+          ],
+        },
+        {
+          name: "Data Management",
+          children: [
+            { name: "Data Sampling" },
+            { name: "Signal Processing" },
+            { name: "Data Buffering" },
+            { name: "Cloud Upload" },
+          ],
+        },
+        {
+          name: "Cloud Platforms",
+          children: [
+            { name: "AWS IoT Core" },
+            { name: "Azure IoT Hub" },
+            { name: "Google IoT Core" },
+            { name: "MQTT Brokers" },
           ],
         },
       ],
-      dividerText: "Edge computing optimized—secure your IoT devices.",
+      dividerText: "Systems designed—advance IoT skills.",
     },
     {
-      name: "Security",
+      name: "Advanced IoT",
       children: [
         {
-          name: "Embedded IoT Security",
+          name: "Optimization",
           children: [
-            {
-              name: "Encryption",
-            },
-            {
-              name: "Secure Boot",
-            },
-            {
-              name: "OTA Updates",
-            },
-            {
-              name: "Hardware Security Modules",
-            },
-            {
-              name: "Authentication",
-            },
+            { name: "Low Power Modes" },
+            { name: "Memory Efficiency" },
+            { name: "Code Optimization" },
+            { name: "Battery Life" },
+          ],
+        },
+        {
+          name: "Security",
+          children: [
+            { name: "Data Encryption" },
+            { name: "Device Auth" },
+            { name: "OTA Updates" },
+            { name: "Firewall Setup" },
+          ],
+        },
+        {
+          name: "Edge Computing",
+          children: [
+            { name: "Edge Analytics" },
+            { name: "TensorFlow Lite" },
+            { name: "Real-Time Processing" },
+            { name: "Edge Gateways" },
           ],
         },
       ],
-      dividerText: "Security enforced—explore emerging trends.",
+      dividerText: "Advanced IoT ready—test and deploy.",
     },
     {
-      name: "Emerging Trends in 2025",
+      name: "Testing and Deployment",
       children: [
         {
-          name: "Sustainability in Embedded IoT",
+          name: "Testing Methods",
           children: [
-            {
-              name: "Energy Harvesting",
-            },
-            {
-              name: "Low-Power Design",
-            },
-            {
-              name: "Eco-Friendly Materials",
-            },
+            { name: "Unit Testing" },
+            { name: "Integration Testing" },
+            { name: "Stress Testing" },
+            { name: "Field Validation" },
           ],
         },
         {
-          name: "Advanced Embedded AI",
+          name: "Deployment",
           children: [
-            {
-              name: "TinyML",
-              preferred: true,
-            },
-            {
-              name: "Embedded Neural Networks",
-            },
-            {
-              name: "Edge AI Optimization",
-            },
+            { name: "Firmware Deployment" },
+            { name: "Network Config" },
+            { name: "Cloud Sync" },
+            { name: "Device Monitoring" },
+          ],
+        },
+        {
+          name: "Maintenance",
+          children: [
+            { name: "Error Logging" },
+            { name: "Firmware Patches" },
+            { name: "Performance Tuning" },
+            { name: "Device Diagnostics" },
           ],
         },
       ],
-      dividerText: "Trends embraced—enhance with soft skills.",
+      dividerText: "Deployment complete—focus on projects.",
     },
     {
-      name: "Soft Skills",
+      name: "Projects and Career",
+      children: [
+        {
+          name: "IoT Projects",
+          children: [
+            { name: "Smart Thermostat" },
+            { name: "IoT Door Lock" },
+            { name: "Environmental Monitor" },
+            { name: "Wearable Tracker" },
+          ],
+        },
+        {
+          name: "Collaboration",
+          children: [
+            { name: "Open Source Contributions" },
+            { name: "Team Prototyping" },
+            { name: "IoT Hackathons" },
+            { name: "Code Reviews" },
+          ],
+        },
+        {
+          name: "Career Growth",
+          children: [
+            { name: "Project Portfolio" },
+            { name: "Industry Networking" },
+            { name: "Certifications" },
+            { name: "Resume Building" },
+          ],
+        },
+      ],
     },
   ],
 };
 
-export default embeddedIotDeveloperRoadmap;
+export default embeddedIoTDeveloperRoadmap;

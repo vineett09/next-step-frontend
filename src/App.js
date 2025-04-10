@@ -70,6 +70,7 @@ import apacheHadoopRoadmap from "./data/techskills/ApacheHadoop";
 import pandasRoadmap from "./data/techskills/Pandas";
 import CLangRoadmap from "./data/techskills/CLang";
 import ReactNativeRoadmap from "./data/techskills/ReactNative";
+import dsaRoadmap from "./data/techskills/DSA";
 import ViewAIRoadmap from "./components/ViewAIRoadmap";
 function App() {
   return (
@@ -240,6 +241,7 @@ function App() {
             path="/react-native"
             element={<Roadmap data={ReactNativeRoadmap} />}
           />
+          <Route path="/dsa" element={<Roadmap data={dsaRoadmap} />} />
           {/* Add more routes as needed */}
         </Routes>
       </div>

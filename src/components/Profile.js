@@ -56,7 +56,7 @@ const Profile = () => {
   const [aiGeneratedRoadmaps, setAIGeneratedRoadmaps] = useState([]);
   const [aiRoadmapsCurrentPage, setAIRoadmapsCurrentPage] = useState(1);
   const itemsPerPage = 3;
-  const navigate = useNavigate(); // Add this line near your other hooks
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token && user) {
