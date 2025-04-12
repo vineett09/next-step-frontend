@@ -12,6 +12,12 @@ function ResetPassword() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState({
+    length: false,
+    hasUpperCase: false,
+    hasNumber: false,
+    isValid: false,
+  });
 
   const { token } = useParams();
   const dispatch = useDispatch();
@@ -30,15 +36,34 @@ function ResetPassword() {
     }
   }, [error, dispatch]);
 
+  // Password strength validation effect
+  useEffect(() => {
+    // Check password requirements
+    const strength = {
+      length: password.length >= 8,
+      hasUpperCase: /[A-Z]/.test(password),
+      hasNumber: /\d/.test(password),
+      isValid: false,
+    };
+
+    // Password is valid if all criteria are met
+    strength.isValid =
+      strength.length && strength.hasUpperCase && strength.hasNumber;
+
+    setPasswordStrength(strength);
+  }, [password]);
+
   const validatePasswords = () => {
+    if (!passwordStrength.isValid) {
+      setPasswordError("Password doesn't meet strength requirements");
+      return false;
+    }
+
     if (password !== confirmPassword) {
       setPasswordError("Passwords do not match");
       return false;
     }
-    if (password.length < 6) {
-      setPasswordError("Password should be at least 6 characters");
-      return false;
-    }
+
     setPasswordError("");
     return true;
   };
@@ -96,9 +121,35 @@ function ResetPassword() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                minLength={6}
+                minLength={8}
               />
               <label htmlFor="password">New Password</label>
+              {/* Password strength indicators */}
+              {password.length > 0 && (
+                <div className="password-strength-indicators">
+                  <div
+                    className={`strength-indicator ${
+                      passwordStrength.length ? "valid" : "invalid"
+                    }`}
+                  >
+                    ✓ At least 8 characters
+                  </div>
+                  <div
+                    className={`strength-indicator ${
+                      passwordStrength.hasUpperCase ? "valid" : "invalid"
+                    }`}
+                  >
+                    ✓ At least one uppercase letter
+                  </div>
+                  <div
+                    className={`strength-indicator ${
+                      passwordStrength.hasNumber ? "valid" : "invalid"
+                    }`}
+                  >
+                    ✓ At least one number
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="form-group">
@@ -109,7 +160,7 @@ function ResetPassword() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                minLength={6}
+                minLength={8}
               />
               <label htmlFor="confirmPassword">Confirm New Password</label>
             </div>
@@ -126,7 +177,11 @@ function ResetPassword() {
 
             <button
               type="submit"
-              disabled={isLoading || !password || !confirmPassword}
+              disabled={
+                isLoading ||
+                !passwordStrength.isValid ||
+                password !== confirmPassword
+              }
             >
               Reset Password
             </button>

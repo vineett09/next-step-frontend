@@ -14,6 +14,12 @@ function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState({
+    length: false,
+    hasUpperCase: false,
+    hasNumber: false,
+    isValid: false,
+  });
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLogin, setIsGoogleLogin] = useState(false);
@@ -51,10 +57,36 @@ function Register() {
     }
   }, [username, errorMessage]);
 
+  // Password strength validation
+  useEffect(() => {
+    if (!isGoogleLogin) {
+      // Check password requirements
+      const strength = {
+        length: password.length >= 8,
+        hasUpperCase: /[A-Z]/.test(password),
+        hasNumber: /\d/.test(password),
+        isValid: false,
+      };
+
+      // Password is valid if all criteria are met
+      strength.isValid =
+        strength.length && strength.hasUpperCase && strength.hasNumber;
+
+      setPasswordStrength(strength);
+    }
+  }, [password, isGoogleLogin]);
+
   const validatePasswords = () => {
-    if (!isGoogleLogin && password !== confirmPassword) {
-      setPasswordError("Passwords do not match");
-      return false;
+    if (!isGoogleLogin) {
+      if (!passwordStrength.isValid) {
+        setPasswordError("Password doesn't meet strength requirements");
+        return false;
+      }
+
+      if (password !== confirmPassword) {
+        setPasswordError("Passwords do not match");
+        return false;
+      }
     }
     setPasswordError("");
     return true;
@@ -271,6 +303,32 @@ function Register() {
             required
           />
           <label htmlFor="password">Password</label>
+          {/* Password strength indicators */}
+          {password.length > 0 && (
+            <div className="password-strength-indicators">
+              <div
+                className={`strength-indicator ${
+                  passwordStrength.length ? "valid" : "invalid"
+                }`}
+              >
+                ✓ At least 8 characters
+              </div>
+              <div
+                className={`strength-indicator ${
+                  passwordStrength.hasUpperCase ? "valid" : "invalid"
+                }`}
+              >
+                ✓ At least one uppercase letter
+              </div>
+              <div
+                className={`strength-indicator ${
+                  passwordStrength.hasNumber ? "valid" : "invalid"
+                }`}
+              >
+                ✓ At least one number
+              </div>
+            </div>
+          )}
         </div>
         <div className="form-group">
           <input
@@ -287,7 +345,14 @@ function Register() {
         {passwordError && <div className="error-message">{passwordError}</div>}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-        <button type="submit" disabled={isLoading}>
+        <button
+          type="submit"
+          disabled={
+            isLoading ||
+            !passwordStrength.isValid ||
+            password !== confirmPassword
+          }
+        >
           {isLoading ? "Signing Up..." : "Sign Up"}
         </button>
       </form>

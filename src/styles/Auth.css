@@ -228,6 +228,25 @@ button[type="submit"]:disabled {
   font-size: 16px;
 }
 
+.password-strength-indicators {
+  margin-top: 8px;
+  font-size: 0.75rem;
+}
+
+.strength-indicator {
+  margin-bottom: 2px;
+  transition: color 0.3s ease;
+}
+
+.strength-indicator.valid {
+  color: #2ecc71;
+}
+
+.strength-indicator.invalid {
+  color: #e74c3c;
+}
+
+
 @keyframes fadeIn {
   from {
     opacity: 0;
