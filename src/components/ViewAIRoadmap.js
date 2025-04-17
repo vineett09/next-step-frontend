@@ -346,6 +346,119 @@ const ViewAIRoadmap = () => {
           "#FFE700",
           "black"
         );
+        if (parent.timeframe) {
+          // Create clock icon
+          const iconGroup = parentGroup
+            .append("g")
+            .attr("class", "timeframe-icon")
+            .attr("cursor", "pointer");
+
+          // Position slightly inside the top-left corner of parent node
+          const iconX = -parent.dimensions.width / 2 + 5;
+          const iconY = -parent.dimensions.height / 2 + 5;
+
+          // Draw clock circle
+          iconGroup
+            .append("circle")
+            .attr("cx", iconX)
+            .attr("cy", iconY)
+            .attr("r", 8)
+            .attr("fill", "#87CEEB")
+            .attr("stroke", "#000")
+            .attr("stroke-width", 1);
+
+          // Draw clock hands
+          iconGroup
+            .append("line")
+            .attr("x1", iconX)
+            .attr("y1", iconY)
+            .attr("x2", iconX)
+            .attr("y2", iconY - 4)
+            .attr("stroke", "#000")
+            .attr("stroke-width", 1.5);
+
+          iconGroup
+            .append("line")
+            .attr("x1", iconX)
+            .attr("y1", iconY)
+            .attr("x2", iconX + 3)
+            .attr("y2", iconY)
+            .attr("stroke", "#000")
+            .attr("stroke-width", 1.5);
+
+          // Add tooltip on hover
+          // First create a hidden tooltip
+          const tooltip = iconGroup
+            .append("g")
+            .attr("class", "tooltip")
+            .style("visibility", "hidden")
+            .attr("transform", `translate(${iconX - 20}, ${iconY})`);
+
+          const tooltipPadding = {
+            x: 8,
+            y: 5,
+          };
+
+          const tooltipText = tooltip
+            .append("text")
+            .text(parent.timeframe)
+            .attr("text-anchor", "end")
+            .attr("dy", "0.35em")
+            .attr("font-size", "12px")
+            .attr("font-weight", "bold")
+            .attr("font-family", "Arial, sans-serif")
+            .attr("fill", "#000");
+
+          // Get text dimensions for background
+          const textBBox = tooltipText.node().getBBox();
+
+          // Draw tooltip background with improved styling
+          tooltip
+            .insert("rect", "text")
+            .attr("x", -textBBox.width - tooltipPadding.x)
+            .attr("y", -textBBox.height / 2 - tooltipPadding.y)
+            .attr("width", textBBox.width + tooltipPadding.x * 2)
+            .attr("height", textBBox.height + tooltipPadding.y * 2)
+            .attr("rx", 5)
+            .attr("ry", 5)
+            .attr("fill", "rgba(255, 255, 255, 0.95)")
+            .attr("stroke", "#87CEEB")
+            .attr("stroke-width", 1.5);
+
+          // Add small triangle pointing to the icon
+          const arrowPoints = [
+            { x: 0, y: 0 },
+            { x: -10, y: -5 },
+            { x: -10, y: 5 },
+          ];
+
+          tooltip
+            .insert("polygon", "rect")
+            .attr("points", arrowPoints.map((p) => `${p.x},${p.y}`).join(" "))
+            .attr("fill", "rgba(255, 255, 255, 0.95)")
+            .attr("stroke", "#87CEEB")
+            .attr("stroke-width", 1.5);
+
+          // Add hover events with fade in/out effect
+          iconGroup
+            .on("mouseover", function () {
+              tooltip
+                .style("visibility", "visible")
+                .style("opacity", 0)
+                .transition()
+                .duration(200)
+                .style("opacity", 1);
+            })
+            .on("mouseout", function () {
+              tooltip
+                .transition()
+                .duration(200)
+                .style("opacity", 0)
+                .on("end", function () {
+                  tooltip.style("visibility", "hidden");
+                });
+            });
+        }
 
         if (parent.children?.length > 0) {
           const isLeft = parentIndex % 2 === 0;

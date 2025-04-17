@@ -862,10 +862,6 @@ const Roadmap = ({ data }) => {
       </React.Suspense>
       <div className="roadmap-container">
         <React.Suspense fallback={<div>Loading components...</div>}>
-          <TechRoles />
-          <TechSkills />
-          <AISuggestionContainer />
-
           <Header
             title={roadmapTitle}
             toggleBookmark={toggleBookmark}
@@ -902,10 +898,14 @@ const Roadmap = ({ data }) => {
         <React.Suspense fallback={<div>Loading tip box...</div>}>
           <TipBox />
         </React.Suspense>
+        <AISuggestionContainer />
       </div>
+
       <React.Suspense fallback={<div>Loading related roadmaps...</div>}>
         <RelatedRoadmaps />
       </React.Suspense>
+      <TechRoles />
+      <TechSkills />
       <React.Suspense fallback={<div>Loading footer...</div>}>
         <Footer />
       </React.Suspense>

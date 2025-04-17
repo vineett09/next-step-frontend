@@ -8,10 +8,17 @@ import Loader from "./Loader";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useSelector } from "react-redux";
+import Chatbot from "./Chatbot";
+import AISuggestionContainer from "./AISuggestionContainer";
+
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const AIRoadmap = () => {
   const [input, setInput] = useState("");
+  const [timeframe, setTimeframe] = useState("1 Month");
+  const [level, setLevel] = useState("Beginner");
+  const [contextInfo, setContextInfo] = useState("");
+  const [aiFeedback, setAiFeedback] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -65,12 +72,13 @@ const AIRoadmap = () => {
 
     // Clear previous roadmap data AND clear the DOM
     setData(null);
+    setAiFeedback("");
     clearRoadmap();
 
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/ai/generate`,
-        { input },
+        { input, timeframe, level, contextInfo },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -79,6 +87,8 @@ const AIRoadmap = () => {
       );
 
       setData(response.data.roadmap);
+      setAiFeedback(response.data.aiFeedback);
+
       setUsageInfo(response.data.usageInfo);
     } catch (err) {
       if (err.response?.data?.error === "Daily limit reached") {
@@ -395,6 +405,119 @@ const AIRoadmap = () => {
           "#FFE700",
           "black"
         );
+        if (parent.timeframe) {
+          // Create clock icon
+          const iconGroup = parentGroup
+            .append("g")
+            .attr("class", "timeframe-icon")
+            .attr("cursor", "pointer");
+
+          // Position slightly inside the top-left corner of parent node
+          const iconX = -parent.dimensions.width / 2 + 5;
+          const iconY = -parent.dimensions.height / 2 + 5;
+
+          // Draw clock circle
+          iconGroup
+            .append("circle")
+            .attr("cx", iconX)
+            .attr("cy", iconY)
+            .attr("r", 8)
+            .attr("fill", "#87CEEB")
+            .attr("stroke", "#000")
+            .attr("stroke-width", 1);
+
+          // Draw clock hands
+          iconGroup
+            .append("line")
+            .attr("x1", iconX)
+            .attr("y1", iconY)
+            .attr("x2", iconX)
+            .attr("y2", iconY - 4)
+            .attr("stroke", "#000")
+            .attr("stroke-width", 1.5);
+
+          iconGroup
+            .append("line")
+            .attr("x1", iconX)
+            .attr("y1", iconY)
+            .attr("x2", iconX + 3)
+            .attr("y2", iconY)
+            .attr("stroke", "#000")
+            .attr("stroke-width", 1.5);
+
+          // Add tooltip on hover
+          // First create a hidden tooltip
+          const tooltip = iconGroup
+            .append("g")
+            .attr("class", "tooltip")
+            .style("visibility", "hidden")
+            .attr("transform", `translate(${iconX - 20}, ${iconY})`);
+
+          const tooltipPadding = {
+            x: 8,
+            y: 5,
+          };
+
+          const tooltipText = tooltip
+            .append("text")
+            .text(parent.timeframe)
+            .attr("text-anchor", "end")
+            .attr("dy", "0.35em")
+            .attr("font-size", "12px")
+            .attr("font-weight", "bold")
+            .attr("font-family", "Arial, sans-serif")
+            .attr("fill", "#000");
+
+          // Get text dimensions for background
+          const textBBox = tooltipText.node().getBBox();
+
+          // Draw tooltip background with improved styling
+          tooltip
+            .insert("rect", "text")
+            .attr("x", -textBBox.width - tooltipPadding.x)
+            .attr("y", -textBBox.height / 2 - tooltipPadding.y)
+            .attr("width", textBBox.width + tooltipPadding.x * 2)
+            .attr("height", textBBox.height + tooltipPadding.y * 2)
+            .attr("rx", 5)
+            .attr("ry", 5)
+            .attr("fill", "rgba(255, 255, 255, 0.95)")
+            .attr("stroke", "#87CEEB")
+            .attr("stroke-width", 1.5);
+
+          // Add small triangle pointing to the icon
+          const arrowPoints = [
+            { x: 0, y: 0 },
+            { x: -10, y: -5 },
+            { x: -10, y: 5 },
+          ];
+
+          tooltip
+            .insert("polygon", "rect")
+            .attr("points", arrowPoints.map((p) => `${p.x},${p.y}`).join(" "))
+            .attr("fill", "rgba(255, 255, 255, 0.95)")
+            .attr("stroke", "#87CEEB")
+            .attr("stroke-width", 1.5);
+
+          // Add hover events with fade in/out effect
+          iconGroup
+            .on("mouseover", function () {
+              tooltip
+                .style("visibility", "visible")
+                .style("opacity", 0)
+                .transition()
+                .duration(200)
+                .style("opacity", 1);
+            })
+            .on("mouseout", function () {
+              tooltip
+                .transition()
+                .duration(200)
+                .style("opacity", 0)
+                .on("end", function () {
+                  tooltip.style("visibility", "hidden");
+                });
+            });
+        }
 
         if (parent.children?.length > 0) {
           const isLeft = parentIndex % 2 === 0;
@@ -732,29 +855,80 @@ const AIRoadmap = () => {
               placeholder="Enter roadmap topic "
               disabled={loading || usageInfo.usageCount >= 10}
             />
-            <button
-              onClick={handleSubmit}
-              disabled={loading || usageInfo.usageCount >= 10}
-              className="generate-btn"
-            >
-              Generate✨
-            </button>
-            <button
-              className="download-ai-roadmap-pdf"
-              disabled={loading || !data}
-              onClick={downloadRoadmapPDF}
-              aria-label="Download roadmap as PDF"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="#fff"
+
+            <div className="ai-dropdown-group">
+              <label htmlFor="timeframe">Timeframe:</label>
+              <select
+                id="timeframe"
+                className="ai-dropdown"
+                value={timeframe}
+                onChange={(e) => setTimeframe(e.target.value)}
+                disabled={loading}
               >
-                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
-              </svg>
-            </button>
+                <option value="1 Week">1 Week</option>
+                <option value="2 Weeks">2 Weeks</option>
+                <option value="1 Month">1 Month</option>
+                <option value="2 Months">2 Months</option>
+                <option value="3 Months">3 Months</option>
+                <option value="6 Months">6 Months</option>
+                <option value="1 Year">1 Year</option>
+              </select>
+
+              <label htmlFor="level">Level:</label>
+              <select
+                id="level"
+                className="ai-dropdown"
+                value={level}
+                onChange={(e) => setLevel(e.target.value)}
+                disabled={loading}
+              >
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+              </select>
+            </div>
+            <div className="custom-context-box">
+              <label htmlFor="contextInfo">
+                Optional: Tell AI more about your background or goals to improve
+                your roadmap 👇
+              </label>
+              <textarea
+                id="contextInfo"
+                value={contextInfo}
+                onChange={(e) => setContextInfo(e.target.value)}
+                placeholder="e.g. I already know JavaScript basics like functions and loops, but want to go deep into backend frameworks and testing."
+                rows={4}
+                disabled={loading}
+              />
+            </div>
+
+            <div className="button-group">
+              <button
+                onClick={handleSubmit}
+                disabled={loading || usageInfo.usageCount >= 10}
+                className="generate-btn"
+              >
+                Generate✨
+              </button>
+
+              <button
+                className="download-ai-roadmap-pdf"
+                disabled={loading || !data}
+                onClick={downloadRoadmapPDF}
+                aria-label="Download roadmap as PDF"
+                title="Download PDF"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="#fff"
+                >
+                  <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                </svg>
+              </button>
+            </div>
           </div>
           <div className="usage-info">
             <p>Daily usage: {usageInfo.usageCount}/10 roadmaps generated</p>
@@ -777,7 +951,16 @@ const AIRoadmap = () => {
             <div ref={d3Container} className="d3-container" />
           ) : null}
         </div>
+        {aiFeedback && (
+          <div className="ai-feedback-box">
+            <h3>Additional feedback from AI🚀</h3>
+            <p>{aiFeedback}</p>
+          </div>
+        )}
       </div>
+      <AISuggestionContainer />
+      <Chatbot roadmapTitle={input} data={data} />
+
       <Footer />
     </div>
   );
