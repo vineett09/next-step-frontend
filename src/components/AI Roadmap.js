@@ -22,7 +22,8 @@ const AIRoadmap = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const chatbotRef = useRef(null);
+  const [selectedNode, setSelectedNode] = useState(null);
   const [usageInfo, setUsageInfo] = useState({
     usageCount: 0,
     remainingCount: 10,
@@ -103,6 +104,40 @@ const AIRoadmap = () => {
     } finally {
       setLoading(false);
     }
+  };
+  const openChatbotWithNodeQuery = (node) => {
+    if (chatbotRef.current) {
+      chatbotRef.current.openWithNodeQuery(node);
+    }
+  };
+
+  const showAskAIButtonAtPosition = (x, y, node) => {
+    // Remove existing button
+    d3.select(d3Container.current).select(".ask-ai-button").remove();
+
+    const button = d3
+      .select(d3Container.current)
+      .append("div")
+      .attr("class", "ask-ai-button")
+      .style("position", "absolute")
+      .style("left", `${x}px`)
+      .style("top", `${y}px`)
+      .style("background-color", "#4285f4")
+      .style("color", "white")
+      .style("padding", "8px 16px")
+      .style("border-radius", "20px")
+      .style("font-size", "10px")
+      .style("cursor", "pointer")
+      .style("box-shadow", "0 2px 5px rgba(0,0,0,0.2)")
+      .style("z-index", "100")
+      .style("transform", "translate(-50%, 30px)")
+      .text("Ask AI")
+      .on("click", () => {
+        openChatbotWithNodeQuery(node);
+        button.remove();
+      });
+
+    setTimeout(() => button.remove(), 5000);
   };
 
   const renderRoadmap = () => {
@@ -386,6 +421,37 @@ const AIRoadmap = () => {
           .attr("font-family", "Arial, sans-serif")
           .attr("x", xOffset)
           .text(node.name);
+        const boxGroup = group.append("g");
+
+        boxGroup
+          .append("rect")
+          .attr("width", boxWidth)
+          .attr("height", dimensions.height)
+          .attr("x", -boxWidth / 2 + xOffset)
+          .attr("y", -dimensions.height / 2)
+          .attr("rx", 10)
+          .attr("ry", 10)
+          .attr("fill", fillColor)
+          .attr("stroke", strokeColor)
+          .attr("stroke-width", 2)
+          .style("cursor", "pointer")
+          .on("click", (event) => {
+            event.stopPropagation();
+            setSelectedNode(node);
+            // Calculate position for the button
+            const coords = d3.pointer(event, d3Container.current);
+            showAskAIButtonAtPosition(coords[0], coords[1], node);
+          });
+
+        boxGroup
+          .append("text")
+          .attr("dy", "0.35em")
+          .attr("text-anchor", "middle")
+          .attr("font-size", "15px")
+          .attr("font-family", "Arial, sans-serif")
+          .attr("x", xOffset)
+          .text(node.name)
+          .style("pointer-events", "none"); // Prevent text from capturing clicks
 
         return { boxWidth, xOffset };
       };
@@ -959,7 +1025,7 @@ const AIRoadmap = () => {
         )}
       </div>
       <AISuggestionContainer />
-      <Chatbot roadmapTitle={input} data={data} />
+      <Chatbot ref={chatbotRef} roadmapTitle={input} data={data} />
 
       <Footer />
     </div>

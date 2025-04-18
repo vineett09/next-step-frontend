@@ -293,7 +293,7 @@ const Roadmap = ({ data }) => {
       .style("color", "white")
       .style("padding", "8px 16px")
       .style("border-radius", "20px")
-      .style("font-size", "14px")
+      .style("font-size", "10px")
       .style("cursor", "pointer")
       .style("box-shadow", "0 2px 5px rgba(0,0,0,0.2)")
       .style("z-index", "100")

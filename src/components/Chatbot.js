@@ -66,7 +66,7 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
         },
       };
     }
-  }, [ref]);
+  }, [ref, data, roadmapTitle]);
 
   const handleNodeQuery = (node) => {
     if (!isAuthenticated) {
@@ -362,7 +362,11 @@ const Chatbot = React.forwardRef(({ roadmapTitle, data }, ref) => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isTyping]);
-
+  useEffect(() => {
+    if (isOpen) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [isOpen]);
   const clearChatHistory = () => {
     if (isAuthenticated && user) {
       localStorage.removeItem(`chat_messages_${user.id}`);
