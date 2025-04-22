@@ -31,6 +31,10 @@ const AIRoadmap = () => {
   const d3Container = useRef(null);
   const { token } = useSelector((state) => state.auth);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // New state for regeneration
+  const [modificationInput, setModificationInput] = useState("");
+  const [regenerating, setRegenerating] = useState(false);
+  const [currentTopic, setCurrentTopic] = useState("");
 
   // Fetch usage info when component mounts
   useEffect(() => {
@@ -89,6 +93,7 @@ const AIRoadmap = () => {
 
       setData(response.data.roadmap);
       setAiFeedback(response.data.aiFeedback);
+      setCurrentTopic(input); // Save the original topic as current
 
       setUsageInfo(response.data.usageInfo);
     } catch (err) {
@@ -105,6 +110,60 @@ const AIRoadmap = () => {
       setLoading(false);
     }
   };
+
+  // New function to handle roadmap regeneration
+  const handleRegenerate = async () => {
+    if (!modificationInput.trim()) {
+      setError("Please enter modification details");
+      return;
+    }
+    if (usageInfo.usageCount >= 10) {
+      setError("You've reached your daily limit of 10 roadmaps");
+      return;
+    }
+
+    setRegenerating(true);
+    setAiFeedback("");
+
+    setError(null);
+    clearRoadmap();
+
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/ai/regenerate`,
+        {
+          originalTopic: currentTopic,
+          timeframe,
+          level,
+          contextInfo,
+          modifications: modificationInput,
+          originalRoadmap: data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setCurrentTopic(response.data.roadmap.name); // Use the updated title from new roadmap
+      setData(response.data.roadmap);
+      setAiFeedback(response.data.aiFeedback);
+      setUsageInfo(response.data.usageInfo);
+    } catch (err) {
+      if (err.response?.data?.error === "Daily limit reached") {
+        setError("You've reached your daily limit of 10 roadmaps");
+        setUsageInfo({
+          usageCount: 10,
+          remainingCount: 0,
+        });
+      } else {
+        setError("Failed to regenerate roadmap. Please try again.");
+      }
+    } finally {
+      setRegenerating(false);
+    }
+  };
+
   const openChatbotWithNodeQuery = (node) => {
     if (chatbotRef.current) {
       chatbotRef.current.openWithNodeQuery(node);
@@ -1009,7 +1068,7 @@ const AIRoadmap = () => {
         </div>
 
         <div className="roadmap-wrapper">
-          {loading ? (
+          {loading || regenerating ? (
             <div className="loader-wrapper">
               <Loader loading={true} />
             </div>
@@ -1017,6 +1076,7 @@ const AIRoadmap = () => {
             <div ref={d3Container} className="d3-container" />
           ) : null}
         </div>
+
         {aiFeedback && (
           <div className="ai-feedback-box">
             <h3>Additional feedback from AI🚀</h3>
@@ -1024,8 +1084,39 @@ const AIRoadmap = () => {
           </div>
         )}
       </div>
+
+      {/* New Regenerate section */}
+      {data && !loading && !regenerating && (
+        <div className="regenerate-section">
+          <h3>Want to improve this roadmap?</h3>
+          <div className="regenerate-input-container">
+            <textarea
+              value={modificationInput}
+              onChange={(e) => setModificationInput(e.target.value)}
+              placeholder="Describe modifications you'd like to see in the roadmap (e.g., 'Include more about mobile development', 'Add DevOps practices', 'Focus more on practical projects')"
+              rows={3}
+              disabled={regenerating || usageInfo.usageCount >= 10}
+            />
+            <button
+              onClick={handleRegenerate}
+              disabled={
+                regenerating ||
+                !modificationInput.trim() ||
+                usageInfo.usageCount >= 10
+              }
+              className="regenerate-btn"
+            >
+              Regenerate Roadmap
+            </button>
+          </div>
+        </div>
+      )}
       <AISuggestionContainer />
-      <Chatbot ref={chatbotRef} roadmapTitle={input} data={data} />
+      <Chatbot
+        ref={chatbotRef}
+        roadmapTitle={data?.name || input}
+        data={data}
+      />
 
       <Footer />
     </div>
