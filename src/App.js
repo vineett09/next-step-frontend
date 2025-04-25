@@ -73,6 +73,7 @@ import CLangRoadmap from "./data/techskills/CLang";
 import ReactNativeRoadmap from "./data/techskills/ReactNative";
 import dsaRoadmap from "./data/techskills/DSA";
 import ViewAIRoadmap from "./components/ViewAIRoadmap";
+import SmartFeedContent from "./components/SmartFeedContent";
 function App() {
   return (
     <Router>
@@ -96,6 +97,7 @@ function App() {
           <Route path="/explore" element={<TechExplorer />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/smart-feed" element={<SmartFeedContent />} />
 
           {/* Tech Fields */}
           <Route

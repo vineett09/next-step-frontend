@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/authslice";
@@ -10,6 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const dropdownRef = useRef(null);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -23,6 +24,30 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  const toggleDropdown = (e) => {
+    e.stopPropagation();
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  // Handle clicks outside the dropdown to close it
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+
+    // Add event listener when dropdown is open
+    if (dropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    // Clean up the event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   return (
     <nav className="navbar">
@@ -38,21 +63,17 @@ const Navbar = () => {
         >
           Shared Roadmaps
         </button>
-
+        <button onClick={() => navigate("/smart-feed")}>Smart Feed</button>
         {user ? (
-          <div
-            className="nav-user-container"
-            onMouseEnter={() => setDropdownOpen(true)}
-            onMouseLeave={() => setDropdownOpen(false)}
-          >
-            <span className="nav-user">Hello, {user.username}</span>
+          <div className="nav-user-container" ref={dropdownRef}>
+            <span className="nav-user" onClick={toggleDropdown}>
+              Hello, {user.username}
+            </span>
             {dropdownOpen && (
               <div className="dropdown-user-menu">
                 <button onClick={() => navigate("/profile")}>Profile</button>
                 <button onClick={() => navigate("/explore")}>Explore </button>
-                <button className="create-button" onClick={handleCreateClick}>
-                  Create Roadmap
-                </button>
+                <button onClick={handleCreateClick}>Create Roadmap</button>
                 <button onClick={() => navigate("/generate-roadmap")}>
                   AI Roadmaps
                 </button>

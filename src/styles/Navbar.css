@@ -1,115 +1,142 @@
-:root {
-  --primary-color: #fff;
-  --hover-color: #007bff;
-  --background-color: #0d1117;
-  --text-color: #fff;
-  --shadow-color: rgba(0, 0, 0, 0.2);
-}
+/* Navbar.css - Dark minimal design with #0d1117 base color and click-based dropdown */
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--background-color);
   padding: 1rem 2rem;
+  background-color: #0d1117;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 .navbar-logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
   cursor: pointer;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.2s ease;
 }
+
+
 
 .navbar-links {
   display: flex;
-  gap: 1.5rem;
   align-items: center;
+  gap: 1.25rem;
 }
 
-.nav-link {
+.navbar-links button {
   background: none;
   border: none;
-  color: var(--text-color);
-  font-size: 1rem;
-  font-weight: 500;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #c9d1d9;
   cursor: pointer;
-  padding: 8px 12px;
-  transition: color 0.3s ease-in-out, transform 0.2s;
+  transition: all 0.2s ease;
+  border-radius: 0.25rem;
+}
+
+.navbar-links button:hover {
+  color: #ffffff;
+  background-color: #1f2937;
+}
+
+.shared-roadmaps-button {
+  color: #c9d1d9;
+}
+
+.signup-button {
+  background-color: #238636 !important;
+  color: white !important;
+  padding: 0.5rem 1.25rem !important;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.signup-button:hover {
+  background-color: #2ea043 !important;
+  color: white !important;
+}
+
+.create-button {
+  background-color: #1f6feb !important;
+  color: white !important;
+  font-weight: 500;
+}
+
+.create-button:hover {
+  background-color: #388bfd !important;
+  color: white !important;
 }
 
 .nav-user-container {
   position: relative;
-  display: flex;
-  align-items: center;
   cursor: pointer;
 }
 
 .nav-user {
-  color: var(--text-color);
-  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #c9d1d9;
   font-weight: 500;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
 }
 
-.shared-roadmaps-button {
-  width: fit-content;
-  min-width: 100px;
-  height: 45px;
-  padding: 8px 16px;
-  border-radius: 5px;
-  border: 2.5px solid #E0E1E4;
-  box-shadow: 0px 0px 20px -20px;
-  cursor: pointer;
-  background-color: white;
-  transition: all 0.2s ease-in-out 0ms;
-  user-select: none;
-  font-family: 'Poppins', sans-serif;
-  color: #000; 
-}
-
-.shared-roadmaps-button:hover {
-  background-color: #F2F2F2;
-  box-shadow: 0px 0px 20px -18px;
-}
-
-.shared-roadmaps-button:active {
-  transform: scale(0.95);
+.nav-user:hover {
+  background-color: #1f2937;
+  color: #ffffff;
 }
 
 .dropdown-user-menu {
   position: absolute;
   top: 100%;
   right: 0;
-  background: #2c3539;
-  border-radius: 6px;
-  box-shadow: 0 4px 6px var(--shadow-color);
-  min-width: 150px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  z-index: 1000;
+  background-color: #161b22;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  min-width: 200px;
+  z-index: 1001;
+  overflow: hidden;
+  margin-top: 0.5rem;
+  border: 1px solid #30363d;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .dropdown-user-menu button {
-  background: none;
-  border: none;
-  color: var(--text-color);
-  padding: 8px 12px;
-  cursor: pointer;
-  text-align: left;
+  display: block;
   width: 100%;
-  transition: background 0.3s ease;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: none;
+  color: #c9d1d9;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .dropdown-user-menu button:hover {
-  background: var(--hover-color);
-  color: white;
+  background-color: #1f2937;
+  color: #ffffff;
 }
 
+/* Hamburger menu for mobile */
 .navbar-toggle {
   display: none;
   flex-direction: column;
@@ -117,163 +144,101 @@
 }
 
 .bar {
+  display: block;
   width: 25px;
   height: 3px;
-  background-color: var(--text-color);
-  margin: 4px 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  margin: 3px 0;
+  background-color: #c9d1d9;
+  transition: all 0.3s ease;
 }
 
-.signup-button {
-  position: relative;
-  padding: 10px 22px;
-  border-radius: 6px;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  background-color: #7d2ae8;
-  transition: all 0.2s ease;
-}
-
-.signup-button:active {
-  transform: scale(0.96);
-}
-
-.signup-button:before,
-.signup-button:after {
-  position: absolute;
-  content: "";
-  width: 150%;
-  left: 50%;
-  height: 100%;
-  transform: translateX(-50%);
-  z-index: -1000;
-  background-repeat: no-repeat;
-}
-
-.signup-button:hover:before {
-  top: -70%;
-  background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, transparent 20%, #7d2ae8 20%, transparent 30%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%);
-  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
-    10% 10%, 18% 18%;
-  background-position: 50% 120%;
-  animation: greentopBubbles 0.6s ease;
-}
-
-@keyframes greentopBubbles {
-  0% {
-    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
-      40% 90%, 55% 90%, 70% 90%;
-  }
-
-  50% {
-    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
-      50% 50%, 65% 20%, 90% 30%;
-  }
-
-  100% {
-    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
-      50% 40%, 65% 10%, 90% 20%;
-    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-  }
-}
-
-.signup-button:hover::after {
-  bottom: -70%;
-  background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%);
-  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
-  background-position: 50% 0%;
-  animation: greenbottomBubbles 0.6s ease;
-}
-
-@keyframes greenbottomBubbles {
-  0% {
-    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
-      70% -10%, 70% 0%;
-  }
-
-  50% {
-    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
-      105% 0%;
-  }
-
-  100% {
-    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
-      110% 10%;
-    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-  }
-}
-.navbar-toggle .bar.change:nth-child(1) {
-  transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.navbar-toggle .bar.change:nth-child(2) {
-  opacity: 0;
-}
-
-.navbar-toggle .bar.change:nth-child(3) {
-  transform: rotate(45deg) translate(-5px, -6px);
-}
-
+/* Mobile responsive styles */
 @media (max-width: 768px) {
   .navbar {
-    flex-wrap: wrap;
+    padding: 1rem;
   }
-
+  
   .navbar-toggle {
     display: flex;
   }
-
+  
   .navbar-links {
-    display: none;
-    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     flex-direction: column;
-    padding: 1rem;
+    background-color: #0d1117;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    padding: 0;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    z-index: 999;
+    border-bottom: 1px solid #30363d;
   }
-
+  
   .navbar-links.active {
-    display: flex;
-  }
-
-  .shared-roadmaps-button {
-    width: 100%;
-    margin: 0.5rem 0;
-    padding: 12px;
-    text-align: center;
-  }
-
-  .nav-user-container {
-    width: 100%;
-    justify-content: space-between;
+    max-height: 500px;
     padding: 0.5rem 0;
   }
-
+  
+  .navbar-links button {
+    width: 100%;
+    text-align: center;
+    padding: 0.85rem 1rem;
+    border-radius: 0;
+  }
+  
+  .nav-user-container {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .nav-user {
+    justify-content: center;
+    padding: 0.85rem 1rem;
+  }
+  
   .dropdown-user-menu {
-    position: static;
+    position: relative;
     width: 100%;
     box-shadow: none;
-    background: #2c3539;
+    margin-top: 0;
+    border: none;
+    border-top: 1px solid #30363d;
   }
+  
+  .bar.change:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+    background-color: #ffffff;
+  }
+  
+  .bar.change:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .bar.change:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+    background-color: #ffffff;
+  }
+}
 
-  .nav-link,
-  .signup-button {
-    width: 100%;
-    margin: 0.5rem 0;
-    padding: 12px;
-    text-align: center;
+/* Transitions for smooth mobile menu animations */
+@media (max-width: 768px) {
+  .navbar-links button, 
+  .nav-user-container, 
+  .dropdown-user-menu button {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  
+  .navbar-links.active button, 
+  .navbar-links.active .nav-user-container, 
+  .navbar-links.active .dropdown-user-menu button {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

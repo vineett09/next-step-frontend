@@ -1,0 +1,455 @@
+.weekly-content-page {
+  min-height: 100vh;
+  background-color: #0c1017;
+  color: #e6edf3;
+}
+
+.weekly-digest-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+
+.personalization-tip {
+  background-color: #f8f9fa;
+  border-left: 4px solid #0d6efd;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin: 16px 0 24px;
+  font-size: 15px;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.personalization-tip p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.personalization-tip p::before {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+
+/* Error state */
+.error-container {
+  background-color: rgba(248, 81, 73, 0.15);
+  border: 1px solid #f85149;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  margin: 40px 0;
+}
+
+.error-text {
+  color: #f85149;
+  margin-bottom: 15px;
+}
+
+.retry-button {
+  background-color: #238636;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover {
+  background-color: #2ea043;
+}
+
+/* No content state */
+.no-content-container {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  margin: 40px 0;
+}
+
+.no-content-text {
+  color: #8b949e;
+  font-size: 1.1rem;
+}
+
+/* Weekly digest container */
+.weekly-digest-container {
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  color: #e6edf3;
+}
+
+/* Header with filter controls */
+.weekly-digest-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #30363d;
+  padding-bottom: 16px;
+}
+
+.weekly-digest-title {
+  font-size: 1.8rem;
+  color: #58a6ff;
+  margin: 0;
+}
+
+.weekly-digest-controls {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.filter-control,
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.digest-select {
+  background-color: #161b22;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.digest-select:focus {
+  border-color: #58a6ff;
+  outline: none;
+}
+
+/* No articles message */
+.no-articles-message {
+  text-align: center;
+  color: #8b949e;
+  padding: 30px 0;
+}
+
+/* Grid layout */
+.weekly-digest-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual card */
+.weekly-digest-item {
+  background-color: #161b22;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.weekly-digest-item:hover {
+  background-color: #1f2937;
+  border-color: #30363d;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.digest-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background-color: #1c1f26;
+}
+
+.digest-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.weekly-digest-item:hover .digest-image {
+  transform: scale(1.05);
+}
+
+/* Source badge */
+.source-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* Source-specific badge colors */
+.source-badge[data-source="dev-to"] {
+  background-color: #0a0a0a;
+  color: #fff;
+  border-left: 3px solid #de4c36;
+}
+
+.source-badge[data-source="medium"] {
+  background-color: #121212;
+  color: #fff;
+  border-left: 3px solid #00ab6c;
+}
+
+.digest-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 16px;
+}
+
+.digest-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #c9d1d9;
+  text-decoration: none;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.digest-title:hover {
+  color: #58a6ff;
+  text-decoration: underline;
+}
+
+/* Article description */
+.digest-description {
+  color: #8b949e;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 15px 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.digest-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #30363d;
+}
+
+.digest-details-primary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.weekly-digest-meta {
+  font-size: 0.85rem;
+  color: #8b949e;
+  line-height: 1.4;
+}
+
+.article-author {
+  font-size: 0.8rem;
+  color: #58a6ff;
+}
+
+.article-tag {
+  background: rgba(88, 166, 255, 0.15);
+  color: #58a6ff;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+/* Pagination controls */
+.pagination-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #30363d;
+}
+
+.load-more-button {
+  background-color: #238636;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.load-more-button:hover {
+  background-color: #2ea043;
+}
+
+.load-more-button:active {
+  transform: translateY(0);
+}
+
+.load-more-button:disabled {
+  background-color: #30363d;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
+}
+
+.end-of-content-message {
+  color: #8b949e;
+  font-style: italic;
+  margin: 20px 0;
+  text-align: center;
+}
+
+/* Loading indicator for "Load More" */
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.loading-indicator-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #58a6ff;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.loading-indicator-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-indicator-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Source info bar at the top of the page */
+.source-info-bar {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
+  background-color: #161b22;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #30363d;
+}
+
+.source-info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #8b949e;
+}
+
+.source-info-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.source-info-indicator.dev-to {
+  background-color: #de4c36;
+}
+
+.source-info-indicator.medium {
+  background-color: #00ab6c;
+}
+
+.source-info-indicator.hashnode {
+  background-color: #2962ff;
+}
+
+.source-info-indicator.hacker-news {
+  background-color: #ff6600;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .weekly-digest-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .weekly-digest-controls {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .filter-control,
+  .sort-control {
+    width: 100%;
+  }
+  
+  .digest-select {
+    flex-grow: 1;
+  }
+  
+  .weekly-digest-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .source-info-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .weekly-digest-title {
+    font-size: 1.4rem;
+  }
+  
+  .digest-image-wrapper {
+    height: 140px;
+  }
+}
