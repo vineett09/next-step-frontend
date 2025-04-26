@@ -5,7 +5,7 @@ import SmartFeed from "../components/SmartFeed";
 import "../styles/SmartFeed.css";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Loader from "../components/Loader";
+import ScrollToTop from "../components/ScrollToTop";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -215,11 +215,6 @@ const SmartFeedContent = () => {
             </p>
           </div>
         )}
-        {loading && articles.length === 0 && (
-          <>
-            <Loader loading={loading} />
-          </>
-        )}
 
         {error && (
           <div className="error-container">
@@ -236,18 +231,7 @@ const SmartFeedContent = () => {
           </div>
         )}
 
-        {!loading && !error && articles.length === 0 && (
-          <div className="no-content-container">
-            <p className="no-content-text">
-              No articles found.{" "}
-              {user
-                ? "Try bookmarking some roadmaps!"
-                : "Please check back later."}
-            </p>
-          </div>
-        )}
-
-        {!error && articles.length > 0 && (
+        {!error && (
           <SmartFeed
             articles={articles}
             onLoadMore={handleLoadMore}
@@ -257,6 +241,8 @@ const SmartFeedContent = () => {
         )}
       </div>
       <Footer />
+
+      <ScrollToTop />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Loader from "./Loader";
 import "../styles/AISuggestionsView.css";
+import ScrollToTop from "./ScrollToTop";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const SuggestionView = () => {
@@ -164,23 +165,6 @@ const SuggestionView = () => {
       <Navbar />
       <div className="suggestion-display-wrapper">
         <div className="suggestion-display-header">
-          <div className="suggestion-info">
-            <div className="suggestion-meta">
-              <p>
-                <strong>Career Goal:</strong> {suggestion.answers.careerGoals}
-              </p>
-              <p>
-                <strong>Experience:</strong> {suggestion.answers.experience}
-              </p>
-              <p>
-                <strong>Learning Style:</strong> {suggestion.answers.preference}
-              </p>
-              <p>
-                <strong>Created:</strong> {formatDate(suggestion.createdAt)}
-              </p>
-            </div>
-          </div>
-
           <button
             className="suggestion-back-btn"
             onClick={() => navigate("/profile")}
@@ -197,11 +181,28 @@ const SuggestionView = () => {
         </div>
 
         <div className="suggestion-display-content-wrapper">
+          <div className="suggestion-info">
+            <div className="suggestion-meta">
+              <p>
+                <strong>Career Goal:</strong> {suggestion.answers.careerGoals}
+              </p>
+              <p>
+                <strong>Experience:</strong> {suggestion.answers.experience}
+              </p>
+              <p>
+                <strong>Learning Style:</strong> {suggestion.answers.preference}
+              </p>
+              <p>
+                <strong>Created:</strong> {formatDate(suggestion.createdAt)}
+              </p>
+            </div>
+          </div>
           <div
             className="suggestion-display-content"
             dangerouslySetInnerHTML={{ __html: suggestion.roadmap }}
           ></div>
         </div>
+        <ScrollToTop />
       </div>
       <Footer />
     </div>

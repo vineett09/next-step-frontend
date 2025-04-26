@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import "../styles/TechExplorer.css";
 import AISuggestionContainer from "./AISuggestionContainer";
-
+import ScrollToTop from "./ScrollToTop";
 const TechExplorer = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("all");
@@ -107,6 +107,7 @@ const TechExplorer = () => {
           </section>
         )}
         <AISuggestionContainer />
+        <ScrollToTop />
       </div>
 
       <Footer />

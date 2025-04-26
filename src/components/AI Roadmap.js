@@ -1112,11 +1112,13 @@ const AIRoadmap = () => {
         </div>
       )}
       <AISuggestionContainer />
-      <Chatbot
-        ref={chatbotRef}
-        roadmapTitle={data?.name || input}
-        data={data}
-      />
+      {data && !loading && !regenerating && (
+        <Chatbot
+          ref={chatbotRef}
+          roadmapTitle={data?.name || input}
+          data={data}
+        />
+      )}
 
       <Footer />
     </div>

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import "../styles/SmartFeed.css";
 import placeholderImage from "../assets/noimagefound.jpg";
+import SmartFeedSkeleton from "./SmartFeedSkeleton";
 
 const SmartFeed = ({ articles = [], onLoadMore, loading, hasMoreContent }) => {
   const [filter, setFilter] = useState("all");
   const [sortOrder, setSortOrder] = useState("newest");
 
-  if (!articles.length) return null;
-
-  // Get unique tags from all articles
+  // Get unique tags from all articles, even when empty (we'll use defaults)
   const uniqueTags = [
     "all",
     ...new Set(articles.map((article) => article.tag)),
@@ -49,6 +48,13 @@ const SmartFeed = ({ articles = [], onLoadMore, loading, hasMoreContent }) => {
     onLoadMore(filter, sortOrder);
   };
 
+  // Generate skeleton placeholders when loading with no articles
+  const renderSkeletons = () => {
+    return Array(6)
+      .fill()
+      .map((_, index) => <SmartFeedSkeleton key={index} />);
+  };
+
   return (
     <div className="weekly-digest-container">
       <div className="weekly-digest-header">
@@ -62,6 +68,7 @@ const SmartFeed = ({ articles = [], onLoadMore, loading, hasMoreContent }) => {
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
               className="digest-select"
+              disabled={loading && articles.length === 0}
             >
               {uniqueTags.map((tag) => (
                 <option key={tag} value={tag}>
@@ -80,6 +87,7 @@ const SmartFeed = ({ articles = [], onLoadMore, loading, hasMoreContent }) => {
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
               className="digest-select"
+              disabled={loading && articles.length === 0}
             >
               <option value="newest">Newest First</option>
               <option value="oldest">Oldest First</option>
@@ -89,84 +97,86 @@ const SmartFeed = ({ articles = [], onLoadMore, loading, hasMoreContent }) => {
         </div>
       </div>
 
-      {sortedArticles.length === 0 ? (
+      {loading && articles.length === 0 ? (
+        // Show skeleton placeholders when initially loading
+        <ul className="weekly-digest-list">{renderSkeletons()}</ul>
+      ) : sortedArticles.length === 0 ? (
+        // Show message when filtered articles are empty
         <p className="no-articles-message">
           No articles found for this filter.
         </p>
       ) : (
-        <>
-          <ul className="weekly-digest-list">
-            {sortedArticles.map((item, index) => (
-              <li key={item.url} className="weekly-digest-item">
-                <div className="digest-image-wrapper">
-                  <img
-                    src={item.image || placeholderImage}
-                    alt={`Cover for ${item.title}`}
-                    className="digest-image"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.src = placeholderImage;
-                    }}
-                  />
-                  <div
-                    className="source-badge"
-                    data-source={item.source.toLowerCase().replace(/\s+/g, "-")}
-                  >
-                    {item.source}
-                  </div>
+        // Show actual articles
+        <ul className="weekly-digest-list">
+          {sortedArticles.map((item) => (
+            <li key={item.url} className="weekly-digest-item">
+              <div className="digest-image-wrapper">
+                <img
+                  src={item.image || placeholderImage}
+                  alt={`Cover for ${item.title}`}
+                  className="digest-image"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.src = placeholderImage;
+                  }}
+                />
+                <div
+                  className="source-badge"
+                  data-source={item.source.toLowerCase().replace(/\s+/g, "-")}
+                >
+                  {item.source}
                 </div>
-                <div className="digest-content">
-                  <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="digest-title"
-                  >
-                    {item.title}
-                  </a>
+              </div>
+              <div className="digest-content">
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="digest-title"
+                >
+                  {item.title}
+                </a>
 
-                  {item.description && (
-                    <p className="digest-description">{item.description}</p>
-                  )}
+                {item.description && (
+                  <p className="digest-description">{item.description}</p>
+                )}
 
-                  <div className="digest-details">
-                    <div className="digest-details-primary">
-                      <span className="weekly-digest-meta">
-                        {formatDate(item.published_at)}
-                        {item.readTime && ` • ${item.readTime}`}
-                        {item.points !== undefined &&
-                          ` • ${item.points} points`}
-                      </span>
-                      {item.author && (
-                        <span className="article-author">By {item.author}</span>
-                      )}
-                    </div>
-                    <span className="article-tag">{item.tag}</span>
+                <div className="digest-details">
+                  <div className="digest-details-primary">
+                    <span className="weekly-digest-meta">
+                      {formatDate(item.published_at)}
+                      {item.readTime && ` • ${item.readTime}`}
+                      {item.points !== undefined && ` • ${item.points} points`}
+                    </span>
+                    {item.author && (
+                      <span className="article-author">By {item.author}</span>
+                    )}
                   </div>
+                  <span className="article-tag">{item.tag}</span>
                 </div>
-              </li>
-            ))}
-          </ul>
-
-          {/* Pagination controls */}
-          <div className="pagination-controls">
-            {hasMoreContent && (
-              <button
-                className="load-more-button"
-                onClick={handleLoadMore}
-                disabled={loading}
-              >
-                {loading ? "Loading..." : "Load More Articles"}
-              </button>
-            )}
-            {!hasMoreContent && articles.length > 0 && (
-              <p className="end-of-content-message">
-                You've reached the end of available articles
-              </p>
-            )}
-          </div>
-        </>
+              </div>
+            </li>
+          ))}
+        </ul>
       )}
+
+      {/* Pagination controls */}
+      <div className="pagination-controls">
+        {hasMoreContent && (
+          <button
+            className="load-more-button"
+            onClick={handleLoadMore}
+            disabled={loading}
+          >
+            {loading ? "Loading..." : "Load More Articles"}
+          </button>
+        )}
+        {!hasMoreContent && articles.length > 0 && (
+          <p className="end-of-content-message">
+            You've reached the end of available articles
+          </p>
+        )}
+      </div>
     </div>
   );
 };

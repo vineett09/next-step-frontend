@@ -4,9 +4,10 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AIRelatedRoadmaps from "./AI RelatedRoadmaps";
 import axios from "axios";
+import ScrollToTop from "./ScrollToTop";
+
 import { useSelector } from "react-redux";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
 const AISuggestions = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -456,6 +457,7 @@ const AISuggestions = () => {
               </button>
             </div>
             <AIRelatedRoadmaps userAnswers={answers} />
+            <ScrollToTop />
           </div>
         </div>
       );
@@ -533,6 +535,8 @@ const AISuggestions = () => {
             {currentStep < questions.length - 1 ? "Next" : "Submit"}
           </button>
         </div>
+
+        <ScrollToTop />
       </div>
     );
   };
