@@ -13,3 +13,40 @@
 .simple-footer .footer-accent {
   display: none;
 }
+.simple-footer .contact-email {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(0, 188, 212, 0.2);
+  border: 1px solid #00bcd4;
+  border-radius: 30px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.simple-footer .email-icon {
+  color: #00bcd4;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.simple-footer .email-link {
+  color: #00bcd4;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.simple-footer .contact-email:hover {
+  background: #00bcd4;
+}
+
+.simple-footer .contact-email:hover .email-link,
+.simple-footer .contact-email:hover .email-icon {
+  color: #ffffff;
+}
+

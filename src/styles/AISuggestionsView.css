@@ -91,233 +91,172 @@
     border: 1px solid #333;
   }
   
+ /* Update the suggestion-display-content to match questionnaire-roadmap-content */
+.suggestion-display-content {
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.6;
+  color: #e0e0e0;
+  background-color: #1e1e1e; /* Match the background color */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  border: 1px solid #333;
+}
+
+@media (max-width: 768px) {
   .suggestion-display-content {
-    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    line-height: 1.6;
-    color: #e0e0e0;
-    background-color: #252525;
-    padding: clamp(1.25rem, 5vw, 2.5rem);
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    border: 1px solid #333;
+    padding: 25px;
   }
-  
+}
+
+@media (max-width: 576px) {
+  .suggestion-display-content {
+    padding: 15px;
+  }
+}
+
+/* Match headings styling */
+.suggestion-display-content h1 {
+  color: #FFE700;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  border-bottom: 3px solid #FFE700;
+  padding-bottom: 15px;
+  word-wrap: break-word;
+}
+
+@media (max-width: 576px) {
   .suggestion-display-content h1 {
-    color: #FFE700;
-    text-align: center;
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
-    margin-bottom: 30px;
-    border-bottom: 3px solid #FFE700;
-    padding-bottom: 15px;
-    width: 100%;
-  }
-  
-  .suggestion-display-content h2 {
-    color: #e0e0e0;
-    border-left: 5px solid #2ecc71;
-    padding-left: 15px;
-    margin-top: 25px;
+    font-size: 1.8rem;
     margin-bottom: 20px;
-    font-size: clamp(1.25rem, 4vw, 1.7rem);
+  }
+}
+
+.suggestion-display-content h2 {
+  color: #e0e0e0;
+  border-left: 5px solid #2ecc71;
+  padding-left: 15px;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .suggestion-display-content h2 {
+    font-size: 1.3rem;
+    padding-left: 10px;
+  }
+}
+
+.suggestion-display-content h3 {
+  color: #FFE700;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+@media (max-width: 576px) {
+  .suggestion-display-content h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Match section styling */
+.suggestion-display-content section {
+  background-color: #252525;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  overflow-x: auto;
+  border: 1px solid #333;
+}
+
+@media (max-width: 576px) {
+  .suggestion-display-content section {
+    padding: 15px;
+  }
+}
+
+/* Match list styling */
+.suggestion-display-content ul, 
+.suggestion-display-content ol {
+  padding-left: 30px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+  .suggestion-display-content ul, 
+  .suggestion-display-content ol {
+    padding-left: 20px;
+  }
+}
+
+.suggestion-display-content li {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+/* Remove the bullet point styling that was different */
+.suggestion-display-content li::before {
+  content: none;
+}
+
+/* Add the essential skills styling from AISuggestions.css */
+.suggestion-display-content .essential-skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.suggestion-display-content .essential-skill-badge {
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: #e0e0e0;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.suggestion-display-content .essential-skill-badge:hover {
+  background-color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Better print styles - match AISuggestions.css */
+@media print {
+  .suggestion-display-content {
+    max-width: none;
+    margin: 0;
+    padding: 20px;
+    box-shadow: none;
+    background-color: white !important;
+    color: black !important;
   }
   
+  .suggestion-display-content h1,
+  .suggestion-display-content h2,
   .suggestion-display-content h3 {
-    color: #FFE700;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    color: black !important;
   }
   
   .suggestion-display-content section {
-    background-color: #2a2a2a;
-    border-radius: 12px;
-    padding: clamp(1rem, 3vw, 1.5rem);
-    margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #333;
-  }
-  
-  .suggestion-display-content ul, 
-  .suggestion-display-content ol {
-    padding-left: clamp(1rem, 4vw, 2rem);
-    margin-bottom: 20px;
-    box-sizing: border-box;
-  }
-  
-  .suggestion-display-content li {
-    margin-bottom: 10px;
-    position: relative;
-  }
-  
-  .suggestion-display-content li::before {
-    color: #2ecc71;
-    font-weight: bold;
-    display: inline-block;
-    margin-left: -1em;
-  }
-  
-  .suggestion-display-content p {
+    page-break-inside: avoid;
+    border: 1px solid #ddd;
+    padding: 15px;
     margin-bottom: 15px;
+    box-shadow: none;
+    background-color: white !important;
   }
-  
-  .suggestion-auth-required {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #121212;
-    border: 1px solid #4c6fff;
-    border-radius: 12px;
-    padding: clamp(1.5rem, 5vw, 2.5rem);
-    width: 90%;
-    max-width: 500px;
-    margin: 5vh auto;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(76, 111, 255, 0.15);
-  }
-    
-  .suggestion-auth-required h2 {
-    color: #4c6fff;
-    font-size: clamp(1.2rem, 4vw, 1.5rem);
-    margin-bottom: 20px;
-    font-weight: 600;
-  }
-    
-  .suggestion-auth-required p {
-    color: #e0e0e0;
-    font-size: clamp(0.9rem, 3vw, 1rem);
-    margin-bottom: 30px;
-    line-height: 1.5;
-  }
-  
-  .suggestion-display-error {
-    text-align: center;
-    padding: 2rem;
-    background-color: #1e1e1e;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    max-width: 600px;
-    margin: 0 auto;
-    border: 1px solid #333;
-  }
-  
-  .suggestion-display-error h2 {
-    color: #ff6b6b;
-    margin-bottom: 1rem;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .suggestion-display-header {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    
-    .suggestion-back-btn,
-    .suggestion-download-btn {
-      width: 100%;
-    }
-    
-    .suggestion-meta {
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .suggestion-meta p {
-      text-align: center;
-      margin: 0.25rem 0;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .suggestion-display-content {
-      padding: 1rem;
-    }
-    
-    .suggestion-display-content section {
-      padding: 0.75rem;
-    }
-    
-    .suggestion-display-content h1 {
-      font-size: 1.5rem;
-      padding-bottom: 10px;
-    }
-    
-    .suggestion-display-content h2 {
-      font-size: 1.25rem;
-      border-left: 3px solid #2ecc71;
-      padding-left: 10px;
-    }
-    
-    .suggestion-display-content h3 {
-      font-size: 1.1rem;
-    }
-  }
-  
-  /* Make pre and code blocks responsive */
-  .suggestion-display-content pre,
-  .suggestion-display-content code {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-x: auto;
-    background-color: #2a2a2a;
-    border-radius: 4px;
-    padding: 10px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    border: 1px solid #444;
-    color: #e0e0e0;
-  }
-  
-  /* Add table responsiveness */
-  .suggestion-display-content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    overflow-x: auto;
-    display: block;
-  }
-  
-  .suggestion-display-content table th,
-  .suggestion-display-content table td {
-    padding: 10px;
-    border: 1px solid #444;
-    text-align: left;
-  }
-  
-  .suggestion-display-content table th {
-    background-color: #222;
-  }
-  
-  /* Loading Spinner */
-  .loader-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-  }
-  
-  .loader-spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid rgba(76, 111, 255, 0.1);
-    border-radius: 50%;
-    border-top-color: #4c6fff;
-    animation: spin 1s ease-in-out infinite;
-  }
-  
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
+}

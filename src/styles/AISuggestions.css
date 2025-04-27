@@ -52,15 +52,7 @@
   text-align: right;
 }
 
-/* Question Styles */
-.questionnaire-container h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: #e0e0e0;
-  font-weight: 600;
-}
-
-/* Options - Responsive Grid */
+/* Options Grid */
 .questionnaire-options-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -68,7 +60,6 @@
   margin: 1.5rem 0;
 }
 
-/* For smaller screens, adjust option grid */
 @media (max-width: 576px) {
   .questionnaire-options-wrapper {
     grid-template-columns: 1fr;
@@ -178,7 +169,7 @@
   background-color: #444;
 }
 
-/* Loading State */
+/* Loading States */
 .questionnaire-loading {
   display: flex;
   flex-direction: column;
@@ -221,8 +212,10 @@
   }
 }
 
-/* Error State */
-.questionnaire-error {
+/* Error & Auth States */
+.questionnaire-error,
+.questionnaire-auth-required,
+.questionnaire-limit-reached {
   text-align: center;
   padding: 2rem 0;
 }
@@ -230,13 +223,6 @@
 .questionnaire-error h2 {
   color: #ff6b6b;
   margin-bottom: 1rem;
-}
-
-/* Auth Required */
-.questionnaire-auth-required,
-.questionnaire-limit-reached {
-  text-align: center;
-  padding: 3rem 0;
 }
 
 .questionnaire-limit-reached h2 {
@@ -264,6 +250,7 @@
   font-weight: 500;
 }
 
+/* Roadmap Styling - Enhanced for AI Output */
 .questionnaire-roadmap-wrapper {
   width: 100%;
 }
@@ -306,6 +293,7 @@
   }
 }
 
+/* Roadmap Content Styling */
 .questionnaire-roadmap-content h1 {
   color: #FFE700;
   text-align: center;
@@ -387,16 +375,8 @@
   position: relative;
 }
 
-.questionnaire-roadmap-content li::before {
-  color: #2ecc71;
-  font-weight: bold;
-  display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-}
-
-/* Essential Skills Container Styles */
-.questionnaire-roadmap-content .essential-skills-container {
+/* Essential Skills Container - Special Styling */
+.essential-skills-container {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -417,7 +397,6 @@
 
 .essential-skill-badge:hover {
   background-color: #333;
-  transform: scale(1.05);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -441,42 +420,7 @@
   }
 }
 
-/* Make pre and code blocks responsive */
-.questionnaire-roadmap-content pre,
-.questionnaire-roadmap-content code {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-x: auto;
-  background-color: #2a2a2a;
-  border-radius: 4px;
-  padding: 10px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
-  border: 1px solid #444;
-  color: #e0e0e0;
-}
-
-/* Add table responsiveness */
-.questionnaire-roadmap-content table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  overflow-x: auto;
-  display: block;
-}
-
-.questionnaire-roadmap-content table th,
-.questionnaire-roadmap-content table td {
-  padding: 10px;
-  border: 1px solid #444;
-  text-align: left;
-}
-
-.questionnaire-roadmap-content table th {
-  background-color: #222;
-}
-
-/* Auth required custom style for dark theme */
+/* Auth required custom style */
 .questionnaire-auth-required {
   display: flex;
   flex-direction: column;
