@@ -52,7 +52,8 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo" onClick={() => navigate("/")}>
-        NextStep
+        <img src="NextStep.png" alt="Logo" className="navbar-logo-image" />
+        <span>NextStep</span>
       </div>
 
       <div className={`navbar-links ${mobileMenuOpen ? "active" : ""}`}>

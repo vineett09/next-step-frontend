@@ -1,5 +1,6 @@
 .skills-cards {
   margin-top: 20px;
+  border: 1px solid #fff;
 }
 
 .card-title {
@@ -18,7 +19,7 @@
 }
 
 .skills-badge {
-  background: #31891d;
+  background: #1f2937;
   color: #fff;
   padding: 8px 12px;
   border-radius: 10px;
@@ -29,11 +30,9 @@
   transition: all 0.3s ease;
   white-space: nowrap;
 }
-
 .skills-badge:hover {
-  background: #1f5a13;
+  filter: brightness(1.50);
 }
-
 @media (max-width: 480px) {
   .skills-list {
     gap: 6px;
