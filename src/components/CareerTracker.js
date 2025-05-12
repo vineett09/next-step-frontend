@@ -619,25 +619,17 @@ const CareerTracker = () => {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    // Get the current viewport width for responsive calculations
-    const viewportWidth = Math.max(
-      document.documentElement.clientWidth || 0,
-      window.innerWidth || 0
-    );
-
-    // Adjust width based on viewport
-    const width = Math.min(1200, viewportWidth * 0.9);
-    const nodeRadius = viewportWidth < 768 ? 40 : 60; // Smaller nodes on mobile
-    const basePadding = viewportWidth < 768 ? 80 : 150;
+    // Set fixed width and dimensions
+    const width = 1200;
+    const nodeRadius = 60;
+    const basePadding = 150;
     const extraLabelPadding = 30;
+    const rowHeight = 245;
 
-    // Calculate row height based on viewport - smaller on mobile
-    const rowHeight = viewportWidth < 768 ? 180 : 245;
-
-    // Adjust nodes per row based on screen size
-    const maxNodesPerRow = viewportWidth < 768 ? 3 : 5;
+    // Fixed number of nodes per row
+    const maxNodesPerRow = 5;
     const numRows = Math.ceil(careerPath.length / maxNodesPerRow);
-    const tooltipExtraSpace = viewportWidth < 768 ? 80 : 120;
+    const tooltipExtraSpace = 120;
 
     const height =
       numRows * rowHeight - (numRows > 1 ? 30 : 0) + tooltipExtraSpace;
@@ -647,9 +639,9 @@ const CareerTracker = () => {
       .attr("height", height)
       .attr("viewBox", `0 0 ${width} ${height}`)
       .attr("class", "career-track-svg")
-      .attr("preserveAspectRatio", "xMidYMid meet"); // This helps with scaling
+      .attr("preserveAspectRatio", "xMidYMid meet");
 
-    // Step 1: Calculate label sizes first to determine spacing requirements
+    // Step 1: Calculate label sizes for spacing requirements
     const labelTexts = careerPath
       .slice(0, -1)
       .map((step) => `${step.timeToAchieve} months`);
@@ -660,7 +652,7 @@ const CareerTracker = () => {
     });
     dummyText.remove();
 
-    // Step 2: Position the nodes with multi-row support and account for tooltip space
+    // Step 2: Position the nodes with multi-row support
     const nodesWithPositions = [];
     let cumulativeTime = 0;
 
@@ -688,7 +680,7 @@ const CareerTracker = () => {
         x = basePadding + positionInRow * nodeSpacing;
       }
 
-      // Calculate y position based on row - more precisely centered in each row
+      // Calculate y position based on row
       const y = tooltipExtraSpace / 2 + rowHeight / 2 + rowIndex * rowHeight;
 
       nodesWithPositions.push({
@@ -700,7 +692,7 @@ const CareerTracker = () => {
         progress: index / (careerPath.length - 1),
         rowIndex,
         positionInRow,
-        monthLabel: `Month ${prevTime}`, // Add month label for timeline functionality
+        monthLabel: `Month ${prevTime}`,
       });
     });
 
