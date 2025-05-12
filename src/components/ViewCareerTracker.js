@@ -67,19 +67,18 @@ const ViewCareerTracker = () => {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const viewportWidth = Math.max(
-      document.documentElement.clientWidth || 0,
-      window.innerWidth || 0
-    );
-
-    const width = Math.min(1200, viewportWidth * 0.9);
-    const nodeRadius = viewportWidth < 768 ? 40 : 60;
-    const basePadding = viewportWidth < 768 ? 80 : 150;
+    // Set fixed width and dimensions
+    const width = 1200;
+    const nodeRadius = 60;
+    const basePadding = 150;
     const extraLabelPadding = 30;
-    const rowHeight = viewportWidth < 768 ? 180 : 245;
-    const maxNodesPerRow = viewportWidth < 768 ? 3 : 5;
+    const rowHeight = 245;
+
+    // Fixed number of nodes per row
+    const maxNodesPerRow = 5;
     const numRows = Math.ceil(careerPath.length / maxNodesPerRow);
-    const tooltipExtraSpace = viewportWidth < 768 ? 80 : 120;
+    const tooltipExtraSpace = 120;
+
     const height =
       numRows * rowHeight - (numRows > 1 ? 30 : 0) + tooltipExtraSpace;
 
@@ -90,6 +89,7 @@ const ViewCareerTracker = () => {
       .attr("class", "career-track-svg")
       .attr("preserveAspectRatio", "xMidYMid meet");
 
+    // Step 1: Calculate label sizes for spacing requirements
     const labelTexts = careerPath
       .slice(0, -1)
       .map((step) => `${step.timeToAchieve} months`);
@@ -100,6 +100,7 @@ const ViewCareerTracker = () => {
     });
     dummyText.remove();
 
+    // Step 2: Position the nodes with multi-row support
     const nodesWithPositions = [];
     let cumulativeTime = 0;
 
@@ -107,8 +108,11 @@ const ViewCareerTracker = () => {
       const prevTime = cumulativeTime;
       cumulativeTime += step.timeToAchieve;
 
+      // Calculate which row and position within row
       const rowIndex = Math.floor(index / maxNodesPerRow);
       const positionInRow = index % maxNodesPerRow;
+
+      // Calculate available width for nodes in this row
       const nodesInThisRow = Math.min(
         maxNodesPerRow,
         careerPath.length - rowIndex * maxNodesPerRow
@@ -116,13 +120,15 @@ const ViewCareerTracker = () => {
       const availableWidth = width - 2 * basePadding;
       const nodeSpacing = availableWidth / (nodesInThisRow - 1 || 1);
 
+      // Calculate x position
       let x;
       if (nodesInThisRow === 1) {
-        x = width / 2;
+        x = width / 2; // Center if only one node in row
       } else {
         x = basePadding + positionInRow * nodeSpacing;
       }
 
+      // Calculate y position based on row
       const y = tooltipExtraSpace / 2 + rowHeight / 2 + rowIndex * rowHeight;
 
       nodesWithPositions.push({
