@@ -55,6 +55,8 @@ const Profile = () => {
   const [suggestionsCurrentPage, setSuggestionsCurrentPage] = useState(1);
   const [aiGeneratedRoadmaps, setAIGeneratedRoadmaps] = useState([]);
   const [aiRoadmapsCurrentPage, setAIRoadmapsCurrentPage] = useState(1);
+  const [careerPaths, setCareerPaths] = useState([]);
+  const [careerPathsCurrentPage, setCareerPathsCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const navigate = useNavigate();
 
@@ -65,6 +67,7 @@ const Profile = () => {
       fetchFollowedRoadmaps();
       fetchSavedSuggestions();
       fetchAIGeneratedRoadmaps();
+      fetchCareerPaths();
     }
   }, [token, user]);
 
@@ -109,6 +112,7 @@ const Profile = () => {
   const totalSuggestionsPages = Math.ceil(
     savedSuggestions.length / itemsPerPage
   );
+
   const aiRoadmapsLastIndex = aiRoadmapsCurrentPage * itemsPerPage;
   const aiRoadmapsFirstIndex = aiRoadmapsLastIndex - itemsPerPage;
   const currentAIRoadmaps = aiGeneratedRoadmaps.slice(
@@ -118,6 +122,15 @@ const Profile = () => {
   const totalAIRoadmapsPages = Math.ceil(
     aiGeneratedRoadmaps.length / itemsPerPage
   );
+
+  const careerPathsLastIndex = careerPathsCurrentPage * itemsPerPage;
+  const careerPathsFirstIndex = careerPathsLastIndex - itemsPerPage;
+  const currentCareerPaths = careerPaths.slice(
+    careerPathsFirstIndex,
+    careerPathsLastIndex
+  );
+  const totalCareerPathsPages = Math.ceil(careerPaths.length / itemsPerPage);
+
   const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
     const handlePageChange = (pageNumber) => {
       setCurrentPage(pageNumber);
@@ -168,7 +181,6 @@ const Profile = () => {
 
             if (!roadmap.isPrivate) {
               try {
-                // Fetch ratings
                 const ratingResponse = await axios.get(
                   `${BACKEND_URL}/api/roadmaps/${roadmap._id}/rating`,
                   {
@@ -183,7 +195,6 @@ const Profile = () => {
                   ratingCount: ratingResponse.data.ratingCount,
                 };
 
-                // Fetch followers count
                 const followersResponse = await axios.get(
                   `${BACKEND_URL}/api/roadmaps/${roadmap._id}/followers-count`,
                   {
@@ -194,7 +205,6 @@ const Profile = () => {
                 );
 
                 if (followersResponse.data.success) {
-                  // Store followers count in the state
                   setFollowersCount((prevState) => ({
                     ...prevState,
                     [roadmap._id]: followersResponse.data.followersCount,
@@ -210,7 +220,11 @@ const Profile = () => {
             return roadmapWithData;
           })
         );
-        setUserRoadmaps(roadmapsWithRatings);
+        // Sort by lastUpdated date, newest first
+        const sortedRoadmaps = roadmapsWithRatings.sort(
+          (a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)
+        );
+        setUserRoadmaps(sortedRoadmaps);
       }
     } catch (error) {
       console.error("Error fetching user roadmaps:", error);
@@ -252,7 +266,6 @@ const Profile = () => {
       );
 
       if (response.data.success) {
-        // Fetch detailed information for each followed roadmap
         const followedRoadmapsDetails = await Promise.all(
           response.data.followedRoadmaps.map(async (roadmapId) => {
             try {
@@ -276,11 +289,15 @@ const Profile = () => {
           })
         );
 
-        // Filter out any null values (roadmaps that couldn't be fetched)
         const validRoadmaps = followedRoadmapsDetails.filter(
           (roadmap) => roadmap !== null
         );
-        setFollowedRoadmaps(validRoadmaps);
+
+        // Sort by lastUpdated date, newest first
+        const sortedRoadmaps = validRoadmaps.sort(
+          (a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)
+        );
+        setFollowedRoadmaps(sortedRoadmaps);
       }
     } catch (error) {
       console.error("Error fetching followed roadmaps:", error);
@@ -300,7 +317,6 @@ const Profile = () => {
       );
 
       if (response.data.success && !response.data.following) {
-        // If successfully unfollowed, remove from the followed roadmaps list
         setFollowedRoadmaps(
           followedRoadmaps.filter((roadmap) => roadmap._id !== roadmapId)
         );
@@ -359,6 +375,7 @@ const Profile = () => {
       console.error("Error toggling roadmap visibility:", error);
     }
   };
+
   const fetchSavedSuggestions = async () => {
     try {
       const response = await axios.get(
@@ -371,12 +388,17 @@ const Profile = () => {
       );
 
       if (response.data && response.data.savedSuggestions) {
-        setSavedSuggestions(response.data.savedSuggestions);
+        // Sort by createdAt date, newest first
+        const sortedSuggestions = response.data.savedSuggestions.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setSavedSuggestions(sortedSuggestions);
       }
     } catch (error) {
       console.error("Error fetching saved AI suggestions:", error);
     }
   };
+
   const deleteAISuggestion = async (suggestionId) => {
     if (!window.confirm("Are you sure you want to delete this suggestion?"))
       return;
@@ -391,7 +413,6 @@ const Profile = () => {
         }
       );
 
-      // Remove the deleted suggestion from state
       setSavedSuggestions(
         savedSuggestions.filter((suggestion) => suggestion._id !== suggestionId)
       );
@@ -399,6 +420,7 @@ const Profile = () => {
       console.error("Error deleting AI suggestion:", error);
     }
   };
+
   const fetchAIGeneratedRoadmaps = async () => {
     try {
       const response = await axios.get(
@@ -409,11 +431,16 @@ const Profile = () => {
           },
         }
       );
-      setAIGeneratedRoadmaps(response.data.aiGeneratedRoadmaps);
+      // Sort by createdAt date, newest first
+      const sortedRoadmaps = response.data.aiGeneratedRoadmaps.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setAIGeneratedRoadmaps(sortedRoadmaps);
     } catch (error) {
       console.error("Error fetching AI-generated roadmaps:", error);
     }
   };
+
   const deleteAIGeneratedRoadmap = async (id) => {
     if (!window.confirm("Are you sure you want to delete this roadmap?"))
       return;
@@ -430,6 +457,42 @@ const Profile = () => {
       console.error("Error deleting roadmap:", error);
     }
   };
+
+  const fetchCareerPaths = async () => {
+    try {
+      const response = await axios.get(
+        `${BACKEND_URL}/api/career-track/saved`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // Sort by createdAt date, newest first
+      const sortedPaths = (response.data.savedCareerPaths || []).sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      setCareerPaths(sortedPaths);
+    } catch (error) {
+      console.error("Error fetching career paths:", error);
+    }
+  };
+
+  const deleteCareerPath = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this career path?"))
+      return;
+
+    try {
+      await axios.delete(`${BACKEND_URL}/api/career-track/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setCareerPaths(careerPaths.filter((path) => path._id !== id));
+    } catch (error) {
+      console.error("Error deleting career path:", error);
+    }
+  };
+
   const findTechFieldTitle = (id) => {
     const cleanId = id.startsWith("/") ? id.substring(1) : id;
     const field = [...techFields, ...techSkills].find(
@@ -454,7 +517,6 @@ const Profile = () => {
     return (
       <div className="profile-page">
         <Navbar />
-
         <div className="profile-auth-required">
           <h2>Authentication Required</h2>
           <p>You need to log in to view your profile.</p>
@@ -468,7 +530,6 @@ const Profile = () => {
       <Navbar />
       <div className="profile-container">
         <div className="profile-layout">
-          {/* Sidebar */}
           <div className="profile-sidebar">
             <button
               className={`sidebar-item ${
@@ -506,9 +567,7 @@ const Profile = () => {
               className={`sidebar-item ${
                 activeSection === "aisuggestions" ? "active" : ""
               }`}
-              onClick={() => {
-                setActiveSection("aisuggestions");
-              }}
+              onClick={() => setActiveSection("aisuggestions")}
             >
               AI Suggestions
             </button>
@@ -520,9 +579,16 @@ const Profile = () => {
             >
               AI Generated Roadmaps
             </button>
+            <button
+              className={`sidebar-item ${
+                activeSection === "careertracker" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("careertracker")}
+            >
+              Career Advices
+            </button>
           </div>
 
-          {/* Main Content */}
           <div className="profile-main-content">
             {activeSection === "profile" && (
               <div className="profile-header-section">
@@ -588,9 +654,7 @@ const Profile = () => {
                               </span>
                             </div>
 
-                            {/* Stats Container */}
                             <div className="roadmap-stats-container">
-                              {/* Rating Display */}
                               {!roadmap.isPrivate && roadmap.ratingStats && (
                                 <div className="rating-container">
                                   {roadmap.ratingStats.ratingCount > 0 ? (
@@ -619,7 +683,6 @@ const Profile = () => {
                                 </div>
                               )}
 
-                              {/* Followers Count Display */}
                               {!roadmap.isPrivate && (
                                 <div className="followers-container">
                                   <svg
@@ -678,7 +741,6 @@ const Profile = () => {
                       ))}
                     </div>
 
-                    {/* Pagination for roadmaps */}
                     {totalRoadmapsPages > 1 && (
                       <Pagination
                         currentPage={roadmapsCurrentPage}
@@ -729,7 +791,6 @@ const Profile = () => {
                       })}
                     </div>
 
-                    {/* Pagination for bookmarks */}
                     {totalBookmarksPages > 1 && (
                       <Pagination
                         currentPage={bookmarksCurrentPage}
@@ -742,7 +803,6 @@ const Profile = () => {
               </div>
             )}
 
-            {/* New Followed Roadmaps Section */}
             {activeSection === "followed" && (
               <div className="profile-followed-section">
                 <h2 className="followed-title">Followed Roadmaps</h2>
@@ -783,7 +843,6 @@ const Profile = () => {
                               </span>
                             </div>
 
-                            {/* Rating Display for followed roadmaps */}
                             {roadmap.ratingStats && (
                               <div className="rating-container">
                                 {roadmap.ratingStats.ratingCount > 0 ? (
@@ -831,7 +890,6 @@ const Profile = () => {
                       ))}
                     </div>
 
-                    {/* Pagination for followed roadmaps */}
                     {totalFollowedPages > 1 && (
                       <Pagination
                         currentPage={followedCurrentPage}
@@ -843,6 +901,7 @@ const Profile = () => {
                 )}
               </div>
             )}
+
             {activeSection === "aisuggestions" && (
               <div className="profile-suggestions-section">
                 <div className="suggestions-header">
@@ -910,7 +969,6 @@ const Profile = () => {
                       ))}
                     </div>
 
-                    {/* Pagination for suggestions */}
                     {totalSuggestionsPages > 1 && (
                       <Pagination
                         currentPage={suggestionsCurrentPage}
@@ -922,6 +980,7 @@ const Profile = () => {
                 )}
               </div>
             )}
+
             {activeSection === "airoadmaps" && (
               <div className="profile-airoadmaps-section">
                 <div className="airoadmaps-header">
@@ -985,6 +1044,81 @@ const Profile = () => {
                         currentPage={aiRoadmapsCurrentPage}
                         totalPages={totalAIRoadmapsPages}
                         setCurrentPage={setAIRoadmapsCurrentPage}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+
+            {activeSection === "careertracker" && (
+              <div className="profile-careertracker-section">
+                <div className="careertracker-header">
+                  <h2 className="careertracker-title">Career Advices</h2>
+                  <Link
+                    to="/career-tracker"
+                    className="careertracker-create-btn"
+                  >
+                    Generate New Career Path
+                  </Link>
+                </div>
+                {careerPaths.length === 0 ? (
+                  <div className="careertracker-empty-state">
+                    <p className="empty-state-message">
+                      You haven't generated any career paths yet.
+                    </p>
+                    <Link
+                      to="/career-tracker"
+                      className="empty-state-action-btn"
+                    >
+                      Generate Your First Career Path
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    <div className="careertracker-list-container">
+                      {currentCareerPaths.map((path) => (
+                        <div key={path._id} className="careertracker-list-item">
+                          <div className="careertracker-list-content">
+                            <h3 className="careertracker-item-title">
+                              {path.inputs.careerGoal}
+                            </h3>
+                            <p className="careertracker-item-details">
+                              Skills: {path.inputs.currentSkills.join(", ")}
+                            </p>
+                            <p className="careertracker-item-details">
+                              Career Stage: {path.inputs.careerStage}
+                            </p>
+                            <div className="careertracker-item-metadata">
+                              <span className="careertracker-date">
+                                Created:{" "}
+                                {new Date(path.createdAt).toLocaleDateString()}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="careertracker-list-actions">
+                            <Link
+                              to={`/career-tracker/${path._id}`}
+                              className="view-careertracker-btn"
+                            >
+                              View
+                            </Link>
+                            <button
+                              className="delete-button"
+                              onClick={() => deleteCareerPath(path._id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {totalCareerPathsPages > 1 && (
+                      <Pagination
+                        currentPage={careerPathsCurrentPage}
+                        totalPages={totalCareerPathsPages}
+                        setCurrentPage={setCareerPathsCurrentPage}
                       />
                     )}
                   </>

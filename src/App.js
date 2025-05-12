@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./components/Register";
 import Roadmap from "./components/Roadmap";
 import Profile from "./components/Profile";
+import CareerTracker from "./components/CareerTracker";
 import fullStackDeveloperRoadmap from "./data/techroles/FullStackDeveloper";
 import Maincontent from "./components/Maincontent";
 import ForgotPassword from "./components/ForgotPassword";
@@ -74,6 +75,7 @@ import ReactNativeRoadmap from "./data/techskills/ReactNative";
 import dsaRoadmap from "./data/techskills/DSA";
 import ViewAIRoadmap from "./components/ViewAIRoadmap";
 import SmartFeedContent from "./components/SmartFeedContent";
+import ViewCareerTracker from "./components/ViewCareerTracker";
 function App() {
   return (
     <Router>
@@ -98,7 +100,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/smart-feed" element={<SmartFeedContent />} />
-
+          <Route path="/career-tracker" element={<CareerTracker />} />
+          <Route path="/career-tracker/:id" element={<ViewCareerTracker />} />
           {/* Tech Fields */}
           <Route
             path="/full-stack-developer"

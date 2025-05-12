@@ -198,8 +198,16 @@ const AIRoadmap = () => {
 
     setTimeout(() => button.remove(), 5000);
   };
+  function debounce(fn, delay) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
 
-  const renderRoadmap = () => {
+  // Modified renderRoadmap function with animations
+  const renderRoadmap = (withAnimation) => {
     if (data && d3Container.current && !loading) {
       d3.select(d3Container.current).selectAll("*").remove();
 
@@ -208,6 +216,11 @@ const AIRoadmap = () => {
       const FIXED_LINE_LENGTH = 100;
       const BASE_BOX_WIDTH = 120;
       const DIVIDER_PADDING = 30;
+
+      const TITLE_ANIMATION_DURATION = withAnimation ? 800 : 0;
+      const NODE_ANIMATION_DURATION = withAnimation ? 600 : 0;
+      const LINE_ANIMATION_DURATION = withAnimation ? 800 : 0;
+      const STAGGER_DELAY = withAnimation ? 100 : 0;
 
       const svgElement = d3
         .select(d3Container.current)
@@ -272,28 +285,50 @@ const AIRoadmap = () => {
       const titleGroup = svg
         .append("g")
         .attr("class", "title-node")
-        .attr("transform", `translate(${width / 2}, ${titleY})`);
+        .attr("transform", `translate(${width / 2}, ${titleY})`)
+        .style("opacity", 0); // Start invisible for animation
 
-      titleGroup
+      const titleRect = titleGroup
         .append("rect")
-        .attr("width", titleDimensions.width)
-        .attr("height", titleDimensions.height)
-        .attr("x", -titleDimensions.width / 2)
-        .attr("y", -titleDimensions.height / 2)
+        .attr("width", 0) // Start with zero width
+        .attr("height", 0) // Start with zero height
+        .attr("x", 0)
+        .attr("y", 0)
         .attr("rx", 10)
         .attr("ry", 10)
         .attr("fill", "#FFE700")
         .attr("stroke", "black")
         .attr("stroke-width", 2);
 
-      titleGroup
+      const titleTextElement = titleGroup
         .append("text")
         .attr("dy", "0.35em")
         .attr("text-anchor", "middle")
         .attr("font-size", "15px")
         .attr("font-family", "Arial, sans-serif")
         .attr("fill", "black")
+        .style("opacity", 0) // Text starts invisible
         .text(titleText);
+
+      // Animate the title appearing
+      titleGroup
+        .transition()
+        .duration(TITLE_ANIMATION_DURATION)
+        .style("opacity", 1);
+
+      titleRect
+        .transition()
+        .duration(TITLE_ANIMATION_DURATION)
+        .attr("width", titleDimensions.width)
+        .attr("height", titleDimensions.height)
+        .attr("x", -titleDimensions.width / 2)
+        .attr("y", -titleDimensions.height / 2);
+
+      titleTextElement
+        .transition()
+        .delay(TITLE_ANIMATION_DURATION * 0.5)
+        .duration(TITLE_ANIMATION_DURATION * 0.5)
+        .style("opacity", 1);
 
       const lineStartY = titleY + titleDimensions.height / 2;
 
@@ -368,16 +403,24 @@ const AIRoadmap = () => {
       const lineEndY =
         parentPositions[0].y - parentPositions[0].node.dimensions.height / 2;
 
-      svg
+      // Main spine from title to first parent - initially with 0 length then animate
+      const mainSpine = svg
         .append("line")
         .attr("x1", width / 2)
         .attr("y1", lineStartY)
         .attr("x2", width / 2)
-        .attr("y2", lineEndY)
+        .attr("y2", lineStartY) // Start with 0 length
         .attr("stroke", "#fff")
         .attr("stroke-width", 3)
         .attr("opacity", 0.7)
         .attr("stroke-dasharray", "5,5");
+
+      // Animate the main spine growing downward
+      mainSpine
+        .transition()
+        .delay(TITLE_ANIMATION_DURATION)
+        .duration(LINE_ANIMATION_DURATION)
+        .attr("y2", lineEndY);
 
       const totalHeight = currentY + margin.top + margin.bottom;
       svgElement.attr("height", totalHeight);
@@ -386,6 +429,7 @@ const AIRoadmap = () => {
         `0 -50 ${width + margin.left + margin.right} ${totalHeight + 50}`
       );
 
+      // Create parent spines with animations
       parentPositions.forEach((position, index) => {
         if (index > 0) {
           const prevPosition = parentPositions[index - 1];
@@ -394,18 +438,32 @@ const AIRoadmap = () => {
           const endY = position.y - position.node.dimensions.height / 2;
 
           if (prevPosition.node.dividerText) {
-            svg
+            // First part of spine
+            const firstSpine = svg
               .append("line")
               .attr("class", "parent-spine")
               .attr("x1", width / 2)
               .attr("y1", startY)
               .attr("x2", width / 2)
-              .attr("y2", prevPosition.dividerY - DIVIDER_PADDING)
+              .attr("y2", startY) // Start at same point
               .attr("stroke", "#fff")
               .attr("stroke-width", 3)
+              .attr("opacity", 0);
+
+            // Animate first spine
+            firstSpine
+              .transition()
+              .delay(
+                TITLE_ANIMATION_DURATION +
+                  LINE_ANIMATION_DURATION +
+                  index * STAGGER_DELAY
+              )
+              .duration(LINE_ANIMATION_DURATION / 2)
+              .attr("y2", prevPosition.dividerY - DIVIDER_PADDING)
               .attr("opacity", 0.7);
 
-            svg
+            // Add divider text with fade-in
+            const dividerText = svg
               .append("text")
               .attr("x", width / 2)
               .attr("y", prevPosition.dividerY)
@@ -414,28 +472,69 @@ const AIRoadmap = () => {
               .attr("font-size", "14px")
               .attr("font-family", "Arial, sans-serif")
               .attr("fill", "#fff")
+              .style("opacity", 0)
               .text(prevPosition.node.dividerText);
 
-            svg
+            // Animate divider text
+            dividerText
+              .transition()
+              .delay(
+                TITLE_ANIMATION_DURATION +
+                  LINE_ANIMATION_DURATION +
+                  LINE_ANIMATION_DURATION / 2 +
+                  index * STAGGER_DELAY
+              )
+              .duration(NODE_ANIMATION_DURATION)
+              .style("opacity", 1);
+
+            // Second part of spine
+            const secondSpine = svg
               .append("line")
               .attr("class", "parent-spine")
               .attr("x1", width / 2)
               .attr("y1", prevPosition.dividerY + DIVIDER_PADDING)
               .attr("x2", width / 2)
-              .attr("y2", endY)
+              .attr("y2", prevPosition.dividerY + DIVIDER_PADDING) // Start at same point
               .attr("stroke", "#fff")
               .attr("stroke-width", 3)
+              .attr("opacity", 0);
+
+            // Animate second spine
+            secondSpine
+              .transition()
+              .delay(
+                TITLE_ANIMATION_DURATION +
+                  LINE_ANIMATION_DURATION +
+                  LINE_ANIMATION_DURATION / 2 +
+                  NODE_ANIMATION_DURATION +
+                  index * STAGGER_DELAY
+              )
+              .duration(LINE_ANIMATION_DURATION / 2)
+              .attr("y2", endY)
               .attr("opacity", 0.7);
           } else {
-            svg
+            // Regular spine without divider
+            const spine = svg
               .append("line")
               .attr("class", "parent-spine")
               .attr("x1", width / 2)
               .attr("y1", startY)
               .attr("x2", width / 2)
-              .attr("y2", endY)
+              .attr("y2", startY) // Start with 0 length
               .attr("stroke", "#fff")
               .attr("stroke-width", 3)
+              .attr("opacity", 0);
+
+            // Animate spine growing
+            spine
+              .transition()
+              .delay(
+                TITLE_ANIMATION_DURATION +
+                  LINE_ANIMATION_DURATION +
+                  index * STAGGER_DELAY
+              )
+              .duration(LINE_ANIMATION_DURATION)
+              .attr("y2", endY)
               .attr("opacity", 0.7);
           }
         }
@@ -447,7 +546,8 @@ const AIRoadmap = () => {
         dimensions,
         defaultFillColor,
         strokeColor,
-        isLeft = null
+        isLeft = null,
+        animationDelay = 0
       ) => {
         let xOffset = 0;
         const boxWidth = dimensions.width;
@@ -457,32 +557,54 @@ const AIRoadmap = () => {
           xOffset = isLeft ? -growthOffset : growthOffset;
         }
 
-        // Use default fill color directly instead of getNodeColor
         const fillColor = defaultFillColor;
 
-        group
+        // Create the node rect with starting dimensions of 0
+        const rect = group
           .append("rect")
-          .attr("width", boxWidth)
-          .attr("height", dimensions.height)
-          .attr("x", -boxWidth / 2 + xOffset)
-          .attr("y", -dimensions.height / 2)
+          .attr("width", 0)
+          .attr("height", 0)
+          .attr("x", 0) // Start from center
+          .attr("y", 0) // Start from center
           .attr("rx", 10)
           .attr("ry", 10)
           .attr("fill", fillColor)
           .attr("stroke", strokeColor)
-          .attr("stroke-width", 2);
+          .attr("stroke-width", 2)
+          .style("opacity", 0);
 
-        group
+        // Animate the rect expanding
+        rect
+          .transition()
+          .delay(animationDelay)
+          .duration(NODE_ANIMATION_DURATION)
+          .attr("width", boxWidth)
+          .attr("height", dimensions.height)
+          .attr("x", -boxWidth / 2 + xOffset)
+          .attr("y", -dimensions.height / 2)
+          .style("opacity", 1);
+
+        // Add text with fade-in animation
+        const text = group
           .append("text")
           .attr("dy", "0.35em")
           .attr("text-anchor", "middle")
           .attr("font-size", "15px")
           .attr("font-family", "Arial, sans-serif")
           .attr("x", xOffset)
+          .style("opacity", 0)
           .text(node.name);
+
+        text
+          .transition()
+          .delay(animationDelay + NODE_ANIMATION_DURATION * 0.5)
+          .duration(NODE_ANIMATION_DURATION * 0.5)
+          .style("opacity", 1);
+
         const boxGroup = group.append("g");
 
-        boxGroup
+        // Interactive overlay rectangle (invisible initially)
+        const interactiveRect = boxGroup
           .append("rect")
           .attr("width", boxWidth)
           .attr("height", dimensions.height)
@@ -490,10 +612,11 @@ const AIRoadmap = () => {
           .attr("y", -dimensions.height / 2)
           .attr("rx", 10)
           .attr("ry", 10)
-          .attr("fill", fillColor)
-          .attr("stroke", strokeColor)
-          .attr("stroke-width", 2)
+          .attr("fill", "transparent") // Transparent fill
+          .attr("stroke", "transparent") // Transparent stroke
+          .attr("stroke-width", 0)
           .style("cursor", "pointer")
+          .style("opacity", 0)
           .on("click", (event) => {
             event.stopPropagation();
             setSelectedNode(node);
@@ -502,44 +625,65 @@ const AIRoadmap = () => {
             showAskAIButtonAtPosition(coords[0], coords[1], node);
           });
 
-        boxGroup
-          .append("text")
-          .attr("dy", "0.35em")
-          .attr("text-anchor", "middle")
-          .attr("font-size", "15px")
-          .attr("font-family", "Arial, sans-serif")
-          .attr("x", xOffset)
-          .text(node.name)
-          .style("pointer-events", "none"); // Prevent text from capturing clicks
+        // Animate the interactive part after the visual part
+        interactiveRect
+          .transition()
+          .delay(animationDelay + NODE_ANIMATION_DURATION)
+          .duration(100)
+          .style("opacity", 1);
 
         return { boxWidth, xOffset };
       };
 
+      // Create and animate parent nodes
       parentPositions.forEach(({ node: parent, y }, parentIndex) => {
         const parentX = width / 2;
+        const parentAnimationDelay =
+          TITLE_ANIMATION_DURATION +
+          LINE_ANIMATION_DURATION +
+          parentIndex * STAGGER_DELAY;
 
         const parentGroup = svg
           .append("g")
           .attr("class", "node")
-          .attr("transform", `translate(${parentX},${y})`);
+          .attr("transform", `translate(${parentX},${y})`)
+          .style("opacity", 0);
+
+        // Fade in the parent group
+        parentGroup
+          .transition()
+          .delay(parentAnimationDelay)
+          .duration(50)
+          .style("opacity", 1);
 
         const parentBox = createNode(
           parentGroup,
           parent,
           parent.dimensions,
           "#FFE700",
-          "black"
+          "black",
+          null,
+          0 // No additional delay within the group
         );
+
         if (parent.timeframe) {
-          // Create clock icon
+          // Create clock icon with animation
           const iconGroup = parentGroup
             .append("g")
             .attr("class", "timeframe-icon")
-            .attr("cursor", "pointer");
+            .attr("cursor", "pointer")
+            .style("opacity", 0);
 
           // Position slightly inside the top-left corner of parent node
           const iconX = -parent.dimensions.width / 2 + 5;
           const iconY = -parent.dimensions.height / 2 + 5;
+
+          // Animate icon appearance
+          iconGroup
+            .transition()
+            .delay(parentAnimationDelay + NODE_ANIMATION_DURATION * 0.8)
+            .duration(NODE_ANIMATION_DURATION * 0.5)
+            .style("opacity", 1);
 
           // Draw clock circle
           iconGroup
@@ -644,10 +788,12 @@ const AIRoadmap = () => {
             });
         }
 
+        // Animate children after parent appears
         if (parent.children?.length > 0) {
           const isLeft = parentIndex % 2 === 0;
+          const totalNodeCount = parent.children.length;
 
-          const drawChildren = (children, isLeftSide) => {
+          const drawChildren = (children, isLeftSide, parentDelay) => {
             // First, calculate required spacing for each child based on its nested children
             const childSpacings = children.map((child) => {
               // Base height is the child's own height
@@ -696,18 +842,35 @@ const AIRoadmap = () => {
                   child.dimensions.width / 2 -
                   childXOffset;
 
+              // Calculate child's animation delay: staggered based on index
+              const childAnimationDelay =
+                parentDelay +
+                NODE_ANIMATION_DURATION +
+                childIndex * (STAGGER_DELAY / 2);
+
+              // Create but initially hide the child group
               const childGroup = svg
                 .append("g")
                 .attr("class", "node")
-                .attr("transform", `translate(${baseChildX},${currentChildY})`);
+                .attr("transform", `translate(${baseChildX},${currentChildY})`)
+                .style("opacity", 0);
 
+              // Fade in the child group
+              childGroup
+                .transition()
+                .delay(childAnimationDelay)
+                .duration(50)
+                .style("opacity", 1);
+
+              // Create and animate the child node
               createNode(
                 childGroup,
                 child,
                 child.dimensions,
                 "#FEEE91",
                 "black",
-                isLeftSide
+                isLeftSide,
+                0 // No additional delay within the group
               );
 
               const parentConnectX =
@@ -717,6 +880,7 @@ const AIRoadmap = () => {
                 ? baseChildX + child.dimensions.width / 2 + childXOffset
                 : baseChildX - child.dimensions.width / 2 + childXOffset;
 
+              // Create and animate connection path
               const path = d3.path();
               path.moveTo(childConnectX, currentChildY);
               path.bezierCurveTo(
@@ -728,18 +892,32 @@ const AIRoadmap = () => {
                 y
               );
 
-              svg
+              const pathElement = svg
                 .append("path")
                 .attr("class", "child-link")
                 .attr("d", path.toString())
                 .attr("stroke", "#fff")
                 .attr("stroke-width", 2)
                 .attr("fill", "none")
-                .attr("opacity", 0.7)
-                .attr("stroke-dasharray", "5,5");
+                .attr("opacity", 0)
+                .attr("stroke-dasharray", "5,5")
+                .attr("stroke-dashoffset", 500); // For dashed line animation
 
+              // Animate the path
+              pathElement
+                .transition()
+                .delay(childAnimationDelay - STAGGER_DELAY / 4)
+                .duration(LINE_ANIMATION_DURATION)
+                .attr("opacity", 0.7)
+                .attr("stroke-dashoffset", 0); // Animate dashes
+
+              // Handle nested children if any
               if (child.children?.length > 0) {
-                const drawNestedChildren = (nestedChildren, parentChildY) => {
+                const drawNestedChildren = (
+                  nestedChildren,
+                  parentChildY,
+                  parentChildDelay
+                ) => {
                   const nestedTotalHeight =
                     nestedChildren.reduce(
                       (total, nestedChild) =>
@@ -752,7 +930,7 @@ const AIRoadmap = () => {
                   // Center the nested children group around the parent child's Y position
                   let currentNestedY = parentChildY - nestedTotalHeight / 2;
 
-                  nestedChildren.forEach((nestedChild) => {
+                  nestedChildren.forEach((nestedChild, nestedIndex) => {
                     const nestedXOffset = isLeftSide
                       ? -Math.max(
                           0,
@@ -774,23 +952,41 @@ const AIRoadmap = () => {
                         nestedChild.dimensions.width / 2 -
                         nestedXOffset;
 
+                    // Calculate nested child's animation delay
+                    const nestedAnimationDelay =
+                      parentChildDelay +
+                      NODE_ANIMATION_DURATION +
+                      nestedIndex * (STAGGER_DELAY / 3);
+
+                    // Create and initially hide nested child group
                     const nestedGroup = svg
                       .append("g")
                       .attr("class", "node")
                       .attr(
                         "transform",
                         `translate(${nestedX},${currentNestedY})`
-                      );
+                      )
+                      .style("opacity", 0);
 
+                    // Fade in the nested group
+                    nestedGroup
+                      .transition()
+                      .delay(nestedAnimationDelay)
+                      .duration(50)
+                      .style("opacity", 1);
+
+                    // Create and animate the nested child node
                     createNode(
                       nestedGroup,
                       nestedChild,
                       nestedChild.dimensions,
                       "#FFFFDD",
                       "black",
-                      isLeftSide
+                      isLeftSide,
+                      0 // No additional delay within the group
                     );
 
+                    // Create and animate connection to parent child
                     const childConnectX =
                       baseChildX +
                       (isLeftSide
@@ -815,23 +1011,36 @@ const AIRoadmap = () => {
                       parentChildY
                     );
 
-                    svg
+                    const nestedPathElement = svg
                       .append("path")
                       .attr("class", "nested-link")
                       .attr("d", nestedPath.toString())
                       .attr("stroke", "#fff")
                       .attr("stroke-width", 2)
                       .attr("fill", "none")
+                      .attr("opacity", 0)
+                      .attr("stroke-dasharray", "5,5")
+                      .attr("stroke-dashoffset", 500); // For dashed line animation
+
+                    // Animate the nested path
+                    nestedPathElement
+                      .transition()
+                      .delay(nestedAnimationDelay - STAGGER_DELAY / 4)
+                      .duration(LINE_ANIMATION_DURATION)
                       .attr("opacity", 0.7)
-                      .attr("stroke-dasharray", "5,5");
+                      .attr("stroke-dashoffset", 0); // Animate dashes
 
                     currentNestedY +=
                       nestedChild.dimensions.height + minNestedGroupGap;
                   });
                 };
 
-                // Pass the current child's Y position to properly center the nested children
-                drawNestedChildren(child.children, currentChildY);
+                // Pass the current child's Y position and delay to properly center and time the nested children
+                drawNestedChildren(
+                  child.children,
+                  currentChildY,
+                  childAnimationDelay
+                );
               }
 
               // Advance by the required space for this child rather than just its height
@@ -839,11 +1048,11 @@ const AIRoadmap = () => {
             });
           };
 
-          drawChildren(parent.children, isLeft);
+          // Start child animations after parent is fully visible
+          drawChildren(parent.children, isLeft, parentAnimationDelay);
         }
       });
-
-      measureSvg.remove();
+      measureSvg.remove(); // Clean up the measure SVG after use
     }
   };
 
@@ -919,9 +1128,14 @@ const AIRoadmap = () => {
 
   useEffect(() => {
     if (data) {
-      renderRoadmap();
-      window.addEventListener("resize", renderRoadmap);
-      return () => window.removeEventListener("resize", renderRoadmap);
+      renderRoadmap(true); // initial render with animation
+
+      const handleResize = debounce(() => {
+        renderRoadmap(false); // re-render on resize without animation
+      }, 300);
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
     }
   }, [data]);
 
@@ -971,7 +1185,7 @@ const AIRoadmap = () => {
       </div>
       <div className="roadmap-container">
         <div className="input-section">
-          <h2>Create AI Generated Learning Roadmap🤖</h2>
+          <h2>Create AI Generated Learning Roadmap✨</h2>
           <div className="input-group">
             <input
               type="text"

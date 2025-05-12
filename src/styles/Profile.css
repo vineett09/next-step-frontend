@@ -1,1395 +1,762 @@
-.profile-page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* Profile.css - Modern Dark Theme */
+:root {
+  --primary-color: #6366f1;
+  --primary-hover: #818cf8;
+  --secondary-color: #3b82f6;
+  --background-dark: #0f172a;
+  --background-darker: #020617;
+  --surface-dark: #1e293b;
+  --surface-darker: #172033;
+  --surface-light: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --text-disabled: #64748b;
+  --accent-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #eab308;
+  --border-color: #334155;
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --transition-speed: 0.3s;
 }
 
+/* Global Styles */
+.profile-page {
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Main Layout */
 .profile-container {
-  max-width: 1200px;
-  width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 2rem 1rem;
-  flex: 1;
 }
 
 .profile-layout {
   display: flex;
   gap: 2rem;
-  height: calc(100vh - 1rem - 60px); 
+  position: relative;
 }
 
-.profile-main-content {
-  flex: 1;
-  max-height: 100%; 
-  overflow-y: auto; 
-}
-
+/* Sidebar Styles */
 .profile-sidebar {
-  width: 250px;
-  height: 410px; 
-  border-radius: 10px;
-  border: 1px solid #fff;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; 
-  overflow-y: auto; 
+  width: 280px;
+  background-color: var(--surface-darker);
+  border-radius: 16px;
+  padding: 1.5rem 0;
+  box-shadow: var(--card-shadow);
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+  overflow: hidden;
+  transition: all var(--transition-speed) ease;
 }
 
 .sidebar-item {
-  display: block;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
   width: 100%;
-  padding: 1rem;
-  margin-bottom: 0.5rem;
-  background-color: #f8f9fa;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333;
   text-align: left;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all var(--transition-speed) ease;
 }
 
 .sidebar-item:hover {
-  background-color: #e9ecef;
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .sidebar-item.active {
-  background-color: #181C14;
-  color: white;
+  color: var(--text-primary);
+  background-color: var(--primary-color);
+  border-left: 4px solid var(--primary-hover);
+  font-weight: 600;
 }
 
-.profile-loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 1.2rem;
-  color: #fff;
-}
-
-.profile-header-section {
-  border-radius: 10px;
-  border: 1px solid #fff;
+/* Main Content */
+.profile-main-content {
+  flex: 1;
+  background-color: var(--surface-dark);
+  border-radius: 16px;
   padding: 2rem;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+/* Profile Section */
+.profile-header-section {
   margin-bottom: 2rem;
 }
 
 .profile-title {
-  margin-top: 0;
-  margin-bottom: 1.5rem;
-  color: #fff;
   font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
 }
 
 .profile-user-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  background-color: var(--surface-darker);
+  padding: 1.5rem;
+  border-radius: 12px;
 }
 
 .profile-user-detail {
-  margin: 0.5rem 0;
+  margin-bottom: 1rem;
   font-size: 1.1rem;
-  color: #fff;
 }
 
-.profile-roadmaps-section {
-  border-radius: 10px;
-  border: 1px solid #fff;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.profile-user-detail:last-child {
+  margin-bottom: 0;
 }
 
-.roadmaps-header {
+.profile-user-detail strong {
+  color: var(--primary-color);
+  margin-right: 0.5rem;
+}
+
+/* Common Section Styles */
+.roadmaps-title,
+.bookmarks-title,
+.followed-title,
+.suggestions-title,
+.airoadmaps-title,
+.careertracker-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.roadmaps-header,
+.suggestions-header,
+.airoadmaps-header,
+.careertracker-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
 }
 
-.roadmaps-title {
-  margin: 0;
-  color: #fff;
-  font-size: 1.5rem;
+/* Button Styles */
+.roadmap-create-btn,
+.empty-state-action-btn,
+.empty-state-explore-btn,
+.create-suggestion-btn,
+.airoadmap-create-btn,
+.careertracker-create-btn {
+  background-color: var(--primary-color);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
   font-weight: 600;
-}
-
-.roadmap-create-btn {
-  display: inline-block;
-  background-color: #fff;
-  color: #000;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
+  cursor: pointer;
   text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  transition: all var(--transition-speed) ease;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
 }
 
-.roadmap-create-btn:hover {
-  background-color: #22281c;
-  color: #fff;
+.roadmap-create-btn:hover,
+.empty-state-action-btn:hover,
+.empty-state-explore-btn:hover,
+.create-suggestion-btn:hover,
+.airoadmap-create-btn:hover,
+.careertracker-create-btn:hover {
+  background-color: var(--primary-hover);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 
-.roadmaps-list-container,
-.bookmarks-list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-}
-
-.roadmap-list-item {
-  background-color: #31363F;
+/* List Item Styles */
+.roadmap-list-item,
+.bookmark-list-item,
+.followed-list-item,
+.suggestion-list-item,
+.airoadmap-list-item,
+.careertracker-list-item {
+  background-color: var(--surface-darker);
   border-radius: 12px;
-  padding: 1.75rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  border: 1px solid #3a404a;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  gap: 1rem;
 }
 
-.roadmap-list-item:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  border-color: #4a5568;
+.roadmap-list-item:hover,
+.bookmark-list-item:hover,
+.followed-list-item:hover,
+.suggestion-list-item:hover,
+.airoadmap-list-item:hover,
+.careertracker-list-item:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.roadmap-list-content {
+.roadmap-list-content,
+.followed-list-content,
+.suggestion-list-content,
+.airoadmap-list-content,
+.careertracker-list-content,
+.bookmark-content {
   flex: 1;
 }
 
-.roadmap-item-title {
-  margin: 0 0 0.75rem 0;
-  font-size: 1.35rem;
-  color: #fff;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+.roadmap-item-title,
+.followed-item-title,
+.suggestion-item-title,
+.bookmark-item-title,
+.airoadmap-item-title,
+.careertracker-item-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
 }
 
-.roadmap-item-description {
-  color: #cbd5e0;
+.roadmap-item-description,
+.followed-item-description {
+  color: var(--text-secondary);
   margin-bottom: 1rem;
-  line-height: 1.6;
-  font-size: 1rem;
-  max-width: 90%;
+  line-height: 1.5;
 }
 
-.roadmap-item-metadata {
-  color: #a0aec0;
+.suggestion-item-details,
+.careertracker-item-details {
+  color: var(--text-tertiary);
+  margin-bottom: 0.5rem;
+}
+
+.roadmap-item-metadata,
+.followed-item-metadata,
+.suggestion-item-metadata,
+.airoadmap-item-metadata,
+.careertracker-item-metadata {
+  display: flex;
+  gap: 1rem;
+  color: var(--text-tertiary);
   font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  margin-bottom: 0.75rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.roadmap-update-date {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.roadmap-update-date::before {
-  content: "";
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23a0aec0' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z'/%3E%3Cpath d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.visibility-status {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.35rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-}
-
-.status-private {
-  background-color: #521c22;
-  color: #fda4af;
-}
-
-.status-public {
-  background-color: #0f4937;
-  color: #86efac;
-}
-
-.roadmap-stats-container {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.followers-container {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #a0aec0;
-  padding: 0.25rem 0.7rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-}
-
-.followers-icon {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-}
-
-.followers-count-number {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
+/* Rating Stars */
 .rating-container {
+  margin-top: 0.75rem;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0.25rem 0.7rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
+  gap: 0.5rem;
 }
 
 .star-rating {
   display: inline-flex;
-  margin-right: 6px;
 }
 
 .star {
-  font-size: 14px;
-  margin-right: 1px;
+  font-size: 1.1rem;
+  margin-right: 0.1rem;
 }
 
 .full-star {
-  color: #fbbf24;
+  color: var(--warning-color);
 }
 
 .half-star {
+  color: var(--warning-color);
   position: relative;
-  color: #fbbf24;
 }
 
 .empty-star {
-  color: #4b5563;
+  color: var(--text-disabled);
 }
 
 .rating-count {
+  color: var(--text-tertiary);
   font-size: 0.9rem;
-  color: #a0aec0;
-  font-weight: 500;
 }
 
 .no-ratings {
+  color: var(--text-disabled);
   font-size: 0.9rem;
-  color: #a0aec0;
-  font-style: italic;
 }
 
-.roadmap-list-actions {
-  position: relative;
+/* Followers Count */
+.followers-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-tertiary);
 }
 
+.followers-icon {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+/* Visibility Status */
+.visibility-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-private {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.status-public {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+/* Action Buttons */
+.roadmap-list-actions,
+.followed-list-actions,
+.suggestion-list-actions,
+.airoadmap-list-actions,
+.careertracker-list-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.view-followed-btn,
+.unfollow-btn,
+.view-suggestion-btn,
+.view-airoadmap-btn,
+.view-careertracker-btn,
+.bookmark-view-link {
+  padding: 0.6rem 1.2rem;
+  margin-right: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  transition: all var(--transition-speed) ease;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  min-width: 100px;
+}
+
+.view-followed-btn,
+.view-suggestion-btn,
+.view-airoadmap-btn,
+.view-careertracker-btn,
+.bookmark-view-link {
+  background-color: var(--secondary-color);
+  color: var(--text-primary);
+  border: none;
+}
+
+.view-followed-btn:hover,
+.view-suggestion-btn:hover,
+.view-airoadmap-btn:hover,
+.view-careertracker-btn:hover,
+.bookmark-view-link:hover {
+  background-color: #60a5fa;
+}
+
+.unfollow-btn,
+.delete-button {
+  background-color: transparent;
+  color: var(--error-color);
+  border-radius: 5px;
+  border: 1px solid var(--error-color);
+  padding: 0.5rem 0.2rem;
+}
+
+.unfollow-btn:hover,
+.delete-button:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+}
+
+/* Dropdown Menu */
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
 .dropdown-toggle {
-  background: transparent;
+  background-color: transparent;
   border: none;
+  color: var(--text-secondary);
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff;
+  padding: 0.25rem 0.5rem;
   cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+  transition: color var(--transition-speed) ease;
 }
 
 .dropdown-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
 }
 
 .dropdown-menu {
   position: absolute;
+  right: 0;
   top: 100%;
-  right: 0;
-  z-index: 1000;
-  display: none;
-  min-width: 10rem;
-  padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
-  font-size: 0.95rem;
-  color: #212529;
-  text-align: left;
-  list-style: none;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  background-color: var(--surface-light);
+  border-radius: 8px;
+  min-width: 150px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-speed) ease;
+  z-index: 100;
 }
 
-.roadmap-list-item:last-child .dropdown-menu {
-  right: 0;
-  left: auto;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
+.dropdown:hover .dropdown-menu,
+.dropdown:focus-within .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
 }
 
 .dropdown-item {
   display: block;
-  width: 100%;
-  padding: 0.75rem 1.5rem;
-  clear: both;
-  font-weight: 400;
-  color: #212529;
-  text-align: inherit;
-  white-space: nowrap;
-  background-color: transparent;
-  border: 0;
+  padding: 0.75rem 1rem;
+  color: var(--text-secondary);
   text-decoration: none;
+  font-size: 0.95rem;
+  transition: all var(--transition-speed) ease;
   cursor: pointer;
+  border: none;
+  background: transparent;
+  text-align: left;
+  width: 100%;
 }
 
-.dropdown-item:hover,
-.dropdown-item:focus {
-  color: #16181b;
-  text-decoration: none;
-  background-color: #f8f9fa;
+.dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
 }
 
-.dropdown-item.delete-option {
-  color: #dc3545;
+.dropdown-item:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
-.dropdown-item.delete-option:hover {
-  background-color: #ffe9e9;
+.dropdown-item:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
-.dropdown-item.toggle-visibility {
-  color: #4a6cf7;
+.delete-option {
+  color: var(--error-color);
 }
 
-.dropdown-item.toggle-visibility:hover {
-  background-color: #e9f0ff;
+.delete-option:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #f87171;
 }
 
-.bookmark-list-item {
-  background-color: #31363F;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-  border: 1px solid #fff;
-}
-
-.bookmark-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  
-}
-
-.bookmark-item-title {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #fff;
-  font-weight: 600;
-}
-
-.bookmark-view-link {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: #e9f0ff;
-  color: #4a6cf7;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: background-color 0.2s ease;
-}
-
-.bookmark-view-link:hover {
-  background-color: #d5e3ff;
-}
-
-.roadmaps-empty-state, .bookmarks-empty-state {
-  text-align: center;
-  padding: 3.5rem 2rem;
-  background-color: #31363F;
+/* Empty States */
+.roadmaps-empty-state,
+.bookmarks-empty-state,
+.followed-empty-state,
+.suggestions-empty-state,
+.airoadmaps-empty-state,
+.careertracker-empty-state {
+  background-color: var(--surface-darker);
   border-radius: 12px;
-  border: 1px dashed #4a5568;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 3rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  border: 2px dashed var(--border-color);
 }
 
 .empty-state-message {
-  margin-bottom: 1.75rem;
-  color: #cbd5e0;
-  font-size: 1.15rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
 }
 
-.empty-state-action-btn, .empty-state-explore-btn {
-  display: inline-block;
-  background-color: #181C14;
-  color: white;
-  padding: 0.85rem 1.75rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s ease;
-  border: none;
-  letter-spacing: 0.02em;
-}
-
-.empty-state-action-btn:hover, .empty-state-explore-btn:hover {
-  background-color: #22281c;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.profile-bookmarks-section {
-  border-radius: 10px;
-  border: 1px solid #fff;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.bookmarks-title {
-  margin: 0 0 1.5rem 0;
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
+/* Pagination */
 .pagination-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .pagination-button {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  color: #333;
-  padding: 8px 12px;
-  border-radius: 4px;
+  background-color: var(--surface-light);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s;
+  transition: all var(--transition-speed) ease;
 }
 
 .pagination-button:hover:not([disabled]) {
-  background-color: #e0e0e0;
+  background-color: var(--primary-color);
 }
 
-.pagination-button:disabled {
-  opacity: 0.5;
+.pagination-button[disabled] {
+  background-color: var(--surface-darker);
+  color: var(--text-disabled);
   cursor: not-allowed;
 }
 
 .pagination-info {
-  margin: 0 15px;
-  font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
 }
 
-.profile-followed-section {
-  width: 100%;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  border: 1px solid #fff;
-}
-
-.followed-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.followed-empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px;
-  text-align: center;
-  border: 1px solid #000;
-  border-radius: 8px;
-  background-color: #31363F;
-}
-
-.followed-list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.followed-list-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  border-radius: 6px;
-  border: 1px solid #fff;
-  transition: all 0.2s ease;
-  background-color: #31363F;
-}
-
-.followed-list-item:hover {
-  border-color: #d1d5da;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.followed-list-content {
-  flex: 1;
-}
-
-.followed-item-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #fff;
-}
-
-.followed-item-description {
-  color: #fff;
-  font-size: 0.9rem;
-  margin-bottom: 12px;
-}
-
-.followed-item-metadata {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  font-size: 0.8rem;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.followed-author {
-  display: inline-flex;
-  align-items: center;
-}
-
-.followed-update-date {
-  display: inline-flex;
-  align-items: center;
-}
-
-.followed-list-actions {
-  display: flex;
-  align-items: center;
-}
-
-.followed-action-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.view-followed-btn, 
-.unfollow-btn {
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.view-followed-btn {
-  background-color: #f1f8ff;
-  color: #0366d6;
-  border: 1px solid #0366d6;
-}
-
-.view-followed-btn:hover {
-  background-color: #e6f1ff;
-}
-
-.unfollow-btn {
-  background-color: #ffffff;
-  color: #d73a49;
-  border: 1px solid #d73a49;
-}
-
-.unfollow-btn:hover {
-  background-color: #ffeef0;
-}
-.profile-suggestions-section {
-  border-radius: 10px;
-  border: 1px solid #fff;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.suggestions-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.suggestions-title {
-  margin: 0;
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.create-suggestion-btn {
-  display: inline-block;
-  background-color: #fff;
-  color: #000;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
-}
-
-.create-suggestion-btn:hover {
-  background-color: #22281c;
-  color: #fff;
-}
-
-.suggestions-empty-state {
-  text-align: center;
-  padding: 3.5rem 2rem;
-  background-color: #31363F;
-  border-radius: 12px;
-  border: 1px dashed #4a5568;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.suggestions-list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.suggestion-list-item {
-  background-color: #31363F;
-  border-radius: 12px;
-  padding: 1.75rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  border: 1px solid #3a404a;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1.25rem;
-}
-
-.suggestion-list-item:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  border-color: #4a5568;
-}
-
-.suggestion-list-content {
-  flex: 1;
-}
-
-.suggestion-item-title {
-  margin: 0 0 0.75rem 0;
-  font-size: 1.35rem;
-  color: #fff;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.suggestion-item-details {
-  color: #cbd5e0;
-  margin-bottom: 0.5rem;
-  line-height: 1.6;
-  font-size: 1rem;
-}
-
-.suggestion-item-metadata {
-  color: #a0aec0;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.suggestion-date {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.suggestion-date::before {
-  content: "";
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23a0aec0' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z'/%3E%3Cpath d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.suggestion-list-actions {
-  display: flex;
-  align-items: center;
-}
-
-.view-suggestion-btn {
-  padding: 0.6rem 1.2rem;
-  background-color: #fff;
-  color: #000;
-  border: none;
-  border-radius: 5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.view-suggestion-btn:hover {
-  background-color: #22281c;
-  color: #fff;
-}
-
-/* Suggestion View Styles */
-.suggestion-view {
-  background-color: #31363F;
-  border-radius: 12px;
-  padding: 2rem;
-  border: 1px solid #3a404a;
-}
-
-.suggestion-view-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.back-to-suggestions-btn {
-  display: flex;
-  align-items: center;
-  background: transparent;
-  color: #fff;
-  border: 1px solid #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.back-to-suggestions-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.download-suggestion-btn {
-  background-color: #fff;
-  color: #000;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.download-suggestion-btn:hover {
-  background-color: #22281c;
-  color: #fff;
-}
-
-.suggestion-content {
-  background-color: #222831;
-  padding: 2rem;
-  border-radius: 8px;
-  color: #fff;
-  line-height: 1.6;
-  max-height: 70vh;
-  overflow-y: auto;
-  border: 1px solid #4a5568;
-}
-
-.suggestion-content h1,
-.suggestion-content h2,
-.suggestion-content h3 {
-  color: #fff;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.suggestion-content p {
-  margin-bottom: 1rem;
-}
-
-.suggestion-content ul,
-.suggestion-content ol {
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.suggestion-content li {
-  margin-bottom: 0.5rem;
-}
-
-/* Responsive styles for AI suggestions */
-@media (max-width: 768px) {
-  .suggestions-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .suggestion-view-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  
-  .back-to-suggestions-btn,
-  .download-suggestion-btn {
-    width: 100%;
-    justify-content: center;
-  }
-  
-  .suggestion-content {
-    padding: 1.5rem;
-    max-height: 60vh;
-  }
-  
-  .suggestion-list-item {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .suggestion-list-actions {
-    width: 100%;
-  }
-  
-  .view-suggestion-btn {
-    width: 100%;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Questionnaire roadmap content styles for PDF download */
-.questionnaire-roadmap-content {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  padding: 20px;
-  background-color: #fff;
+.profile-main-content > div {
+  animation: fadeIn 0.5s ease forwards;
 }
 
-.questionnaire-roadmap-content h1 {
-  font-size: 24px;
-  margin-bottom: 16px;
-  color: #000;
-}
-
-.questionnaire-roadmap-content h2 {
-  font-size: 20px;
-  margin-top: 24px;
-  margin-bottom: 12px;
-  color: #222;
-}
-
-.questionnaire-roadmap-content h3 {
-  font-size: 18px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.questionnaire-roadmap-content p {
-  margin-bottom: 16px;
-}
-
-.questionnaire-roadmap-content ul,
-.questionnaire-roadmap-content ol {
-  margin-left: 20px;
-  margin-bottom: 16px;
-}
-
-.questionnaire-roadmap-content li {
-  margin-bottom: 8px;
-}
-/* AI Generated Roadmaps Section */
-.profile-airoadmaps-section {
-  border-radius: 10px;
-  border: 1px solid #fff;
-  padding: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.airoadmaps-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
-
-.airoadmaps-title {
-  margin: 0;
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.airoadmap-create-btn {
-  display: inline-block;
-  background-color: #fff;
-  color: #000;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.2s ease;
-}
-
-.airoadmap-create-btn:hover {
-  background-color: #22281c;
-  color: #fff;
-}
-
-.airoadmaps-empty-state {
-  text-align: center;
-  padding: 3.5rem 2rem;
-  background-color: #31363F;
-  border-radius: 12px;
-  border: 1px dashed #4a5568;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.airoadmaps-list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.airoadmap-list-item {
-  background-color: #31363F;
-  border-radius: 12px;
-  padding: 1.75rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  border: 1px solid #3a404a;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.airoadmap-list-item:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  border-color: #4a5568;
-}
-
-.airoadmap-list-content {
-  flex: 1;
-}
-
-.airoadmap-item-title {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.35rem;
-  color: #fff;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.airoadmap-item-metadata {
-  color: #a0aec0;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.airoadmap-date {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.airoadmap-date::before {
-  content: "";
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23a0aec0' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z'/%3E%3Cpath d='M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.airoadmap-list-actions {
-  display: flex;
-  align-items: center;
-}
-
-.view-airoadmap-btn {
-  padding: 0.6rem 1.2rem;
-  background-color: #fff;
-  color: #000;
-  border: none;
-  border-radius: 5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-}
-
-.view-airoadmap-btn:hover {
-  background-color: #22281c;
-  color: #fff;
-}
-.delete-button {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  margin-left: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease-in-out;
-}
-
-.delete-button:hover {
-  background-color: #cc0000;
-}
-
-.delete-button:active {
-  background-color: #a30000;
-}
-
+/* Authentication Required */
 .profile-auth-required {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #121212;
-  border: 1px solid #FFE700;
-  border-radius: 12px;
-  padding: 40px;
-  max-width: 500px;
-  margin: 100px auto;
+  background-color: var(--surface-dark);
+  border-radius: 16px;
+  padding: 4rem 2rem;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(255, 231, 0, 0.15);
+  max-width: 600px;
+  margin: 5rem auto;
+  box-shadow: var(--card-shadow);
 }
 
 .profile-auth-required h2 {
-  color: #FFE700;
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  font-weight: 600;
+  color: var(--error-color);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
 }
 
 .profile-auth-required p {
-  color: #ffffff;
-  font-size: 1rem;
-  margin-bottom: 30px;
-  line-height: 1.5;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
 }
-@media (max-width: 1024px) {
-  .profile-container {
-    padding: 1.5rem 0.75rem;
-  }
 
+/* Loading State */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+/* Roadmaps Stats Container */
+.roadmap-stats-container {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1200px) {
   .profile-layout {
     gap: 1.5rem;
   }
-
+  
   .profile-sidebar {
-    width: 200px;
+    width: 240px;
   }
+}
 
-  .roadmap-list-item {
+@media (max-width: 992px) {
+  .profile-layout {
     flex-direction: column;
-    gap: 1rem;
   }
-
-  .roadmap-list-actions {
+  
+  .profile-sidebar {
     width: 100%;
+    margin-bottom: 1.5rem;
+    position: static;
+    padding: 0.5rem 0;
     display: flex;
-    justify-content: flex-end;
+    overflow-x: auto;
+    border-radius: 12px;
   }
-
-  .followed-list-item {
+  
+  .sidebar-item {
+    padding: 0.75rem 1.25rem;
+    white-space: nowrap;
+    justify-content: center;
+  }
+  
+  .sidebar-item.active {
+    border-left: none;
+    border-bottom: 4px solid var(--primary-hover);
+  }
+  
+  .roadmaps-header, 
+  .suggestions-header,
+  .airoadmaps-header,
+  .careertracker-header {
     flex-direction: column;
     gap: 1rem;
-  }
-
-  .followed-list-actions {
-    width: 100%;
-    justify-content: flex-end;
+    align-items: flex-start;
   }
 }
 
 @media (max-width: 768px) {
-  .profile-layout {
-    flex-direction: column;
-    height: auto;
-  }
-
   .profile-container {
-    padding: 1rem 0.5rem;
+    padding: 1rem 0.75rem;
   }
-
-  .profile-sidebar {
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 0.5rem;
-    justify-content: space-around;
-    border-radius: 8px;
-  }
-
-  .sidebar-item {
-    flex: 1;
-    min-width: 80px;
-    margin: 0.25rem;
-    padding: 0.5rem;
-    font-size: 0.9rem;
-  }
-
+  
   .profile-main-content {
-    max-height: none;
-    overflow-y: visible;
-  }
-
-  .profile-header-section,
-  .profile-roadmaps-section,
-  .profile-bookmarks-section,
-  .profile-followed-section,
-  .profile-suggestions-section {
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .roadmaps-header,
-  .suggestions-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .roadmap-create-btn,
-  .create-suggestion-btn {
-    width: 100%;
-    text-align: center;
-  }
-
-  .profile-user-info {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .bookmark-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .dropdown-menu {
-    right: 0;
-    left: auto;
-    min-width: 8rem;
-  }
-
-  .roadmap-list-item,
-  .followed-list-item,
-  .suggestion-list-item {
-    padding: 1rem;
-  }
-
-  .roadmap-item-description,
-  .followed-item-description {
-    max-width: 100%;
-  }
-
-  .roadmap-stats-container,
-  .followed-item-metadata {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .pagination-container {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .pagination-button {
-    padding: 6px 10px;
-  }
-  .airoadmaps-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-  
-  .airoadmap-create-btn {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .airoadmap-list-item {
-    flex-direction: column;
-    gap: 1rem;
     padding: 1.5rem;
   }
   
-  .airoadmap-list-actions {
-    width: 100%;
-    justify-content: flex-end;
+  .roadmap-list-item,
+  .bookmark-list-item,
+  .followed-list-item,
+  .suggestion-list-item,
+  .airoadmap-list-item,
+  .careertracker-list-item {
+    flex-direction: column;
+    padding: 1.25rem;
   }
   
-  .view-airoadmap-btn {
-    width: 100%;
+  .roadmap-list-actions,
+  .followed-list-actions,
+  .suggestion-list-actions,
+  .airoadmap-list-actions,
+  .careertracker-list-actions {
+    flex-direction: row;
+    gap: 0.75rem;
   }
-}
-
-@media (max-width: 480px) {
-  .profile-container {
-    padding: 0.5rem;
+  
+  .view-followed-btn,
+  .unfollow-btn,
+  .view-suggestion-btn,
+  .view-airoadmap-btn,
+  .view-careertracker-btn {
+    margin-bottom: 0;
   }
-
+  
+  .roadmap-item-metadata,
+  .followed-item-metadata,
+  .suggestion-item-metadata,
+  .airoadmap-item-metadata,
+  .careertracker-item-metadata {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
   .sidebar-item {
-    min-width: 60px;
-    font-size: 0.8rem;
-    padding: 0.4rem;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
   }
-
+  
   .profile-title,
   .roadmaps-title,
   .bookmarks-title,
   .followed-title,
-  .suggestions-title {
-    font-size: 1.2rem;
+  .suggestions-title,
+  .airoadmaps-title,
+  .careertracker-title {
+    font-size: 1.5rem;
   }
-
-  .roadmap-item-title,
-  .followed-item-title,
-  .suggestion-item-title {
-    font-size: 1.1rem;
-  }
-
-  .roadmap-item-description,
-  .followed-item-description,
-  .suggestion-item-details {
-    font-size: 0.9rem;
-  }
-
-  .roadmap-item-metadata,
-  .followed-item-metadata,
-  .suggestion-item-metadata {
-    font-size: 0.8rem;
-  }
-
-  .rating-container,
-  .followers-container {
-    padding: 0.2rem 0.5rem;
-  }
-
-  .dropdown-toggle {
-    width: 32px;
-    height: 32px;
-    font-size: 1.2rem;
-  }
-
-  .dropdown-item {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  .view-followed-btn,
-  .unfollow-btn,
-  .view-suggestion-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
+  
+  .roadmap-create-btn,
+  .empty-state-action-btn,
+  .empty-state-explore-btn,
+  .create-suggestion-btn,
+  .airoadmap-create-btn,
+  .careertracker-create-btn {
     width: 100%;
+    justify-content: center;
   }
+}
 
-  .followed-action-buttons {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.5rem;
-  }
-
-  .profile-auth-required {
-    margin: 50px 1rem;
-    padding: 20px;
-  }
-  .airoadmaps-title {
-    font-size: 1.2rem;
+@media (max-width: 480px) {
+  .profile-main-content {
+    padding: 1.25rem;
   }
   
-  .airoadmap-item-title {
-    font-size: 1.1rem;
+  .profile-sidebar {
+    padding: 0.25rem 0;
   }
   
-  .airoadmap-item-metadata {
-    font-size: 0.8rem;
+  .sidebar-item {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
   }
   
-  .view-airoadmap-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+  .profile-user-info {
+    padding: 1.25rem;
   }
-}
-
-/* Additional fluid layouts */
-.profile-container {
-  width: 100%;
-  max-width: 1200px;
-}
-
-.profile-sidebar {
-  min-width: 200px;
-}
-
-.profile-main-content {
-  width: 100%;
-}
-
-.roadmap-list-item,
-.bookmark-list-item,
-.followed-list-item,
-.suggestion-list-item {
-  width: 100%;
-}
-
-/* Smooth transitions for all interactive elements */
-.sidebar-item,
-.roadmap-list-item,
-.bookmark-list-item,
-.followed-list-item,
-.suggestion-list-item,
-.dropdown-toggle,
-button,
-a {
-  transition: all 0.3s ease;
+  
+  .roadmaps-empty-state,
+  .bookmarks-empty-state,
+  .followed-empty-state,
+  .suggestions-empty-state,
+  .airoadmaps-empty-state,
+  .careertracker-empty-state {
+    padding: 2rem 1rem;
+  }
+  
+  .profile-title,
+  .roadmaps-title,
+  .bookmarks-title,
+  .followed-title,
+  .suggestions-title,
+  .airoadmaps-title,
+  .careertracker-title {
+    font-size: 1.3rem;
+  }
+  
+  .empty-state-message {
+    font-size: 1rem;
+  }
+  
+  .pagination-button {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .pagination-info {
+    font-size: 0.85rem;
+  }
 }
