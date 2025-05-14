@@ -1222,9 +1222,13 @@ const AIRoadmap = () => {
                 onChange={(e) => setLevel(e.target.value)}
                 disabled={loading}
               >
-                <option value="Beginner">Beginner-Intermediate</option>
-                <option value="Intermediate">Intermediate-Advanced</option>
-                <option value="Advanced">Beginner-Advanced</option>
+                <option value="Beginner-Intermediate">
+                  Beginner-Intermediate
+                </option>
+                <option value="Intermediate-Advanced">
+                  Intermediate-Advanced
+                </option>
+                <option value="Beginner-Advanced">Beginner-Advanced</option>
               </select>
             </div>
             <div className="custom-context-box">
