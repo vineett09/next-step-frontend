@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../features/authslice";
 import "../styles/Navbar.css";
+import logo from "../assets/NextStep.png"; // Adjust path as needed
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -52,7 +53,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo" onClick={() => navigate("/")}>
-        <img src="NextStep.png" alt="Logo" className="navbar-logo-image" />
+        <img src={logo} alt="Logo" className="navbar-logo-image" />
         <span>NextStep</span>
       </div>
 

@@ -1,5 +1,5 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useTokenRefresh } from "./services/authservice";
 import ScrollToTop from "./ScrollToTop";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -77,6 +77,7 @@ import ViewAIRoadmap from "./components/ViewAIRoadmap";
 import SmartFeedContent from "./components/SmartFeedContent";
 import ViewCareerTracker from "./components/ViewCareerTracker";
 function App() {
+  useTokenRefresh();
   return (
     <Router>
       <ScrollToTop />

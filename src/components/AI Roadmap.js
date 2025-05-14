@@ -15,8 +15,8 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const AIRoadmap = () => {
   const [input, setInput] = useState("");
-  const [timeframe, setTimeframe] = useState("1 Month");
-  const [level, setLevel] = useState("Beginner");
+  const [timeframe, setTimeframe] = useState("As Required");
+  const [level, setLevel] = useState("Beginner-Intermediate");
   const [contextInfo, setContextInfo] = useState("");
   const [aiFeedback, setAiFeedback] = useState("");
   const [data, setData] = useState(null);
@@ -1204,6 +1204,7 @@ const AIRoadmap = () => {
                 onChange={(e) => setTimeframe(e.target.value)}
                 disabled={loading}
               >
+                <option value="As Required">As Required</option>
                 <option value="1 Week">1 Week</option>
                 <option value="2 Weeks">2 Weeks</option>
                 <option value="1 Month">1 Month</option>
@@ -1221,9 +1222,9 @@ const AIRoadmap = () => {
                 onChange={(e) => setLevel(e.target.value)}
                 disabled={loading}
               >
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Advanced">Advanced</option>
+                <option value="Beginner">Beginner-Intermediate</option>
+                <option value="Intermediate">Intermediate-Advanced</option>
+                <option value="Advanced">Beginner-Advanced</option>
               </select>
             </div>
             <div className="custom-context-box">

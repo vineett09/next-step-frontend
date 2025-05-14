@@ -5,7 +5,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./Store";
+import axios from "axios";
+import { setupAxiosInterceptors } from "./services/authservice";
 import "./index.css";
+
+setupAxiosInterceptors(axios, store);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

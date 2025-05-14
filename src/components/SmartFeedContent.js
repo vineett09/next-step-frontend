@@ -191,7 +191,7 @@ const SmartFeedContent = () => {
 
   // Determine if we should show the personalization tip
   const showPersonalizationTip = user && bookmarkedRoadmaps.length === 0;
-
+  const showPersonalizationTip2 = user && bookmarkedRoadmaps.length > 0;
   return (
     <div className="weekly-content-page">
       <Navbar />
@@ -205,7 +205,14 @@ const SmartFeedContent = () => {
             </p>
           </div>
         )}
-
+        {showPersonalizationTip2 && (
+          <div className="personalization-tip">
+            <p>
+              {" "}
+              💡 This feed is based on your bookmarks and personalized for you!
+            </p>
+          </div>
+        )}
         {/* Show tip for non logged-in users */}
         {!user && (
           <div className="personalization-tip">
