@@ -1,5 +1,3 @@
-// Create a new file: src/services/authService.js
-
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshToken } from "../features/authslice";
@@ -11,11 +9,12 @@ export const useTokenRefresh = () => {
     token,
     tokenExpiryTime,
     refreshToken: refToken,
+    user,
   } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    // Skip if no token or refresh token
-    if (!token || !refToken) return;
+    // Skip if no token, no refresh token, or no user (logged out)
+    if (!token || !refToken || !user) return;
 
     // Function to check and refresh token
     const checkTokenExpiry = () => {
@@ -35,7 +34,7 @@ export const useTokenRefresh = () => {
     const interval = setInterval(checkTokenExpiry, 5 * 60 * 1000);
 
     return () => clearInterval(interval);
-  }, [token, tokenExpiryTime, refToken, dispatch]);
+  }, [token, tokenExpiryTime, refToken, user, dispatch]); // Added user dependency
 };
 
 // Setup axios interceptor for automatic token handling
@@ -59,7 +58,12 @@ export const setupAxiosInterceptors = (axiosInstance, store) => {
       const originalRequest = error.config;
 
       // If error is 401 (Unauthorized) and not already retrying
-      if (error.response?.status === 401 && !originalRequest._retry) {
+      // Also check if user is still logged in
+      if (
+        error.response?.status === 401 &&
+        !originalRequest._retry &&
+        store.getState().auth.user !== null
+      ) {
         originalRequest._retry = true;
 
         try {

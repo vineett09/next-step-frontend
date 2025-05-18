@@ -1,13 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 export const refreshToken = createAsyncThunk(
   "auth/refreshToken",
   async (_, { getState, rejectWithValue }) => {
     try {
-      const { refreshToken } = getState().auth;
+      const { refreshToken, user } = getState().auth;
 
-      if (!refreshToken) {
+      // Don't attempt refresh if user is logged out
+      if (!refreshToken || !user) {
         return rejectWithValue({
           message: "No refresh token available",
           code: "NO_REFRESH_TOKEN",
@@ -31,7 +33,6 @@ export const refreshToken = createAsyncThunk(
   }
 );
 
-// Add this new thunk for logout
 export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, { getState, dispatch }) => {
@@ -40,15 +41,19 @@ export const logoutUser = createAsyncThunk(
 
       // Send logout request to server if token exists
       if (token) {
-        await axios.post(
-          `${BACKEND_URL}/api/auth/logout`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        try {
+          await axios.post(
+            `${BACKEND_URL}/api/auth/logout`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+        } catch (error) {
+          console.warn("Logout server request failed:", error);
+        }
       }
 
       // Clear local state regardless of server response
@@ -63,6 +68,35 @@ export const logoutUser = createAsyncThunk(
     }
   }
 );
+
+// Delete account thunk
+export const deleteAccount = createAsyncThunk(
+  "auth/deleteAccount",
+  async (_, { getState, dispatch, rejectWithValue }) => {
+    try {
+      const { token } = getState().auth;
+
+      if (!token) {
+        return rejectWithValue({ message: "Not authenticated" });
+      }
+
+      await axios.delete(`${BACKEND_URL}/api/auth/delete-account`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      // First dispatch logout to clear all auth state
+      dispatch(logout());
+
+      return { success: true };
+    } catch (error) {
+      console.error("Account deletion error:", error);
+      return rejectWithValue({
+        message: error.response?.data?.msg || "Failed to delete account",
+      });
+    }
+  }
+);
+
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (userData, { rejectWithValue }) => {
@@ -109,6 +143,7 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
 export const requestPasswordReset = createAsyncThunk(
   "auth/requestPasswordReset",
   async (userData, { rejectWithValue }) => {
@@ -150,6 +185,7 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
   token: localStorage.getItem("token") || null,
@@ -296,7 +332,10 @@ const authSlice = createSlice({
         }
 
         // If refresh failed due to invalid token, logout
-        if (action.payload?.code === "INVALID_REFRESH_TOKEN") {
+        if (
+          action.payload?.code === "INVALID_REFRESH_TOKEN" ||
+          action.payload?.message === "Invalid refresh token"
+        ) {
           state.user = null;
           state.token = null;
           state.refreshToken = null;
@@ -306,6 +345,20 @@ const authSlice = createSlice({
           localStorage.removeItem("refreshToken");
           localStorage.removeItem("tokenExpiryTime");
         }
+      })
+      // Add cases for deleteAccount
+      .addCase(deleteAccount.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteAccount.fulfilled, (state) => {
+        state.loading = false;
+        // Note: We don't need to clear state here as the logout action is dispatched
+        // in the thunk before this is fulfilled
+      })
+      .addCase(deleteAccount.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.message || "Failed to delete account";
       });
   },
 });

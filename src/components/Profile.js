@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import Loader from "./Loader";
 import "../styles/Profile.css";
 import { techFields, techSkills } from "../data/TechFieldsData";
+import { deleteAccount } from "../features/authslice";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const StarRating = ({ value }) => {
@@ -58,7 +59,9 @@ const Profile = () => {
   const [careerPaths, setCareerPaths] = useState([]);
   const [careerPathsCurrentPage, setCareerPathsCurrentPage] = useState(1);
   const itemsPerPage = 3;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [deleteError, setDeleteError] = useState("");
 
   useEffect(() => {
     if (token && user) {
@@ -164,6 +167,30 @@ const Profile = () => {
         </button>
       </div>
     );
+  };
+  const handleDeleteAccount = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
+
+    if (!confirmed) return;
+
+    try {
+      setDeleteError("");
+
+      // Use the deleteAccount thunk which handles both backend deletion and logout
+      const resultAction = await dispatch(deleteAccount()).unwrap();
+
+      if (resultAction.success) {
+        // Redirect to login after successful account deletion
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Account deletion failed:", error);
+      setDeleteError(
+        error.message || "Failed to delete account. Please try again."
+      );
+    }
   };
 
   const fetchUserRoadmaps = async () => {
@@ -600,6 +627,17 @@ const Profile = () => {
                   <p className="profile-user-detail">
                     <strong>Email:</strong> {user?.email}
                   </p>
+                  <button
+                    onClick={handleDeleteAccount}
+                    disabled={loading}
+                    className="account-delete-btn"
+                  >
+                    {loading ? "Processing..." : "Delete Account"}
+                  </button>
+
+                  {deleteError && (
+                    <p className="error-message">{deleteError}</p>
+                  )}
                 </div>
               </div>
             )}
