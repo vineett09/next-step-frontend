@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { techFields, techSkills } from "../data/TechFieldsData";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-// Lazy load components that aren't immediately needed
+// Lazy load components
 const Header = React.lazy(() => import("./Header"));
 const TechSkills = React.lazy(() => import("./TechSkills"));
 const TechRoles = React.lazy(() => import("./TechRoles"));
@@ -28,7 +28,6 @@ const AISuggestionContainer = React.lazy(() =>
   import("./AISuggestionContainer")
 );
 
-// Utility function to debounce function calls
 const debounce = (fn, delay) => {
   let timeoutId;
   return (...args) => {
@@ -56,15 +55,17 @@ const Roadmap = ({ data }) => {
     height: window.innerHeight,
   });
   const [selectedNode, setSelectedNode] = useState(null);
+  const [hoveredNodeId, setHoveredNodeId] = useState(null);
   const chatbotRef = useRef(null);
-  // Memoize expensive lookups
+  const [lastTapTime, setLastTapTime] = useState(0);
+  const [lastTappedNodeId, setLastTappedNodeId] = useState(null);
+  const isSmallScreen = () => window.innerWidth <= 768;
+
   const fieldOrSkill = useMemo(() => {
     const field = techFields.find((field) => field.link === `/${roadmapId}`);
     if (field) return field;
-
     const skill = techSkills.find((skill) => skill.link === `/${roadmapId}`);
     if (skill) return skill;
-
     return null;
   }, [roadmapId]);
 
@@ -76,7 +77,6 @@ const Roadmap = ({ data }) => {
     [fieldOrSkill]
   );
 
-  // Memoize node counting
   const countTotalNodes = useCallback((nodes) => {
     let count = 0;
     const countRecursive = (nodeList) => {
@@ -87,15 +87,13 @@ const Roadmap = ({ data }) => {
         }
       });
     };
-
-    if (nodes.children) {
+    if (nodes?.children) {
+      // Added optional chaining for safety
       countRecursive(nodes.children);
     }
-
     return count;
   }, []);
 
-  // Calculate total nodes once when data changes
   useEffect(() => {
     if (data) {
       const nodeCount = countTotalNodes(data);
@@ -104,7 +102,6 @@ const Roadmap = ({ data }) => {
     }
   }, [data, countTotalNodes]);
 
-  // Fetch data only when dependencies change
   useEffect(() => {
     if (user && token && roadmapId) {
       fetchUserProgress();
@@ -112,12 +109,10 @@ const Roadmap = ({ data }) => {
     }
   }, [user, token, roadmapId]);
 
-  // Memoize metrics calculation functions
   const calculateNodeDimensions = useCallback((text, measureSvg) => {
     const paddingX = 20;
     const paddingY = 10;
     const BASE_BOX_WIDTH = 120;
-
     const textElement = measureSvg
       .append("text")
       .attr("font-size", "15px")
@@ -125,22 +120,41 @@ const Roadmap = ({ data }) => {
       .text(text);
     const bbox = textElement.node().getBBox();
     textElement.remove();
-
     return {
       width: Math.max(bbox.width + paddingX * 2, BASE_BOX_WIDTH),
       height: bbox.height + paddingY * 2,
     };
   }, []);
 
-  // Process node metrics once when data changes
+  const processDataWithParentReferences = useCallback((node, parent = null) => {
+    if (!node) return null; // Safety check
+    // Ensure nodeId is always a string, even if name/id are numbers. Default to a unique string if all else fails.
+    const rawNodeId = node.id ?? node.name;
+    const nodeId =
+      rawNodeId !== undefined
+        ? String(rawNodeId)
+        : `unknown-node-${Math.random().toString(36).substring(7)}`;
+
+    const processedNode = { ...node, parent, nodeId };
+    if (node.children) {
+      processedNode.children = node.children
+        .map((child) => processDataWithParentReferences(child, processedNode))
+        .filter(Boolean); // Filter out nulls
+    }
+    return processedNode;
+  }, []);
+
+  const processedChartData = useMemo(() => {
+    if (!data) return null;
+    return processDataWithParentReferences(data);
+  }, [data, processDataWithParentReferences]);
+
   const processNodeMetrics = useCallback(
-    (data, svgElement) => {
-      if (!data || !data.children) return { parents: [] };
-
+    (processedData, svgElement) => {
+      if (!processedData || !processedData.children) return { parents: [] };
       const measureSvg = svgElement.append("g").style("visibility", "hidden");
-
       const metrics = {
-        parents: data.children.map((parent) => ({
+        parents: processedData.children.map((parent) => ({
           ...parent,
           dimensions: calculateNodeDimensions(parent.name, measureSvg),
           children:
@@ -158,7 +172,6 @@ const Roadmap = ({ data }) => {
             })) || [],
         })),
       };
-
       measureSvg.remove();
       return metrics;
     },
@@ -169,21 +182,12 @@ const Roadmap = ({ data }) => {
     try {
       const response = await axios.get(
         `${BACKEND_URL}/api/progress/${roadmapId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-
       const progressMap = response.data.reduce((acc, item) => {
-        acc[item.nodeId] = {
-          completed: true,
-          timestamp: item.timestamp,
-        };
+        acc[item.nodeId] = { completed: true, timestamp: item.timestamp };
         return acc;
       }, {});
-
       setCompletedNodes(progressMap);
     } catch (error) {
       console.error("Error fetching user progress:", error);
@@ -194,11 +198,7 @@ const Roadmap = ({ data }) => {
     try {
       const response = await axios.get(
         `${BACKEND_URL}/api/bookmark/bookmarks`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       setIsBookmarked(response.data.includes(roadmapId));
     } catch (error) {
@@ -211,18 +211,12 @@ const Roadmap = ({ data }) => {
       setShowAuthModal(true);
       return;
     }
-
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/progress/toggle`,
         { roadmapId, nodeId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
-
       if (response.data.success) {
         setCompletedNodes((prev) => {
           const newState = { ...prev };
@@ -236,6 +230,30 @@ const Roadmap = ({ data }) => {
           }
           return newState;
         });
+
+        // Find the actual node data to pass to getNodeColor for preferred status
+        let nodeToColor = { nodeId: nodeId, preferred: false }; // Default
+        function findNode(searchNode, id) {
+          if (!searchNode) return null;
+          if (searchNode.nodeId === id) return searchNode;
+          if (searchNode.children) {
+            for (const child of searchNode.children) {
+              const found = findNode(child, id);
+              if (found) return found;
+            }
+          }
+          return null;
+        }
+        const actualNode = findNode(processedChartData, nodeId);
+        if (actualNode) nodeToColor = actualNode;
+
+        d3.selectAll(`.node-group[data-id="${nodeId}"] rect`)
+          .transition()
+          .duration(150)
+          .attr("fill", getNodeColor(nodeToColor, "#FFE700", true))
+          .transition()
+          .duration(300)
+          .attr("fill", getNodeColor(nodeToColor, "#FFE700"));
       }
     } catch (error) {
       console.error("Error updating progress:", error);
@@ -251,11 +269,7 @@ const Roadmap = ({ data }) => {
       const response = await axios.post(
         `${BACKEND_URL}/api/bookmark/bookmark-toggle`,
         { roadmapId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.data.success) {
         setIsBookmarked(response.data.bookmarked);
@@ -266,22 +280,80 @@ const Roadmap = ({ data }) => {
   };
 
   const getNodeColor = useCallback(
-    (node, defaultColor) => {
-      const nodeId = node.id || node.name;
+    (node, defaultColor, isHighlight = false) => {
+      const nodeId = node?.nodeId; // Use optional chaining and nodeId
+      if (!nodeId) return defaultColor; // Safety for undefined node or nodeId
 
-      if (completedNodes[nodeId]) {
-        return "#4CAF50";
-      }
+      if (isHighlight && completedNodes[nodeId]) return "#66BB6A";
+      if (completedNodes[nodeId]) return "#4CAF50";
+      if (isHighlight && node.preferred) return "#FFB74D";
+      if (node.preferred) return "#FF8C00";
 
-      return node.preferred ? "#FF8C00" : defaultColor;
+      return defaultColor;
     },
     [completedNodes]
   );
-  const showAskAIButtonAtPosition = (x, y, node) => {
-    // Remove any existing button first
-    d3.select(d3Container.current).select(".ask-ai-button").remove();
 
-    // Create a button element
+  const getLinkStyle = useCallback(
+    (sourceNode, targetNode) => {
+      const sourceId = sourceNode?.nodeId;
+      const targetId = targetNode?.nodeId;
+      let stroke = "#fff";
+      let strokeWidth = 2;
+      let opacity = 0.7;
+
+      if (!sourceId || !targetId) return { stroke, strokeWidth, opacity }; // Safety
+
+      if (completedNodes[sourceId] && completedNodes[targetId]) {
+        stroke = "#4CAF50";
+        opacity = 1;
+        strokeWidth = 2.5;
+      } else if (completedNodes[sourceId] || completedNodes[targetId]) {
+        stroke = "#FFD54F";
+        opacity = 0.85;
+      }
+
+      if (hoveredNodeId) {
+        const isSourceHovered = sourceId === hoveredNodeId;
+        const isTargetHovered = targetId === hoveredNodeId;
+
+        // Check if the link is directly connected to the hovered node
+        let linkPartOfPath = false;
+        if (isSourceHovered && targetNode?.parent?.nodeId === sourceId) {
+          // target is child of hovered source
+          linkPartOfPath = true;
+        } else if (isTargetHovered && sourceNode?.parent?.nodeId === targetId) {
+          // source is child of hovered target
+          linkPartOfPath = true;
+        }
+        // Add checks for parent relationships if needed (source is parent of hovered target, etc.)
+        // This means sourceNode is parent of targetNode
+        else if (isTargetHovered && targetNode?.parent?.nodeId === sourceId) {
+          // source is parent of hovered target
+          linkPartOfPath = true;
+        } else if (isSourceHovered && sourceNode?.parent?.nodeId === targetId) {
+          // target is parent of hovered source
+          linkPartOfPath = true;
+        }
+
+        if (linkPartOfPath) {
+          stroke = "#03A9F4";
+          strokeWidth = 3;
+          opacity = 1;
+        } else {
+          opacity = 0.2;
+        }
+      }
+      return { stroke, strokeWidth, opacity };
+    },
+    [completedNodes, hoveredNodeId]
+  );
+
+  const showAskAIButtonAtPosition = (x, y, node) => {
+    // Don't show button on small screens
+    if (isSmallScreen()) return;
+
+    d3.select(d3Container.current).select(".ask-ai-button").remove();
     const button = d3
       .select(d3Container.current)
       .append("div")
@@ -293,30 +365,51 @@ const Roadmap = ({ data }) => {
       .style("color", "white")
       .style("padding", "8px 16px")
       .style("border-radius", "20px")
-      .style("font-size", "10px")
+      .style("font-size", "12px")
       .style("cursor", "pointer")
-      .style("box-shadow", "0 2px 5px rgba(0,0,0,0.2)")
+      .style("box-shadow", "0 4px 8px rgba(0,0,0,0.2)")
       .style("z-index", "100")
       .style("transform", "translate(-50%, 30px)")
-      .text("Ask AI")
+      .text(`Ask AI about ${node.name}`)
       .on("click", () => {
         openChatbotWithNodeQuery(node);
-        // Remove the button after clicking
         button.remove();
       });
-
-    // Auto-hide the button after 5 seconds
-    setTimeout(() => {
-      button.remove();
-    }, 5000);
+    setTimeout(() => button.remove(), 5000);
   };
 
+  // Add this helper function for handling clicks
+  const handleNodeClick = (event, node) => {
+    if (!node) return;
+    event.stopPropagation();
+
+    if (isSmallScreen()) {
+      const currentTime = Date.now();
+      const timeDiff = currentTime - lastTapTime;
+
+      // Double tap detection (within 300ms and same node)
+      if (timeDiff < 300 && lastTappedNodeId === node.nodeId) {
+        openChatbotWithNodeQuery(node);
+        setLastTapTime(0);
+        setLastTappedNodeId(null);
+      } else {
+        setSelectedNode(node);
+        setLastTapTime(currentTime);
+        setLastTappedNodeId(node.nodeId);
+      }
+    } else {
+      // Desktop behavior - show button
+      setSelectedNode(node);
+      const coords = d3.pointer(event, d3Container.current);
+      showAskAIButtonAtPosition(coords[0], coords[1], node);
+    }
+  };
   const openChatbotWithNodeQuery = (node) => {
     if (chatbotRef.current) {
       chatbotRef.current.openWithNodeQuery(node);
     }
   };
-  // Handle resize with debounce
+
   useEffect(() => {
     const handleResize = debounce(() => {
       setWindowSize({
@@ -324,16 +417,13 @@ const Roadmap = ({ data }) => {
         height: window.innerHeight,
       });
     }, 250);
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Main rendering function - optimized with useCallback to prevent recreation on every render
   const renderRoadmap = useCallback(() => {
-    if (!data || !d3Container.current || isLoading) return;
+    if (!processedChartData || !d3Container.current || isLoading) return;
 
-    // Clear previous SVG
     if (svgRef.current) {
       d3.select(svgRef.current).remove();
     }
@@ -352,11 +442,9 @@ const Roadmap = ({ data }) => {
       .attr("class", "roadmap-svg")
       .attr("preserveAspectRatio", "xMidYMid meet")
       .attr("viewBox", `0 -50 ${width + margin.left + margin.right} 1000`);
-
     svgRef.current = svgElement.node();
 
-    // Process node metrics once
-    const nodeMetrics = processNodeMetrics(data, svgElement);
+    const nodeMetrics = processNodeMetrics(processedChartData, svgElement);
 
     const childVerticalGap = 20;
     const minNestedGroupGap = 0;
@@ -365,16 +453,34 @@ const Roadmap = ({ data }) => {
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
+    const defs = svg.append("defs");
+    const nodeGradient = defs
+      .append("linearGradient")
+      .attr("id", "nodeGradient")
+      .attr("x1", "0%")
+      .attr("y1", "0%")
+      .attr("x2", "100%")
+      .attr("y2", "100%");
+    nodeGradient
+      .append("stop")
+      .attr("offset", "0%")
+      .style("stop-color", "#fff1a0");
+    nodeGradient
+      .append("stop")
+      .attr("offset", "100%")
+      .style("stop-color", "#FFD700");
+
     const titleText = roadmapTitle;
     const measureSvg = svgElement.append("g").style("visibility", "hidden");
     const titleDimensions = calculateNodeDimensions(titleText, measureSvg);
     measureSvg.remove();
-
     const titleY = 50;
 
     const titleGroup = svg
       .append("g")
-      .attr("class", "title-node")
+      .datum(processedChartData)
+      .attr("class", "title-node node-group")
+      .attr("data-id", processedChartData.nodeId)
       .attr("transform", `translate(${width / 2}, ${titleY})`);
 
     titleGroup
@@ -383,11 +489,12 @@ const Roadmap = ({ data }) => {
       .attr("height", titleDimensions.height)
       .attr("x", -titleDimensions.width / 2)
       .attr("y", -titleDimensions.height / 2)
-      .attr("rx", 10)
-      .attr("ry", 10)
-      .attr("fill", getNodeColor(data, "#FFE700"))
+      .attr("rx", 15)
+      .attr("ry", 15)
+      .attr("fill", getNodeColor(processedChartData, "#FFE700"))
       .attr("stroke", "black")
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 2)
+      .style("filter", "drop-shadow(3px 5px 4px rgba(0,0,0,0.15))");
 
     titleGroup
       .append("text")
@@ -398,9 +505,35 @@ const Roadmap = ({ data }) => {
       .attr("fill", "black")
       .text(titleText);
 
+    titleGroup
+      .on("mouseover", function (event, d) {
+        if (d && d.nodeId) {
+          setHoveredNodeId(d.nodeId);
+          d3.select(this)
+            .select("rect")
+            .transition()
+            .duration(150)
+            .style("transform", "scale(1.05)")
+            .attr("fill", getNodeColor(d, "#FFE700", true));
+        }
+      })
+      .on("mouseout", function (event, d) {
+        setHoveredNodeId(null);
+        if (d) {
+          d3.select(this)
+            .select("rect")
+            .transition()
+            .duration(150)
+            .style("transform", "scale(1)")
+            .attr("fill", getNodeColor(d, "#FFE700"));
+        }
+      })
+      .on("click", (event, d) => {
+        handleNodeClick(event, d);
+      });
+
     const lineStartY = titleY + titleDimensions.height / 2;
 
-    // Calculate space needed for a parent and all its descendants
     const calculateParentSpan = (parent) => {
       const children = parent.children || [];
       if (children.length === 0) {
@@ -409,14 +542,9 @@ const Roadmap = ({ data }) => {
           max_y: parent.dimensions.height / 2,
         };
       }
-
-      // Calculate space needed for each child including its nested children
       const childSpans = children.map((child) => {
-        // Start with the child's own dimensions
         let minY = -child.dimensions.height / 2;
         let maxY = child.dimensions.height / 2;
-
-        // If this child has nested children, calculate their required space
         if (child.children && child.children.length > 0) {
           const nestedTotalHeight =
             child.children.reduce(
@@ -424,16 +552,11 @@ const Roadmap = ({ data }) => {
               0
             ) +
             (child.children.length - 1) * minNestedGroupGap;
-
-          // The nested children group should be centered around the child
           minY = Math.min(minY, -nestedTotalHeight / 2);
           maxY = Math.max(maxY, nestedTotalHeight / 2);
         }
-
         return { minY, maxY, height: maxY - minY };
       });
-
-      // Now calculate the total span needed for all children with proper spacing
       let totalSpan = 0;
       childSpans.forEach((span, idx) => {
         totalSpan += span.height;
@@ -441,10 +564,8 @@ const Roadmap = ({ data }) => {
           totalSpan += childVerticalGap;
         }
       });
-
       let min_y = Math.min(-parent.dimensions.height / 2, -totalSpan / 2);
       let max_y = Math.max(parent.dimensions.height / 2, totalSpan / 2);
-
       return { min_y, max_y };
     };
 
@@ -457,13 +578,7 @@ const Roadmap = ({ data }) => {
       const position = currentY + blockHeight / 2;
       currentY += blockHeight + dividerSpace;
       const dividerY = parent.dividerText ? currentY - dividerSpace / 2 : null;
-
-      return {
-        node: parent,
-        y: position,
-        blockHeight,
-        dividerY,
-      };
+      return { node: parent, y: position, blockHeight, dividerY };
     });
 
     const lineEndY =
@@ -472,11 +587,12 @@ const Roadmap = ({ data }) => {
 
     svg
       .append("line")
+      .attr("class", "main-spine")
       .attr("x1", width / 2)
       .attr("y1", lineStartY)
       .attr("x2", width / 2)
       .attr("y2", lineEndY)
-      .attr("stroke", "#fff")
+      .attr("stroke", "#607D8B")
       .attr("stroke-width", 3)
       .attr("opacity", 0.7)
       .attr("stroke-dasharray", "5,5");
@@ -493,19 +609,19 @@ const Roadmap = ({ data }) => {
         const prevPosition = parentPositions[index - 1];
         const startY = prevPosition.y + prevPosition.node.dimensions.height / 2;
         const endY = position.y - position.node.dimensions.height / 2;
+        const spineLinkClass = `spine-link spine-link-${prevPosition.node.nodeId}-${position.node.nodeId}`;
 
         if (prevPosition.node.dividerText) {
           svg
             .append("line")
-            .attr("class", "parent-spine")
+            .attr("class", `parent-spine ${spineLinkClass}`)
             .attr("x1", width / 2)
             .attr("y1", startY)
             .attr("x2", width / 2)
             .attr("y2", prevPosition.dividerY - DIVIDER_PADDING)
-            .attr("stroke", "#fff")
+            .attr("stroke", "#607D8B")
             .attr("stroke-width", 3)
             .attr("opacity", 0.7);
-
           svg
             .append("text")
             .attr("x", width / 2)
@@ -514,28 +630,27 @@ const Roadmap = ({ data }) => {
             .attr("dominant-baseline", "middle")
             .attr("font-size", "14px")
             .attr("font-family", "Arial, sans-serif")
-            .attr("fill", "#fff")
+            .attr("fill", "#B0BEC5")
             .text(prevPosition.node.dividerText);
-
           svg
             .append("line")
-            .attr("class", "parent-spine")
+            .attr("class", `parent-spine ${spineLinkClass}`)
             .attr("x1", width / 2)
             .attr("y1", prevPosition.dividerY + DIVIDER_PADDING)
             .attr("x2", width / 2)
             .attr("y2", endY)
-            .attr("stroke", "#fff")
+            .attr("stroke", "#607D8B")
             .attr("stroke-width", 3)
             .attr("opacity", 0.7);
         } else {
           svg
             .append("line")
-            .attr("class", "parent-spine")
+            .attr("class", `parent-spine ${spineLinkClass}`)
             .attr("x1", width / 2)
             .attr("y1", startY)
             .attr("x2", width / 2)
             .attr("y2", endY)
-            .attr("stroke", "#fff")
+            .attr("stroke", "#607D8B")
             .attr("stroke-width", 3)
             .attr("opacity", 0.7);
         }
@@ -543,8 +658,8 @@ const Roadmap = ({ data }) => {
     });
 
     const createNode = (
-      group,
-      node,
+      group, // This is the D3 selection of the <g> element
+      node, // This is the data object for the node
       dimensions,
       defaultFillColor,
       strokeColor,
@@ -552,37 +667,69 @@ const Roadmap = ({ data }) => {
     ) => {
       let xOffset = 0;
       const boxWidth = dimensions.width;
-
       if (isLeft !== null) {
         const growthOffset = Math.max(0, (boxWidth - BASE_BOX_WIDTH) / 2);
         xOffset = isLeft ? -growthOffset : growthOffset;
       }
-
       const fillColor = getNodeColor(node, defaultFillColor);
 
-      group
-        .append("rect")
-        .attr("width", boxWidth)
-        .attr("height", dimensions.height)
-        .attr("x", -boxWidth / 2 + xOffset)
-        .attr("y", -dimensions.height / 2)
-        .attr("rx", 10)
-        .attr("ry", 10)
-        .attr("fill", fillColor)
-        .attr("stroke", strokeColor)
-        .attr("stroke-width", 2);
+      const currentDrawingNodeId = node.nodeId;
+      let isNodeDimmed = false;
+
+      if (hoveredNodeId && currentDrawingNodeId !== hoveredNodeId) {
+        // Attempt to get the hovered node's data object.
+        // Note: d3.select().datum() gets data from the FIRST selected element.
+        const hoveredNodeSelection = d3.select(
+          `.node-group[data-id="${hoveredNodeId}"]`
+        );
+        const hoveredNodeObject = hoveredNodeSelection.empty()
+          ? null
+          : hoveredNodeSelection.datum();
+
+        let partOfPath = false;
+        if (hoveredNodeObject) {
+          // 1. Is currentDrawingNode an ancestor of hoveredNodeObject?
+          let tempParentOfHovered = hoveredNodeObject.parent;
+          while (tempParentOfHovered) {
+            if (tempParentOfHovered.nodeId === currentDrawingNodeId) {
+              partOfPath = true;
+              break;
+            }
+            tempParentOfHovered = tempParentOfHovered.parent;
+          }
+
+          // 2. Is currentDrawingNode a child of hoveredNodeObject?
+          if (!partOfPath) {
+            if (
+              hoveredNodeObject.children?.some(
+                (child) => child.nodeId === currentDrawingNodeId
+              )
+            ) {
+              partOfPath = true;
+            }
+          }
+
+          // 3. Is currentDrawingNode a grandchild of hoveredNodeObject?
+          if (!partOfPath && hoveredNodeObject.children) {
+            for (const child of hoveredNodeObject.children) {
+              if (
+                child.children?.some(
+                  (grandchild) => grandchild.nodeId === currentDrawingNodeId
+                )
+              ) {
+                partOfPath = true;
+                break;
+              }
+            }
+          }
+
+          if (!partOfPath) {
+            isNodeDimmed = true;
+          }
+        }
+      }
 
       group
-        .append("text")
-        .attr("dy", "0.35em")
-        .attr("text-anchor", "middle")
-        .attr("font-size", "15px")
-        .attr("font-family", "Arial, sans-serif")
-        .attr("x", xOffset)
-        .text(node.name);
-      const boxGroup = group.append("g");
-
-      boxGroup
         .append("rect")
         .attr("width", boxWidth)
         .attr("height", dimensions.height)
@@ -593,16 +740,13 @@ const Roadmap = ({ data }) => {
         .attr("fill", fillColor)
         .attr("stroke", strokeColor)
         .attr("stroke-width", 2)
-        .style("cursor", "pointer")
-        .on("click", (event) => {
-          event.stopPropagation();
-          setSelectedNode(node);
-          // Calculate position for the button
-          const coords = d3.pointer(event, d3Container.current);
-          showAskAIButtonAtPosition(coords[0], coords[1], node);
-        });
+        .style("filter", "drop-shadow(2px 3px 3px rgba(0,0,0,0.1))")
+        .style(
+          "transition",
+          "opacity 0.3s, transform 0.2s ease-out, fill 0.3s ease"
+        );
 
-      boxGroup
+      group
         .append("text")
         .attr("dy", "0.35em")
         .attr("text-anchor", "middle")
@@ -610,23 +754,52 @@ const Roadmap = ({ data }) => {
         .attr("font-family", "Arial, sans-serif")
         .attr("x", xOffset)
         .text(node.name)
-        .style("pointer-events", "none"); // Prevent text from capturing clicks
+        .style("pointer-events", "none")
+        .style("transition", "opacity 0.3s ease-out");
 
+      group // The group itself is the clickable/hoverable area
+        .attr("cursor", "pointer")
+        .on("click", (event, d) => {
+          handleNodeClick(event, d);
+        })
+        .on("mouseover", function (event, d) {
+          // d here is 'node'
+          if (!d || !d.nodeId) return; // FIX: Safety check for d and d.nodeId
+          setHoveredNodeId(d.nodeId); // FIX: Use d.nodeId
+          d3.select(this)
+            .select("rect") // Select the rect within this group
+            .transition()
+            .duration(150)
+            .style("transform", "scale(1.05)")
+            .attr("fill", getNodeColor(d, defaultFillColor, true));
+        })
+        .on("mouseout", function (event, d) {
+          // d here is 'node'
+          if (!d) return; // Safety check
+          setHoveredNodeId(null);
+          d3.select(this)
+            .select("rect") // Select the rect within this group
+            .transition()
+            .duration(150)
+            .style("transform", "scale(1)")
+            .attr("fill", getNodeColor(d, defaultFillColor));
+        });
       return { boxWidth, xOffset };
     };
+
     parentPositions.forEach(({ node: parent, y }, parentIndex) => {
       const parentX = width / 2;
-
       const parentGroup = svg
         .append("g")
-        .attr("class", "node")
+        .datum(parent)
+        .attr("class", "node node-group")
+        .attr("data-id", parent.nodeId)
         .attr("transform", `translate(${parentX},${y})`)
-
         .on("contextmenu", (event) => {
+          // d is implicitly parent here
           event.preventDefault();
-          toggleNodeCompletion(parent.id || parent.name);
+          toggleNodeCompletion(parent.nodeId);
         });
-
       const parentBox = createNode(
         parentGroup,
         parent,
@@ -637,14 +810,9 @@ const Roadmap = ({ data }) => {
 
       if (parent.children?.length > 0) {
         const isLeft = parentIndex % 2 === 0;
-
-        const drawChildren = (children, isLeftSide) => {
-          // First, calculate required spacing for each child based on its nested children
+        const drawChildren = (children, isLeftSide, parentNodeData) => {
           const childSpacings = children.map((child) => {
-            // Base height is the child's own height
             let requiredSpace = child.dimensions.height;
-
-            // If this child has nested children, calculate their total space requirements
             if (child.children?.length > 0) {
               const nestedChildrenHeight =
                 child.children.reduce(
@@ -652,30 +820,22 @@ const Roadmap = ({ data }) => {
                     total + nestedChild.dimensions.height + minNestedGroupGap,
                   0
                 ) - minNestedGroupGap;
-
-              // Use the larger of the two: either the child's height or its nested children's total height
-              // Add extra padding to ensure enough space
               requiredSpace =
                 Math.max(requiredSpace, nestedChildrenHeight) + 20;
             }
-
             return requiredSpace;
           });
-
-          // Calculate total height needed with proper spacing
           const totalHeight =
             childSpacings.reduce(
               (total, space) => total + space + childVerticalGap,
               0
             ) - childVerticalGap;
-
           let currentChildY = y - totalHeight / 2;
 
           children.forEach((child, childIndex) => {
             const childXOffset = isLeftSide
               ? -Math.max(0, (child.dimensions.width - BASE_BOX_WIDTH) / 2)
               : Math.max(0, (child.dimensions.width - BASE_BOX_WIDTH) / 2);
-
             const baseChildX = isLeftSide
               ? parentX -
                 parentBox.boxWidth / 2 -
@@ -689,14 +849,15 @@ const Roadmap = ({ data }) => {
 
             const childGroup = svg
               .append("g")
-              .attr("class", "node")
+              .datum(child)
+              .attr("class", "node node-group")
+              .attr("data-id", child.nodeId)
               .attr("transform", `translate(${baseChildX},${currentChildY})`)
-
               .on("contextmenu", (event) => {
+                // d is implicitly child
                 event.preventDefault();
-                toggleNodeCompletion(child.id || child.name);
+                toggleNodeCompletion(child.nodeId);
               });
-
             createNode(
               childGroup,
               child,
@@ -724,28 +885,33 @@ const Roadmap = ({ data }) => {
               y
             );
 
+            const linkStyles = getLinkStyle(parentNodeData, child);
+            const linkClass = `child-link link-${parentNodeData.nodeId}-${child.nodeId}`;
+
             svg
               .append("path")
-              .attr("class", "child-link")
+              .attr("class", linkClass)
               .attr("d", path.toString())
-              .attr("stroke", "#fff")
-              .attr("stroke-width", 2)
+              .attr("stroke", linkStyles.stroke)
+              .attr("stroke-width", linkStyles.strokeWidth)
               .attr("fill", "none")
-              .attr("opacity", 0.7)
-              .attr("stroke-dasharray", "5,5");
+              .attr("opacity", linkStyles.opacity)
+              .attr("stroke-dasharray", "5,5")
+              .style("transition", "stroke 0.3s, opacity 0.3s");
 
             if (child.children?.length > 0) {
-              const drawNestedChildren = (nestedChildren, parentChildY) => {
+              const drawNestedChildren = (
+                nestedChildren,
+                parentChildY,
+                currentChildNodeData
+              ) => {
                 const nestedTotalHeight =
                   nestedChildren.reduce(
                     (total, nestedChild) =>
                       total + nestedChild.dimensions.height + minNestedGroupGap,
                     0
                   ) - minNestedGroupGap;
-
-                // Center the nested children group around the parent child's Y position
                 let currentNestedY = parentChildY - nestedTotalHeight / 2;
-
                 nestedChildren.forEach((nestedChild) => {
                   const nestedXOffset = isLeftSide
                     ? -Math.max(
@@ -756,7 +922,6 @@ const Roadmap = ({ data }) => {
                         0,
                         (nestedChild.dimensions.width - BASE_BOX_WIDTH) / 2
                       );
-
                   const nestedX = isLeftSide
                     ? baseChildX -
                       child.dimensions.width / 2 -
@@ -770,17 +935,18 @@ const Roadmap = ({ data }) => {
 
                   const nestedGroup = svg
                     .append("g")
-                    .attr("class", "node")
+                    .datum(nestedChild)
+                    .attr("class", "node node-group")
+                    .attr("data-id", nestedChild.nodeId)
                     .attr(
                       "transform",
                       `translate(${nestedX},${currentNestedY})`
                     )
-
                     .on("contextmenu", (event) => {
+                      // d is implicitly nestedChild
                       event.preventDefault();
-                      toggleNodeCompletion(nestedChild.id || nestedChild.name);
+                      toggleNodeCompletion(nestedChild.nodeId);
                     });
-
                   createNode(
                     nestedGroup,
                     nestedChild,
@@ -790,7 +956,7 @@ const Roadmap = ({ data }) => {
                     isLeftSide
                   );
 
-                  const childConnectX =
+                  const childConnectXInner =
                     baseChildX +
                     (isLeftSide
                       ? -child.dimensions.width / 2 + childXOffset
@@ -804,56 +970,69 @@ const Roadmap = ({ data }) => {
                   const nestedPath = d3.path();
                   nestedPath.moveTo(nestedConnectX, currentNestedY);
                   nestedPath.bezierCurveTo(
-                    (nestedConnectX + childConnectX) / 2,
+                    (nestedConnectX + childConnectXInner) / 2,
                     currentNestedY,
-                    (nestedConnectX + childConnectX) / 2,
+                    (nestedConnectX + childConnectXInner) / 2,
                     parentChildY,
-                    childConnectX,
+                    childConnectXInner,
                     parentChildY
                   );
 
+                  const nestedLinkStyles = getLinkStyle(
+                    currentChildNodeData,
+                    nestedChild
+                  );
+                  const nestedLinkClass = `nested-link link-${currentChildNodeData.nodeId}-${nestedChild.nodeId}`;
+
                   svg
                     .append("path")
-                    .attr("class", "nested-link")
+                    .attr("class", nestedLinkClass)
                     .attr("d", nestedPath.toString())
-                    .attr("stroke", "#fff")
-                    .attr("stroke-width", 2)
+                    .attr("stroke", nestedLinkStyles.stroke)
+                    .attr("stroke-width", nestedLinkStyles.strokeWidth)
                     .attr("fill", "none")
-                    .attr("opacity", 0.7)
-                    .attr("stroke-dasharray", "5,5");
+                    .attr("opacity", nestedLinkStyles.opacity)
+                    .attr("stroke-dasharray", "5,5")
+                    .style("transition", "stroke 0.3s, opacity 0.3s");
 
                   currentNestedY +=
                     nestedChild.dimensions.height + minNestedGroupGap;
                 });
               };
-
-              // Pass the current child's Y position to properly center the nested children
-              drawNestedChildren(child.children, currentChildY);
+              drawNestedChildren(child.children, currentChildY, child);
             }
-
-            // Advance by the required space for this child rather than just its height
             currentChildY += childSpacings[childIndex] + childVerticalGap;
           });
         };
-
-        drawChildren(parent.children, isLeft);
+        drawChildren(parent.children, isLeft, parent);
       }
     });
   }, [
-    data,
+    processedChartData,
     isLoading,
     roadmapTitle,
     calculateNodeDimensions,
     getNodeColor,
+    getLinkStyle,
     processNodeMetrics,
+    hoveredNodeId,
+    toggleNodeCompletion,
+    showAskAIButtonAtPosition,
+    openChatbotWithNodeQuery,
   ]);
 
-  // Render roadmap when dependencies change
   useEffect(() => {
-    if (data && !isLoading) {
+    if (processedChartData && !isLoading) {
       renderRoadmap();
     }
-  }, [data, completedNodes, isLoading, windowSize, renderRoadmap]);
+  }, [
+    processedChartData,
+    completedNodes,
+    isLoading,
+    windowSize,
+    renderRoadmap,
+    hoveredNodeId,
+  ]);
 
   return (
     <div className="roadmap">
@@ -883,13 +1062,11 @@ const Roadmap = ({ data }) => {
           <div className="roadmap-wrapper">
             <div ref={d3Container} className="d3-container" />
             <React.Suspense fallback={<div>Loading chatbot...</div>}>
-              <React.Suspense fallback={<div>Loading chatbot...</div>}>
-                <Chatbot
-                  ref={chatbotRef}
-                  roadmapTitle={roadmapTitle}
-                  data={data}
-                />
-              </React.Suspense>{" "}
+              <Chatbot
+                ref={chatbotRef}
+                roadmapTitle={roadmapTitle}
+                data={data}
+              />
             </React.Suspense>
             <div className="cards-container"></div>
           </div>

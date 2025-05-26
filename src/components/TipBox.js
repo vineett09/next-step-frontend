@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/roadmaps/TipBox.css";
+import nodeDeveloperRoadmap from "./../data/techskills/Nodejs";
 
 const TipBox = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -21,7 +22,7 @@ const TipBox = () => {
             className="color-box"
             style={{ backgroundColor: "#FF8C00" }}
           ></div>
-          <span className="tipbox-text">Recommended/Required</span>
+          <span className="tipbox-text">Recommended</span>
         </div>
         <div className="legend-item">
           <div
@@ -31,7 +32,8 @@ const TipBox = () => {
           <span className="tipbox-text">Completed</span>
         </div>
         <span className="instruction-text">
-          Right click to mark as completed
+          Right click to mark as completed and double tap on a node to start
+          Chatbot in mobile.
         </span>
       </div>
     </div>

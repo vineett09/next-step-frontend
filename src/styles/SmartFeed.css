@@ -112,8 +112,30 @@
   gap: 20px;
   flex-wrap: wrap;
   margin-top: 15px;
+  align-items: center;
+}
+.weekly-digest-controls .refresh-icon {
+  color: #58a6ff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.3s ease;
+  margin-right: 10px;
 }
 
+.weekly-digest-controls .refresh-icon svg {
+  fill: #58a6ff;
+}
+
+.weekly-digest-controls .refresh-icon:hover {
+  transform: rotate(90deg);
+  color: #79c0ff;
+}
+
+.weekly-digest-controls .refresh-icon:hover svg {
+  fill: #79c0ff;
+}
 .filter-control,
 .sort-control {
   display: flex;

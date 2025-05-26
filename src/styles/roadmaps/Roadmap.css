@@ -1,41 +1,49 @@
 .roadmap-container {
   width: 100%;
   padding: 20px;
-  max-width: 100%;
-  overflow-x: hidden;
+  max-width: 100%; /* Ensures it doesn't exceed viewport width */
+  overflow-x: hidden; /* Prevents horizontal scroll on the main container */
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 }
 
-/* Keep original D3 tree and node styles */
+/* D3 tree and node styles */
 .node:hover rect {
-  filter: brightness(1.15);
+  filter: brightness(1.15); /* Slight brightness increase on hover */
 }
 
-
-
-/* Keep original Ask AI button styles */
+/* Ask AI button styles */
 .ask-ai-button {
   position: absolute;
-  background-color: #4285f4;
+  background-color: #4285f4; /* Google Blue */
   color: white;
-  padding: 6px 12px; /* smaller padding */
-  border-radius: 16px; /* reduced border radius */
-  font-size: 13px; /* smaller font */
+  /* Base styles (desktop) - reflecting original JS inline styles for consistency */
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px; /* Base font size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 100;
-  transform: translate(-50%, 30px);
-  transition: all 0.2s ease;
+  z-index: 100; /* Ensure it's above other elements */
+  transform: translate(-50%, 30px); /* Position relative to click */
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap; /* Prevent text from wrapping */
+  max-width: 200px; /* Max width for longer node names */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+  border: none; /* Explicitly no border unless desired */
+  text-align: center;
 }
 
 .ask-ai-button:hover {
-  background-color: #3367d6 !important;
+  background-color: #3367d6; /* Darker blue on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  transform: translate(-50%, 28px) scale(1.02); /* Slight lift and scale on hover */
 }
 
-/* Notifications area */
+/* Notifications area (if used) */
 .notifications-container {
   width: auto;
   height: auto;
@@ -52,7 +60,7 @@
 .alert {
   padding: 1rem;
   border-radius: 0.5rem;
-  background-color: rgba(255, 146, 43, 0.1);
+  background-color: rgba(255, 146, 43, 0.1); /* Example alert style */
   border: 1px solid rgba(255, 146, 43, 0.3);
   margin-bottom: 1rem;
   width: 100%;
@@ -71,22 +79,21 @@
 .alert-svg {
   width: 1.25rem;
   height: 1.25rem;
-  color: var(--warning-color);
+  color: var(--warning-color); /* Define --warning-color or use a direct value */
 }
 
 .alert-prompt-wrap {
-  color: var(--warning-color);
+  color: var(--warning-color); /* Define --warning-color or use a direct value */
 }
 
-/* Keep original D3 wrapper styles */
+/* Roadmap wrapper for D3 chart and related components */
 .roadmap-wrapper {
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: auto;
+  justify-content: center; /* Center the D3 container */
+  align-items: flex-start; /* Align items at the top */
+  overflow-x: auto; /* Allow horizontal scrolling for the chart itself if it's very wide */
   margin: 30px 0;
- 
 }
 
 /* Loader styles */
@@ -95,28 +102,34 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 500px;
+  height: 500px; /* Adjust as needed */
   width: 100%;
 }
 
+.loading-text { /* Added style for loading text */
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #555;
+}
 
 
-/* Keep original D3 container styles */
+/* D3 container for the SVG */
 .d3-container {
   max-width: 100%;
-  min-width: 320px; 
-  position: relative;
+  min-width: 320px; /* Minimum width for smaller screens */
+  position: relative; /* For absolute positioning of Ask AI button */
+  margin: 0 auto; /* Center if roadmap-wrapper allows */
 }
 
 .roadmap-svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 1600px; 
-  margin: 0 auto;
+  display: block; /* Remove extra space below SVG */
+  width: 100%; /* Make SVG responsive within its container */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 1600px; /* Max width for the SVG itself */
+  margin: 0 auto; /* Center SVG if its max-width is reached */
 }
 
-/* Enhanced input section */
+/* Input section styles (if part of this component structure) */
 .input-section {
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -128,7 +141,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1a1a1a;
+  background-color: #1a1a1a; /* Dark background example */
   position: relative;
   overflow: hidden;
 }
@@ -212,7 +225,7 @@
   color: rgba(255, 255, 255, 0.3);
 }
 
-/* Improved dropdown group */
+/* AI Dropdown group */
 .ai-dropdown-group {
   display: flex;
   flex-wrap: wrap;
@@ -239,7 +252,7 @@
   border-radius: 10px;
   outline: none;
   background-color: rgba(255, 255, 255, 0.07);
-  color: #000;
+  color: #000; /* Ensure text is visible if background is light */
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 500;
@@ -247,7 +260,7 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23ffffff' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: calc(100% - 12px) center;
-  padding-right: 36px;
+  padding-right: 36px; /* Space for dropdown arrow */
 }
 
 .ai-dropdown:focus {
@@ -262,7 +275,7 @@
   color: rgba(255, 255, 255, 0.3);
 }
 
-/* Improved context box */
+/* Custom context box */
 .custom-context-box {
   display: flex;
   flex-direction: column;
@@ -312,12 +325,12 @@
   color: rgba(255, 255, 255, 0.3);
 }
 
-/* Enhanced button group */
+/* Button group */
 .button-group {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-top: 8px;
+  margin-top: 8px; /* Reduced from 24px */
 }
 
 .generate-btn {
@@ -334,14 +347,14 @@
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  align-self: center;
+  align-self: center; /* Center if it's the only button */
   box-shadow: 0 4px 15px rgba(125, 42, 232, 0.3);
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
 }
 
-.generate-btn::before {
+.generate-btn::before { /* Shimmer effect */
   content: "";
   position: absolute;
   top: 0;
@@ -370,7 +383,7 @@
 }
 
 .generate-btn:disabled {
-  background: #3d3d4d;
+  background: #3d3d4d; /* Muted background for disabled state */
   cursor: not-allowed;
   box-shadow: none;
   opacity: 0.6;
@@ -402,10 +415,10 @@
 .download-ai-roadmap-pdf:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-  transform: none;
+  transform: none; /* Remove hover transform if any */
 }
 
-/* Enhanced usage info */
+/* Usage info */
 .usage-info {
   margin-top: 22px;
   width: 100%;
@@ -461,23 +474,23 @@
   width: 100%;
 }
 
-/* Enhanced AI feedback box */
+/* AI feedback box */
 .ai-feedback-box {
-  background-color: rgba(253, 246, 178, 0.15);
-  border-left: 5px solid #facc15;
+  background-color: rgba(253, 246, 178, 0.15); /* Light yellow, semi-transparent */
+  border-left: 5px solid #facc15; /* Yellow accent */
   border-radius: 12px;
   padding: 24px;
   margin: 30px auto;
   max-width: 720px;
   width: 100%;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9); /* Light text for dark themes */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .ai-feedback-box h3 {
   margin-top: 0;
   font-size: 1.25rem;
-  color: #facc15;
+  color: #facc15; /* Yellow for heading */
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(250, 204, 21, 0.3);
   display: flex;
@@ -486,7 +499,7 @@
 }
 
 .ai-feedback-box h3::before {
-  content: "🚀";
+  content: "🚀"; /* Rocket emoji or an SVG icon */
 }
 
 .ai-feedback-box p {
@@ -495,18 +508,18 @@
   line-height: 1.6;
 }
 
-/* Authentication required box */
+/* Auth required box */
 .auth-required {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #121212;
-  border: 1px solid rgba(255, 231, 0, 0.5);
+  background-color: #121212; /* Very dark background */
+  border: 1px solid rgba(255, 231, 0, 0.5); /* Gold border */
   border-radius: 16px;
   padding: 50px 40px;
   max-width: 520px;
-  margin: 120px auto;
+  margin: 120px auto; /* Center on page with ample margin */
   text-align: center;
   box-shadow: 0 10px 30px rgba(255, 231, 0, 0.1);
   position: relative;
@@ -529,7 +542,7 @@
 }
 
 .auth-required h2 {
-  color: #FFE700;
+  color: #FFE700; /* Gold color for heading */
   font-size: 1.75rem;
   margin-bottom: 24px;
   font-weight: 700;
@@ -542,11 +555,11 @@
   line-height: 1.6;
 }
 
-/* Enhanced regenerate section */
+/* Regenerate section */
 .regenerate-section {
   margin: 40px auto;
   padding: 28px;
-  background-color: rgba(66, 133, 244, 0.08);
+  background-color: rgba(66, 133, 244, 0.08); /* Light blue, semi-transparent */
   border-radius: 16px;
   border: 1px solid rgba(66, 133, 244, 0.2);
   max-width: 800px;
@@ -563,7 +576,7 @@
 }
 
 .regenerate-section h3:before {
-  content: "⚡";
+  content: "⚡"; /* Lightning emoji or SVG */
   margin-right: 10px;
   font-size: 1.4rem;
 }
@@ -602,9 +615,9 @@
 }
 
 .regenerate-btn {
-  align-self: flex-start;
+  align-self: flex-start; /* Align to the left by default */
   padding: 14px 26px;
-  background: linear-gradient(135deg, #4285f4, #346ac3);
+  background: linear-gradient(135deg, #4285f4, #346ac3); /* Google Blue gradient */
   color: white;
   border: none;
   border-radius: 12px;
@@ -621,10 +634,10 @@
 }
 
 .regenerate-btn:before {
-  content: "🔄";
+  content: "🔄"; /* Refresh emoji or SVG */
 }
 
-.regenerate-btn::after {
+.regenerate-btn::after { /* Shimmer effect */
   content: "";
   position: absolute;
   top: 0;
@@ -641,7 +654,7 @@
 }
 
 .regenerate-btn:hover {
-  background: linear-gradient(135deg, #346ac3, #2857a7);
+  background: linear-gradient(135deg, #346ac3, #2857a7); /* Darker blue on hover */
   box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
 }
 
@@ -654,7 +667,7 @@
 }
 
 .regenerate-btn:disabled {
-  background: #2a3a51;
+  background: #2a3a51; /* Muted blue for disabled state */
   cursor: not-allowed;
   opacity: 0.6;
   transform: none;
@@ -662,7 +675,7 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* Tablet and smaller */
   .input-section {
     padding: 24px;
     border-radius: 12px;
@@ -673,59 +686,78 @@
   }
   
   .regenerate-section {
-    margin: 30px 20px;
+    margin: 30px 20px; /* Adjust margin for smaller screens */
     padding: 20px;
   }
   
   .regenerate-btn {
-    align-self: center;
-    width: 100%;
+    align-self: center; /* Center button on smaller screens */
+    width: 100%; /* Make button full width */
     justify-content: center;
   }
   
   .ai-feedback-box {
-    margin: 20px;
+    margin: 20px; /* Adjust margin */
     padding: 20px;
+  }
+
+  /* Ask AI Button specific mobile adjustments */
+  .ask-ai-button {
+    padding: 6px 12px; /* Slightly smaller padding for mobile */
+    font-size: 11px;   /* Smaller font size for mobile */
+    border-radius: 16px; /* Slightly smaller border radius */
+    max-width: 150px;    /* Restrict max-width more on mobile */
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 600px) { /* Mobile phones */
   .ai-dropdown-group {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start; /* Align items to start for column layout */
   }
 
   .ai-dropdown-group label {
-    margin-top: 10px;
+    margin-top: 10px; /* Add some space above label when stacked */
   }
   
   .button-group {
-    flex-direction: row;
+    flex-direction: column; /* Stack buttons vertically */
     width: 100%;
   }
   
-  .generate-btn {
+  .generate-btn, .download-ai-roadmap-pdf { /* Make buttons full width in stacked layout */
     flex: 1;
+    width: 100%; 
+    margin-bottom: 10px; /* Add space between stacked buttons */
+  }
+  .download-ai-roadmap-pdf:last-child {
+    margin-bottom: 0;
+  }
+
+  .ask-ai-button { /* Further refinement for very small screens if needed */
+    padding: 5px 10px;
+    font-size: 10px;
+    max-width: 120px;
   }
 }
 
-/* Keep the original tree-related classes and styles */
+/* D3 tree-related classes and styles */
 .link {
   fill: none;
-  stroke: #888; 
+  stroke: #888; /* Default link color */
   stroke-width: 2px;
   opacity: 0.7; 
-  transition: stroke 0.3s ease; 
-  stroke-dasharray: 5, 5; 
+  transition: stroke 0.3s ease, opacity 0.3s ease; 
+  stroke-dasharray: 5, 5; /* Dashed line style */
 }
 
 .node text {
-  pointer-events: none; 
-  user-select: none; 
+  pointer-events: none; /* Text should not interfere with mouse events on the node */
+  user-select: none; /* Prevent text selection */
   font-weight: bold; 
 }
 
-.title-node {
+.title-node { /* Specific styles for the main title node if needed */
   cursor: pointer; 
 }
 
@@ -735,57 +767,52 @@
   font-weight: bold; 
 }
 
-/* Preserve media queries for D3 tree container */
-@media (max-width: 767px) {
+/* Media queries for D3 tree container and layout */
+@media (max-width: 767px) { /* Mobile and smaller tablets */
   .roadmap-wrapper {
-    flex-direction: column;
+    /* flex-direction: column; // Already handled by general responsiveness */
     align-items: center;
   }
   
   .d3-container {
-    width: 100%;
-    overflow-x: auto;
+    width: 100%; /* Ensure d3 container takes full width */
+    overflow-x: auto; /* Allow scrolling for the chart itself */
   }
   
-  .TechRoles, .TechSkills {
+  /* Adjustments for TechRoles, TechSkills if they are part of this view */
+  .TechRoles, .TechSkills { 
     width: 100%;
-    max-width: 350px;
-    margin: 10px 0;
-  }
-  
-  /* Keep original Ask AI button responsive styles */
-  .ask-ai-button {
-    padding: 5px 10px;
-    font-size: 12px;
-    border-radius: 14px;
+    max-width: 350px; /* Limit width on mobile */
+    margin: 10px 0; /* Stack them with some margin */
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) { /* Tablets and up */
   .roadmap-wrapper {
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-wrap: wrap; /* Allow wrapping if multiple items */
+    justify-content: space-around; /* Space out items like chart, skills, roles */
     gap: 20px;
   }
   
   .TechRoles, .TechSkills {
-    flex: 1;
+    flex: 1; /* Allow them to take up space */
     margin: 10px;
+    min-width: 250px; /* Minimum width before wrapping */
   }
   
   .d3-container {
-    flex: 2;
-    min-width: 600px;
+    flex: 2; /* Give more space to the D3 chart */
+    min-width: 600px; /* Minimum width for the chart area */
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) { /* Desktop */
   .roadmap-wrapper {
-    padding: 0 20px;
+    padding: 0 20px; /* Add some horizontal padding on larger screens */
   }
   
   .d3-container {
-    width: 1400px; 
-    max-width: 90vw; 
+    /* width: 1400px; /* Example fixed width for very large screens if desired */
+    max-width: 90vw; /* Or use viewport width percentage */
   }
 }
