@@ -85,6 +85,9 @@ const Navbar = () => {
                 <button onClick={() => navigate("/career-tracker")}>
                   Career Path Advisor
                 </button>
+                <button onClick={() => navigate("/smart-mentor")}>
+                  Smart Mentor
+                </button>
                 <button onClick={handleLogout}>Logout</button>
               </div>
             )}

@@ -214,7 +214,7 @@ const Roadmap = ({ data }) => {
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/progress/toggle`,
-        { roadmapId, nodeId },
+        { roadmapId, nodeId, totalNodes },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.data.success) {

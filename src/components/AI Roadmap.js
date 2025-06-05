@@ -190,7 +190,7 @@ const AIRoadmap = () => {
       .style("box-shadow", "0 2px 5px rgba(0,0,0,0.2)")
       .style("z-index", "100")
       .style("transform", "translate(-50%, 30px)")
-      .text("Ask AI")
+      .text(`Ask AI about ${node.name}`)
       .on("click", () => {
         openChatbotWithNodeQuery(node);
         button.remove();

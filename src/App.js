@@ -7,6 +7,7 @@ import Register from "./components/Register";
 import Roadmap from "./components/Roadmap";
 import Profile from "./components/Profile";
 import CareerTracker from "./components/CareerTracker";
+import SmartMentor from "./components/SmartMentor";
 import fullStackDeveloperRoadmap from "./data/techroles/FullStackDeveloper";
 import Maincontent from "./components/Maincontent";
 import ForgotPassword from "./components/ForgotPassword";
@@ -103,6 +104,7 @@ function App() {
           <Route path="/smart-feed" element={<SmartFeedContent />} />
           <Route path="/career-tracker" element={<CareerTracker />} />
           <Route path="/career-tracker/:id" element={<ViewCareerTracker />} />
+          <Route path="/smart-mentor" element={<SmartMentor />} />
           {/* Tech Fields */}
           <Route
             path="/full-stack-developer"
