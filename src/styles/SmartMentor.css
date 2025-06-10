@@ -554,17 +554,17 @@
   flex-direction: column;
   gap: 12px;
 }
-.roadmap-header {
+.roadmap-header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.roadmap-title {
+.roadmap-title-content {
   font-size: 1rem;
   font-weight: 600;
   color: #e0e0e0;
 }
-.roadmap-completion {
+.roadmap-completion-content {
   font-size: 0.9rem;
   margin-top: 8px;
   font-weight: bold;

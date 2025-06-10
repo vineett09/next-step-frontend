@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../styles/roadmaps/TipBox.css";
-import nodeDeveloperRoadmap from "./../data/techskills/Nodejs";
 
 const TipBox = () => {
   const [isHovered, setIsHovered] = useState(false);

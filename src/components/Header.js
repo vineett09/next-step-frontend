@@ -1,11 +1,61 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../styles/Header.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AuthModal from "./AuthModal";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import "../styles/Header.css";
+// Custom SVG Icons
+const ArrowLeftIcon = ({ size = 20 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="m12 19-7-7 7-7" />
+    <path d="M19 12H5" />
+  </svg>
+);
+
+const BookmarkIcon = ({ size = 18, filled = false }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill={filled ? "currentColor" : "none"}
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+  </svg>
+);
+
+const DownloadIcon = ({ size = 18 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+    <polyline points="7,10 12,15 17,10" />
+    <line x1="12" y1="15" x2="12" y2="3" />
+  </svg>
+);
+
+const SparkleIcon = () => <span style={{ fontSize: "16px" }}>✨</span>;
 
 const Header = ({
   title,
@@ -64,20 +114,16 @@ const Header = ({
         compress: true,
       });
 
-      // Get PDF dimensions
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
 
-      // Calculate scaling to fit the entire tree on one page
       const widthRatio = pdfWidth / canvas.width;
       const heightRatio = pdfHeight / canvas.height;
-      const ratio = Math.min(widthRatio, heightRatio) * 0.95; // 95% of available space for margins
+      const ratio = Math.min(widthRatio, heightRatio) * 0.95;
 
-      // Calculate centered position
       const xPos = (pdfWidth - canvas.width * ratio) / 2;
       const yPos = (pdfHeight - canvas.height * ratio) / 2;
 
-      // Add image to PDF scaled to fit
       pdf.addImage(
         imgData,
         "JPEG",
@@ -88,7 +134,6 @@ const Header = ({
       );
 
       pdf.save("roadmap.pdf");
-
       document.body.removeChild(tempDiv);
     });
   };
@@ -103,80 +148,84 @@ const Header = ({
 
   return (
     <div>
-      <section className="roadmap-header">
-        <div className="header-top-row">
-          <Link to="/explore" className="back-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-              <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
-            </svg>
-            <span className="back-text">Explore All</span>
-          </Link>
+      <div className="roadmap-main-container">
+        {/* Back button */}
+        <Link to="/explore" className="roadmap-nav-back-container">
+          <ArrowLeftIcon size={20} />
+          <span>Explore All</span>
+        </Link>
 
-          <div className="action-buttons">
-            <button
-              onClick={toggleBookmark}
-              className={`bookmark-button ${isBookmarked ? "bookmarked" : ""}`}
-              aria-label={
-                isBookmarked ? "Unbookmark roadmap" : "Bookmark roadmap"
-              }
-              title={isBookmarked ? "Unbookmark roadmap" : "Bookmark roadmap"}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill={isBookmarked ? "#000" : "#fff"}
-              >
-                <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z" />
-              </svg>
-              <span className="button-text">Bookmark</span>
-            </button>
+        {/* Action buttons */}
+        <div className="roadmap-action-controls">
+          <button
+            onClick={toggleBookmark}
+            className={`roadmap-btn roadmap-bookmark-control ${
+              isBookmarked ? "active-bookmark" : ""
+            }`}
+            aria-label={
+              isBookmarked ? "Unbookmark roadmap" : "Bookmark roadmap"
+            }
+            title={isBookmarked ? "Unbookmark roadmap" : "Bookmark roadmap"}
+          >
+            <BookmarkIcon size={18} filled={isBookmarked} />
+            <span>Bookmark</span>
+          </button>
 
-            <button
-              className="download-pdf"
-              onClick={handleDownloadPDF}
-              aria-label="Download roadmap as PDF"
-              title="Download roadmap as PDF"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="#fff"
-              >
-                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
-              </svg>
-              <span className="button-text">PDF</span>
-            </button>
+          <button
+            className="roadmap-btn roadmap-download-control"
+            onClick={handleDownloadPDF}
+            aria-label="Download roadmap as PDF"
+            title="Download roadmap as PDF"
+          >
+            <DownloadIcon size={18} />
+            <span>PDF</span>
+          </button>
 
-            <button
-              className="generate-roadmap"
-              aria-label="Generate AI Roadmap"
-              onClick={handleGenerateRoadmapClick}
-              title="Generate AI Roadmap"
-            >
-              <span>Generate AI Roadmap</span>
-              <span className="sparkle">✨</span>
-            </button>
-          </div>
+          <button
+            className="roadmap-btn roadmap-generate-control"
+            aria-label="Generate AI Roadmap"
+            onClick={handleGenerateRoadmapClick}
+            title="Generate AI Roadmap"
+          >
+            <span>Generate AI Roadmap</span>
+            <SparkleIcon />
+          </button>
         </div>
 
-        <div className="roadmap-content">
-          <h1>
-            {`A comprehensive roadmap to achieve ${title} field in 2025.` ||
-              "Explore Your Path to Tech Excellence"}
-          </h1>
-
-          <div className="progress-wrapper">
-            <span className="progress-text">
-              {completedNodesCount} / {totalNodes} Completed (
-              {progressPercentage}%)
-            </span>
+        {/* Main content */}
+        <div className="roadmap-content-section">
+          {/* Title section */}
+          <div className="roadmap-title-section">
+            <h1 className="roadmap-main-title">
+              {title
+                ? `A comprehensive roadmap to achieve ${title} field in 2025.`
+                : "Explore Your Path to Tech Excellence"}
+            </h1>
+            <p className="roadmap-subtitle-text">Learning Roadmap</p>
+            {/* Stats section */}
+            <div className="roadmap-stats-section">
+              <div className="roadmap-stat-item">
+                <span className="roadmap-stat-value">
+                  {completedNodesCount}
+                </span>
+                <span className="roadmap-stat-label">Completed</span>
+              </div>
+              <div className="roadmap-stat-divider">•</div>
+              <div className="roadmap-stat-item">
+                <span className="roadmap-stat-value">{totalNodes}</span>
+                <span className="roadmap-stat-label">Total</span>
+              </div>
+              <div className="roadmap-stat-divider">•</div>
+              <div className="roadmap-stat-item">
+                <span className="roadmap-stat-value">
+                  {progressPercentage}%
+                </span>
+                <span className="roadmap-stat-label">Progress</span>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {!user && (
         <AuthModal

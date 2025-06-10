@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { refreshToken } from "../features/authslice";
-import "../styles/SmartMentor.css"; // Adjust path as needed
-import Navbar from "./Navbar"; // Import Navbar component
-import Footer from "./Footer"; // Import Footer component
+import "../styles/SmartMentor.css";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 import { FaRobot, FaUserCircle } from "react-icons/fa";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -427,7 +427,7 @@ const SmartMentor = () => {
               {insights.activity.mostActiveRoadmap && (
                 <div className="activity-item">
                   <span>Most Active:</span>
-                  <span>{insights.activity.mostActiveRoadmap.id}</span>
+                  <span>{insights.activity.mostActiveRoadmap.title}</span>
                 </div>
               )}
             </div>
@@ -464,9 +464,11 @@ const SmartMentor = () => {
             <div className="roadmap-progress-grid">
               {insights.roadmapProgress.map((roadmap, index) => (
                 <div key={index} className="roadmap-progress-card">
-                  <div className="roadmap-header">
-                    <div className="roadmap-title">🗺️ {roadmap.roadmapId}</div>
-                    <div className="roadmap-completion">
+                  <div className="roadmap-header-content">
+                    <div className="roadmap-title-content">
+                      🗺️ {roadmap.title}
+                    </div>
+                    <div className="roadmap-completion-content">
                       {roadmap.completionRate}%
                     </div>
                   </div>
@@ -572,7 +574,7 @@ const SmartMentor = () => {
                   .sort((a, b) => b.thisMonth - a.thisMonth)
                   .map((roadmap, index) => (
                     <div key={index} className="activity-breakdown-item">
-                      <div className="roadmap-name">{roadmap.roadmapId}</div>
+                      <div className="roadmap-name">{roadmap.title}</div>
                       <div className="activity-metrics">
                         <div className="metric">
                           <span className="metric-label">Week:</span>
@@ -610,7 +612,7 @@ const SmartMentor = () => {
                       )
                       .map((roadmap, index) => (
                         <span key={index} className="inactive-roadmap">
-                          {roadmap.roadmapId} ({roadmap.completionRate}%)
+                          {roadmap.title} ({roadmap.completionRate}%)
                         </span>
                       ))}
                   </div>
@@ -633,8 +635,6 @@ const SmartMentor = () => {
       </div>
     );
   };
-
-  // Enhanced renderSuggestions function to replace your existing one in AIMentor.js
 
   const renderSuggestions = () => {
     if (loadingSuggestions) {
@@ -893,10 +893,10 @@ const SmartMentor = () => {
                         </div>
 
                         {/* Roadmap Info */}
-                        {suggestion.roadmapId && (
+                        {suggestion.roadmapTitle && (
                           <div className="suggestion-roadmap-info">
                             <span className="roadmap-badge">
-                              📍 {suggestion.roadmapId}
+                              📍 {suggestion.roadmapTitle}
                             </span>
                           </div>
                         )}
@@ -1169,7 +1169,6 @@ const SmartMentor = () => {
     );
   };
 
-  // Render chat tab content
   // Render chat tab content
   const renderChat = () => (
     <>

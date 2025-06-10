@@ -10,15 +10,16 @@ import html2canvas from "html2canvas";
 import { useSelector } from "react-redux";
 import Chatbot from "./Chatbot";
 import AISuggestionContainer from "./AISuggestionContainer";
-
+import { useNavigate } from "react-router-dom";
+import { FaArrowCircleRight } from "react-icons/fa";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const AIRoadmap = () => {
   const [input, setInput] = useState("");
-  const [timeframe, setTimeframe] = useState("As Required");
+  const [roadmapId, setRoadmapId] = useState(null);
+  const [timeframe, setTimeframe] = useState("Standard Pace");
   const [level, setLevel] = useState("Beginner-Intermediate");
   const [contextInfo, setContextInfo] = useState("");
-  const [aiFeedback, setAiFeedback] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -31,11 +32,10 @@ const AIRoadmap = () => {
   const d3Container = useRef(null);
   const { token } = useSelector((state) => state.auth);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  // New state for regeneration
   const [modificationInput, setModificationInput] = useState("");
   const [regenerating, setRegenerating] = useState(false);
   const [currentTopic, setCurrentTopic] = useState("");
-
+  const navigate = useNavigate();
   // Fetch usage info when component mounts
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -44,7 +44,11 @@ const AIRoadmap = () => {
       fetchUsageInfo();
     }
   }, [token]);
-
+  const handleStartRoadmap = () => {
+    if (roadmapId) {
+      navigate(`/ai-roadmap/view/${roadmapId}`);
+    }
+  };
   const fetchUsageInfo = async () => {
     try {
       const response = await axios.get(` ${BACKEND_URL}/api/ai/usage`, {
@@ -77,7 +81,6 @@ const AIRoadmap = () => {
 
     // Clear previous roadmap data AND clear the DOM
     setData(null);
-    setAiFeedback("");
     clearRoadmap();
 
     try {
@@ -92,9 +95,8 @@ const AIRoadmap = () => {
       );
 
       setData(response.data.roadmap);
-      setAiFeedback(response.data.aiFeedback);
-      setCurrentTopic(input); // Save the original topic as current
-
+      setCurrentTopic(input);
+      setRoadmapId(response.data.roadmapId);
       setUsageInfo(response.data.usageInfo);
     } catch (err) {
       if (err.response?.data?.error === "Daily limit reached") {
@@ -111,7 +113,6 @@ const AIRoadmap = () => {
     }
   };
 
-  // New function to handle roadmap regeneration
   const handleRegenerate = async () => {
     if (!modificationInput.trim()) {
       setError("Please enter modification details");
@@ -123,7 +124,6 @@ const AIRoadmap = () => {
     }
 
     setRegenerating(true);
-    setAiFeedback("");
 
     setError(null);
     clearRoadmap();
@@ -145,9 +145,9 @@ const AIRoadmap = () => {
           },
         }
       );
-      setCurrentTopic(response.data.roadmap.name); // Use the updated title from new roadmap
+      setCurrentTopic(response.data.roadmap.name);
       setData(response.data.roadmap);
-      setAiFeedback(response.data.aiFeedback);
+      setRoadmapId(response.data.roadmapId);
       setUsageInfo(response.data.usageInfo);
     } catch (err) {
       if (err.response?.data?.error === "Daily limit reached") {
@@ -171,7 +171,6 @@ const AIRoadmap = () => {
   };
 
   const showAskAIButtonAtPosition = (x, y, node) => {
-    // Remove existing button
     d3.select(d3Container.current).select(".ask-ai-button").remove();
 
     const button = d3
@@ -206,7 +205,6 @@ const AIRoadmap = () => {
     };
   }
 
-  // Modified renderRoadmap function with animations
   const renderRoadmap = (withAnimation) => {
     if (data && d3Container.current && !loading) {
       d3.select(d3Container.current).selectAll("*").remove();
@@ -1204,7 +1202,7 @@ const AIRoadmap = () => {
                 onChange={(e) => setTimeframe(e.target.value)}
                 disabled={loading}
               >
-                <option value="As Required">As Required</option>
+                <option value="Standard Pace">Standard Pace</option>
                 <option value="1 Week">1 Week</option>
                 <option value="2 Weeks">2 Weeks</option>
                 <option value="1 Month">1 Month</option>
@@ -1295,15 +1293,16 @@ const AIRoadmap = () => {
             <div ref={d3Container} className="d3-container" />
           ) : null}
         </div>
-
-        {aiFeedback && (
-          <div className="ai-feedback-box">
-            <h3>Additional feedback from AI🚀</h3>
-            <p>{aiFeedback}</p>
-          </div>
-        )}
       </div>
-
+      {data && roadmapId && !loading && !regenerating && (
+        <div className="start-roadmap-section">
+          <p className="start-roadmap-prompt">🌟 Want to start this roadmap?</p>
+          <button className="start-roadmap-button" onClick={handleStartRoadmap}>
+            Start the Roadmap{" "}
+            <FaArrowCircleRight className="start-roadmap-icon" />
+          </button>
+        </div>
+      )}
       {/* New Regenerate section */}
       {data && !loading && !regenerating && (
         <div className="regenerate-section">
@@ -1331,6 +1330,7 @@ const AIRoadmap = () => {
         </div>
       )}
       <AISuggestionContainer />
+
       {data && !loading && !regenerating && (
         <Chatbot
           ref={chatbotRef}

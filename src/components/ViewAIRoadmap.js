@@ -1,27 +1,119 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as d3 from "d3";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import "../styles/ViewAIRoadmap.css";
 import Navbar from "./Navbar";
 import Loader from "./Loader";
 import Footer from "./Footer";
+import Chatbot from "./Chatbot";
+import { useSelector } from "react-redux";
+import ViewAIRoadmapHeader from "./ViewAIRoadmapHeader";
+
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const ViewAIRoadmap = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // This is the AI Roadmap ID
   const [data, setData] = useState(null);
+  const [processedData, setProcessedData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [completedNodes, setCompletedNodes] = useState({});
+  const [totalNodes, setTotalNodes] = useState(0);
+  const [currentTopic, setCurrentTopic] = useState("");
+  const chatbotRef = useRef(null);
+  const [selectedNode, setSelectedNode] = useState(null);
 
   const navigate = useNavigate();
   const d3Container = useRef(null);
-  const token = localStorage.getItem("token");
+  const { user, token } = useSelector((state) => state.auth);
+
+  // --- Utility Functions (countTotalNodes, processDataWithParentReferences) ---
+  const countTotalNodes = useCallback((node) => {
+    if (!node) return 0;
+    let count = 1; // Count the node itself
+    if (node.children) {
+      count += node.children.reduce(
+        (sum, child) => sum + countTotalNodes(child),
+        0
+      );
+    }
+    return count;
+  }, []);
+
+  const processDataWithParentReferences = useCallback((node, parent = null) => {
+    if (!node) return null;
+    const rawNodeId = node.id ?? node.name;
+    const nodeId =
+      rawNodeId !== undefined
+        ? String(rawNodeId)
+        : `unknown-node-${Math.random().toString(36).substring(7)}`;
+
+    const processedNode = { ...node, parent, nodeId };
+    if (node.children) {
+      processedNode.children = node.children
+        .map((child) => processDataWithParentReferences(child, processedNode))
+        .filter(Boolean);
+    }
+    return processedNode;
+  }, []);
+  const openChatbotWithNodeQuery = (node) => {
+    if (chatbotRef.current) {
+      chatbotRef.current.openWithNodeQuery(node);
+    }
+  };
+
+  const showAskAIButtonAtPosition = (x, y, node) => {
+    d3.select(d3Container.current).select(".ask-ai-button").remove();
+
+    const button = d3
+      .select(d3Container.current)
+      .append("div")
+      .attr("class", "ask-ai-button")
+      .style("position", "absolute")
+      .style("left", `${x}px`)
+      .style("top", `${y}px`)
+      .style("background-color", "#4285f4")
+      .style("color", "white")
+      .style("padding", "8px 16px")
+      .style("border-radius", "20px")
+      .style("font-size", "10px")
+      .style("cursor", "pointer")
+      .style("box-shadow", "0 2px 5px rgba(0,0,0,0.2)")
+      .style("z-index", "100")
+      .style("transform", "translate(-50%, 30px)")
+      .text(`Ask AI about ${node.name}`)
+      .on("click", () => {
+        openChatbotWithNodeQuery(node);
+        button.remove();
+      });
+
+    setTimeout(() => button.remove(), 5000);
+  };
+
+  const fetchUserProgress = useCallback(async () => {
+    if (!token || !id) return;
+    try {
+      const response = await axios.get(`${BACKEND_URL}/api/progress/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const progressMap = response.data.reduce((acc, item) => {
+        acc[item.nodeId] = { completed: true, timestamp: item.timestamp };
+        return acc;
+      }, {});
+      setCompletedNodes(progressMap);
+    } catch (error) {
+      console.error("Error fetching user progress:", error);
+    }
+  }, [id, token]);
 
   useEffect(() => {
     const fetchRoadmap = async () => {
+      if (!token || !id) {
+        setLoading(false);
+        setError("Authentication is required to view this page.");
+        return;
+      }
       try {
         const response = await axios.get(
           `${BACKEND_URL}/api/ai/generated-roadmaps/${id}`,
@@ -30,27 +122,94 @@ const ViewAIRoadmap = () => {
           }
         );
 
-        if (response.data && response.data.roadmap) {
+        if (
+          response.data &&
+          response.data.roadmap &&
+          response.data.roadmap.roadmap
+        ) {
+          const roadmapData = response.data.roadmap.roadmap;
           setData(response.data.roadmap.roadmap);
+          setCurrentTopic(response.data.roadmap.roadmap.name);
+
+          const processed = processDataWithParentReferences(roadmapData);
+          setProcessedData(processed);
+
+          const nodeCount = countTotalNodes(processed);
+          setTotalNodes(nodeCount);
+
+          fetchUserProgress();
         } else {
           setError("Roadmap not found");
           setTimeout(() => navigate("/profile"), 3000);
         }
       } catch (error) {
         console.error("Error fetching roadmap:", error);
-        setError("Failed to load roadmap");
-        setTimeout(() => navigate("/profile"), 3000);
+        setError(
+          "Failed to load roadmap. You may not have access or it may not exist."
+        );
       } finally {
         setLoading(false);
       }
     };
 
     fetchRoadmap();
-  }, [id, token, navigate]);
+  }, [
+    id,
+    token,
+    navigate,
+    countTotalNodes,
+    processDataWithParentReferences,
+    fetchUserProgress,
+  ]);
 
-  const renderRoadmap = () => {
-    if (data && d3Container.current && !loading) {
-      // Clear any existing content first
+  const getNodeColor = useCallback(
+    (node, defaultColor) => {
+      const nodeId = node?.nodeId;
+      if (!nodeId) return defaultColor;
+
+      if (completedNodes[nodeId]) return "#4CAF50"; // Completed color
+      if (node.preferred) return "#FF8C00"; // Preferred color
+
+      return defaultColor;
+    },
+    [completedNodes]
+  );
+
+  const toggleNodeCompletion = useCallback(
+    async (nodeId) => {
+      if (!token) {
+        alert("Please log in to save your progress.");
+        return;
+      }
+      try {
+        const response = await axios.post(
+          `${BACKEND_URL}/api/progress/toggle`,
+          { roadmapId: id, nodeId, totalNodes },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        if (response.data.success) {
+          setCompletedNodes((prev) => {
+            const newState = { ...prev };
+            if (response.data.completed) {
+              newState[nodeId] = {
+                completed: true,
+                timestamp: response.data.timestamp,
+              };
+            } else {
+              delete newState[nodeId];
+            }
+            return newState;
+          });
+        }
+      } catch (error) {
+        console.error("Error updating progress:", error);
+      }
+    },
+    [id, token, totalNodes]
+  );
+
+  const renderRoadmap = useCallback(() => {
+    if (processedData && d3Container.current && !loading) {
       d3.select(d3Container.current).selectAll("*").remove();
 
       const width = 1200;
@@ -92,7 +251,7 @@ const ViewAIRoadmap = () => {
       };
 
       const nodeMetrics = {
-        parents: data.children.map((parent) => ({
+        parents: processedData.children.map((parent) => ({
           ...parent,
           dimensions: calculateNodeDimensions(parent.name),
           children:
@@ -115,13 +274,14 @@ const ViewAIRoadmap = () => {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-      const titleText = data.name;
+      const titleText = processedData.name;
       const titleDimensions = calculateNodeDimensions(titleText);
       const titleY = 50;
 
       const titleGroup = svg
         .append("g")
-        .attr("class", "title-node")
+        .datum(processedData)
+        .attr("class", "title-node node")
         .attr("transform", `translate(${width / 2}, ${titleY})`);
 
       titleGroup
@@ -132,7 +292,7 @@ const ViewAIRoadmap = () => {
         .attr("y", -titleDimensions.height / 2)
         .attr("rx", 10)
         .attr("ry", 10)
-        .attr("fill", "#FFE700")
+        .attr("fill", getNodeColor(processedData, "#FFE700"))
         .attr("stroke", "black")
         .attr("stroke-width", 2);
 
@@ -144,9 +304,14 @@ const ViewAIRoadmap = () => {
         .attr("font-family", "Arial, sans-serif")
         .attr("fill", "black")
         .text(titleText);
+
+      titleGroup.on("contextmenu", (event, d) => {
+        event.preventDefault();
+        toggleNodeCompletion(d.nodeId);
+      });
+
       const lineStartY = titleY + titleDimensions.height / 2;
 
-      // Calculate space needed for a parent and all its descendants
       const calculateParentSpan = (parent) => {
         const children = parent.children || [];
         if (children.length === 0) {
@@ -156,13 +321,10 @@ const ViewAIRoadmap = () => {
           };
         }
 
-        // Calculate space needed for each child including its nested children
         const childSpans = children.map((child) => {
-          // Start with the child's own dimensions
           let minY = -child.dimensions.height / 2;
           let maxY = child.dimensions.height / 2;
 
-          // If this child has nested children, calculate their required space
           if (child.children && child.children.length > 0) {
             const nestedTotalHeight =
               child.children.reduce(
@@ -171,7 +333,6 @@ const ViewAIRoadmap = () => {
               ) +
               (child.children.length - 1) * minNestedGroupGap;
 
-            // The nested children group should be centered around the child
             minY = Math.min(minY, -nestedTotalHeight / 2);
             maxY = Math.max(maxY, nestedTotalHeight / 2);
           }
@@ -179,7 +340,6 @@ const ViewAIRoadmap = () => {
           return { minY, maxY, height: maxY - minY };
         });
 
-        // Now calculate the total span needed for all children with proper spacing
         let totalSpan = 0;
         childSpans.forEach((span, idx) => {
           totalSpan += span.height;
@@ -306,7 +466,7 @@ const ViewAIRoadmap = () => {
           xOffset = isLeft ? -growthOffset : growthOffset;
         }
 
-        const fillColor = defaultFillColor;
+        const fillColor = getNodeColor(node, defaultFillColor);
 
         group
           .append("rect")
@@ -328,6 +488,27 @@ const ViewAIRoadmap = () => {
           .attr("font-family", "Arial, sans-serif")
           .attr("x", xOffset)
           .text(node.name);
+        group
+          .append("rect")
+          .attr("width", dimensions.width)
+          .attr("height", dimensions.height)
+          .attr("x", -dimensions.width / 2 + xOffset)
+          .attr("y", -dimensions.height / 2)
+          .attr("rx", 10)
+          .attr("ry", 10)
+          .attr("fill", "transparent")
+          .style("cursor", "pointer")
+          .on("click", (event) => {
+            event.stopPropagation();
+            setSelectedNode(node);
+            const coords = d3.pointer(event, d3Container.current);
+            showAskAIButtonAtPosition(coords[0], coords[1], node);
+          });
+
+        group.on("contextmenu", (event, d) => {
+          event.preventDefault();
+          toggleNodeCompletion(d.nodeId);
+        });
 
         return { boxWidth, xOffset };
       };
@@ -337,8 +518,10 @@ const ViewAIRoadmap = () => {
 
         const parentGroup = svg
           .append("g")
+          .datum(parent)
           .attr("class", "node")
           .attr("transform", `translate(${parentX},${y})`);
+
         const parentBox = createNode(
           parentGroup,
           parent,
@@ -347,17 +530,14 @@ const ViewAIRoadmap = () => {
           "black"
         );
         if (parent.timeframe) {
-          // Create clock icon
           const iconGroup = parentGroup
             .append("g")
             .attr("class", "timeframe-icon")
             .attr("cursor", "pointer");
 
-          // Position slightly inside the top-left corner of parent node
           const iconX = -parent.dimensions.width / 2 + 5;
           const iconY = -parent.dimensions.height / 2 + 5;
 
-          // Draw clock circle
           iconGroup
             .append("circle")
             .attr("cx", iconX)
@@ -367,7 +547,6 @@ const ViewAIRoadmap = () => {
             .attr("stroke", "#000")
             .attr("stroke-width", 1);
 
-          // Draw clock hands
           iconGroup
             .append("line")
             .attr("x1", iconX)
@@ -386,8 +565,6 @@ const ViewAIRoadmap = () => {
             .attr("stroke", "#000")
             .attr("stroke-width", 1.5);
 
-          // Add tooltip on hover
-          // First create a hidden tooltip
           const tooltip = iconGroup
             .append("g")
             .attr("class", "tooltip")
@@ -409,10 +586,8 @@ const ViewAIRoadmap = () => {
             .attr("font-family", "Arial, sans-serif")
             .attr("fill", "#000");
 
-          // Get text dimensions for background
           const textBBox = tooltipText.node().getBBox();
 
-          // Draw tooltip background with improved styling
           tooltip
             .insert("rect", "text")
             .attr("x", -textBBox.width - tooltipPadding.x)
@@ -425,7 +600,6 @@ const ViewAIRoadmap = () => {
             .attr("stroke", "#87CEEB")
             .attr("stroke-width", 1.5);
 
-          // Add small triangle pointing to the icon
           const arrowPoints = [
             { x: 0, y: 0 },
             { x: -10, y: -5 },
@@ -439,7 +613,6 @@ const ViewAIRoadmap = () => {
             .attr("stroke", "#87CEEB")
             .attr("stroke-width", 1.5);
 
-          // Add hover events with fade in/out effect
           iconGroup
             .on("mouseover", function () {
               tooltip
@@ -464,12 +637,8 @@ const ViewAIRoadmap = () => {
           const isLeft = parentIndex % 2 === 0;
 
           const drawChildren = (children, isLeftSide) => {
-            // First, calculate required spacing for each child based on its nested children
             const childSpacings = children.map((child) => {
-              // Base height is the child's own height
               let requiredSpace = child.dimensions.height;
-
-              // If this child has nested children, calculate their total space requirements
               if (child.children?.length > 0) {
                 const nestedChildrenHeight =
                   child.children.reduce(
@@ -477,16 +646,12 @@ const ViewAIRoadmap = () => {
                       total + nestedChild.dimensions.height + minNestedGroupGap,
                     0
                   ) - minNestedGroupGap;
-
-                // Use the larger of the two: either the child's height or its nested children's total height
                 requiredSpace =
                   Math.max(requiredSpace, nestedChildrenHeight) + 20;
               }
-
               return requiredSpace;
             });
 
-            // Calculate total height needed with proper spacing
             const totalHeight =
               childSpacings.reduce(
                 (total, space) => total + space + childVerticalGap,
@@ -513,6 +678,7 @@ const ViewAIRoadmap = () => {
 
               const childGroup = svg
                 .append("g")
+                .datum(child)
                 .attr("class", "node")
                 .attr("transform", `translate(${baseChildX},${currentChildY})`);
 
@@ -563,8 +729,6 @@ const ViewAIRoadmap = () => {
                         minNestedGroupGap,
                       0
                     ) - minNestedGroupGap;
-
-                  // Center the nested children group around the parent child's Y position
                   let currentNestedY = parentChildY - nestedTotalHeight / 2;
 
                   nestedChildren.forEach((nestedChild) => {
@@ -591,6 +755,7 @@ const ViewAIRoadmap = () => {
 
                     const nestedGroup = svg
                       .append("g")
+                      .datum(nestedChild)
                       .attr("class", "node")
                       .attr(
                         "transform",
@@ -644,12 +809,8 @@ const ViewAIRoadmap = () => {
                       nestedChild.dimensions.height + minNestedGroupGap;
                   });
                 };
-
-                // Pass the current child's Y position to properly center the nested children
                 drawNestedChildren(child.children, currentChildY);
               }
-
-              // Advance by the required space for this child rather than just its height
               currentChildY += childSpacings[childIndex] + childVerticalGap;
             });
           };
@@ -660,90 +821,18 @@ const ViewAIRoadmap = () => {
 
       measureSvg.remove();
     }
-  };
-
-  const downloadRoadmapPDF = () => {
-    if (!data) return;
-
-    const container = document.querySelector(".d3-container");
-    if (!container) {
-      alert("Roadmap not found!");
-      return;
-    }
-
-    const tempDiv = document.createElement("div");
-    tempDiv.style.position = "absolute";
-    tempDiv.style.left = "-9999px";
-    tempDiv.style.backgroundColor = "#0d1117";
-    tempDiv.style.width = container.scrollWidth + "px";
-    tempDiv.style.height = container.scrollHeight + "px";
-    tempDiv.style.padding = "20px";
-
-    const containerClone = container.cloneNode(true);
-    tempDiv.appendChild(containerClone);
-    document.body.appendChild(tempDiv);
-
-    html2canvas(tempDiv, {
-      scale: 1.5,
-      height: tempDiv.scrollHeight,
-      width: tempDiv.scrollWidth,
-      backgroundColor: "#0d1117",
-      logging: false,
-      imageTimeout: 0,
-      useCORS: true,
-      allowTaint: true,
-    }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/jpeg", 0.9);
-
-      const pdf = new jsPDF({
-        orientation: "landscape",
-        unit: "mm",
-        format: "a4",
-        compress: true,
-      });
-
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-
-      const widthRatio = pdfWidth / canvas.width;
-      const heightRatio = pdfHeight / canvas.height;
-      const ratio = Math.min(widthRatio, heightRatio) * 0.95;
-
-      const xPos = (pdfWidth - canvas.width * ratio) / 2;
-      const yPos = (pdfHeight - canvas.height * ratio) / 2;
-
-      pdf.addImage(
-        imgData,
-        "JPEG",
-        xPos,
-        yPos,
-        canvas.width * ratio,
-        canvas.height * ratio
-      );
-
-      const filename = `${data.name
-        .replace(/\s+/g, "-")
-        .toLowerCase()}-roadmap.pdf`;
-      pdf.save(filename);
-
-      document.body.removeChild(tempDiv);
-    });
-  };
+  }, [loading, processedData, getNodeColor, toggleNodeCompletion]);
 
   useEffect(() => {
-    if (data) {
-      const timer = setTimeout(() => {
-        renderRoadmap();
-      }, 100);
-
+    if (processedData) {
+      renderRoadmap();
       window.addEventListener("resize", renderRoadmap);
 
       return () => {
-        clearTimeout(timer);
         window.removeEventListener("resize", renderRoadmap);
       };
     }
-  }, [data]);
+  }, [processedData, completedNodes, renderRoadmap]);
 
   if (loading) {
     return (
@@ -765,26 +854,18 @@ const ViewAIRoadmap = () => {
   return (
     <div className="view-ai-roadmap">
       <Navbar />
+      <ViewAIRoadmapHeader
+        onBack={() => navigate(-1)}
+        title={currentTopic}
+        completedNodes={Object.keys(completedNodes).length}
+        totalNodes={totalNodes}
+      />
+      <div className="roadmap-content"></div>
       <div className="roadmap-pure-container">
-        <div className="roadmap-actions">
-          <button
-            className="download-roadmap-btn"
-            onClick={downloadRoadmapPDF}
-            title="Download as PDF"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              fill="#fff"
-            >
-              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
-            </svg>
-          </button>
-        </div>
         <div ref={d3Container} className="d3-container" />
       </div>
+      <Chatbot ref={chatbotRef} roadmapTitle={currentTopic} data={data} />
+
       <Footer />
     </div>
   );
