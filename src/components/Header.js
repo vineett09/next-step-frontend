@@ -6,6 +6,7 @@ import AuthModal from "./AuthModal";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import "../styles/Header.css";
+
 // Custom SVG Icons
 const ArrowLeftIcon = ({ size = 20 }) => (
   <svg
@@ -55,7 +56,11 @@ const DownloadIcon = ({ size = 18 }) => (
   </svg>
 );
 
-const SparkleIcon = () => <span style={{ fontSize: "16px" }}>✨</span>;
+const SparkleIcon = () => (
+  <span className="sparkle-icon" style={{ fontSize: "16px" }}>
+    ✨
+  </span>
+);
 
 const Header = ({
   title,
@@ -187,7 +192,7 @@ const Header = ({
             onClick={handleGenerateRoadmapClick}
             title="Generate AI Roadmap"
           >
-            <span>Generate AI Roadmap</span>
+            <span className="generate-text">Generate AI Roadmap</span>
             <SparkleIcon />
           </button>
         </div>
