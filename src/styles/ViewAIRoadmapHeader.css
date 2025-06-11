@@ -18,19 +18,22 @@
   margin: 20px auto;
 }
 
-/* Header buttons */
-.rm-back-btn-container {
+/* Header buttons container */
+.rm-header-buttons {
   position: absolute;
   top: 24px;
   left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   z-index: 10;
+  pointer-events: none; /* Allow clicks to pass through container */
 }
 
+.rm-back-btn-container,
 .rm-download-btn-container {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  z-index: 10;
+  pointer-events: auto; /* Re-enable clicks on buttons */
 }
 
 .rm-btn {
@@ -47,6 +50,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  min-width: 0; /* Allow buttons to shrink */
 }
 
 .rm-btn:hover {
@@ -67,6 +71,7 @@
   align-items: center;
   gap: 16px;
   text-align: center;
+  padding-top: 20px; /* Add padding to avoid button overlap */
 }
 
 /* Title section */
@@ -84,6 +89,7 @@
   color: #ffffff;
   letter-spacing: -0.025em;
   line-height: 1.2;
+  word-break: break-word; /* Handle long titles */
 }
 
 .rm-subtitle {
@@ -104,6 +110,8 @@
   background-color: #262626;
   border: 1px solid #404040;
   border-radius: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .rm-stat {
@@ -111,6 +119,7 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  min-width: 0;
 }
 
 .rm-stat-value {
@@ -143,12 +152,15 @@
     margin: 16px auto;
   }
   
-  .rm-back-btn-container, .rm-download-btn-container {
+  .rm-header-buttons {
     top: 20px;
+    left: 20px;
+    right: 20px;
   }
   
-  .rm-back-btn-container { left: 20px; }
-  .rm-download-btn-container { right: 20px; }
+  .rm-content {
+    padding-top: 25px;
+  }
   
   .rm-title {
     font-size: 1.5rem;
@@ -162,21 +174,26 @@
   .rm-btn {
     padding: 8px 12px;
     font-size: 0.85rem;
+    gap: 6px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .rm-container {
     width: 98%;
     padding: 16px 20px;
   }
   
-  .rm-back-btn-container, .rm-download-btn-container {
+  .rm-header-buttons {
     top: 16px;
+    left: 16px;
+    right: 16px;
+    gap: 8px;
   }
   
-  .rm-back-btn-container { left: 16px; }
-  .rm-download-btn-container { right: 16px; }
+  .rm-content {
+    padding-top: 30px;
+  }
   
   .rm-title {
     font-size: 1.3rem;
@@ -197,5 +214,87 @@
   
   .rm-subtitle {
     font-size: 0.8rem;
+  }
+  
+  .rm-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rm-container {
+    padding: 14px 16px;
+  }
+  
+  .rm-header-buttons {
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    gap: 6px;
+  }
+  
+  .rm-content {
+    padding-top: 35px;
+  }
+  
+  .rm-title {
+    font-size: 1.2rem;
+  }
+  
+  .rm-btn {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    gap: 3px;
+    min-width: auto;
+  }
+  
+  /* Stack stats vertically on very small screens if needed */
+  .rm-stats-container {
+    gap: 8px;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .rm-container {
+    padding: 12px 14px;
+  }
+  
+  .rm-header-buttons {
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    gap: 4px;
+  }
+  
+  .rm-content {
+    padding-top: 40px;
+  }
+  
+  .rm-title {
+    font-size: 1.1rem;
+  }
+  
+  .rm-btn {
+    padding: 5px 6px;
+    font-size: 0.7rem;
+    gap: 2px;
+  }
+  
+  /* Hide button text on very small screens, keep only icons */
+  .rm-btn span {
+    display: none;
+  }
+  
+  .rm-stats-container {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+  }
+  
+  .rm-stat-divider {
+    display: none;
   }
 }

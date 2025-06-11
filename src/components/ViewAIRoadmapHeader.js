@@ -92,21 +92,24 @@ const ViewAIRoadmapHeader = ({
 
   return (
     <div className="rm-container">
-      {/* Back button */}
-      <button onClick={onBack} className="rm-btn rm-back-btn-container">
-        <ArrowLeftIcon size={20} />
-        <span>Back</span>
-      </button>
+      {/* Header buttons container */}
+      <div className="rm-header-buttons">
+        {/* Back button */}
+        <button onClick={onBack} className="rm-btn rm-back-btn-container">
+          <ArrowLeftIcon size={20} />
+          <span>Back</span>
+        </button>
 
-      {/* Download button */}
-      <button
-        onClick={downloadSvg}
-        className="rm-btn rm-download-btn-container"
-        title="Download Roadmap as SVG"
-      >
-        <DownloadIcon size={18} />
-        <span>Download</span>
-      </button>
+        {/* Download button */}
+        <button
+          onClick={downloadSvg}
+          className="rm-btn rm-download-btn-container"
+          title="Download Roadmap as SVG"
+        >
+          <DownloadIcon size={18} />
+          <span>Download</span>
+        </button>
+      </div>
 
       {/* Main content */}
       <div className="rm-content">
