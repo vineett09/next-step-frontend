@@ -38,12 +38,12 @@ NextStep is a powerful, AI-integrated web application that helps users navigate 
 
 | Category     | Technology           |
 |--------------|----------------------|
-| Frontend     | React.js, TailwindCSS |
+| Frontend     | React.js             |
 | Visuals      | D3.js, React Flow    |
 | Backend      | Node.js, Express     |
 | Database     | MongoDB              |
 | Auth         | Firebase / JWT       |
-| AI Integration | OpenAI API / Custom ML models |
+| AI Integration | Google Gemini      |
 
 ---
 
@@ -51,10 +51,10 @@ NextStep is a powerful, AI-integrated web application that helps users navigate 
 
 ```bash
 # Clone the repository
-git clone https://github.com/vineett09/nextstep.git
+git clone https://github.com/vineett09/next-step-frontend.git
 
 # Navigate to the project directory
-cd nextstep
+cd client-repo
 
 # Install dependencies
 npm install
