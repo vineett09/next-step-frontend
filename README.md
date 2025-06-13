@@ -2,7 +2,6 @@
 
 NextStep is a powerful, AI-integrated web application that helps users navigate their tech career journey through dynamic, interactive roadmaps. Whether you're just starting out or pivoting your path, NextStep offers visual guides, personalized AI suggestions, and custom roadmap creation tools to support every step of your journey.
 
-![NextStep Banner](./assets/NextStep.png) <!-- Optional: Add a real image or remove -->
 
 ---
 
