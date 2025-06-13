@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser, registerUser } from "../features/authslice";
 import { signInWithGoogle } from "../services/googleAuth";
 import "../styles/roadmaps/AuthModal.css";
+import Loader from "./Loader";
 import axios from "axios";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -267,6 +268,8 @@ const AuthModal = ({ isOpen, onClose }) => {
             ? "LOGIN"
             : "SIGN UP"}
         </p>
+
+        {/* Always render the form content */}
         <form onSubmit={handleSubmit}>
           {isGoogleLogin ? renderGoogleLoginForm() : renderRegularForm()}
 
@@ -349,6 +352,13 @@ const AuthModal = ({ isOpen, onClose }) => {
             </div>
           )}
         </form>
+
+        {/* Loading overlay - only show when loading */}
+        {isLoading && (
+          <div className="loading-overlay">
+            <Loader loading={true} />
+          </div>
+        )}
       </div>
     </div>
   );

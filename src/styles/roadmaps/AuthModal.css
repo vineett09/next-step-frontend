@@ -1,4 +1,3 @@
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -21,6 +20,7 @@
   width: 100%;
   max-width: 400px;
   animation: slideUp 0.3s ease;
+  position: relative; /* For overlay positioning */
 }
 
 .title {
@@ -196,6 +196,44 @@
   cursor: not-allowed;
 }
 
+/* Loading overlay styles - same as Login component */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border-radius: 10px;
+  z-index: 10;
+}
+
+.loading-overlay p {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Loader wrapper for overlay */
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.loader-wrapper p {
+  color: #666;
+  font-size: 16px;
+  margin: 0;
+}
+
 @media (max-width: 480px) {
   .google-signin-btn {
     padding: 10px;
@@ -208,6 +246,7 @@
     margin-right: 8px;
   }
 }
+
 /* Animations */
 @keyframes fadeIn {
   from {

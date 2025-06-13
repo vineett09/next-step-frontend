@@ -58,42 +58,39 @@ function ForgotPassword() {
       <div className="auth-box">
         <h2 className="auth-title">Reset Password</h2>
 
-        {isLoading ? (
-          <div className="loader-wrapper">
-            <Loader loading={true} />
-            <p>Sending reset instructions...</p>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              type="email"
+              id="email"
+              placeholder=" "
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <label htmlFor="email">Email Address</label>
           </div>
-        ) : (
-          <form className="auth-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input
-                type="email"
-                id="email"
-                placeholder=" "
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <label htmlFor="email">Email Address</label>
-            </div>
 
-            {errorMessage && (
-              <div className="error-message">{errorMessage}</div>
-            )}
-            {successMessage && (
-              <div className="success-message">{successMessage}</div>
-            )}
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
+          {successMessage && (
+            <div className="success-message">{successMessage}</div>
+          )}
 
-            <button type="submit" disabled={isLoading || !email}>
-              Send Reset Link
-            </button>
+          <button type="submit" disabled={isLoading || !email}>
+            Send Reset Link
+          </button>
 
-            <div className="auth-footer">
-              <Link to="/login" className="auth-link">
-                ← Back to Login
-              </Link>
-            </div>
-          </form>
+          <div className="auth-footer">
+            <Link to="/login" className="auth-link">
+              ← Back to Login
+            </Link>
+          </div>
+        </form>
+
+        {isLoading && (
+          <div className="loading-overlay">
+            <Loader loading={true} />
+          </div>
         )}
       </div>
     </div>

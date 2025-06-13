@@ -1,4 +1,8 @@
+/* Footer.css */
+
 .simple-footer {
+  width: 100%;       /* ADD THIS: Ensures the footer is always full-width. */
+  margin-top: auto;  /* KEEP THIS: This is what pushes the footer down. */
   background: #16213e;
   color: #ffffff;
   padding: 1.5rem 1rem;

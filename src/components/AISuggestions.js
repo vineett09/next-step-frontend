@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import AIRelatedRoadmaps from "./AI RelatedRoadmaps";
 import axios from "axios";
 import ScrollToTop from "./ScrollToTop";
+import Loader from "./Loader";
 
 import { useSelector } from "react-redux";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -404,7 +405,7 @@ const AISuggestions = () => {
       return (
         <div className="questionnaire-container">
           <div className="questionnaire-loading">
-            <div className="questionnaire-loading-spinner"></div>
+            <Loader loading={true} />
             <p>Generating your personalized learning roadmap...</p>
           </div>
         </div>

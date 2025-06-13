@@ -106,92 +106,88 @@ function ResetPassword() {
       <div className="auth-box">
         <h2 className="auth-title">Set New Password</h2>
 
-        {isLoading ? (
-          <div className="loader-wrapper">
-            <Loader loading={true} />
-            <p>Updating your password...</p>
-          </div>
-        ) : (
-          <form className="auth-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input
-                type="password"
-                id="password"
-                placeholder=" "
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={8}
-              />
-              <label htmlFor="password">New Password</label>
-              {/* Password strength indicators */}
-              {password.length > 0 && (
-                <div className="password-strength-indicators">
-                  <div
-                    className={`strength-indicator ${
-                      passwordStrength.length ? "valid" : "invalid"
-                    }`}
-                  >
-                    ✓ At least 8 characters
-                  </div>
-                  <div
-                    className={`strength-indicator ${
-                      passwordStrength.hasUpperCase ? "valid" : "invalid"
-                    }`}
-                  >
-                    ✓ At least one uppercase letter
-                  </div>
-                  <div
-                    className={`strength-indicator ${
-                      passwordStrength.hasNumber ? "valid" : "invalid"
-                    }`}
-                  >
-                    ✓ At least one number
-                  </div>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              type="password"
+              id="password"
+              placeholder=" "
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength={8}
+            />
+            <label htmlFor="password">New Password</label>
+            {/* Password strength indicators */}
+            {password.length > 0 && (
+              <div className="password-strength-indicators">
+                <div
+                  className={`strength-indicator ${
+                    passwordStrength.length ? "valid" : "invalid"
+                  }`}
+                >
+                  ✓ At least 8 characters
                 </div>
-              )}
-            </div>
-
-            <div className="form-group">
-              <input
-                type="password"
-                id="confirmPassword"
-                placeholder=" "
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                minLength={8}
-              />
-              <label htmlFor="confirmPassword">Confirm New Password</label>
-            </div>
-
-            {passwordError && (
-              <div className="error-message">{passwordError}</div>
+                <div
+                  className={`strength-indicator ${
+                    passwordStrength.hasUpperCase ? "valid" : "invalid"
+                  }`}
+                >
+                  ✓ At least one uppercase letter
+                </div>
+                <div
+                  className={`strength-indicator ${
+                    passwordStrength.hasNumber ? "valid" : "invalid"
+                  }`}
+                >
+                  ✓ At least one number
+                </div>
+              </div>
             )}
-            {errorMessage && (
-              <div className="error-message">{errorMessage}</div>
-            )}
-            {successMessage && (
-              <div className="success-message">{successMessage}</div>
-            )}
+          </div>
 
-            <button
-              type="submit"
-              disabled={
-                isLoading ||
-                !passwordStrength.isValid ||
-                password !== confirmPassword
-              }
-            >
-              Reset Password
-            </button>
+          <div className="form-group">
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder=" "
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              minLength={8}
+            />
+            <label htmlFor="confirmPassword">Confirm New Password</label>
+          </div>
 
-            <div className="auth-footer">
-              <Link to="/login" className="auth-link">
-                ← Back to Login
-              </Link>
-            </div>
-          </form>
+          {passwordError && (
+            <div className="error-message">{passwordError}</div>
+          )}
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
+          {successMessage && (
+            <div className="success-message">{successMessage}</div>
+          )}
+
+          <button
+            type="submit"
+            disabled={
+              isLoading ||
+              !passwordStrength.isValid ||
+              password !== confirmPassword
+            }
+          >
+            Reset Password
+          </button>
+
+          <div className="auth-footer">
+            <Link to="/login" className="auth-link">
+              ← Back to Login
+            </Link>
+          </div>
+        </form>
+        {isLoading && (
+          <div className="loading-overlay">
+            <Loader loading={true} />
+          </div>
         )}
       </div>
     </div>

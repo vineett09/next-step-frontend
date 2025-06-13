@@ -28,6 +28,7 @@
   transition: all 0.3s ease;
   width: 100%;
   border: 1px solid #333;
+  
 }
 
 /* Progress Bar */
@@ -175,42 +176,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem 0;
-  color: #e0e0e0;
 }
 
-.questionnaire-loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid rgba(76, 111, 255, 0.1);
-  border-radius: 50%;
-  border-top-color: #4c6fff;
-  animation: spin 1s ease-in-out infinite;
-  margin-bottom: 1.5rem;
-}
-
-.questionnaire-loading-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.questionnaire-btn-spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: white;
-  animation: spin 1s ease-in-out infinite;
-  margin-right: 10px;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 /* Error & Auth States */
 .questionnaire-error,

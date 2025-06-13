@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import ScrollToTop from "./ScrollToTop";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const CareerTracker = () => {
@@ -1443,8 +1444,7 @@ const CareerTracker = () => {
     if (loading) {
       return (
         <div className="simulator-loading">
-          <div className="simulator-loading-spinner"></div>
-          <p>Calculating your career path...</p>
+          <Loader loading={true} />
         </div>
       );
     }

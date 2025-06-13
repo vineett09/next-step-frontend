@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import ScrollToTop from "./ScrollToTop";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const ViewCareerTracker = () => {
@@ -687,8 +688,7 @@ const ViewCareerTracker = () => {
     if (loading) {
       return (
         <div className="simulator-loading">
-          <div className="simulator-loading-spinner"></div>
-          <p>Loading your career path...</p>
+          <Loader loading={true} />
         </div>
       );
     }
