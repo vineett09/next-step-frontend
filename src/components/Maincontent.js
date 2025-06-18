@@ -16,6 +16,12 @@ const Maincontent = () => {
             Discover personalized roadmaps to master new skills, advance your
             career, and achieve your goals.
           </p>
+          <button
+            className="btn-primary"
+            onClick={() => navigate("/explore-features")}
+          >
+            Explore Features
+          </button>
         </div>
       </section>
       <TechFields />
@@ -25,8 +31,8 @@ const Maincontent = () => {
           Join thousands of learners who are achieving their goals with our
           roadmaps.
         </p>
-        <button className="btn-primary" onClick={() => navigate("/register")}>
-          Sign Up Now
+        <button className="btn-primary" onClick={() => navigate("/explore")}>
+          Explore Roadmaps
         </button>
       </section>
       <Footer />
