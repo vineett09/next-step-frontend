@@ -38,10 +38,12 @@ const debounce = (fn, delay) => {
   };
 };
 
-const Roadmap = ({ data }) => {
+const Roadmap = ({ staticData = null }) => {
+  // Made staticData optional
   const d3Container = useRef(null);
   const svgRef = useRef(null);
 
+  const [data, setData] = useState(staticData); // Store roadmap data in state
   const [completedNodes, setCompletedNodes] = useState({});
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { user, token } = useSelector((state) => state.auth);
@@ -50,6 +52,7 @@ const Roadmap = ({ data }) => {
   const roadmapId = location.pathname.split("/").pop();
   const [isLoading, setIsLoading] = useState(true);
   const [totalNodes, setTotalNodes] = useState(0);
+  const [error, setError] = useState(null);
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -73,9 +76,58 @@ const Roadmap = ({ data }) => {
     () =>
       fieldOrSkill
         ? fieldOrSkill.title
-        : "Explore Your Path to Tech Excellence",
-    [fieldOrSkill]
+        : data?.name || "Explore Your Path to Tech Excellence",
+    [fieldOrSkill, data]
   );
+
+  // Fetch roadmap data from backend
+  const fetchRoadmapData = useCallback(async () => {
+    if (staticData) {
+      // If static data is provided, use it (for backward compatibility)
+      setData(staticData);
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      const response = await axios.get(
+        `${BACKEND_URL}/api/mainRoadmaps/${roadmapId}`,
+        {
+          timeout: 10000, // 10 second timeout
+        }
+      );
+
+      if (response.data.success && response.data.data) {
+        setData(response.data.data);
+      } else {
+        setError("Roadmap not found");
+      }
+    } catch (error) {
+      console.error("Error fetching roadmap:", error);
+
+      if (error.code === "ECONNABORTED") {
+        setError(
+          "Request timeout. Please check your connection and try again."
+        );
+      } else if (error.response?.status === 404) {
+        setError("Roadmap not found. Please check the URL and try again.");
+      } else if (error.response?.status >= 500) {
+        setError("Server error. Please try again later.");
+      } else {
+        setError("Failed to load roadmap. Please try again.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }, [roadmapId, staticData]);
+
+  // Fetch roadmap data on component mount
+  useEffect(() => {
+    fetchRoadmapData();
+  }, [fetchRoadmapData]);
 
   const countTotalNodes = useCallback((nodes) => {
     let count = 0;
@@ -88,7 +140,6 @@ const Roadmap = ({ data }) => {
       });
     };
     if (nodes?.children) {
-      // Added optional chaining for safety
       countRecursive(nodes.children);
     }
     return count;
@@ -98,7 +149,6 @@ const Roadmap = ({ data }) => {
     if (data) {
       const nodeCount = countTotalNodes(data);
       setTotalNodes(nodeCount);
-      setIsLoading(false);
     }
   }, [data, countTotalNodes]);
 
@@ -108,6 +158,40 @@ const Roadmap = ({ data }) => {
       fetchBookmarkStatus();
     }
   }, [user, token, roadmapId]);
+
+  // Error retry handler
+  const handleRetry = () => {
+    fetchRoadmapData();
+  };
+
+  // Error display component
+  const ErrorDisplay = () => (
+    <div
+      className="error-container"
+      style={{
+        textAlign: "center",
+        padding: "2rem",
+        color: "#e74c3c",
+      }}
+    >
+      <h3>Unable to Load Roadmap</h3>
+      <p>{error}</p>
+      <button
+        onClick={handleRetry}
+        style={{
+          background: "#3498db",
+          color: "white",
+          border: "none",
+          padding: "0.5rem 1rem",
+          borderRadius: "4px",
+          cursor: "pointer",
+          marginTop: "1rem",
+        }}
+      >
+        Retry
+      </button>
+    </div>
+  );
 
   const calculateNodeDimensions = useCallback((text, measureSvg) => {
     const paddingX = 20;
@@ -127,8 +211,7 @@ const Roadmap = ({ data }) => {
   }, []);
 
   const processDataWithParentReferences = useCallback((node, parent = null) => {
-    if (!node) return null; // Safety check
-    // Ensure nodeId is always a string, even if name/id are numbers. Default to a unique string if all else fails.
+    if (!node) return null;
     const rawNodeId = node.id ?? node.name;
     const nodeId =
       rawNodeId !== undefined
@@ -139,7 +222,7 @@ const Roadmap = ({ data }) => {
     if (node.children) {
       processedNode.children = node.children
         .map((child) => processDataWithParentReferences(child, processedNode))
-        .filter(Boolean); // Filter out nulls
+        .filter(Boolean);
     }
     return processedNode;
   }, []);
@@ -231,8 +314,7 @@ const Roadmap = ({ data }) => {
           return newState;
         });
 
-        // Find the actual node data to pass to getNodeColor for preferred status
-        let nodeToColor = { nodeId: nodeId, preferred: false }; // Default
+        let nodeToColor = { nodeId: nodeId, preferred: false };
         function findNode(searchNode, id) {
           if (!searchNode) return null;
           if (searchNode.nodeId === id) return searchNode;
@@ -281,8 +363,8 @@ const Roadmap = ({ data }) => {
 
   const getNodeColor = useCallback(
     (node, defaultColor, isHighlight = false) => {
-      const nodeId = node?.nodeId; // Use optional chaining and nodeId
-      if (!nodeId) return defaultColor; // Safety for undefined node or nodeId
+      const nodeId = node?.nodeId;
+      if (!nodeId) return defaultColor;
 
       if (isHighlight && completedNodes[nodeId]) return "#66BB6A";
       if (completedNodes[nodeId]) return "#4CAF50";
@@ -302,7 +384,7 @@ const Roadmap = ({ data }) => {
       let strokeWidth = 2;
       let opacity = 0.7;
 
-      if (!sourceId || !targetId) return { stroke, strokeWidth, opacity }; // Safety
+      if (!sourceId || !targetId) return { stroke, strokeWidth, opacity };
 
       if (completedNodes[sourceId] && completedNodes[targetId]) {
         stroke = "#4CAF50";
@@ -317,22 +399,14 @@ const Roadmap = ({ data }) => {
         const isSourceHovered = sourceId === hoveredNodeId;
         const isTargetHovered = targetId === hoveredNodeId;
 
-        // Check if the link is directly connected to the hovered node
         let linkPartOfPath = false;
         if (isSourceHovered && targetNode?.parent?.nodeId === sourceId) {
-          // target is child of hovered source
           linkPartOfPath = true;
         } else if (isTargetHovered && sourceNode?.parent?.nodeId === targetId) {
-          // source is child of hovered target
           linkPartOfPath = true;
-        }
-        // Add checks for parent relationships if needed (source is parent of hovered target, etc.)
-        // This means sourceNode is parent of targetNode
-        else if (isTargetHovered && targetNode?.parent?.nodeId === sourceId) {
-          // source is parent of hovered target
+        } else if (isTargetHovered && targetNode?.parent?.nodeId === sourceId) {
           linkPartOfPath = true;
         } else if (isSourceHovered && sourceNode?.parent?.nodeId === targetId) {
-          // target is parent of hovered source
           linkPartOfPath = true;
         }
 
@@ -350,7 +424,6 @@ const Roadmap = ({ data }) => {
   );
 
   const showAskAIButtonAtPosition = (x, y, node) => {
-    // Don't show button on small screens
     if (isSmallScreen()) return;
 
     d3.select(d3Container.current).select(".ask-ai-button").remove();
@@ -378,7 +451,6 @@ const Roadmap = ({ data }) => {
     setTimeout(() => button.remove(), 5000);
   };
 
-  // Add this helper function for handling clicks
   const handleNodeClick = (event, node) => {
     if (!node) return;
     event.stopPropagation();
@@ -387,7 +459,6 @@ const Roadmap = ({ data }) => {
       const currentTime = Date.now();
       const timeDiff = currentTime - lastTapTime;
 
-      // Double tap detection (within 300ms and same node)
       if (timeDiff < 300 && lastTappedNodeId === node.nodeId) {
         openChatbotWithNodeQuery(node);
         setLastTapTime(0);
@@ -398,12 +469,12 @@ const Roadmap = ({ data }) => {
         setLastTappedNodeId(node.nodeId);
       }
     } else {
-      // Desktop behavior - show button
       setSelectedNode(node);
       const coords = d3.pointer(event, d3Container.current);
       showAskAIButtonAtPosition(coords[0], coords[1], node);
     }
   };
+
   const openChatbotWithNodeQuery = (node) => {
     if (chatbotRef.current) {
       chatbotRef.current.openWithNodeQuery(node);
@@ -658,8 +729,8 @@ const Roadmap = ({ data }) => {
     });
 
     const createNode = (
-      group, // This is the D3 selection of the <g> element
-      node, // This is the data object for the node
+      group,
+      node,
       dimensions,
       defaultFillColor,
       strokeColor,
@@ -677,8 +748,6 @@ const Roadmap = ({ data }) => {
       let isNodeDimmed = false;
 
       if (hoveredNodeId && currentDrawingNodeId !== hoveredNodeId) {
-        // Attempt to get the hovered node's data object.
-        // Note: d3.select().datum() gets data from the FIRST selected element.
         const hoveredNodeSelection = d3.select(
           `.node-group[data-id="${hoveredNodeId}"]`
         );
@@ -688,7 +757,6 @@ const Roadmap = ({ data }) => {
 
         let partOfPath = false;
         if (hoveredNodeObject) {
-          // 1. Is currentDrawingNode an ancestor of hoveredNodeObject?
           let tempParentOfHovered = hoveredNodeObject.parent;
           while (tempParentOfHovered) {
             if (tempParentOfHovered.nodeId === currentDrawingNodeId) {
@@ -698,7 +766,6 @@ const Roadmap = ({ data }) => {
             tempParentOfHovered = tempParentOfHovered.parent;
           }
 
-          // 2. Is currentDrawingNode a child of hoveredNodeObject?
           if (!partOfPath) {
             if (
               hoveredNodeObject.children?.some(
@@ -709,7 +776,6 @@ const Roadmap = ({ data }) => {
             }
           }
 
-          // 3. Is currentDrawingNode a grandchild of hoveredNodeObject?
           if (!partOfPath && hoveredNodeObject.children) {
             for (const child of hoveredNodeObject.children) {
               if (
@@ -757,28 +823,26 @@ const Roadmap = ({ data }) => {
         .style("pointer-events", "none")
         .style("transition", "opacity 0.3s ease-out");
 
-      group // The group itself is the clickable/hoverable area
+      group
         .attr("cursor", "pointer")
         .on("click", (event, d) => {
           handleNodeClick(event, d);
         })
         .on("mouseover", function (event, d) {
-          // d here is 'node'
-          if (!d || !d.nodeId) return; // FIX: Safety check for d and d.nodeId
-          setHoveredNodeId(d.nodeId); // FIX: Use d.nodeId
+          if (!d || !d.nodeId) return;
+          setHoveredNodeId(d.nodeId);
           d3.select(this)
-            .select("rect") // Select the rect within this group
+            .select("rect")
             .transition()
             .duration(150)
             .style("transform", "scale(1.05)")
             .attr("fill", getNodeColor(d, defaultFillColor, true));
         })
         .on("mouseout", function (event, d) {
-          // d here is 'node'
-          if (!d) return; // Safety check
+          if (!d) return;
           setHoveredNodeId(null);
           d3.select(this)
-            .select("rect") // Select the rect within this group
+            .select("rect")
             .transition()
             .duration(150)
             .style("transform", "scale(1)")
@@ -796,7 +860,6 @@ const Roadmap = ({ data }) => {
         .attr("data-id", parent.nodeId)
         .attr("transform", `translate(${parentX},${y})`)
         .on("contextmenu", (event) => {
-          // d is implicitly parent here
           event.preventDefault();
           toggleNodeCompletion(parent.nodeId);
         });
@@ -854,7 +917,6 @@ const Roadmap = ({ data }) => {
               .attr("data-id", child.nodeId)
               .attr("transform", `translate(${baseChildX},${currentChildY})`)
               .on("contextmenu", (event) => {
-                // d is implicitly child
                 event.preventDefault();
                 toggleNodeCompletion(child.nodeId);
               });
@@ -943,7 +1005,6 @@ const Roadmap = ({ data }) => {
                       `translate(${nestedX},${currentNestedY})`
                     )
                     .on("contextmenu", (event) => {
-                      // d is implicitly nestedChild
                       event.preventDefault();
                       toggleNodeCompletion(nestedChild.nodeId);
                     });
@@ -1033,6 +1094,21 @@ const Roadmap = ({ data }) => {
     renderRoadmap,
     hoveredNodeId,
   ]);
+
+  // Show error if there's an error
+  if (error) {
+    return (
+      <div className="roadmap">
+        <React.Suspense fallback={<div>Loading navigation...</div>}>
+          <Navbar />
+        </React.Suspense>
+        <ErrorDisplay />
+        <React.Suspense fallback={<div>Loading footer...</div>}>
+          <Footer />
+        </React.Suspense>
+      </div>
+    );
+  }
 
   return (
     <div className="roadmap">

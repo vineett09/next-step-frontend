@@ -3,7 +3,7 @@ export const techFields = [
     id: 1,
     title: "Full Stack Developer",
     icon: "💻",
-    link: "/full-stack-developer",
+    link: "/web-development-roadmap-2025",
     description:
       "Full Stack Development involves building web applications that handle both front-end and back-end responsibilities. Full Stack Developers work with databases, servers, systems engineering, and clients, using languages like HTML, CSS, JavaScript, and frameworks like React, Angular, or Node.js. They create responsive, interactive applications, ensuring seamless user experiences and high performance across the entire software stack.",
   },
@@ -11,7 +11,7 @@ export const techFields = [
     id: 2,
     title: "Data Scientist",
     icon: "📊",
-    link: "/data-scientist",
+    link: "/data-science-roadmap-2025",
     description:
       "Data Science is the field of extracting actionable insights from vast datasets using statistical analysis, machine learning, and data visualization techniques. It combines programming skills (e.g., Python, R) with domain knowledge to uncover trends, predict outcomes, and solve complex problems. Data scientists clean, process, and interpret data, enabling businesses to make informed decisions in areas like marketing, healthcare, and finance.",
   },
@@ -19,7 +19,7 @@ export const techFields = [
     id: 3,
     title: "AI Engineer",
     icon: "🤖",
-    link: "/artificial-intelligence",
+    link: "/ai-engineer-roadmap-2025",
     description:
       "Artificial Intelligence (AI) focuses on developing systems that simulate human intelligence, such as learning, reasoning, and problem-solving. It powers technologies like virtual assistants, autonomous vehicles, and recommendation systems. AI encompasses subfields like machine learning and natural language processing, using algorithms and vast datasets to enable machines to perform tasks that typically require human cognition, revolutionizing industries globally.",
   },
@@ -27,7 +27,7 @@ export const techFields = [
     id: 4,
     title: "Cybersecurity",
     icon: "🔒",
-    link: "/cybersecurity",
+    link: "/cybersecurity-it-skills-roadmap-2025",
     description:
       "Cybersecurity is the practice of protecting computers, networks, and data from unauthorized access, attacks, and damage. It involves implementing measures like encryption, firewalls, and intrusion detection to safeguard sensitive information. Cybersecurity professionals analyze threats, respond to incidents, and ensure system integrity, playing a critical role in defending organizations and individuals against hackers, malware, and data breaches in a digital world.",
   },
@@ -35,7 +35,7 @@ export const techFields = [
     id: 5,
     title: "Cloud Computing",
     icon: "☁️",
-    link: "/cloud-computing",
+    link: "/cloud-computing-roadmap-2025",
     description:
       "Cloud Computing provides on-demand access to computing resources like servers, storage, and applications over the internet, eliminating the need for physical infrastructure. It offers scalability, cost-efficiency, and flexibility through platforms like AWS, Azure, and Google Cloud. Businesses use it for data backup, software deployment, and analytics, relying on cloud engineers to design, manage, and optimize these distributed systems effectively.",
   },
@@ -43,7 +43,7 @@ export const techFields = [
     id: 6,
     title: "Android Developer",
     icon: "📱",
-    link: "/android-developer",
+    link: "/android-developer-roadmap-2025",
     description:
       "Android Development involves creating applications for devices running the Android operating system, used by billions of users worldwide. Developers use Java or Kotlin to build mobile apps, games, and utilities, leveraging Android Studio and the Android SDK. They design interfaces, integrate APIs, and publish apps on Google Play, ensuring compatibility and performance across a diverse range of smartphones and tablets.",
   },
@@ -51,7 +51,7 @@ export const techFields = [
     id: 7,
     title: "Blockchain Developer",
     icon: "🔑",
-    link: "/blockchain-developer",
+    link: "/blockchain-developer-roadmap-2025",
     description:
       "Blockchain is a decentralized, secure technology for recording transactions across a network of computers, best known for powering cryptocurrencies like Bitcoin and Ethereum. It ensures transparency and immutability through cryptographic techniques, enabling applications in finance, supply chain, and smart contracts. Developers in this field build distributed ledgers and decentralized apps (DApps), revolutionizing trust and data management in various industries.",
   },
@@ -59,7 +59,7 @@ export const techFields = [
     id: 8,
     title: "Game Development",
     icon: "🎮",
-    link: "/game-development",
+    link: "/game-development-roadmap-2025",
     description:
       "Game Development is the process of designing and programming interactive video games for consoles, PCs, and mobile devices. It combines creativity with technical skills, using engines like Unity or Unreal Engine and languages like C++ or C#. Developers craft gameplay mechanics, graphics, and sound, creating immersive experiences that entertain millions, from casual mobile games to complex virtual worlds.",
   },
@@ -67,7 +67,7 @@ export const techFields = [
     id: 9,
     title: "MLOps",
     icon: "🧠",
-    link: "/mLops",
+    link: "/mLops-roadmap-2025",
     description:
       "Machine Learning, a subset of AI, enables systems to learn from data and improve without explicit programming. It uses algorithms like regression, neural networks, and decision trees to predict outcomes or classify information. Applications include image recognition, fraud detection, and personalized recommendations. Practitioners leverage tools like TensorFlow and Python to build models that adapt to real-world challenges.",
   },
@@ -75,7 +75,7 @@ export const techFields = [
     id: 10,
     title: "Robotics",
     icon: "🤖",
-    link: "/robotics",
+    link: "/robotics-engineer-roadmap-2025",
     description:
       "Robotics involves designing, building, and programming robots to perform tasks autonomously or semi-autonomously. It integrates mechanical engineering, electronics, and software (e.g., C++, Python) to create machines for manufacturing, healthcare, and exploration. Robotics engineers develop sensors, actuators, and control systems, enabling robots to navigate environments, manipulate objects, and assist humans in complex or hazardous scenarios effectively.",
   },
@@ -83,7 +83,7 @@ export const techFields = [
     id: 11,
     title: "Embedded IoT Developer",
     icon: "📱",
-    link: "/embedded-iot-developer",
+    link: "/embedded-iot-developer-roadmap-2025",
     description:
       "The Internet of Things (IoT) connects everyday devices—like appliances, cars, and wearables—to the internet, enabling data exchange and automation. It relies on sensors, networks, and platforms like AWS IoT to monitor and control systems remotely. IoT developers create solutions for smart homes, healthcare, and industrial automation, driving efficiency and innovation across interconnected ecosystems.",
   },
@@ -91,7 +91,7 @@ export const techFields = [
     id: 12,
     title: "IoT Application Developer",
     icon: "📱",
-    link: "/iot-application-developer",
+    link: "/iot-application-developer-roadmap-2025",
     description:
       "IoT Application Developers design and build software applications that interact with connected devices in the Internet of Things (IoT) ecosystem. They use programming languages like Python, JavaScript, or C++ to develop IoT applications that collect, analyze, and visualize data from sensors and devices. IoT Application Developers create user interfaces, dashboards, and automation systems that enable users to monitor and control IoT devices remotely, enhancing efficiency and convenience in various industries.",
   },
@@ -100,7 +100,7 @@ export const techFields = [
     id: 15,
     title: "Data Analyst",
     icon: "💻",
-    link: "/data-analyst",
+    link: "/data-analyst-roadmap-2025",
     description:
       "Data Analysts collect, process, and analyze data to derive insights and support decision-making in organizations. They use tools like SQL, Excel, and Tableau to query databases, create visualizations, and generate reports. Data Analysts identify trends, patterns, and anomalies, helping businesses understand their operations, customers, and markets through data-driven strategies and actionable recommendations.",
   },
@@ -108,7 +108,7 @@ export const techFields = [
     id: 16,
     title: "ios Developer",
     icon: "📱",
-    link: "/ios-developer",
+    link: "/ios-developer-roadmap-2025",
     description:
       "iOS Development focuses on creating applications for Apple devices like iPhones and iPads using Swift or Objective-C. Developers use Xcode and UIKit to design interfaces, integrate APIs, and publish apps on the App Store. iOS developers optimize performance, ensure compatibility, and deliver engaging user experiences, driving innovation and accessibility in mobile software for millions of users worldwide.",
   },
@@ -117,7 +117,7 @@ export const techFields = [
     id: 17,
     title: "Frontend Developer",
     icon: "🖥️",
-    link: "/frontend-developer",
+    link: "/frontend-developer-roadmap-2025",
     description:
       "Frontend Development focuses on building user interfaces and experiences for websites and applications. Frontend Developers use HTML, CSS, and JavaScript to create responsive layouts, interactive features, and engaging designs. They work with frameworks like React, Angular, or Vue.js to develop client-side code, ensuring seamless navigation and accessibility across browsers and devices for optimal user engagement.",
   },
@@ -125,7 +125,7 @@ export const techFields = [
     id: 18,
     title: "DevOps Engineer",
     icon: "🔄",
-    link: "/devops-engineer",
+    link: "/devops-engineer-roadmap-2025",
     description:
       "DevOps bridges development and operations to streamline software delivery through automation, collaboration, and continuous integration/deployment (CI/CD). Tools like Docker, Kubernetes, and Jenkins enhance efficiency and reliability. DevOps engineers manage infrastructure, monitor systems, and optimize workflows, ensuring rapid, scalable, and high-quality releases while fostering a culture of shared responsibility and agile development practices.",
   },
@@ -133,7 +133,7 @@ export const techFields = [
     id: 19,
     title: "UI/UX Design",
     icon: "🎨",
-    link: "/ui-ux-design",
+    link: "/uiux-designer-roadmap",
     description:
       "UI/UX Design focuses on creating user-friendly, visually appealing interfaces (UI) and optimizing user experiences (UX) for digital products. UI designers craft layouts and aesthetics using tools like Figma, while UX designers research user behavior to enhance usability. Together, they ensure applications are intuitive, engaging, and effective, meeting user needs across websites, apps, and software platforms.",
   },
@@ -141,7 +141,7 @@ export const techFields = [
     id: 20,
     title: "Backend Developer",
     icon: "🔙",
-    link: "/backend-developer",
+    link: "/backend-developer-roadmap-2025",
     description:
       "Backend Development involves building server-side applications that manage data, logic, and security for websites and software. Backend Developers use languages like Python, Java, or Node.js to create APIs, databases, and servers, ensuring smooth functionality and performance. They work with frameworks like Django, Spring, or Express to handle requests, process data, and support front-end interactions in web applications.",
   },
@@ -152,7 +152,7 @@ export const techSkills = [
     id: 1,
     title: "JavaScript",
     icon: "🟨",
-    link: "/javascript",
+    link: "/javascript-developer-roadmap-2025",
     description:
       "JavaScript is a versatile, high-level programming language essential for web development, enabling dynamic and interactive content on websites. It powers front-end frameworks like React and Vue.js, and back-end environments via Node.js. Developers use it for animations, form validation, and API integration, making it a cornerstone of modern web applications with its event-driven, asynchronous capabilities.",
   },
@@ -160,7 +160,7 @@ export const techSkills = [
     id: 2,
     title: "Python",
     icon: "🐍",
-    link: "/python",
+    link: "/python-developer-roadmap-2025",
     description:
       "Python is a readable, general-purpose programming language widely used in data science, machine learning, web development, and automation. Its simple syntax and extensive libraries (e.g., Pandas, TensorFlow) make it ideal for rapid prototyping and complex applications. Python developers build everything from scientific models to web servers, leveraging its versatility and strong community support across industries.",
   },
@@ -168,7 +168,7 @@ export const techSkills = [
     id: 3,
     title: "React",
     icon: "⚛️",
-    link: "/react",
+    link: "/react-developer-roadmap-2025",
     description:
       "React is a JavaScript library for building fast, reusable user interfaces, particularly single-page applications. Developed by Facebook, it uses a component-based architecture and virtual DOM to optimize rendering. React developers create interactive, scalable front-ends for websites and mobile apps, integrating with tools like Redux for state management and APIs for dynamic data handling.",
   },
@@ -176,7 +176,7 @@ export const techSkills = [
     id: 4,
     title: "Node.js",
     icon: "🟩",
-    link: "/nodejs",
+    link: "/nodejs-developer-roadmap-2025",
     description:
       "Node.js is a runtime environment that allows JavaScript to run on the server side, enabling full-stack development with a single language. Built on Chrome’s V8 engine, it excels in handling asynchronous operations for real-time applications like chat or streaming services. Node.js developers use it with frameworks like Express to build scalable, efficient back-end systems.",
   },
@@ -184,7 +184,7 @@ export const techSkills = [
     id: 5,
     title: "SQL",
     icon: "🗃️",
-    link: "/sql",
+    link: "/sql-developer-roadmap-2025",
     description:
       "SQL (Structured Query Language) is a standard for managing and querying relational databases like MySQL and PostgreSQL. It enables developers to create, retrieve, update, and delete data efficiently, supporting business intelligence and data-driven applications. SQL professionals design schemas, optimize queries, and ensure data integrity, making it vital for backend development and analytics workflows.",
   },
@@ -192,7 +192,7 @@ export const techSkills = [
     id: 6,
     title: "Docker",
     icon: "🐳",
-    link: "/docker",
+    link: "/docker-developer-roadmap-2025",
     description:
       "Docker is a containerization platform that packages applications and their dependencies into lightweight, portable containers. It ensures consistency across development, testing, and production environments, simplifying deployment. DevOps engineers use Docker to isolate services, scale microservices, and streamline CI/CD pipelines, enhancing collaboration and reducing ‘works on my machine’ issues in software delivery processes.",
   },
@@ -200,7 +200,7 @@ export const techSkills = [
     id: 7,
     title: "Kubernetes",
     icon: "☸️",
-    link: "/kubernetes",
+    link: "/kubernetes-developer-roadmap-2025",
     description:
       "Kubernetes is an open-source system for automating the deployment, scaling, and management of containerized applications, often paired with Docker. It orchestrates clusters, ensuring high availability and resource efficiency. DevOps professionals use Kubernetes to handle microservices, manage workloads, and recover from failures, making it essential for cloud-native development and large-scale, resilient systems.",
   },
@@ -208,7 +208,7 @@ export const techSkills = [
     id: 8,
     title: "TensorFlow",
     icon: "🧠",
-    link: "/tensorflow",
+    link: "/tensorflow-developer-roadmap-2025",
     description:
       "TensorFlow is an open-source framework by Google for building and training machine learning models, particularly neural networks. It supports tasks like image recognition and natural language processing with extensive libraries and GPU acceleration. Data scientists and engineers use TensorFlow to develop predictive models, leveraging its flexibility for research and production-grade AI applications.",
   },
@@ -216,7 +216,7 @@ export const techSkills = [
     id: 9,
     title: "Git and Github",
     icon: "🐙",
-    link: "/gitandgithub",
+    link: "/git-and-github-developer-roadmap-2025",
     description:
       "Git is a distributed version control system that tracks changes in source code during software development, enabling collaboration and versioning. GitHub is a platform for hosting Git repositories, providing tools for project management and code review. Developers use Git and GitHub to manage codebases, track issues, and contribute to open-source projects, fostering transparency and efficiency in software development workflows.",
   },
@@ -224,7 +224,7 @@ export const techSkills = [
     id: 10,
     title: "AWS",
     icon: "☁️",
-    link: "/aws",
+    link: "/aws-developer-roadmap-for-beginners-2025",
     description:
       "Amazon Web Services (AWS) is a leading cloud platform offering scalable computing, storage, and database services for businesses and developers. It includes tools like EC2, S3, and Lambda for building applications and managing infrastructure. AWS professionals deploy, monitor, and optimize cloud solutions, supporting everything from startups to enterprises with cost-effective, secure, and flexible resources.",
   },
@@ -232,7 +232,7 @@ export const techSkills = [
     id: 11,
     title: "Microsoft Azure",
     icon: "🔷",
-    link: "/microsoft-azure",
+    link: "/azure-developer-roadmap-for-beginners-2025",
     description:
       "Microsoft Azure is a cloud computing platform providing a wide range of services, including virtual machines, AI tools, and data analytics, competing with AWS. It supports hybrid environments and integrates with Microsoft products. Azure developers build and manage scalable applications, leveraging its global network for high availability, security, and enterprise-grade solutions across industries.",
   },
@@ -240,7 +240,7 @@ export const techSkills = [
     id: 12,
     title: "Linux",
     icon: "🐧",
-    link: "/linux",
+    link: "/linux-developer-roadmap-for-beginners-2025",
     description:
       "Linux is an open-source operating system widely used in servers, cloud infrastructure, and development environments due to its stability and flexibility. It supports scripting with Bash and tools like SSH for system administration. Linux engineers configure, secure, and optimize systems, making it a backbone for web hosting, software development, and embedded devices worldwide.",
   },
@@ -248,7 +248,7 @@ export const techSkills = [
     id: 13,
     title: "Java",
     icon: "☕",
-    link: "/java",
+    link: "/java-developer-roadmap-for-beginners-2025",
     description:
       "Java is a robust, object-oriented programming language known for its ‘write once, run anywhere’ capability, thanks to the Java Virtual Machine (JVM). It’s used in enterprise applications, Android development, and web servers. Java developers build scalable, secure systems with frameworks like Spring, leveraging its strong typing and extensive APIs for complex, cross-platform solutions.",
   },
@@ -256,7 +256,7 @@ export const techSkills = [
     id: 14,
     title: "C++",
     icon: "➕",
-    link: "/cpp",
+    link: "/cpp-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "C++ is a high-performance programming language extending C with object-oriented features, widely used in game development, system programming, and real-time applications. It offers fine-grained control over hardware resources. C++ developers create efficient software like operating systems and simulations, relying on its speed and libraries like STL for complex, resource-intensive projects.",
   },
@@ -264,7 +264,7 @@ export const techSkills = [
     id: 15,
     title: "Rust",
     icon: "🦀",
-    link: "/rust",
+    link: "/rust-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Rust is a systems programming language focused on safety and performance, preventing memory errors without a garbage collector. It’s favored for low-level applications like browsers and operating systems. Rust developers build reliable, concurrent systems, leveraging its ownership model and modern syntax to create fast, secure software that rivals C++ in efficiency and robustness.",
   },
@@ -272,7 +272,7 @@ export const techSkills = [
     id: 16,
     title: "Golang",
     icon: "🐹",
-    link: "/golang",
+    link: "/go-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Go, created by Google, is a fast, statically typed language designed for simplicity and concurrency, making it ideal for scalable web services and cloud applications. It features goroutines for parallel processing. Go developers use it with tools like Docker and Kubernetes, building efficient, reliable back-ends that power modern, high-performance distributed systems with minimal complexity.",
   },
@@ -280,7 +280,7 @@ export const techSkills = [
     id: 17,
     title: "Ruby",
     icon: "💎",
-    link: "/ruby",
+    link: "/ruby-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Ruby is an elegant, developer-friendly programming language emphasizing readability and productivity, best known for the Ruby on Rails web framework. It’s used for rapid prototyping and full-stack development. Ruby developers create dynamic websites and applications, leveraging its expressive syntax and vast ecosystem of gems to streamline coding and deliver user-focused solutions efficiently.",
   },
@@ -288,7 +288,7 @@ export const techSkills = [
     id: 18,
     title: "Terraform",
     icon: "🌍",
-    link: "/terraform",
+    link: "/terraform-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Terraform is an open-source infrastructure as code (IaC) tool for building, changing, and versioning infrastructure efficiently. It uses declarative configuration files to manage services and providers like AWS, Azure, and Docker. DevOps engineers use Terraform to automate provisioning, ensure consistency, and scale resources, simplifying cloud operations and enabling infrastructure changes with minimal downtime.",
   },
@@ -296,7 +296,7 @@ export const techSkills = [
     id: 19,
     title: "Kotlin",
     icon: "🟪",
-    link: "/kotlin",
+    link: "/kotlin-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Kotlin is a modern, concise programming language interoperable with Java, widely adopted for Android development and web applications. It reduces boilerplate code and enhances safety with nullability checks. Kotlin developers use it with Android Studio to build robust, user-friendly apps, leveraging its flexibility and integration with existing Java codebases for efficient, maintainable software.",
   },
@@ -304,7 +304,7 @@ export const techSkills = [
     id: 20,
     title: "PHP",
     icon: "🐘",
-    link: "/php",
+    link: "/php-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "PHP is a server-side scripting language designed for web development, powering platforms like WordPress and Laravel. It excels in generating dynamic content and interacting with databases like MySQL. PHP developers create scalable websites and applications, using its simplicity and vast community resources to deliver cost-effective, server-driven solutions for businesses and individuals.",
   },
@@ -312,7 +312,7 @@ export const techSkills = [
     id: 21,
     title: "Redis",
     icon: "🔴",
-    link: "/redis",
+    link: "/redis-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Redis is an open-source, in-memory data structure store known for its speed and flexibility, used as a caching layer or message broker in web applications. It supports data structures like strings, hashes, and sets, enabling advanced operations and performance optimizations. Redis developers design efficient, scalable systems, leveraging its key-value store for real-time analytics, session management, and queuing mechanisms.",
   },
@@ -320,7 +320,7 @@ export const techSkills = [
     id: 22,
     title: "TypeScript",
     icon: "🟦",
-    link: "/typescript",
+    link: "/typescript-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "TypeScript is a superset of JavaScript that adds static typing, enhancing code reliability and scalability for large web applications. It compiles to plain JavaScript and integrates with frameworks like Angular. TypeScript developers use type definitions and interfaces to catch errors early, improving maintainability and collaboration in complex, team-based front-end and full-stack projects.",
   },
@@ -328,7 +328,7 @@ export const techSkills = [
     id: 23,
     title: "Angular",
     icon: "🅰️",
-    link: "/angular",
+    link: "/angular-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Angular is a TypeScript-based framework by Google for building dynamic, single-page web applications with a strong MVC architecture. It offers two-way data binding and dependency injection. Angular developers create structured, feature-rich front-ends, using its CLI and components to streamline development and deliver responsive, enterprise-grade solutions with robust testing and tooling support.",
   },
@@ -336,7 +336,7 @@ export const techSkills = [
     id: 24,
     title: "Vue.js",
     icon: "🟩",
-    link: "/vuejs",
+    link: "/vuejs-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Vue.js is a progressive JavaScript framework for building user interfaces, known for its simplicity and flexibility in integrating with existing projects. It uses reactive data binding and a component-based approach. Vue developers craft lightweight, interactive front-ends, leveraging its ecosystem (e.g., Vuex, Vue Router) to create scalable, modern web applications with minimal overhead.",
   },
@@ -344,7 +344,7 @@ export const techSkills = [
     id: 25,
     title: "Flutter",
     icon: "✨",
-    link: "/flutter",
+    link: "/flutter-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       " Flutter is Google’s open-source UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase. It uses Dart, a fast, object-oriented language. Flutter developers create beautiful, responsive apps with a flexible UI, hot reload for quick updates, and native performance, enabling rapid prototyping and cross-platform development for iOS, Android, and beyond.",
   },
@@ -352,7 +352,7 @@ export const techSkills = [
     id: 26,
     title: "Spring Boot",
     icon: "🌲",
-    link: "/springboot",
+    link: "/spring-boot-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Spring Boot is an open-source Java framework for building microservices and standalone applications with minimal configuration. It simplifies Spring development with auto-configuration, embedded servers, and production-ready features. Spring Boot developers create robust, scalable back-end systems, leveraging its ecosystem for data access, security, and cloud integration, accelerating Java-based projects with efficiency and ease.",
   },
@@ -361,7 +361,7 @@ export const techSkills = [
     id: 28,
     title: "MongoDB",
     icon: "🍃",
-    link: "/mongodb",
+    link: "/mongodb-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "MongoDB is a NoSQL database that stores data in flexible, JSON-like documents, ideal for handling unstructured or semi-structured data in modern applications. It scales horizontally with ease. MongoDB developers design schemas, manage collections, and optimize queries, supporting web, mobile, and big data projects with its agility and performance in dynamic, data-intensive environments.",
   },
@@ -370,7 +370,7 @@ export const techSkills = [
     id: 31,
     title: "GraphQL",
     icon: "🔗",
-    link: "/graphql",
+    link: "/graphql-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "GraphQL is a query language for APIs that allows clients to request exactly the data they need, improving efficiency over traditional REST. It’s backed by a strong type system. GraphQL developers design schemas and resolvers, enabling flexible, performant data fetching for front-end applications, reducing over-fetching and enhancing scalability in modern web development workflows.",
   },
@@ -379,7 +379,7 @@ export const techSkills = [
     id: 32,
     title: "React Native",
     icon: "📱",
-    link: "/react-native",
+    link: "/react-native-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "React Native is a framework for building mobile applications using JavaScript and React, enabling cross-platform development for iOS and Android. It uses native components for performance. Developers create responsive, high-quality apps with a single codebase, leveraging React’s component model and ecosystem to streamline mobile development and enhance user experiences across devices.",
   },
@@ -388,7 +388,7 @@ export const techSkills = [
     id: 33,
     title: "Apache Hadoop",
     icon: "🐘",
-    link: "/apache-hadoop",
+    link: "/hadoop-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Hadoop is an open-source framework for distributed storage and processing of big data using the MapReduce model and HDFS. It’s designed for scalability and fault tolerance. Data engineers use Hadoop to analyze massive datasets, powering applications in finance, healthcare, and research with its robust ecosystem of tools like Hive and Pig.",
   },
@@ -396,7 +396,7 @@ export const techSkills = [
     id: 34,
     title: "Jenkins",
     icon: "🤖",
-    link: "/jenkins",
+    link: "/jenkins-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Jenkins is an open-source automation server for building, testing, and deploying software, central to CI/CD pipelines. It supports hundreds of plugins for customization. DevOps teams use Jenkins to automate workflows, integrate with Git and Docker, and ensure consistent, repeatable delivery processes in software development cycles.",
   },
@@ -405,7 +405,7 @@ export const techSkills = [
     id: 35,
     title: "Pandas",
     icon: "🐼",
-    link: "/pandas",
+    link: "/pandas-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Pandas is a Python library for data manipulation and analysis, offering powerful data structures like DataFrames for handling structured data. It simplifies cleaning and exploration. Data scientists use Pandas for preprocessing, aggregating, and visualizing datasets, making it a cornerstone for data analysis workflows in research and industry.",
   },
@@ -414,7 +414,7 @@ export const techSkills = [
     id: 36,
     title: "C",
     icon: " 🟩",
-    link: "/clang",
+    link: "/c-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "C is a high-performance, general-purpose programming language known for its efficiency and low-level access to memory. It’s widely used in system programming, embedded systems, and game development. C developers write operating systems, compilers, and applications that require direct hardware manipulation, leveraging its speed and portability across platforms while maintaining control over system resources.",
   },
@@ -422,7 +422,7 @@ export const techSkills = [
     id: 37,
     title: "Scala",
     icon: "🔴",
-    link: "/scala",
+    link: "/scala-developer-roadmap-for-beginners-to-advanced-2025",
     description:
       "Scala is a high-level, functional programming language that runs on the JVM, blending object-oriented and functional paradigms for concise, scalable code. It powers big data tools like Apache Spark. Developers use Scala for distributed systems and data processing, leveraging its type safety and concurrency features for robust, modern applications.",
   },
@@ -430,7 +430,7 @@ export const techSkills = [
     id: 38,
     title: "Swift",
     icon: "🐦",
-    link: "/swift",
+    link: "/swift-developer-roadmap-2025",
     description:
       "Swift is a powerful, open-source programming language by Apple for iOS, macOS, and watchOS apps, known for its safety and performance. It simplifies app development. Swift developers build native, high-quality mobile apps with Xcode, utilizing its modern syntax and features like optionals to create responsive, user-friendly experiences.",
   },
@@ -438,7 +438,7 @@ export const techSkills = [
     id: 39,
     title: "Data Structures and Algorithms",
     icon: "📚",
-    link: "/dsa",
+    link: "/data-structures-and-algorithms-roadmap-2025",
     description:
       "Data Structures and Algorithms (DSA) are fundamental concepts in computer science that focus on organizing and manipulating data efficiently. Data structures like arrays, linked lists, trees, and graphs provide ways to store data, while algorithms define the steps to process that data. Mastering DSA is crucial for optimizing performance in software development, enabling developers to solve complex problems and improve application efficiency.",
   },
