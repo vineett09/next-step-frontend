@@ -94,10 +94,7 @@ const Roadmap = ({ staticData = null }) => {
       setError(null);
 
       const response = await axios.get(
-        `${BACKEND_URL}/api/mainRoadmaps/${roadmapId}`,
-        {
-          timeout: 10000, // 10 second timeout
-        }
+        `${BACKEND_URL}/api/mainRoadmaps/${roadmapId}`
       );
 
       if (response.data.success && response.data.data) {
